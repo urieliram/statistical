@@ -1,4 +1,4 @@
-# Apendizaje automático
+# Aprendizaje automático
 
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [liga](https://github.com/satuelisa/StatisticalLearning)
 
