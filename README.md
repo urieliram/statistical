@@ -1,6 +1,6 @@
-# Apendizaje estadístico
+# Apendizaje automático
 
-Repositorio de actividades del curso de aprendizaje estadístico. La descripción del curso y las actividades se pueden encontrar la siguiente  [liga](https://github.com/satuelisa/StatisticalLearning)
+Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [liga](https://github.com/satuelisa/StatisticalLearning)
 
 ## Tarea 1
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
@@ -16,6 +16,7 @@ Como entrada se tienen:
 
 En las salidas de cada instancia se tiene el resultado de:
 - Los generadores que fueron seleccionados para ser prendidos o apagados en cada hora (variable categórica).
+- La producción de los generadores  en cada hora (variable escalar).
 - Líneas de transmisión que fueron violadas (variable categórica).
 - Las pérdidas en el sistema (variable escalar).
 - Tiempos de ejecución de cada instancia (variable escalar).
