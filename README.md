@@ -5,7 +5,7 @@ Repositorio de actividades del curso de aprendizaje estadístico. La descripció
 ## Tarea 1
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
 
-En el trabajo de investogación del alumno se tienen resultados preliminares de 320 instancias resueltad de la programación de los generadores (Unit Commitment) para el día siguiente resuelto con un modelo de programación entera mixta.
+En el trabajo de investigación del alumno se tienen resultados preliminares de 320 instancias resueltad de la programación de los generadores (Unit Commitment) para el día siguiente resuelto con un modelo de programación entera mixta.
 
 Como entrada se tienen:
 - Datos de disponibilidad de las unidades. (variable categórica)
