@@ -21,7 +21,7 @@ En las salidas de cada instancia se tiene el resultado de:
 - Tiempos de ejecución de cada instancia (variable escalar).
 
 Preguntas de investigación:
-1. ¿Es posible determinar que conjunto de lineas de transmisión serán violadas conociendo los generadores que serán prendidos o la demanda del sistema o por regiones?
+1. ¿Es posible determinar que conjunto de lineas de transmisión serán violadas conociendo los generadores que serán prendidos o la demanda por regiones?
 2. ¿Es posible predecir las pérdidas en el sistema conociendo la salida de potencia de cada generador?
 3. ¿Cómo puedo agrupar los generadores de acuerdo a aquellos que seguramente serán elegidos y a aquellos que es mas o menos probable que sean elegidos y aquellos que probablemente no?
 4. ¿Es posible predecir el tiempo de ejecución de la programación conociendo la combinación de las lineas de transmisión violadas?
