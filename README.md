@@ -2,7 +2,7 @@
 
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [liga](https://github.com/satuelisa/StatisticalLearning)
 
-## Tarea 1
+## Tarea 1: Introducción
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
 
 En el trabajo de investigación del alumno se tienen resultados preliminares de 320 instancias resueltas de la programación de los generadores (Unit Commitment) para el día siguiente resuelto con un modelo de programación entera mixta.
@@ -31,3 +31,11 @@ Preguntas de investigación:
 Otras preguntas indirectamente relacionadas pero que se tienen datos para estudiar:
 
 1. ¿Es posible predecir la aportación de agua de un embalse de un mes teniendo en cuenta las aportaciones mensuales de los demás embalses en una cuenca?. 
+
+## Tarea 2: Aprendizaje supervisado
+
+>Instructions: First carry out Exercise 2.8 of the textbook with their ZIP-code data and then replicate the process the best you manage to some data from you own problem that was established in the first homework.
+```python
+s = "Aquí el código usado"
+print s
+```
