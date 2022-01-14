@@ -2,6 +2,9 @@
 
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [liga](https://github.com/satuelisa/StatisticalLearning)
 
+Los datos a usar del libro estan en [liga](https://hastie.su.domains/ElemStatLearn/datasets/)
+
+
 ## Tarea 1: Introducción
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
 
