@@ -42,6 +42,7 @@ Otras preguntas indirectamente relacionadas pero que se tienen datos para estudi
 El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb) 
 Aquí solo se presentaran los resultados y partes importantes del código:
 
+Los datos utilizados en este cuaderno están disponibles aquí: [Datasets](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing) 
 
 ```python
 s = "Aquí el código usado"
