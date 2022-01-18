@@ -74,7 +74,7 @@ print("MAE del modelo de regresión con datos de prueba:", err_regress_t)
 >
 >print("MAE del modelo de regresión con datos de prueba:", err_regress_t) 
 
-###**k-nearest neighbors**
+### **k-nearest neighbors**
 A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
 
 Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
@@ -110,9 +110,14 @@ print("MAE del modelo de KNN con datos de prueba:", mae_knn_t)
 >
 >MAE del modelo de KNN con datos de prueba: [0.024725274725274724, 0.03021978021978022, 0.03296703296703297, 0.03767660910518054, 0.04761904761904762]
 
+A manera de ejemplo se muestra el histograma de errores par el modelo de k-NN con parametro k=15 para las series de entrenamiento y prueba.
+![image](https://user-images.githubusercontent.com/54382451/150032424-f01764a0-4645-4202-b76c-df40f1c37895.png)
+![image](https://user-images.githubusercontent.com/54382451/150032720-8d57f11a-2fbc-4b99-a836-1036af9ba3d8.png)
 
 
 
+Finalmente, comparamos graficamnete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de $k$.
+![image](https://user-images.githubusercontent.com/54382451/150032555-9bb8e614-654e-433e-bf00-0471af83a8a5.png)
 
 
 
