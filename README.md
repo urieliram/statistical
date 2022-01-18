@@ -51,9 +51,16 @@ model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-i
 y_pred = model.predict(X)
 error = Y - y_pred
 dfx = pd.DataFrame(error,Y)
-dfx.to_csv('error.csv')
 plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zorder=2, rwidth=0.9)
 err_regress = mean_absolute_error(Y,y_pred)
 ```
 ![image](https://user-images.githubusercontent.com/54382451/150030914-b242c594-95f1-4124-b4a1-12f2a5f19f11.png)
 
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
+```python
+y_pred2 = model.predict(Xt)
+error2 = Yt - y_pred2
+df = pd.DataFrame(error2,Yt)
+plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
+err_regress_t = mean_absolute_error(Yt,y_pred2)
+```
