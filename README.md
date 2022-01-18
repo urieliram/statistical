@@ -64,3 +64,4 @@ df = pd.DataFrame(error2,Yt)
 plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
 err_regress_t = mean_absolute_error(Yt,y_pred2)
 ```
+![image](https://user-images.githubusercontent.com/54382451/150031119-dc8de852-7b2d-4dbd-8d3b-8509bd57e46f.png)
