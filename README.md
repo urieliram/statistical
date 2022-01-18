@@ -1,8 +1,8 @@
 # Aprendizaje automático
 
-Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [liga](https://github.com/satuelisa/StatisticalLearning)
+Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [curso](https://github.com/satuelisa/StatisticalLearning)
 
-Los datos a usar del libro están en [liga](https://hastie.su.domains/ElemStatLearn/datasets/)
+Los datos a usar del libro están en [dataset](https://hastie.su.domains/ElemStatLearn/datasets/)
 
 
 ## Tarea 1: Introducción
@@ -38,7 +38,10 @@ Otras preguntas indirectamente relacionadas pero que se tienen datos para estudi
 ## Tarea 2: Aprendizaje supervisado
 
 >Instructions: First carry out Exercise 2.8 of the textbook with their ZIP-code data and then replicate the process the best you manage to some data from you own problem that was established in the first homework.
+
 El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb) 
+Aquí solo se presentaran los resultados y fracciones del código relevantes:
+
 
 ```python
 s = "Aquí el código usado"
