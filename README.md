@@ -111,10 +111,12 @@ Por último mostramos el error absoluto medio (MAE) de los datos de entrenamient
 >MAE del modelo de KNN con datos de prueba: [0.02472, 0.03021, 0.03296, 0.03767, 0.04761]
 
 A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento(derecha) y prueba(izquierda).
+
 ![image](https://user-images.githubusercontent.com/54382451/150032424-f01764a0-4645-4202-b76c-df40f1c37895.png)
 ![image](https://user-images.githubusercontent.com/54382451/150032720-8d57f11a-2fbc-4b99-a836-1036af9ba3d8.png)
 
 Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de $k$=[1, 3, 5, 7, 15].
+
 ![image](https://user-images.githubusercontent.com/54382451/150032555-9bb8e614-654e-433e-bf00-0471af83a8a5.png)
 
 
