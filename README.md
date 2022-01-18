@@ -45,6 +45,7 @@ Los datos utilizados en este cuaderno están disponibles aquí: [Datasets](https
 
 ### **Regresión líneal**
 A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción $y\_pred$ y los datos de entrenamiento "Y". Además, los errores de predicción son representados por un histograma.
+
 ```python
 model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
 y_pred = model.predict(X)
@@ -56,6 +57,7 @@ err_regress = mean_absolute_error(Y,y_pred)
 ![image](https://user-images.githubusercontent.com/54382451/150030914-b242c594-95f1-4124-b4a1-12f2a5f19f11.png)
 
 Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
+
 ```python
 y_pred2 = model.predict(Xt)
 error2 = Yt - y_pred2
@@ -63,15 +65,14 @@ df = pd.DataFrame(error2,Yt)
 plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
 err_regress_t = mean_absolute_error(Yt,y_pred2)
 ```
+
 ![image](https://user-images.githubusercontent.com/54382451/150031119-dc8de852-7b2d-4dbd-8d3b-8509bd57e46f.png)
-```python
+
 Por último calculamos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba.
-print("MAE del modelo de regresión con datos de entrenamiento:", err_regress)
-print("MAE del modelo de regresión con datos de prueba:", err_regress_t)
-```
->print("MAE del modelo de regresión con datos de entrenamiento:", err_regress)
+>MAE del modelo de regresión con datos de entrenamiento: 7.02644
 >
->print("MAE del modelo de regresión con datos de prueba:", err_regress_t) 
+>MAE del modelo de regresión con datos de prueba: 6.88467
+
 
 ### **k-nearest neighbors**
 A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
@@ -80,8 +81,8 @@ Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absol
 
 ```python
 k_list    = [1, 3, 5, 7, 15] ## Lista de parámetros k
-mae_knn   = []  ## Guarda valores de error de diferentes k en datos de entrenamiento
-mae_knn_t = []  ## Guarda valores de error de diferentes k en datos de prueba
+mae_knn   = []               ## Guarda valores de error de diferentes k en datos de entrenamiento
+mae_knn_t = []               ## Guarda valores de error de diferentes k en datos de prueba
 ```
 
 Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
@@ -105,12 +106,6 @@ for k in k_list:
 ```
 
 Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k.
-
-```python
-print("MAE del modelo de KNN con datos de entrenamiento:", mae_knn)
-print("MAE del modelo de KNN con datos de prueba:", mae_knn_t)
-```
-
 >MAE del modelo de KNN con datos de entrenamiento: [0.0, 0.00719, 0.010079, 0.01337, 0.02371]
 >
 >MAE del modelo de KNN con datos de prueba: [0.02472, 0.03021, 0.03296, 0.03767, 0.04761]
