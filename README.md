@@ -65,3 +65,54 @@ plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zor
 err_regress_t = mean_absolute_error(Yt,y_pred2)
 ```
 ![image](https://user-images.githubusercontent.com/54382451/150031119-dc8de852-7b2d-4dbd-8d3b-8509bd57e46f.png)
+```python
+Por último calculamos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba.
+print("MAE del modelo de regresión con datos de entrenamiento:", err_regress)
+print("MAE del modelo de regresión con datos de prueba:", err_regress_t)
+```
+>print("MAE del modelo de regresión con datos de entrenamiento:", err_regress)
+>
+>print("MAE del modelo de regresión con datos de prueba:", err_regress_t) 
+
+###**k-nearest neighbors**
+A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
+
+Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+```python
+k_list    = [1, 3, 5, 7, 15] ## Lista de parámetros k
+mae_knn   = []  ## Guarda valores de error de diferentes k en datos de entrenamiento
+mae_knn_t = []  ## Guarda valores de error de diferentes k en datos de prueba
+```
+Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+```python
+for k in k_list:
+    #https://realpython.com/knn-python/#:~:text=The%20kNN%20algorithm%20is%20a,in%20Python%3A%20A%20Practical%20Guide.
+    model = KNeighborsRegressor(n_neighbors=k)
+    model.fit(X, Y)
+    y_pred   = model.predict(X) 
+    y_predt   = model.predict(Xt)
+    mae_knn.append(mean_absolute_error(Y,y_pred))
+    mae_knn_t.append(mean_absolute_error(Yt,y_predt))
+    error = Y - y_pred
+    errort = Yt - y_predt
+    ## Líneas de código que imprimen los histogramas de los errores de cada modelo con un parámetro k.
+    df = pd.DataFrame(error,Y)
+    plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zorder=2, rwidth=0.9)    
+    dft = pd.DataFrame(errort,Yt)
+    plt2 = dft.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
+```
+Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k.
+```python
+print("MAE del modelo de KNN con datos de entrenamiento:", mae_knn)
+print("MAE del modelo de KNN con datos de prueba:", mae_knn_t)
+```
+>MAE del modelo de KNN con datos de entrenamiento: [0.0, 0.007199424046076315, 0.010079193664506842, 0.013370358942713153, 0.023710103191744672]
+>
+>MAE del modelo de KNN con datos de prueba: [0.024725274725274724, 0.03021978021978022, 0.03296703296703297, 0.03767660910518054, 0.04761904761904762]
+
+
+
+
+
+
+
