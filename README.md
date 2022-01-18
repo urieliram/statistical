@@ -129,3 +129,27 @@ Una parte importante del proyecto de tesis es la estimación de pérdidas eléct
 
 ¿Puede agregarse este modelo de estimación de pérdidas al modelo MILP a manera de restricciónes para acelerar el proceso de convergencia?
 
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Posteriomente, calculamos los errores entre la predicción $y\_pred$ y los datos de entrenamiento "Y". Los errores de la predicción con datos de entrenamiento son representados por un histograma.
+```python
+model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
+y_pred = model.predict(X)
+error = Y - y_pred
+dfx = pd.DataFrame(error,Y)
+plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#777bd4', zorder=2, rwidth=0.9)
+err_regress = mean_absolute_error(Y,y_pred)
+```
+![image](https://user-images.githubusercontent.com/54382451/150034666-8d10414c-cc85-47c2-996e-df00fd0835e3.png)
+
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
+
+```python
+y_pred2 = model.predict(Xt)
+error2 = Yt - y_pred2
+df = pd.DataFrame(error2,Yt)
+plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#76ced6', zorder=2, rwidth=0.9)
+err_regress_t = mean_absolute_error(Yt,y_pred2)
+```
+
+![image](https://user-images.githubusercontent.com/54382451/150034749-5068f93a-1ed0-41f9-a6e3-91f9e9f23b56.png)
+
+
