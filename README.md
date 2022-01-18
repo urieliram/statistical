@@ -40,7 +40,7 @@ Otras preguntas indirectamente relacionadas pero que se tienen datos para estudi
 >Instructions: First carry out Exercise 2.8 of the textbook with their ZIP-code data and then replicate the process the best you manage to some data from you own problem that was established in the first homework.
 
 El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb) 
-Aquí solo se presentaran los resultados y fracciones del código relevantes:
+Aquí solo se presentaran los resultados y partes importantes del código:
 
 
 ```python
