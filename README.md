@@ -119,5 +119,13 @@ Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code 
 
 ![image](https://user-images.githubusercontent.com/54382451/150032555-9bb8e614-654e-433e-bf00-0471af83a8a5.png)
 
+## **Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN**
+Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias.
+Las columnas de los datos son los resultados por región y por hora del día. Se dan resultados de generación térmica (GenTer), generación hidráulica (GenHid), generación renovable (GenRE), Gneración no programable (GenNP), Generación total (GenTot), demanda de la región (Demanda), Cortes de energía (Corte), Excedentes de energía(Excedente),Potencia (PotInt), precio Marginal y pérdidas de la región.
 
+Una parte importante del proyecto de tesis es la estimación de pérdidas eléctricas en la red agregando restricciones al modelo MILP de programación de las unidades.
+
+¿Es posible determinar un modelo lineal de regresión o k-NN que estime las pérdidas en función de la generación y demanda conocidas?
+
+¿Puede agregarse este modelo de estimación de pérdidas al modelo MILP a manera de restricciónes para acelerar el proceso de convergencia?
 
