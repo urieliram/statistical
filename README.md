@@ -16,7 +16,6 @@ Como entrada se tienen:
 - La región a la que pertenecen los generadores (variable categórica).
 - Requerimientos de reservas por tipo de reserva (variable escalar).
 
-
 En las salidas de cada instancia se tiene el resultado de:
 - Los generadores que fueron seleccionados para ser prendidos o apagados en cada hora (variable categórica).
 - La producción de los generadores  en cada hora (variable escalar).
@@ -78,12 +77,15 @@ print("MAE del modelo de regresión con datos de prueba:", err_regress_t)
 A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
 
 Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+
 ```python
 k_list    = [1, 3, 5, 7, 15] ## Lista de parámetros k
 mae_knn   = []  ## Guarda valores de error de diferentes k en datos de entrenamiento
 mae_knn_t = []  ## Guarda valores de error de diferentes k en datos de prueba
 ```
+
 Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+
 ```python
 for k in k_list:
     #https://realpython.com/knn-python/#:~:text=The%20kNN%20algorithm%20is%20a,in%20Python%3A%20A%20Practical%20Guide.
@@ -101,11 +103,14 @@ for k in k_list:
     dft = pd.DataFrame(errort,Yt)
     plt2 = dft.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
 ```
+
 Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k.
+
 ```python
 print("MAE del modelo de KNN con datos de entrenamiento:", mae_knn)
 print("MAE del modelo de KNN con datos de prueba:", mae_knn_t)
 ```
+
 >MAE del modelo de KNN con datos de entrenamiento: [0.0, 0.00719, 0.010079, 0.01337, 0.02371]
 >
 >MAE del modelo de KNN con datos de prueba: [0.02472, 0.03021, 0.03296, 0.03767, 0.04761]
