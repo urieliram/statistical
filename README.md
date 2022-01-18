@@ -42,11 +42,18 @@ Otras preguntas indirectamente relacionadas pero que se tienen datos para estudi
 El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb) 
 Aquí solo se presentaran los resultados y partes importantes del código:
 
-Los datos utilizados en este cuaderno están disponibles aquí: [Datasets](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing) 
+Los datos utilizados en este cuaderno están disponibles aquí: [Datasets](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing)
 
+### **Regresión líneal**
+A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción $y\_pred$ y los datos de entrenamiento "Y". Además, los errores de predicción son representados por un histograma.
 ```python
-s = "Aquí el código usado"
-print s
+model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
+y_pred = model.predict(X)
+error = Y - y_pred
+dfx = pd.DataFrame(error,Y)
+dfx.to_csv('error.csv')
+plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zorder=2, rwidth=0.9)
+err_regress = mean_absolute_error(Y,y_pred)
 ```
-Los datos utilizados pa
+![image](https://user-images.githubusercontent.com/54382451/150030914-b242c594-95f1-4124-b4a1-12f2a5f19f11.png)
 
