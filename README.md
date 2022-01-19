@@ -1,6 +1,7 @@
 # Aprendizaje automático
 
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles en [datos](https://hastie.su.domains/ElemStatLearn/datasets/).
+
 ---
 
 + [Chapter 1: Introduction](#tarea-1-introduction)
@@ -10,7 +11,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 ---
 
 ## Tarea 1: Introducción
->Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
+>**Instructions:** Identify one or more learning problems in your thesis work and identify goals and elements.
 
 En el trabajo de investigación del alumno se tienen resultados preliminares de 320 instancias resueltas de la programación de los generadores (Unit Commitment) para el día siguiente resuelto con un modelo de programación entera mixta.
 
@@ -207,5 +208,9 @@ Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de
 Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicadpo a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
 Una forma de utilizar el modelo líneal que se obtiene por la regresión para disminuir el tiempo de solución de la programación de las unidades es agregar al MILP el modelo de regresión por regiones como restricciones o cortes con le objetivo de acotar el espacio de solución. Siempre que se agrege estos cortes al mismo sistema eléctrico del que se obtuvo la información para hacer la regresión.
 
+---
 
+## **Tarea 3: Regresión Lineal**
+
+>**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection. 
 
