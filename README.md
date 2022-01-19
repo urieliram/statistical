@@ -4,9 +4,9 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 
 ---
 
-+ [Chapter 1: Introduction](#tarea-1-introduction)
-+ [Chapter 2: Supervised learning]()
-+ [Chapter 3: Linear Regresion]()
++ [Tarea 1: Introducción](#Tarea-1-Introduction)
++ [Tarea 2: Aprendizaje supervisado](#Tarea-2-Aprendizaje-supervisado)
++ [Tarea 3: Regresión lineal]()
 
 ---
 
