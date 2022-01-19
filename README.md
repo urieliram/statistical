@@ -195,4 +195,8 @@ Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de
 ![image](https://user-images.githubusercontent.com/54382451/150039065-a0d1c862-f82e-48fb-8ec5-025ac7691591.png)
 
 ## **Conclusiones de la tarea**
+Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicadpo a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
+Una forma de utilizar el modelo líneal que se obtiene por la regresión para disminuir el tiempo de solución de la programación de las unidades es agregar al MILP el modelo de regresión por regiones como restricciones o cortes con le objetivo de acotar el espacio de solución. Siempre que se agrege estos cortes al mismo sistema eléctrico del que se obtuvo la información para hacer la regresión.
+
+
 
