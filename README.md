@@ -6,11 +6,11 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 
 + [Tarea 1 Introducción](#tarea-1-introduction)
 + [Tarea 2 Aprendizaje supervisado](#tarea-2-aprendizaje-supervisado)
-+ [Tarea 3 Regresión lineal](#tarea-3-regresion-lineal)
++ [Tarea 3 Regresión lineal](#tarea-3-regresión-lineal)
 
 ---
 
-## Tarea 1: Introducción
+## Tarea 1 Introducción
 >**Instructions:** Identify one or more learning problems in your thesis work and identify goals and elements.
 
 En el trabajo de investigación del alumno se tienen resultados preliminares de 320 instancias resueltas de la programación de los generadores (Unit Commitment) para el día siguiente resuelto con un modelo de programación entera mixta.
@@ -39,7 +39,7 @@ Otras preguntas indirectamente relacionadas pero que se tienen datos para estudi
 
 1. ¿Es posible predecir la aportación de agua de un embalse de un mes teniendo en cuenta las aportaciones mensuales de los demás embalses en una cuenca?. 
 ---
-## Tarea 2: Aprendizaje supervisado
+## Tarea 2 Aprendizaje supervisado
 
 >Instructions: First carry out Exercise 2.8 of the textbook with their ZIP-code data and then replicate the process the best you manage to some data from you own problem that was established in the first homework.
 
@@ -210,7 +210,7 @@ Una forma de utilizar el modelo líneal que se obtiene por la regresión para di
 
 ---
 
-## **Tarea 3: Regresión Lineal**
+## **Tarea 3 Regresión Lineal**
 
 >**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection. 
 
