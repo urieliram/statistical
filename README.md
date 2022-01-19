@@ -117,7 +117,7 @@ Por último mostramos el error absoluto medio (MAE) de los datos de entrenamient
 >
 >MAE del modelo de KNN con datos de prueba: [0.02472, 0.03021, 0.03296, 0.03767, 0.04761]
 
-A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento(derecha) y prueba(izquierda).
+A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento (derecha) y prueba (izquierda).
 
 ![image](https://user-images.githubusercontent.com/54382451/150032424-f01764a0-4645-4202-b76c-df40f1c37895.png)
 ![image](https://user-images.githubusercontent.com/54382451/150032720-8d57f11a-2fbc-4b99-a836-1036af9ba3d8.png)
@@ -190,7 +190,7 @@ for k in k_list:
     plt2 = dft.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#76ced6', zorder=2, rwidth=0.9)
 ```
 
-A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento(derecha) y prueba(izquierda).
+A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento (derecha) y prueba (izquierda).
 
 ![image](https://user-images.githubusercontent.com/54382451/150038179-d0cdaf42-b93d-4e3d-8c93-ace876d511f3.png)
 ![image](https://user-images.githubusercontent.com/54382451/150038193-510363c3-97c5-45a6-88da-b0da768aa4b4.png)
