@@ -3,7 +3,7 @@
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles en [datos](https://hastie.su.domains/ElemStatLearn/datasets/).
 ---
 
-+ [Chapter 1: Introduction](#homework-1-introduction)
++ [Chapter 1: Introduction](#tarea-1-introduction)
 + [Chapter 2: Supervised learning]()
 + [Chapter 3: Linear Regresion]()
 
