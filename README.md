@@ -3,9 +3,10 @@
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles en [datos](https://hastie.su.domains/ElemStatLearn/datasets/).
 ---
 
-+ [Chapter 1: Introduction](## Tarea 1: Introducción)
-+ [Chapter 2: Supervised learning](## Tarea 2: Aprendizaje supervisado)
++ [Chapter 1: Introduction](#homework-1-introduction)
++ [Chapter 2: Supervised learning]()
 + [Chapter 3: Linear Regresion]()
+
 ---
 
 ## Tarea 1: Introducción
@@ -36,7 +37,7 @@ Preguntas de investigación:
 Otras preguntas indirectamente relacionadas pero que se tienen datos para estudiar:
 
 1. ¿Es posible predecir la aportación de agua de un embalse de un mes teniendo en cuenta las aportaciones mensuales de los demás embalses en una cuenca?. 
-
+---
 ## Tarea 2: Aprendizaje supervisado
 
 >Instructions: First carry out Exercise 2.8 of the textbook with their ZIP-code data and then replicate the process the best you manage to some data from you own problem that was established in the first homework.
