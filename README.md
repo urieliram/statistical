@@ -1,9 +1,8 @@
 # Aprendizaje automático
 
-Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar la siguiente  [curso](https://github.com/satuelisa/StatisticalLearning)
+Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace](https://github.com/satuelisa/StatisticalLearning)
 
-Los datos a usar del libro están en [dataset](https://hastie.su.domains/ElemStatLearn/datasets/)
-
+Los datos a usar del libro están disponibles en: [dataset](https://hastie.su.domains/ElemStatLearn/datasets/)
 
 ## Tarea 1: Introducción
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
@@ -89,7 +88,6 @@ Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absol
 
 ```python
 for k in k_list:
-    #https://realpython.com/knn-python/#:~:text=The%20kNN%20algorithm%20is%20a,in%20Python%3A%20A%20Practical%20Guide.
     model = KNeighborsRegressor(n_neighbors=k)
     model.fit(X, Y)
     y_pred   = model.predict(X) 
@@ -143,7 +141,7 @@ err_regress = mean_absolute_error(Y,y_pred)
 
 ![image](https://user-images.githubusercontent.com/54382451/150034666-8d10414c-cc85-47c2-996e-df00fd0835e3.png)
 
-Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
 
 ```python
 y_pred2 = model.predict(Xt)
@@ -162,9 +160,36 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 >MAE del modelo de regresión con datos de prueba: 6.884672
 
 ### **Estimación de pérdidas eléctricas con k-NN**
-Usaremos los arreglos $mae\_knn$ y $mae\_knn\_y$ para guardar los resultados del error de predicción de cada modelo de K-NN con parámetro $k$.
+Usaremos los arreglos $mae\_knn$ y $mae\_knn\_y$ para guardar los resultados del error de predicción de cada modelo de K-NN con parámetro $k$ =[1, 3, 5, 7, 15].
 
+Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
 
+```python
+for k in k_list:
+    model = KNeighborsRegressor(n_neighbors=k)
+    model.fit(X, Y)
+    y_pred   = model.predict(X) 
+    y_predt   = model.predict(Xt)
+    mae_knn.append(mean_absolute_error(Y,y_pred))
+    mae_knn_t.append(mean_absolute_error(Yt,y_predt))
+    error = Y - y_pred
+    errort = Yt - y_predt
+    ## Líneas de código que imprimen los histogramas de los errores de cada modelo con un parámetro k.
+    df = pd.DataFrame(error,Y)
+    plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#777bd4', zorder=2, rwidth=0.9)    
+    dft = pd.DataFrame(errort,Yt)
+    plt2 = dft.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#76ced6', zorder=2, rwidth=0.9)
+```
+
+A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento(derecha) y prueba(izquierda).
+
+![image](https://user-images.githubusercontent.com/54382451/150038179-d0cdaf42-b93d-4e3d-8c93-ace876d511f3.png)
+![image](https://user-images.githubusercontent.com/54382451/150038193-510363c3-97c5-45a6-88da-b0da768aa4b4.png)
+
+Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro $k$.
+
+MAE del modelo de KNN con datos de entrenamiento: [1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820, 1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820]
+MAE del modelo de KNN con datos de prueba: [1.0412, 1.1468, 1.2613, 1.3769, 1.7017, 2.1300, 1.0412, 1.1468, 1.2613, 1.3769, 1.7017, 2.1300]
 
 
 
