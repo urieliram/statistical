@@ -1,6 +1,12 @@
 # Aprendizaje automático
 
 Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles en [datos](https://hastie.su.domains/ElemStatLearn/datasets/).
+---
+
++ [Chapter 1: Introduction](## Tarea 1: Introducción)
++ [Chapter 2: Supervised learning](## Tarea 2: Aprendizaje supervisado)
++ [Chapter 3: Linear Regresion]()
+---
 
 ## Tarea 1: Introducción
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
