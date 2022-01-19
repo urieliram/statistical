@@ -1,8 +1,6 @@
 # Aprendizaje automático
 
-Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace](https://github.com/satuelisa/StatisticalLearning)
-
-Los datos a usar del libro están disponibles en: [dataset](https://hastie.su.domains/ElemStatLearn/datasets/)
+Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles en [datos](https://hastie.su.domains/ElemStatLearn/datasets/).
 
 ## Tarea 1: Introducción
 >Instructions: Identify one or more learning problems in your thesis work and identify goals and elements.
@@ -103,7 +101,7 @@ for k in k_list:
     plt2 = dft.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
 ```
 
-Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k.
+Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k=[1, 3, 5, 7, 15].
 >MAE del modelo de KNN con datos de entrenamiento: [0.0, 0.00719, 0.010079, 0.01337, 0.02371]
 >
 >MAE del modelo de KNN con datos de prueba: [0.02472, 0.03021, 0.03296, 0.03767, 0.04761]
@@ -186,7 +184,7 @@ A continuación se muestran los histogramas de error del modelo de k-NN con para
 ![image](https://user-images.githubusercontent.com/54382451/150038179-d0cdaf42-b93d-4e3d-8c93-ace876d511f3.png)
 ![image](https://user-images.githubusercontent.com/54382451/150038193-510363c3-97c5-45a6-88da-b0da768aa4b4.png)
 
-Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro $k$.
+Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro $k$=[1, 3, 5, 7, 15].
 
 >MAE del modelo de KNN con datos de entrenamiento: [1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820, 1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820]
 >
@@ -195,3 +193,6 @@ Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenam
 Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de K-NN con diferentes valores de $k$.
 
 ![image](https://user-images.githubusercontent.com/54382451/150039065-a0d1c862-f82e-48fb-8ec5-025ac7691591.png)
+
+## **Conclusiones de la tarea**
+
