@@ -41,7 +41,9 @@ Aquí solo se presentaran los resultados y partes importantes del código:
 Los datos utilizados en este cuaderno están disponibles aquí: [Datasets](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing)
 
 ### **Regresión líneal**
-A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción $y\_pred$ y los datos de entrenamiento "Y". Además, los errores de predicción son representados por un histograma.
+A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción 
+
+y_pred y los datos de entrenamiento Y. Además, los errores de predicción son representados por un histograma.
 
 ```python
 model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
@@ -51,9 +53,10 @@ dfx = pd.DataFrame(error,Y)
 plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zorder=2, rwidth=0.9)
 err_regress = mean_absolute_error(Y,y_pred)
 ```
+
 ![image](https://user-images.githubusercontent.com/54382451/150030914-b242c594-95f1-4124-b4a1-12f2a5f19f11.png)
 
-Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
 
 ```python
 y_pred2 = model.predict(Xt)
@@ -74,7 +77,7 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 ### **k-nearest neighbors**
 A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
 
-Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+Para cada k se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 k_list    = [1, 3, 5, 7, 15] ## Lista de parámetros k
@@ -82,7 +85,7 @@ mae_knn   = []               ## Guarda valores de error de diferentes k en datos
 mae_knn_t = []               ## Guarda valores de error de diferentes k en datos de prueba
 ```
 
-Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+Para cada k se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 for k in k_list:
@@ -111,7 +114,7 @@ A continuación se muestran los histogramas de error del modelo de k-NN con para
 ![image](https://user-images.githubusercontent.com/54382451/150032424-f01764a0-4645-4202-b76c-df40f1c37895.png)
 ![image](https://user-images.githubusercontent.com/54382451/150032720-8d57f11a-2fbc-4b99-a836-1036af9ba3d8.png)
 
-Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de $k$=[1, 3, 5, 7, 15].
+Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de k=[1, 3, 5, 7, 15].
 
 ![image](https://user-images.githubusercontent.com/54382451/150032555-9bb8e614-654e-433e-bf00-0471af83a8a5.png)
 
@@ -126,7 +129,7 @@ Una parte importante del proyecto de tesis es la estimación de pérdidas eléct
 ¿Puede agregarse este modelo de estimación de pérdidas al modelo MILP a manera de restricciónes para acelerar el proceso de convergencia?
 
 ### **Estimación de pérdidas eléctricas con regresión líneal**
-A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Posteriomente, calculamos los errores entre la predicción $y\_pred$ y los datos de entrenamiento "Y". Los errores de la predicción con datos de entrenamiento son representados por un histograma.
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Los errores de la predicción con datos de entrenamiento son representados por un histograma.
 
 ```python
 model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
@@ -139,7 +142,7 @@ err_regress = mean_absolute_error(Y,y_pred)
 
 ![image](https://user-images.githubusercontent.com/54382451/150034666-8d10414c-cc85-47c2-996e-df00fd0835e3.png)
 
-Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción $y\_pred2$ y los datos de prueba $Yt$. Los errores de la predicción con datos de prueba son representados por un histograma.
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
 
 ```python
 y_pred2 = model.predict(Xt)
@@ -158,9 +161,9 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 >MAE del modelo de regresión con datos de prueba: 6.884672
 
 ### **Estimación de pérdidas eléctricas con k-NN**
-Usaremos los arreglos $mae\_knn$ y $mae\_knn\_y$ para guardar los resultados del error de predicción de cada modelo de K-NN con parámetro $k$ =[1, 3, 5, 7, 15].
+Usaremos los arreglos mae_knn y mae_knn_y para guardar los resultados del error de predicción de cada modelo de K-NN con parámetro k=[1, 3, 5, 7, 15].
 
-Para cada $k$ se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento $X$ como de prueba $Xt$.
+Para cada k se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 for k in k_list:
@@ -184,13 +187,13 @@ A continuación se muestran los histogramas de error del modelo de k-NN con para
 ![image](https://user-images.githubusercontent.com/54382451/150038179-d0cdaf42-b93d-4e3d-8c93-ace876d511f3.png)
 ![image](https://user-images.githubusercontent.com/54382451/150038193-510363c3-97c5-45a6-88da-b0da768aa4b4.png)
 
-Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro $k$=[1, 3, 5, 7, 15].
+Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k=[1, 3, 5, 7, 15].
 
 >MAE del modelo de KNN con datos de entrenamiento: [1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820, 1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820]
 >
 >MAE del modelo de KNN con datos de prueba: [1.0412, 1.1468, 1.2613, 1.3769, 1.7017, 2.1300, 1.0412, 1.1468, 1.2613, 1.3769, 1.7017, 2.1300]
 
-Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de K-NN con diferentes valores de $k$.
+Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de K-NN con diferentes valores de k.
 
 ![image](https://user-images.githubusercontent.com/54382451/150039065-a0d1c862-f82e-48fb-8ec5-025ac7691591.png)
 
