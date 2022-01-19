@@ -28,6 +28,7 @@ En las salidas de cada instancia se tiene el resultado de:
 - Las pérdidas en el sistema (variable escalar).
 - Tiempos de ejecución de cada instancia (variable escalar).
 
+
 Preguntas de investigación:
 1. ¿Es posible determinar que conjunto de lineas de transmisión serán violadas conociendo los generadores que serán prendidos o la demanda por regiones?
 2. ¿Es posible predecir las pérdidas en el sistema conociendo la salida de potencia de cada generador?
