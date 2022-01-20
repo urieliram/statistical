@@ -73,8 +73,7 @@ df = pd.DataFrame(error2,Yt)
 plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
 err_regress_t = mean_absolute_error(Yt,y_pred2)
 ```
-
-![image](https://user-images.githubusercontent.com/54382451/150405217-f6ca1781-b3b5-4a31-bcb0-ed42b62f2137.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist2.png)
 
 Por último, calculamos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba.
 >MAE del modelo de regresión con datos de entrenamiento: 7.02644
