@@ -199,7 +199,7 @@ Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenam
 
 Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de K-NN con diferentes valores de k.
 
-![image](https://github.com/urieliram/statistical/commit/7816b87e74cee0c2db09c353437b05ebcd94c8ec)
+![image](https://github.com/urieliram/statistical/blob/main/figures/MAE2.png)
 
 ## **Conclusiones de la tarea**
 Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicadpo a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
