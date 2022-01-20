@@ -62,7 +62,7 @@ plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zo
 err_regress = mean_absolute_error(Y,y_pred)
 ```
 
-![image](https://user-images.githubusercontent.com/54382451/150030914-b242c594-95f1-4124-b4a1-12f2a5f19f11.png)
+![image](https://user-images.githubusercontent.com/54382451/150405162-7b101d32-25d6-41e9-a729-2576eb7b0a08.png)
 
 Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
 
@@ -74,7 +74,7 @@ plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zor
 err_regress_t = mean_absolute_error(Yt,y_pred2)
 ```
 
-![image](https://user-images.githubusercontent.com/54382451/150031119-dc8de852-7b2d-4dbd-8d3b-8509bd57e46f.png)
+![image](https://user-images.githubusercontent.com/54382451/150405217-f6ca1781-b3b5-4a31-bcb0-ed42b62f2137.png)
 
 Por último, calculamos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba.
 >MAE del modelo de regresión con datos de entrenamiento: 7.02644
@@ -124,7 +124,7 @@ A continuación se muestran los histogramas de error del modelo de k-NN con para
 
 Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de k=[1, 3, 5, 7, 15].
 
-![image](https://user-images.githubusercontent.com/54382451/150032555-9bb8e614-654e-433e-bf00-0471af83a8a5.png)
+![image](https://user-images.githubusercontent.com/54382451/150405413-423846a1-4337-4757-8c83-28b6bf8f6822.png)
 
 ## **Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN**
 Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias.
