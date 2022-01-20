@@ -61,7 +61,7 @@ dfx = pd.DataFrame(error,Y)
 plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zorder=2, rwidth=0.9)
 err_regress = mean_absolute_error(Y,y_pred)
 ```
-![image](https://user-images.githubusercontent.com/54382451/150406897-5d59e99e-f2ab-437a-a134-5591ce1e7c8e.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist1.png)
 
 
 Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
