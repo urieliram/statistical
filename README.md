@@ -48,7 +48,7 @@ El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.
 
 Los datos utilizados están disponibles en el [Repositorio](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing).
 
-### **Regresión líneal**
+### Regresión líneal
 A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Además, los errores de predicción son representados por un histograma.
 
 ```python
@@ -78,10 +78,10 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 >MAE del modelo de regresión con datos de prueba: 6.88467
 
 
-### **k-nearest neighbors**
+### k-nearest neighbors
 A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
 
-Para cada k se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
+Para cada k se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 k_list    = [1, 3, 5, 7, 15] ## Lista de parámetros k
@@ -89,7 +89,7 @@ mae_knn   = []               ## Guarda valores de error de diferentes k en datos
 mae_knn_t = []               ## Guarda valores de error de diferentes k en datos de prueba
 ```
 
-Para cada k se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
+Para cada k se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 for k in k_list:
@@ -108,7 +108,7 @@ for k in k_list:
     plt2 = dft.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf40', zorder=2, rwidth=0.9)
 ```
 
-Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k=[1, 3, 5, 7, 15].
+Por último mostramos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba del modelo k-NN para cada parámetro k=[1, 3, 5, 7, 15].
 >MAE del modelo de KNN con datos de entrenamiento: [0.0, 0.00719, 0.010079, 0.01337, 0.02371]
 >
 >MAE del modelo de KNN con datos de prueba: [0.02472, 0.03021, 0.03296, 0.03767, 0.04761]
@@ -118,11 +118,11 @@ A continuación se muestran los histogramas de error del modelo de k-NN con para
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist3.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist4.png)
 
-Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de k=[1, 3, 5, 7, 15].
+Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el k-NN con diferentes valores de k=[1, 3, 5, 7, 15].
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/MAE1.png)
 
-## **Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN**
+## Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN
 Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias.
 Las columnas de los datos son los resultados por región y por hora del día. Se dan resultados de generación térmica (GenTer), generación hidráulica (GenHid), generación renovable (GenRE), Gneración no programable (GenNP), Generación total (GenTot), demanda de la región (Demanda), Cortes de energía (Corte), Excedentes de energía(Excedente),Potencia (PotInt), precio Marginal y pérdidas de la región.
 
@@ -132,7 +132,7 @@ Una parte importante del proyecto de tesis es la estimación de pérdidas eléct
 
 ¿Puede agregarse este modelo de estimación de pérdidas al modelo MILP a manera de restricciónes para acelerar el proceso de convergencia?
 
-### **Estimación de pérdidas eléctricas con regresión líneal**
+### Estimación de pérdidas eléctricas con regresión líneal
 A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Los errores de la predicción con datos de entrenamiento son representados por un histograma.
 
 ```python
@@ -164,10 +164,10 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 >
 >MAE del modelo de regresión con datos de prueba: 6.884672
 
-### **Estimación de pérdidas eléctricas con k-NN**
-Usaremos los arreglos mae_knn y mae_knn_y para guardar los resultados del error de predicción de cada modelo de K-NN con parámetro k=[1, 3, 5, 7, 15].
+### Estimación de pérdidas eléctricas con k-NN
+Usaremos los arreglos mae_knn y mae_knn_y para guardar los resultados del error de predicción de cada modelo de k-NN con parámetro k=[1, 3, 5, 7, 15].
 
-Para cada k se obtiene un modelo K-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
+Para cada k se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 for k in k_list:
@@ -191,17 +191,17 @@ A continuación se muestran los histogramas de error del modelo de k-NN con para
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist5.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist6.png)
 
-Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k=[1, 3, 5, 7, 15].
+Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo k-NN para cada parámetro k=[1, 3, 5, 7, 15].
 
 >MAE del modelo de KNN con datos de entrenamiento: [1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820, 1.3242, 1.2696, 1.2798, 1.2984, 1.4456, 1.6820]
 >
 >MAE del modelo de KNN con datos de prueba: [1.0412, 1.1468, 1.2613, 1.3769, 1.7017, 2.1300, 1.0412, 1.1468, 1.2613, 1.3769, 1.7017, 2.1300]
 
-Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de K-NN con diferentes valores de k.
+Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de k-NN con diferentes valores de k.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/MAE2.png)
 
-## **Conclusiones de la tarea**
+## Conclusiones de la tarea
 Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicadpo a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
 Una forma de utilizar el modelo líneal que se obtiene por la regresión para disminuir el tiempo de solución de la programación de las unidades es agregar al MILP el modelo de regresión por regiones como restricciones o cortes con le objetivo de acotar el espacio de solución. Siempre que se agrege estos cortes al mismo sistema eléctrico del que se obtuvo la información para hacer la regresión.
 
