@@ -115,12 +115,12 @@ Por último mostramos el error absoluto medio (MAE) de los datos de entrenamient
 
 A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento (derecha) y prueba (izquierda).
 
-![image](https://user-images.githubusercontent.com/54382451/150032424-f01764a0-4645-4202-b76c-df40f1c37895.png)
-![image](https://user-images.githubusercontent.com/54382451/150032720-8d57f11a-2fbc-4b99-a836-1036af9ba3d8.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist4.png)
 
 Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code entre modelo de regresión lineal y el K-NN con diferentes valores de k=[1, 3, 5, 7, 15].
 
-![image](https://user-images.githubusercontent.com/54382451/150405413-423846a1-4337-4757-8c83-28b6bf8f6822.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/MAE1.png)
 
 ## **Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN**
 Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias.
@@ -144,7 +144,7 @@ plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#777bd4', zo
 err_regress = mean_absolute_error(Y,y_pred)
 ```
 
-![image](https://user-images.githubusercontent.com/54382451/150034666-8d10414c-cc85-47c2-996e-df00fd0835e3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist4.png)
 
 Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
 
@@ -188,8 +188,8 @@ for k in k_list:
 
 A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento (derecha) y prueba (izquierda).
 
-![image](https://user-images.githubusercontent.com/54382451/150038179-d0cdaf42-b93d-4e3d-8c93-ace876d511f3.png)
-![image](https://user-images.githubusercontent.com/54382451/150038193-510363c3-97c5-45a6-88da-b0da768aa4b4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist6.png)
 
 Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo K-NN para cada parámetro k=[1, 3, 5, 7, 15].
 
@@ -199,7 +199,7 @@ Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenam
 
 Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de regresión lineal contra el de K-NN con diferentes valores de k.
 
-![image](https://user-images.githubusercontent.com/54382451/150039065-a0d1c862-f82e-48fb-8ec5-025ac7691591.png)
+![image](https://github.com/urieliram/statistical/commit/7816b87e74cee0c2db09c353437b05ebcd94c8ec)
 
 ## **Conclusiones de la tarea**
 Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicadpo a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
