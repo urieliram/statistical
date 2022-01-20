@@ -49,9 +49,7 @@ El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.
 Los datos utilizados están disponibles en el [Repositorio](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing).
 
 ### **Regresión líneal**
-A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción 
-
-y_pred y los datos de entrenamiento Y. Además, los errores de predicción son representados por un histograma.
+A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Además, los errores de predicción son representados por un histograma.
 
 ```python
 model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
@@ -62,7 +60,6 @@ plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#86bf91', zo
 err_regress = mean_absolute_error(Y,y_pred)
 ```
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist1.png)
-
 
 Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además,  calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
 
