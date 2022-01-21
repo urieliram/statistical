@@ -136,7 +136,7 @@ Una parte importante del proyecto de tesis es la estimación de pérdidas eléct
 A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Los errores de la predicción con datos de entrenamiento son representados por un histograma.
 
 ```python
-model = LinearRegression().fit(X, Y) #https://realpython.com/linear-regression-in-python/
+model = LinearRegression().fit(X, Y)
 y_pred = model.predict(X)
 error = Y - y_pred
 dfx = pd.DataFrame(error,Y)
@@ -144,7 +144,7 @@ plt = dfx.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#777bd4', zo
 err_regress = mean_absolute_error(Y,y_pred)
 ```
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist5.png)
 
 Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción y_pred2 y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
 
@@ -156,7 +156,7 @@ plt = df.hist(column=0, bins=25, grid=False, figsize=(6,3), color='#76ced6', zor
 err_regress_t = mean_absolute_error(Yt,y_pred2)
 ```
 
-![image](https://user-images.githubusercontent.com/54382451/150034749-5068f93a-1ed0-41f9-a6e3-91f9e9f23b56.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist6.png)
 
 Por último, calculamos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba.
 
@@ -188,8 +188,8 @@ for k in k_list:
 
 A continuación se muestran los histogramas de error del modelo de k-NN con parametro k=15 para las series de entrenamiento (derecha) y prueba (izquierda).
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist5.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist7.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist8.png)
 
 Por último mostramos el **error absoluto medio (MAE)** de los datos de entrenamiento así como de los datos de prueba del modelo k-NN para cada parámetro k=[1, 3, 5, 7, 15].
 
