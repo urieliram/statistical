@@ -269,6 +269,45 @@ Ahora, calculamos el error absoluto medio (MAE) de los datos de entrenamiento as
 >MAE del modelo de regresión con datos de entrenamiento: 0.4986
 >MAE del modelo de regresión con datos de prueba: 0.5332
 
+
+#### Regression del mejor subconjunto aplicado 
+
+a la predicción de cáncer de próstata aplicaremos la técnica de regresión del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de cáncer de próstata.
+
+```python
+## Loop over all possible numbers of features to be included
+results = pd.DataFrame(columns=['num_features', 'features', 'MAE'])
+for k in range(1, X_train.shape[1] + 1):
+    # Loop over all possible subsets of size k
+    for subset in itertools.combinations(range(X_train.shape[1]), k):
+        subset = list(subset)        
+        linreg_model = LinearRegression().fit(X_train[:, subset], y_train)
+        linreg_prediction = linreg_model.predict(X_train[:, subset])
+        linreg_mae = np.mean(np.abs(y_train - linreg_prediction))
+        #print(subset," ",linreg_mae)
+        results = results.append(pd.DataFrame([{'num_features': k,
+                                                'features': subset,
+                                                'MAE': linreg_mae}]))
+print(results.sort_values('MAE'))
+err_regress_subset = results.sort_values('MAE')['MAE'].head(1)
+```
+La aplicación de este método sugiere utilizar las variables (features) [1, 2, 3, 4, 5, 6, 8]; es decir: ['lweight','age','lbph','svi','lcp','gleason','pgg45'] para lograr un mínimo error entre todas las combinaciones de las variables.
+
+```
+   num_features                     features       MAE
+0             7        [1, 2, 3, 4, 5, 6, 8]  0.497997
+0             8     [0, 1, 2, 3, 4, 5, 6, 8]  0.497997
+0             9  [0, 1, 2, 3, 4, 5, 6, 7, 8]  0.498614
+0             8     [1, 2, 3, 4, 5, 6, 7, 8]  0.498614
+0             7        [1, 2, 3, 4, 5, 6, 7]  0.504766
+..          ...                          ...       ...
+0             2                       [0, 7]  0.904978
+0             1                          [7]  0.904978
+0             2                       [0, 3]  0.905767
+0             1                          [3]  0.905767
+0             1                          [0]  0.961085
+```
+
 ### Regresión lineal en predicción de demanda eléctrica
 
 A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación. En esta sección, aplicaremos algunas de las técnicas de regresión que aplican reducción de dimensiones y pueden encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16).
@@ -285,9 +324,9 @@ Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predeci
 
 Ahora, comparamos el error absoluto medio (MAE) y bias de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
 
->MAE y bias del modelo de regresión con datos de entrenamiento: 112.4721 , 0.0
+>MAE y bias del modelo de regresión con datos de entrenamiento: 97.1445 , 0.0
 >
->MAE y bias del modelo de regresión con datos de prueba: 394.5627 , -379.3629
+>MAE y bias del modelo de regresión con datos de prueba: 176.1676 , 40.9495
 
 #### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regression del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de pronóstico de demanda.
@@ -308,20 +347,20 @@ for k in range(1, X_train.shape[1] + 1):
 print(results.sort_values('MAE'))
 subset_best = list(results.sort_values('MAE')['features'].head(1)[0]) ## Seleccionamos el mejor subconjunto con menor MAE
 ```
-La salida del código nos muestra los subconjuntos (features) con el menor error absoluto medio (MAE). La aplicación de este método sugiere utilizar las variables (features) (0, 1, 2, 3, 5, 7, 9]; es decir [X1, X2, X3, X6, X8, X10] para lograr un mínimo error entre todas las combinaciones de las variables.
+La salida del código nos muestra los subconjuntos (features) con el menor error absoluto medio (MAE). La aplicación de este método sugiere utilizar las variables (features) [1, 2, 3, 7, 8, 10]; es decir [X2, X3, X4, X8, X9, X11] para lograr un mínimo error entre todas las combinaciones de las variables.
 ```
->   num_features                      features         MAE
->0             7         [0, 1, 2, 3, 5, 7, 9]  110.867369
->0             6            [1, 2, 3, 5, 7, 9]  110.867369
->0             6            [0, 1, 2, 3, 5, 7]  110.919145
->0             5               [1, 2, 3, 5, 7]  110.919145
->0             9  [0, 1, 2, 3, 4, 5, 7, 9, 10]  110.991807
->..          ...                           ...         ...
->0             1                           [7]  152.292525
->0             2                        [0, 7]  152.292525
->0             1                          [10]  157.380566
->0             2                       [0, 10]  157.380566
->0             1                           [0]  474.064100
+   num_features                   features         MAE
+0             6        [1, 2, 3, 7, 8, 10]   95.651466
+0             7     [0, 1, 2, 3, 7, 8, 10]   95.651466
+0             8  [0, 1, 2, 3, 6, 7, 8, 10]   95.724433
+0             7     [1, 2, 3, 6, 7, 8, 10]   95.724433
+0             8  [0, 1, 2, 3, 7, 8, 9, 10]   95.737479
+..          ...                        ...         ...
+0             1                       [10]  145.218521
+0             2                    [0, 10]  145.218521
+0             2                     [0, 5]  151.493611
+0             1                        [5]  151.493611
+0             1                        [0]  463.242794
 ```
 Calculamos lo errores con los datos de prueba:
 
@@ -333,7 +372,7 @@ bias_test_subset = bias.bias(y_test,subset_prediction,axis=0)
 print("MAE y bias del modelo de regresión con datos de prueba (subset):" , err_test_subset, "," , bias_test_subset) 
 ```
 Obteniendo los errores como:
->MAE y bias del modelo de regresión con datos de prueba (subset): 392.7999 , -379.3629
+>MAE y bias del modelo de regresión con datos de prueba (subset): 173.5274 , 40.9495
 
 #### Regresión Ridge aplicada a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión ridge **(Ridge Regression)** a los datos de entrenamiento de pronóstico de demanda.
@@ -347,7 +386,7 @@ bias_test_ridge = bias.bias(y_test,ridge_prediction,axis=0)
 #print(ridge_model.coef_)
 print("MAE y bias del modelo de regresión con datos de prueba (ridge):" , err_test_ridge, "," , bias_test_ridge)
 ```
->MAE y bias del modelo de regresión con datos de prueba (ridge): 392.4197 , -379.3629
+>MAE y bias del modelo de regresión con datos de prueba (ridge): 172.5657 , 40.9495
 
 #### Regresión Lasso aplicada a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión lasso **(lasso regression)** a los datos de entrenamiento de pronóstico de demanda.
@@ -362,7 +401,7 @@ bias_test_lasso  = bias.bias(y_test,lasso_prediction,axis=0)
 #print(lasso_model.coef_)
 print("MAE y bias del modelo de regresión con datos de prueba (lasso):" , err_test_lasso, "," , bias_test_lasso)
 ```
->MAE y bias del modelo de regresión con datos de prueba (lasso): 391.3755 , -379.3629
+>MAE y bias del modelo de regresión con datos de prueba (lasso): 169.1226 , 40.9495
 
 #### Regresión de componentes principales aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión de componentes principales **(Principal Components Regression)** a los datos de entrenamiento de pronóstico de demanda.
@@ -379,7 +418,7 @@ bias_test_pcr  = bias.bias(y_test,lasso_prediction,axis=0)
 n_comp = list(pcr_model.best_params_.values())[0]
 print("MAE y bias del modelo de regresión con datos de prueba (pcr):" , err_test_pcr, "," , bias_test_pcr)
 ```
->MAE y bias del modelo de regresión con datos de prueba (pcr): 386.49000938187555 , -379.3629503298587
+>MAE y bias del modelo de regresión con datos de prueba (pcr): 164.4150 , 40.9495
 
 #### Regresión por mínimos cuadrados parciales aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión de componentes principales **(Partial Least Squares)** a los datos de entrenamiento de pronóstico de demanda.
@@ -394,7 +433,11 @@ err_test_pls = np.mean(np.abs(y_test - pls_prediction))  ## MAE
 bias_test_pls = bias.bias(y_test,lasso_prediction,axis=0)
 print("MAE y bias del modelo de regresión con datos de prueba (pls):" , err_test_pls, "," , bias_test_pls)
 ```
-MAE y bias del modelo de regresión con datos de prueba (pls): 633.3116 , -379.3629
+MAE y bias del modelo de regresión con datos de prueba (pls): 545.5517 , 40.9495
+
+Por último graficamos los resultados de predicción de las diferentes técnicas de regresión y los resultados de prueba Y.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda.png)
 
 ### Conclusiones tarea 3
 En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independiente). Se utilizaron métodos para reducir la dimensión de las variables como fueron: regresión de mejor Subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir el sesgo o bias en la predicción y el número de variables, para nuestros datos el método que tuvo un mejor desempeño fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener un modelo de regresión de manera rápida.
