@@ -437,7 +437,7 @@ MAE y bias del modelo de regresión con datos de prueba (pls): 545.5517 , 40.949
 
 Por último graficamos los resultados de predicción de las diferentes técnicas de regresión y los resultados de prueba Y.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda2.png)
 
 ### Conclusiones tarea 3
 En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independiente). Se utilizaron métodos para reducir la dimensión de las variables como fueron: regresión de mejor Subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir el sesgo o bias en la predicción y el número de variables, para nuestros datos el método que tuvo un mejor desempeño fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener un modelo de regresión de manera rápida.
