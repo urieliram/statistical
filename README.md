@@ -316,7 +316,8 @@ for k in range(1, X_train.shape[1] + 1):
 print(results.sort_values('MAE'))
 subset_best = list(results.sort_values('MAE')['features'].head(1)[0]) ## Seleccionamos el mejor subconjunto con menor MAE
 ```
-
+La salida del código nos muestra los subconjuntos (features) con el menor error absoluto medio (MAE).
+```
 >   num_features                      features         MAE
 >0             7         [0, 1, 2, 3, 5, 7, 9]  110.867369
 >0             6            [1, 2, 3, 5, 7, 9]  110.867369
@@ -329,7 +330,7 @@ subset_best = list(results.sort_values('MAE')['features'].head(1)[0]) ## Selecci
 >0             1                          [10]  157.380566
 >0             2                       [0, 10]  157.380566
 >0             1                           [0]  474.064100
-
+```
 
 
 
