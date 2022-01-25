@@ -204,8 +204,8 @@ Una forma de utilizar el modelo líneal que se obtiene por la regresión para di
 >**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection.
 
 ### Regresión líneal en cáncer de próstata
-A continuación repetiremos el ejercicio 3.2.1 del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) en el que se aplica un modelo de regresión líneal para predecir cáncer de próstata.
-De acuerdo con el libro es necesario primero estandarizar los datos de los regresores `X_train` y `X_test` restando la media y dividiendo entre la varianza.
+A continuación repetiremos el ejercicio 3.2.1 del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) aplicando un modelo de regresión líneal para predecir cáncer de próstata.
+Primero estandarizaremos los datos de los regresores `X_train` y `X_test` restando la media y dividiendo entre la varianza.
 ```python
 df1.std(numeric_only = True) 
 df1.mean(numeric_only = True)
@@ -215,7 +215,8 @@ X_train = df1.to_numpy()   ## Predictors
 X_train = sm.add_constant(X_train)
 y_train = df2.to_numpy()   ## Outcome
 ```
-A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal.
+
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal usando la librería **statsmodels**.
 
 ```python
 X_train = sm.add_constant(X_train)
@@ -223,7 +224,9 @@ model   = sm.OLS(y_train, X_train)
 results = model.fit()
 print(results.summary())
 ```
-El resultado de los coeficientes se muestra en la tabla siguiente. En las tres últimas columnas se muestran el valor p y los intervalos de confianza de los coeficientes.
+
+Los resultados de la regresión se muestran en la tabla siguiente. En las tres últimas columnas se muestran el valor **p** y los **intervalos de confianza** de los coeficientes.
+
 ```
 OLS Regression Results                            
 ==============================================================================
@@ -256,23 +259,23 @@ Kurtosis:                       3.178   Cond. No.                         4.44
 ==============================================================================
 ```
 
-Ahora, calculamos los errores entre la predicción y_pred y los datos de entrenamiento y_train. Los errores son representados por un histograma.
+Calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados en el siguiente histograma.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist9.png)
 
-Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción `y_pred2` y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
+Utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba `y_test`. Además, calculamos los errores entre la predicción `y_pred2` y los datos de prueba `y_test`. Los errores de la predicción con datos de prueba son representados en el siguiente histograma.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist10.png)
 
-Ahora, calculamos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
+Calculamos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
 
 >MAE del modelo de regresión con datos de entrenamiento: 0.4986
 >MAE del modelo de regresión con datos de prueba: 0.5332
 
 
-#### Regression del mejor subconjunto aplicado 
+#### Regression del mejor subconjunto aplicado a la predicción de cáncer de próstata 
 
-a la predicción de cáncer de próstata aplicaremos la técnica de regresión del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de cáncer de próstata.
+A continuación aplicaremos la técnica de regresión del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de cáncer de próstata.
 
 ```python
 ## Loop over all possible numbers of features to be included
@@ -291,7 +294,7 @@ for k in range(1, X_train.shape[1] + 1):
 print(results.sort_values('MAE'))
 err_regress_subset = results.sort_values('MAE')['MAE'].head(1)
 ```
-La aplicación de este método sugiere utilizar las variables (features) [1, 2, 3, 4, 5, 6, 8]; es decir: ['lweight','age','lbph','svi','lcp','gleason','pgg45'] para lograr un mínimo error entre todas las combinaciones de las variables.
+Los resultados del método sugiere utilizar las variables (features) [1, 2, 3, 4, 5, 6, 8]; es decir: ['lweight','age','lbph','svi','lcp','gleason','pgg45'] para lograr un mínimo error entre todas las combinaciones de las variables.
 
 ```
    num_features                     features       MAE
@@ -310,27 +313,28 @@ La aplicación de este método sugiere utilizar las variables (features) [1, 2, 
 
 ### Regresión lineal en predicción de demanda eléctrica
 
-A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación. En esta sección, aplicaremos algunas de las técnicas de regresión que aplican reducción de dimensiones y pueden encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16).
+A continuación aplicaremos **regresión líneal** a la predicción de demanda eléctrica. La variable independiente Y serán los datos de demanda de 24 horas antes en intervalos de 5 minutos (288 datos), y las variables independientes X serán los datos de otros días con una mayor correlación. Los datos se han dividido en datos de entrenamiento (`x_train`,`x_train`) y datos de prueba (`x_test`,`y_test`). El objetivo es encontrar el mejor modelo de pronóstico para los datos de demanda.
 
 Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
 
-A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Ahora, calculamos los errores entre la predicción y_pred y los datos de entrenamiento y_train. Los errores son representados por un histograma.
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando **regresión lineal**. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist11.png)
 
-Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción y_pred2 y los datos de prueba  Yt . Los errores de la predicción con datos de prueba son representados por un histograma.
+Utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba `y_test`. Además, calculamos los errores entre la predicción `y_pred2` y los datos de prueba `y_test`. Los errores de la predicción con datos de prueba son representados por un histograma.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist12.png)
 
-Ahora, comparamos el error absoluto medio (MAE) y bias de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
+Comparamos el error absoluto medio (MAE) y bias de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
 
 >MAE y bias del modelo de regresión con datos de entrenamiento: 97.1445 , 0.0
 >
 >MAE y bias del modelo de regresión con datos de prueba: 176.1676 , 40.9495
 
+A continuación aplicaremos Las técnicas de regresión lineal con reducción de dimensiones a nuestros datos de demanda. Estas técnicas pueden encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16).
+
 #### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
-Aplicaremos la técnica de regression del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de pronóstico de demanda.
-Otras técnicas de reducción de dimensión y compactación de modelos de regresión puede encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16). 
+Aplicamos la técnica de regresión del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de demanda electrica.
 
 ```python
 results = pd.DataFrame(columns=['num_features', 'features', 'MAE'])
@@ -371,11 +375,12 @@ err_test_subset  = np.mean(np.abs(y_test - subset_prediction))
 bias_test_subset = bias.bias(y_test,subset_prediction,axis=0)
 print("MAE y bias del modelo de regresión con datos de prueba (subset):" , err_test_subset, "," , bias_test_subset) 
 ```
-Obteniendo los errores como:
+Obtenemos los errores de los datos de prueba `y_test`.
+
 >MAE y bias del modelo de regresión con datos de prueba (subset): 173.5274 , 40.9495
 
 #### Regresión Ridge aplicada a la predicción de pronóstico de demanda eléctrica
-Aplicaremos la técnica de regresión ridge **(Ridge Regression)** a los datos de entrenamiento de pronóstico de demanda.
+Aplicaremos la técnica de regresión ridge **(Ridge Regression)** a los datos de entrenamiento de demanda eléctrica.
 ```python
 ridge_cv = RidgeCV(normalize=True, alphas=np.logspace(-10, 1, 400))
 ridge_model = ridge_cv.fit(X_train, y_train)
@@ -386,10 +391,12 @@ bias_test_ridge = bias.bias(y_test,ridge_prediction,axis=0)
 #print(ridge_model.coef_)
 print("MAE y bias del modelo de regresión con datos de prueba (ridge):" , err_test_ridge, "," , bias_test_ridge)
 ```
+Obtenemos los errores de los datos de prueba `y_test`.
+
 >MAE y bias del modelo de regresión con datos de prueba (ridge): 172.5657 , 40.9495
 
 #### Regresión Lasso aplicada a la predicción de pronóstico de demanda eléctrica
-Aplicaremos la técnica de regresión lasso **(lasso regression)** a los datos de entrenamiento de pronóstico de demanda.
+Aplicaremos la técnica de regresión lasso **(lasso regression)** a los datos de entrenamiento de demanda eléctrica.
 
 ```python
 lasso_cv         = LassoCV(normalize=True, alphas=np.logspace(-10, 1, 400))
@@ -401,10 +408,13 @@ bias_test_lasso  = bias.bias(y_test,lasso_prediction,axis=0)
 #print(lasso_model.coef_)
 print("MAE y bias del modelo de regresión con datos de prueba (lasso):" , err_test_lasso, "," , bias_test_lasso)
 ```
+
+Obtenemos los errores de los datos de prueba `y_test`.
+
 >MAE y bias del modelo de regresión con datos de prueba (lasso): 169.1226 , 40.9495
 
 #### Regresión de componentes principales aplicado a la predicción de pronóstico de demanda eléctrica
-Aplicaremos la técnica de regresión de componentes principales **(Principal Components Regression)** a los datos de entrenamiento de pronóstico de demanda.
+Aplicaremos la técnica de regresión de componentes principales **(Principal Components Regression)** a los datos de entrenamiento de demanda eléctrica.
 ```python
 regression_model = LinearRegression(normalize=True)
 pca_model = PCA()
@@ -418,10 +428,13 @@ bias_test_pcr  = bias.bias(y_test,lasso_prediction,axis=0)
 n_comp = list(pcr_model.best_params_.values())[0]
 print("MAE y bias del modelo de regresión con datos de prueba (pcr):" , err_test_pcr, "," , bias_test_pcr)
 ```
+
+Obtenemos los errores de los datos de prueba `y_test`.
+
 >MAE y bias del modelo de regresión con datos de prueba (pcr): 164.4150 , 40.9495
 
 #### Regresión por mínimos cuadrados parciales aplicado a la predicción de pronóstico de demanda eléctrica
-Aplicaremos la técnica de regresión de componentes principales **(Partial Least Squares)** a los datos de entrenamiento de pronóstico de demanda.
+Aplicaremos la técnica de regresión de componentes principales **(Partial Least Squares)** a los datos de entrenamiento de demanda eléctrica.
 
 ```python
 pls_model_setup = PLSRegression(scale=True)
@@ -433,6 +446,9 @@ err_test_pls = np.mean(np.abs(y_test - pls_prediction))  ## MAE
 bias_test_pls = bias.bias(y_test,lasso_prediction,axis=0)
 print("MAE y bias del modelo de regresión con datos de prueba (pls):" , err_test_pls, "," , bias_test_pls)
 ```
+
+Obtenemos los errores de los datos de prueba `y_test`.
+
 MAE y bias del modelo de regresión con datos de prueba (pls): 545.5517 , 40.9495
 
 Por último graficamos los resultados de predicción de las diferentes técnicas de regresión y los resultados de prueba Y.
@@ -440,4 +456,4 @@ Por último graficamos los resultados de predicción de las diferentes técnicas
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda.png)
 
 ### Conclusiones tarea 3
-En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independiente). Se utilizaron métodos para reducir la dimensión de las variables como fueron: regresión de mejor Subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir el sesgo o bias en la predicción y el número de variables, para nuestros datos el método que tuvo un mejor desempeño fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener un modelo de regresión de manera rápida.
+En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Se utilizaron diversos métodos de reducción de dimensión de variables como: regresión de mejor subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir simultaneamente el sesgo o bias en la predicción y el número de variables. El método que tuvo un mejor desempeño en nuetros datos fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener y probar diferentes modelos de regresión de manera rápida.
