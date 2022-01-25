@@ -263,7 +263,6 @@ Skew:                          -0.164   Prob(JB):                        0.823
 Kurtosis:                       3.178   Cond. No.                         4.44
 ==============================================================================
 ```
-![image](https://github.com/urieliram/statistical/blob/main/figures/coef_regresion.png)
 
 Ahora, calculamos los errores entre la predicción y_pred y los datos de entrenamiento y_train. Los errores son representados por un histograma.
 
@@ -274,8 +273,8 @@ Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predeci
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist10.png)
 
 Ahora, calculamos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
-
->MAE del modelo de regresión con datos de entrenamiento: 0.49861362344949917
->MAE del modelo de regresión con datos de prueba: 0.5332335474812145
-
+```
+MAE del modelo de regresión con datos de entrenamiento: 0.49861362344949917
+MAE del modelo de regresión con datos de prueba: 0.5332335474812145
+```
 
