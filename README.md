@@ -122,7 +122,7 @@ Finalmente, comparamos graficamete los errores en la clasificación de ZIP-code 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/MAE1.png)
 
-## Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN
+### Estimación de pérdidas eléctricas en regiones con técnicas de  regresión líneal y k-NN
 Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias.
 Las columnas de los datos son los resultados por región y por hora del día. Se dan resultados de generación térmica (GenTer), generación hidráulica (GenHid), generación renovable (GenRE), Gneración no programable (GenNP), Generación total (GenTot), demanda de la región (Demanda), Cortes de energía (Corte), Excedentes de energía(Excedente),Potencia (PotInt), precio Marginal y pérdidas de la región.
 
@@ -132,7 +132,7 @@ Una parte importante del proyecto de tesis es la estimación de pérdidas eléct
 
 ¿Puede agregarse este modelo de estimación de pérdidas al modelo MILP a manera de restricciónes para acelerar el proceso de convergencia?
 
-### Estimación de pérdidas eléctricas con regresión líneal
+#### Estimación de pérdidas eléctricas con regresión líneal
 A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Los errores de la predicción con datos de entrenamiento son representados por un histograma.
 
 ```python
@@ -164,7 +164,7 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 >
 >MAE del modelo de regresión con datos de prueba: 6.884672
 
-### Estimación de pérdidas eléctricas con k-NN
+#### Estimación de pérdidas eléctricas con k-NN
 Usaremos los arreglos mae_knn y mae_knn_y para guardar los resultados del error de predicción de cada modelo de k-NN con parámetro k=[1, 3, 5, 7, 15].
 
 Para cada k se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
@@ -201,7 +201,7 @@ Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/MAE2.png)
 
-## Conclusiones de la tarea 2
+### Conclusiones de la tarea 2
 Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicado a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
 Una forma de utilizar el modelo líneal que se obtiene por la regresión para disminuir el tiempo de solución de la programación de las unidades es agregar al MILP el modelo de regresión por regiones como restricciones o cortes con le objetivo de acotar el espacio de solución. Siempre que se agregen estos cortes al mismo sistema eléctrico del que se obtuvo la información para hacer la regresión.
 
@@ -211,7 +211,7 @@ Una forma de utilizar el modelo líneal que se obtiene por la regresión para di
 
 >**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection.
 
-## Regresión líneal en cáncer de próstata
+### Regresión líneal en cáncer de próstata
 A continuación repetiremos el ejercicio 3.2.1 del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) en el que se aplica un modelo de regresión líneal para predecir cáncer de próstata.
 De acuerdo con el libro es necesario primero estandarizar los datos de los regresores `X_train` y `X_test` restando la media y dividiendo entre la varianza.
 ```python
@@ -277,7 +277,7 @@ Ahora, calculamos el error absoluto medio (MAE) de los datos de entrenamiento as
 >MAE del modelo de regresión con datos de entrenamiento: 0.4986
 >MAE del modelo de regresión con datos de prueba: 0.5332
 
-## Regresión lineal en predicción de demanda eléctrica
+### Regresión lineal en predicción de demanda eléctrica
 
 A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación. En esta sección, aplicaremos algunas de las técnicas de regresión que aplican reducción de dimensiones y pueden encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16).
 
@@ -297,7 +297,7 @@ Ahora, comparamos el error absoluto medio (MAE) y bias de los datos de entrenami
 >
 >MAE y bias del modelo de regresión con datos de prueba: 394.5627 , -379.3629
 
-### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
+#### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regression del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de pronóstico de demanda.
 Otras técnicas de reducción de dimensión y compactación de modelos de regresión puede encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16). 
 
@@ -343,7 +343,7 @@ print("MAE y bias del modelo de regresión con datos de prueba (subset):" , err_
 Obteniendo los errores como:
 >MAE y bias del modelo de regresión con datos de prueba (subset): 392.7999 , -379.3629
 
-### Regresión Ridge aplicada a la predicción de pronóstico de demanda eléctrica
+#### Regresión Ridge aplicada a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión ridge **(Ridge Regression)** a los datos de entrenamiento de pronóstico de demanda.
 ```python
 ridge_cv = RidgeCV(normalize=True, alphas=np.logspace(-10, 1, 400))
@@ -357,7 +357,7 @@ print("MAE y bias del modelo de regresión con datos de prueba (ridge):" , err_t
 ```
 >MAE y bias del modelo de regresión con datos de prueba (ridge): 392.4197 , -379.3629
 
-### Regresión Lasso aplicada a la predicción de pronóstico de demanda eléctrica
+#### Regresión Lasso aplicada a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión lasso **(lasso regression)** a los datos de entrenamiento de pronóstico de demanda.
 
 ```python
@@ -372,7 +372,7 @@ print("MAE y bias del modelo de regresión con datos de prueba (lasso):" , err_t
 ```
 >MAE y bias del modelo de regresión con datos de prueba (lasso): 391.3755 , -379.3629
 
-### Regresión de componentes principales aplicado a la predicción de pronóstico de demanda eléctrica
+#### Regresión de componentes principales aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión de componentes principales **(Principal Components Regression)** a los datos de entrenamiento de pronóstico de demanda.
 ```python
 regression_model = LinearRegression(normalize=True)
@@ -389,7 +389,7 @@ print("MAE y bias del modelo de regresión con datos de prueba (pcr):" , err_tes
 ```
 >MAE y bias del modelo de regresión con datos de prueba (pcr): 386.49000938187555 , -379.3629503298587
 
-### Regresión por mínimos cuadrados parciales aplicado a la predicción de pronóstico de demanda eléctrica
+#### Regresión por mínimos cuadrados parciales aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regresión de componentes principales **(Partial Least Squares)** a los datos de entrenamiento de pronóstico de demanda.
 
 ```python
@@ -404,5 +404,5 @@ print("MAE y bias del modelo de regresión con datos de prueba (pls):" , err_tes
 ```
 MAE y bias del modelo de regresión con datos de prueba (pls): 633.3116 , -379.3629
 
-## Conclusiones tarea 3
+### Conclusiones tarea 3
 En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independiente). Se utilizaron métodos para reducir la dimensión de las variables como fueron: regresión de mejor Subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir el sesgo o bias en la predicción y el número de variables, para nuestros datos el método que tuvo un mejor desempeño fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener un modelo de regresión de manera rápida.
