@@ -201,7 +201,7 @@ Finalmente comparamos los errores en la clasificación de ZIP-code del modelo de
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/MAE2.png)
 
-## Conclusiones de la tarea
+## Conclusiones de la tarea 2
 Las herramientas de **regresión lineal** y **k-NN** pueden ser útiles para predecir en base resultados de planeación de un sistema eléctrico las pérdidas eléctricas en una región usando como datos de entrada la demanda, y generación (térmica, hidráulica, renovable, etc) de las regiones. Se observó que el k-NN aplicado a los datos tiene un mejor desempeño que la regresión líneal, sin embargo el k-NN no genera un modelo matemático que podamos usar para obtener resultados de predicción sin consultar los datos de la instancia; el consultar los datos de la instancia cada vez que se hace una predicción implica más costo computacional que obtener un modelo de regresión líneal una sola vez. 
 Una forma de utilizar el modelo líneal que se obtiene por la regresión para disminuir el tiempo de solución de la programación de las unidades es agregar al MILP el modelo de regresión por regiones como restricciones o cortes con le objetivo de acotar el espacio de solución. Siempre que se agregen estos cortes al mismo sistema eléctrico del que se obtuvo la información para hacer la regresión.
 
@@ -299,8 +299,7 @@ Ahora, comparamos el error absoluto medio (MAE) y bias de los datos de entrenami
 
 ### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
 Aplicaremos la técnica de regression del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de pronóstico de demanda.
-Otras técnicas de reducción de dimensión y compactación de modelos de regresión puede encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16). La aplicación de este método sugiere utilizar las variables (features) (0, 1, 2, 3, 5, 7, 9]; es decir [X1, X2, X3, X6, X8, X10] para lograr un mínimo error entre todas las combinaciones de las variables.
-
+Otras técnicas de reducción de dimensión y compactación de modelos de regresión puede encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16). 
 
 ```python
 results = pd.DataFrame(columns=['num_features', 'features', 'MAE'])
@@ -317,7 +316,7 @@ for k in range(1, X_train.shape[1] + 1):
 print(results.sort_values('MAE'))
 subset_best = list(results.sort_values('MAE')['features'].head(1)[0]) ## Seleccionamos el mejor subconjunto con menor MAE
 ```
-La salida del código nos muestra los subconjuntos (features) con el menor error absoluto medio (MAE).
+La salida del código nos muestra los subconjuntos (features) con el menor error absoluto medio (MAE). La aplicación de este método sugiere utilizar las variables (features) (0, 1, 2, 3, 5, 7, 9]; es decir [X1, X2, X3, X6, X8, X10] para lograr un mínimo error entre todas las combinaciones de las variables.
 ```
 >   num_features                      features         MAE
 >0             7         [0, 1, 2, 3, 5, 7, 9]  110.867369
@@ -404,3 +403,6 @@ bias_test_pls = bias.bias(y_test,lasso_prediction,axis=0)
 print("MAE y bias del modelo de regresión con datos de prueba (pls):" , err_test_pls, "," , bias_test_pls)
 ```
 MAE y bias del modelo de regresión con datos de prueba (pls): 633.3116 , -379.3629
+
+## Conclusiones tarea 3
+En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independiente). Se utilizaron métodos para reducir la dimensión de las variables como fueron: regresión de mejor Subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir el sesgo o bias en la predicción y el número de variables, para nuestros datos el método que tuvo un mejor desempeño fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener un modelo de regresión de manera rápida.
