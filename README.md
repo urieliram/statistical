@@ -79,17 +79,9 @@ Por último, calculamos el **error absoluto medio (MAE)** de los datos de entren
 
 
 ### k-nearest neighbors
+
 A continuación usaremos un modelo de k-NN para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7).
-
-Para cada k se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
-
-```python
-k_list    = [1, 3, 5, 7, 15] ## Lista de parámetros k
-mae_knn   = []               ## Guarda valores de error de diferentes k en datos de entrenamiento
-mae_knn_t = []               ## Guarda valores de error de diferentes k en datos de prueba
-```
-
-Para cada k se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
+Para cada k=[1, 3, 5, 7, 15] se obtiene un modelo k-NN con los que se calculan el **error absoluto medio (MAE)** para los datos de entrenamiento X como de prueba Xt.
 
 ```python
 for k in k_list:
