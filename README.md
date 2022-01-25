@@ -8,7 +8,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 2 Aprendizaje supervisado](#tarea-2-aprendizaje-supervisado)
 + [Tarea 3 Regresión lineal](#tarea-3-regresión-lineal)
 + [Tarea 4 Classificación](#tarea-4-classificación)
-+ [Tarea 5 Expansión de base](#tarea-4-expansión-de-base)
++ [Tarea 5 Expansión de base](#tarea-5-expansión-de-base)
 
 ---
 
