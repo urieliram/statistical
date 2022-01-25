@@ -273,7 +273,7 @@ Calculamos el error absoluto medio (MAE) de los datos de entrenamiento así como
 >MAE del modelo de regresión con datos de prueba: 0.5332
 
 
-#### Regression del mejor subconjunto aplicado a la predicción de cáncer de próstata 
+#### Regresión del mejor subconjunto aplicado a la predicción de cáncer de próstata 
 
 A continuación aplicaremos la técnica de regresión del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de cáncer de próstata.
 
