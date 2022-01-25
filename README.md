@@ -294,6 +294,7 @@ Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predeci
 Ahora, comparamos el error absoluto medio (MAE) y bias de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
 
 >MAE y bias del modelo de regresión con datos de entrenamiento: 112.4721 , 0.0
+>
 >MAE y bias del modelo de regresión con datos de prueba: 394.5627 , -379.3629
 
 ### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
@@ -331,20 +332,75 @@ La salida del código nos muestra los subconjuntos (features) con el menor error
 >0             2                       [0, 10]  157.380566
 >0             1                           [0]  474.064100
 ```
+Calculamos lo errores con los datos de prueba:
 
+```python
+modelsub = LinearRegression().fit(X_train[:, subset_best], y_train)
+subset_prediction = modelsub.predict(X_test[:, subset_best])
+err_test_subset  = np.mean(np.abs(y_test - subset_prediction))
+bias_test_subset = bias.bias(y_test,subset_prediction,axis=0)
+print("MAE y bias del modelo de regresión con datos de prueba (subset):" , err_test_subset, "," , bias_test_subset) 
+```
+Obteniendo los errores como:
+>MAE y bias del modelo de regresión con datos de prueba (subset): 392.7999 , -379.3629
 
+### Regresión Ridge aplicada a la predicción de pronóstico de demanda eléctrica
+Aplicaremos la técnica de regresión ridge **(Ridge Regression)** a los datos de entrenamiento de pronóstico de demanda.
+```python
+ridge_cv = RidgeCV(normalize=True, alphas=np.logspace(-10, 1, 400))
+ridge_model = ridge_cv.fit(X_train, y_train)
+ridge_prediction = ridge_model.predict(X_test)
+err_test_ridge = np.mean(np.abs(y_test - ridge_prediction))  ## MAE
+bias_test_ridge = bias.bias(y_test,ridge_prediction,axis=0)
+#print(ridge_model.intercept_)
+#print(ridge_model.coef_)
+print("MAE y bias del modelo de regresión con datos de prueba (ridge):" , err_test_ridge, "," , bias_test_ridge)
+```
+>MAE y bias del modelo de regresión con datos de prueba (ridge): 392.4197 , -379.3629
 
+### Regresión Lasso aplicada a la predicción de pronóstico de demanda eléctrica
+Aplicaremos la técnica de regresión lasso **(lasso regression)** a los datos de entrenamiento de pronóstico de demanda.
 
+```python
+lasso_cv         = LassoCV(normalize=True, alphas=np.logspace(-10, 1, 400))
+lasso_model      = lasso_cv.fit(X_train, y_train)
+lasso_prediction = lasso_model.predict(X_test)
+err_test_lasso   = np.mean(np.abs(y_test - lasso_prediction)) ## MAE
+bias_test_lasso  = bias.bias(y_test,lasso_prediction,axis=0)
+#print(lasso_model.intercept_)
+#print(lasso_model.coef_)
+print("MAE y bias del modelo de regresión con datos de prueba (lasso):" , err_test_lasso, "," , bias_test_lasso)
+```
+>MAE y bias del modelo de regresión con datos de prueba (lasso): 391.3755 , -379.3629
 
+### Regresión de componentes principales aplicado a la predicción de pronóstico de demanda eléctrica
+Aplicaremos la técnica de regresión de componentes principales **(Principal Components Regression)** a los datos de entrenamiento de pronóstico de demanda.
+```python
+regression_model = LinearRegression(normalize=True)
+pca_model = PCA()
+pipe = Pipeline(steps=[('pca', pca_model), ('least_squares', regression_model)])
+param_grid = {'pca__n_components': range(1, 9)}
+search = GridSearchCV(pipe, param_grid)
+pcr_model = search.fit(X_train, y_train)
+pcr_prediction = pcr_model.predict(X_test)
+err_test_pcr = np.mean(np.abs(y_test - pcr_prediction))  ## MAE
+bias_test_pcr  = bias.bias(y_test,lasso_prediction,axis=0)
+n_comp = list(pcr_model.best_params_.values())[0]
+print("MAE y bias del modelo de regresión con datos de prueba (pcr):" , err_test_pcr, "," , bias_test_pcr)
+```
+>MAE y bias del modelo de regresión con datos de prueba (pcr): 386.49000938187555 , -379.3629503298587
 
+### Regresión por mínimos cuadrados parciales aplicado a la predicción de pronóstico de demanda eléctrica
+Aplicaremos la técnica de regresión de componentes principales **(Partial Least Squares)** a los datos de entrenamiento de pronóstico de demanda.
 
-
-
-
-
-
-
-
-
-
-
+```python
+pls_model_setup = PLSRegression(scale=True)
+param_grid = {'n_components': range(1, 9)}
+search = GridSearchCV(pls_model_setup, param_grid)
+pls_model = search.fit(X_train, y_train)
+pls_prediction = pls_model.predict(X_test)
+err_test_pls = np.mean(np.abs(y_test - pls_prediction))  ## MAE
+bias_test_pls = bias.bias(y_test,lasso_prediction,axis=0)
+print("MAE y bias del modelo de regresión con datos de prueba (pls):" , err_test_pls, "," , bias_test_pls)
+```
+MAE y bias del modelo de regresión con datos de prueba (pls): 633.3116 , -379.3629
