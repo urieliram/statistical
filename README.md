@@ -273,8 +273,77 @@ Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predeci
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist10.png)
 
 Ahora, calculamos el error absoluto medio (MAE) de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
+
+>MAE del modelo de regresión con datos de entrenamiento: 0.4986
+>MAE del modelo de regresión con datos de prueba: 0.5332
+
+## Regresión lineal en predicción de demanda eléctrica
+
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación. En esta sección, aplicaremos algunas de las técnicas de regresión que aplican reducción de dimensiones y pueden encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16).
+
+Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
+
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal. Ahora, calculamos los errores entre la predicción y_pred y los datos de entrenamiento y_train. Los errores son representados por un histograma.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist11.png)
+
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción y_pred2 y los datos de prueba  Yt . Los errores de la predicción con datos de prueba son representados por un histograma.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist12.png)
+
+Ahora, comparamos el error absoluto medio (MAE) y bias de los datos de entrenamiento así como de los datos de prueba en la predicción de cancer de próstata.
+
+>MAE y bias del modelo de regresión con datos de entrenamiento: 112.4721 , 0.0
+>MAE y bias del modelo de regresión con datos de prueba: 394.5627 , -379.3629
+
+### Regresión del mejor subconjunto aplicado a la predicción de pronóstico de demanda eléctrica
+Aplicaremos la técnica de regression del mejor subconjunto **(Best Subset Regression)** a los datos de entrenamiento de pronóstico de demanda.
+Otras técnicas de reducción de dimensión y compactación de modelos de regresión puede encontrarse en: [A Comparison of Shrinkage and Selection Methods for Linear Regression](https://towardsdatascience.com/a-comparison-of-shrinkage-and-selection-methods-for-linear-regression-ee4dd3a71f16). La aplicación de este método sugiere utilizar las variables (features) (0, 1, 2, 3, 5, 7, 9]; es decir [X1, X2, X3, X6, X8, X10] para lograr un mínimo error entre todas las combinaciones de las variables.
+
+
+```python
+results = pd.DataFrame(columns=['num_features', 'features', 'MAE'])
+for k in range(1, X_train.shape[1] + 1):
+    # Loop over all possible subsets of size k
+    for subset in itertools.combinations(range(X_train.shape[1]), k):
+        subset = list(subset)        
+        linreg_model = LinearRegression().fit(X_train[:, subset], y_train)
+        linreg_prediction = linreg_model.predict(X_train[:, subset])
+        linreg_mae = np.mean(np.abs(y_train - linreg_prediction))
+        results = results.append(pd.DataFrame([{'num_features': k,
+                                                'features': subset,
+                                                'MAE': linreg_mae}]))
+print(results.sort_values('MAE'))
+subset_best = list(results.sort_values('MAE')['features'].head(1)[0]) ## Seleccionamos el mejor subconjunto con menor MAE
 ```
-MAE del modelo de regresión con datos de entrenamiento: 0.49861362344949917
-MAE del modelo de regresión con datos de prueba: 0.5332335474812145
-```
+
+>   num_features                      features         MAE
+>0             7         [0, 1, 2, 3, 5, 7, 9]  110.867369
+>0             6            [1, 2, 3, 5, 7, 9]  110.867369
+>0             6            [0, 1, 2, 3, 5, 7]  110.919145
+>0             5               [1, 2, 3, 5, 7]  110.919145
+>0             9  [0, 1, 2, 3, 4, 5, 7, 9, 10]  110.991807
+>..          ...                           ...         ...
+>0             1                           [7]  152.292525
+>0             2                        [0, 7]  152.292525
+>0             1                          [10]  157.380566
+>0             2                       [0, 10]  157.380566
+>0             1                           [0]  474.064100
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
