@@ -210,7 +210,7 @@ Una forma de utilizar el modelo líneal que se obtiene por la regresión para di
 ## **Tarea 3 Regresión Lineal**
 
 >**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection.
->
+
 ## Regresión líneal en cáncer de próstata
 A continuación repetiremos el ejercicio 3.2.1 del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) en el que se aplica un modelo de regresión líneal para predecir cáncer de próstata.
 De acuerdo con el libro es necesario primero estandarizar los datos de los regresores `X_train` y `X_test` restando la media y dividiendo entre la varianza.
@@ -224,39 +224,21 @@ X_train = sm.add_constant(X_train)
 y_train = df2.to_numpy()   ## Outcome
 ```
 A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión lineal.
+
 ```python
 X_train = sm.add_constant(X_train)
 model   = sm.OLS(y_train, X_train)
 results = model.fit()
 print(results.summary())
 ```
+El resultado de los coeficientes se muestra en la tabla siguiente. En las tres últimas columnas se muestran el valor p y los intervalos de confianza de los coeficientes.
 
->OLS Regression Results                            
->==============================================================================
->Dep. Variable:                      y   R-squared:                       0.694
->Model:                            OLS   Adj. R-squared:                  0.652
->Method:                 Least Squares   F-statistic:                     16.47
->Date:                Tue, 25 Jan 2022   Prob (F-statistic):           2.04e-12
->Time:                        06:18:31   Log-Likelihood:                -67.505
->No. Observations:                  67   AIC:                             153.0
->Df Residuals:                      58   BIC:                             172.9
->Df Model:                           8                                         
->Covariance Type:            nonrobust                                         
->==============================================================================
->                 coef    std err          t      P>|t|      [0.025      0.975]
->------------------------------------------------------------------------------
->const          2.4523      0.087     28.182      0.000       2.278       2.627
->x1             0.7164      0.134      5.366      0.000       0.449       0.984
->x2             0.2926      0.106      2.751      0.008       0.080       0.506
->x3            -0.1425      0.102     -1.396      0.168      -0.347       0.062
->x4             0.2120      0.103      2.056      0.044       0.006       0.418
->x5             0.3096      0.125      2.469      0.017       0.059       0.561
->x6            -0.2890      0.155     -1.867      0.067      -0.599       0.021
->x7            -0.0209      0.143     -0.147      0.884      -0.306       0.264
->x8             0.2773      0.160      1.738      0.088      -0.042       0.597
->==============================================================================
->Omnibus:                        0.825   Durbin-Watson:                   1.690
->Prob(Omnibus):                  0.662   Jarque-Bera (JB):                0.389
->Skew:                          -0.164   Prob(JB):                        0.823
->Kurtosis:                       3.178   Cond. No.                         4.44
->==============================================================================
+![image](https://github.com/urieliram/statistical/blob/main/figures/coef_regresion.png)
+
+Ahora, calculamos los errores entre la predicción y_pred y los datos de entrenamiento y_train. Los errores son representados por un histograma.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist9.png)
+
+Ahora, utilizamos el modelo obtenido con los datos de entrenamiento para predecir los datos de prueba. Además, calculamos los errores entre la predicción `y_pred2` y los datos de prueba Yt. Los errores de la predicción con datos de prueba son representados por un histograma.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist10.png)
