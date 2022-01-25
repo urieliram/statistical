@@ -210,6 +210,7 @@ Una forma de utilizar el modelo líneal que se obtiene por la regresión para di
 ## **Tarea 3 Regresión Lineal**
 
 >**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection.
+>
 ## Regresión líneal en cáncer de próstata
 A continuación repetiremos el ejercicio 3.2.1 del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) en el que se aplica un modelo de regresión líneal para predecir cáncer de próstata.
 De acuerdo con el libro es necesario primero estandarizar los datos de los regresores `X_train` y `X_test` restando la media y dividiendo entre la varianza.
@@ -229,6 +230,7 @@ model   = sm.OLS(y_train, X_train)
 results = model.fit()
 print(results.summary())
 ```
+
 >OLS Regression Results                            
 >==============================================================================
 >Dep. Variable:                      y   R-squared:                       0.694
