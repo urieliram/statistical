@@ -502,7 +502,7 @@ alcohol        0.0005      0.004      0.118      0.906      -0.008       0.009
 age            0.0404      0.012      3.437      0.001       0.017       0.063
 ==============================================================================
 ```
-Se aplicó una técnica de reducción de variables paso a paso **(Stepwise)** tal como el libro sugiere. Como resultado se encuentran un subconjunto de variables que son suficientes para explicar el efecto conjunto de los predictores sobre la variable *chd*. El procedimiento descarta una por una las variables con coeficiente P menos significativo `pmenor` reajustando el modelo. Esto se hace repetidamente hasta que no se puedan eliminar más variables del modelo.
+Se aplicó una técnica de reducción de variables paso a paso **(Stepwise)** tal como el libro sugiere. Como resultado se encuentran un subconjunto de variables que son suficientes para explicar el efecto conjunto de los predictores sobre la variable *chd*. El procedimiento descarta una por una las variables con coeficiente P menos significativo `pmenor` y reajusta el modelo. Esto se hace repetidamente hasta que no se puedan eliminar más variables del modelo.
 
 Los resultados obtenidos en la tabla coinciden con los del libro.
 ```python
@@ -568,7 +568,7 @@ Confusion Matrix :
 Test accuracy =  0.7316
 ```
 ## Análisis Discriminante Lineal y Cuadrático con datos de prueba en dos dimensiones
-Haremos algunas pruebas con datos de un ejemplo de dos dimensiones para predecir un conjunto de datos divididos en tres clases [1,2,3] usando el Análisis Discriminante Lineal **(LDA)** y Análisis Discriminante Cuadrático **(QDA)**. Usaremos la librería **sklearn**.
+Haremos algunas pruebas con datos de dos dimensiones divididos en tres clases [1,2,3] usando el Análisis Discriminante Lineal **(LDA)** y Análisis Discriminante Cuadrático **(QDA)** usando la librería **sklearn**.
 
 Iniciamos con el método **LDA** y obtenemos la exactitud **(score)**.
 ```python
@@ -581,7 +581,7 @@ print(score)
 ```
 La exactitud  del método se muestra en una escala de 0 a 1.
 ```
-Test accuracy LDA = 0.9906666666666667
+Test accuracy LDA = 0.9906
 ```
 Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **LDA**.
 
@@ -641,11 +641,11 @@ A manera de ejmplo se muestra una proyección de los datos entre las variables d
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/scatter3.png) ![image](https://github.com/urieliram/statistical/blob/main/figures/scatter4.png)
 
-Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)**.
+Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
 Test accuracy LDA = 0.5760
 ```
-Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)**.
+Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
 Test accuracy QDA = 0.3620
 ```
