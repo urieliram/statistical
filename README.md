@@ -349,7 +349,6 @@ for k in range(1, X_train.shape[1] + 1):
         linreg_model = LinearRegression().fit(X_train[:, subset], y_train)
         linreg_prediction = linreg_model.predict(X_train[:, subset])
         linreg_mae = np.mean(np.abs(y_train - linreg_prediction))
-        results = results.append(pd.DataFrame([{'num_features': k,
                                                 'features': subset,
                                                 'MAE': linreg_mae}]))
 print(results.sort_values('MAE'))
@@ -641,7 +640,7 @@ Los datos que se usarán en este ejercicio son resultados de la planeación de l
 
 La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
 
-Se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Demanda'] (izquierda).
+Se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Pérdidas'] (izquierda).
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/scatter3.png) 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/scatter4.png)
