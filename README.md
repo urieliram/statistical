@@ -652,7 +652,7 @@ Test accuracy QDA = 0.3620
 ```
 Graficamos la matriz de confusión del modelo **QDA** aplicado a predicción de regiones eléctricas
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/scatter5.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/confusion3.png) 
 
 ## Tarea 5 Expansión de base
 >Fit splines into single features in your project data. Explore options to obtain the best fit.
