@@ -460,8 +460,126 @@ Por último graficamos los resultados de predicción de las diferentes técnicas
 ### Conclusiones tarea 3
 En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Se utilizaron diversos métodos de reducción de dimensión de variables como: regresión de mejor subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir simultaneamente el sesgo o bias en la predicción y el número de variables. El método que tuvo un mejor desempeño en nuetros datos fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener y probar diferentes modelos de regresión de manera rápida.
 
-## Tarea 4 Classificación
->Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data.
+---
+## **Tarea 4 Classificación**
+>**Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data.
+
+### Regresión logística en predicción de enfermedades cardiacas
+A continuación repetiremos el ejemplo 4.4.2 de predicción de enfermedad cardiaca en Sudafrica **(South African Heart Disease)** del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7).
+
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión logística de la librería **statsmodels**. Como podemos ver algunas de las variables resultan ser no significativas con un valor P menor que 0.05. Tal es el caso de *alcohol, obesity, adiposity* y *sbp*. 
+```python
+model = sm.Logit(dfy, dfx)
+results = model.fit()
+print(results.summary())
+```
+El resultado de la regresión logística se muestra a continuación:
+```
+Optimization terminated successfully.
+         Current function value: 0.522778
+         Iterations 6
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                    chd   No. Observations:                  462
+Model:                          Logit   Df Residuals:                      453
+Method:                           MLE   Df Model:                            8
+Date:                Mon, 31 Jan 2022   Pseudo R-squ.:                  0.1897
+Time:                        00:54:27   Log-Likelihood:                -241.52
+converged:                       True   LL-Null:                       -298.05
+Covariance Type:            nonrobust   LLR p-value:                 8.931e-21
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -3.9658      1.068     -3.715      0.000      -6.058      -1.873
+sbp            0.0056      0.006      0.996      0.319      -0.005       0.017
+tobacco        0.0795      0.026      3.033      0.002       0.028       0.131
+ldl            0.1803      0.059      3.072      0.002       0.065       0.295
+adiposity      0.0101      0.028      0.357      0.721      -0.046       0.066
+famhist        0.9407      0.225      4.181      0.000       0.500       1.382
+obesity       -0.0457      0.043     -1.067      0.286      -0.130       0.038
+alcohol        0.0005      0.004      0.118      0.906      -0.008       0.009
+age            0.0404      0.012      3.437      0.001       0.017       0.063
+==============================================================================
+```
+De acuerdo con el libro, se aplicó una técnica de reducción de variables paso a paso **(Stepwise)** en el se encuentra un subconjunto de las variables que son suficientes para explicar el efecto conjunto de los predictores sobre la variable *chd*. El procedimiento descarta el coeficiente P menos significativo `pmenor` y el modelo se reajusta. Esto se hace repetidamente hasta que no se puedan eliminar más variables del modelo.
+Los resultados obtenidos en la tabla coinciden con los del libro.
+
+```python
+## Se ordenan los valores p y se selecciona el más pequeño
+p_values = results.pvalues.sort_values(ascending = False)
+pmenor = p_values.head(1)
+print("menorpi.item() ", pmenor.item())
+
+## Proceso de stepwise
+while pmenor.item() > 0.01:
+    print(pmenor.index.tolist())
+    dfx = dfx.drop(pmenor.index.tolist(), axis=1)
+    model = sm.Logit(dfy, dfx)
+    model = model.fit()
+    # Se ordenan los valores p y se selecciona el más pequeño
+    p_values = model.pvalues.sort_values(ascending = False)
+    pmenor = p_values.head(1)    
+print(model.summary())
+```
+El resultado de la stepwise se muestra a continuación:
+```
+menorpi.item()  0.9062256410652616
+['alcohol']
+Optimization terminated successfully.
+         Current function value: 0.522793
+         Iterations 6
+['adiposity']
+Optimization terminated successfully.
+         Current function value: 0.522936
+         Iterations 6
+['sbp']
+Optimization terminated successfully.
+         Current function value: 0.524131
+         Iterations 6
+['obesity']
+Optimization terminated successfully.
+         Current function value: 0.525372
+         Iterations 6
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                    chd   No. Observations:                  462
+Model:                          Logit   Df Residuals:                      457
+Method:                           MLE   Df Model:                            4
+Date:                Mon, 31 Jan 2022   Pseudo R-squ.:                  0.1856
+Time:                        00:54:29   Log-Likelihood:                -242.72
+converged:                       True   LL-Null:                       -298.05
+Covariance Type:            nonrobust   LLR p-value:                 5.251e-23
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const         -4.2043      0.498     -8.436      0.000      -5.181      -3.228
+tobacco        0.0807      0.026      3.163      0.002       0.031       0.131
+ldl            0.1676      0.054      3.093      0.002       0.061       0.274
+famhist        0.9241      0.223      4.141      0.000       0.487       1.362
+age            0.0440      0.010      4.520      0.000       0.025       0.063
+==============================================================================
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 ## Tarea 5 Expansión de base
