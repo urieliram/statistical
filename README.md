@@ -7,7 +7,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 1 Introducción](#tarea-1-introduction)
 + [Tarea 2 Aprendizaje supervisado](#tarea-2-aprendizaje-supervisado)
 + [Tarea 3 Regresión lineal](#tarea-3-regresión-lineal)
-+ [Tarea 4 Classificación](#tarea-4-classificación)
++ [Tarea 4 Clasificación](#tarea-4-clasificación)
 + [Tarea 5 Expansión de base](#tarea-5-expansión-de-base)
 
 ---
@@ -461,7 +461,8 @@ Por último graficamos los resultados de predicción de las diferentes técnicas
 En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Se utilizaron diversos métodos de reducción de dimensión de variables como: regresión de mejor subconjunto, ridge, lasso, componentes principales, regresión por mínimos cuadrados parciales. Estos métodos intentan reducir simultaneamente el sesgo o bias en la predicción y el número de variables. El método que tuvo un mejor desempeño en nuetros datos fue el de regresión de componentes principales. Por último, el uso de librerias estadísticas como sklear o statsmodels pueden ayudar mucho a obtener y probar diferentes modelos de regresión de manera rápida.
 
 ---
-## **Tarea 4 Classificación**
+
+## **Tarea 4 Clasificación**
 >**Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data.
 
 ### Regresión logística en predicción de enfermedades cardiacas
