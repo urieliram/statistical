@@ -503,7 +503,6 @@ age            0.0404      0.012      3.437      0.001       0.017       0.063
 ```
 De acuerdo con el libro, se aplicó una técnica de reducción de variables paso a paso **(Stepwise)** en el se encuentra un subconjunto de las variables que son suficientes para explicar el efecto conjunto de los predictores sobre la variable *chd*. El procedimiento descarta el coeficiente P menos significativo `pmenor` y el modelo se reajusta. Esto se hace repetidamente hasta que no se puedan eliminar más variables del modelo.
 Los resultados obtenidos en la tabla coinciden con los del libro.
-
 ```python
 ## Se ordenan los valores p y se selecciona el más pequeño
 p_values = results.pvalues.sort_values(ascending = False)
@@ -559,28 +558,100 @@ famhist        0.9241      0.223      4.141      0.000       0.487       1.362
 age            0.0440      0.010      4.520      0.000       0.025       0.063
 ==============================================================================
 ```
+Finalmente, evaluamos el desempeño del modelo calculando la exactitud y la matriz de confusión.
+```
+Confusion Matrix : 
+ [[254  48]
+ [ 76  84]]
+Test accuracy =  0.7316
+```
+## Análisis Discriminante Lineal y Cuadrático con datos de prueba en dos dimensiones
+Haremos algunas pruebas con datos de un ejemplo de dos dimensiones para predecir un conjunto de datos divididos en tres clases [1,2,3] usando el Análisis Discriminante Lineal **(LDA)** y Análisis Discriminante Cuadrático **(QDA)**. Usaremos la librería **sklearn**.
+
+Iniciamos con el método **LDA** y obtenemos la exactitud **(score)**.
+```python
+LDA_model = LinearDiscriminantAnalysis(solver="svd", store_covariance=True)
+LDA_model.fit(X_test, y_test)
+y_pred_LDA = LDA_model.predict(X_test)
+score = LDA_model.score(X_test, y_test)
+parametros = LDA_model.get_params(deep=False)
+print(score)
+```
+La exactitud  del método se muestra en una escala de 0 a 1.
+```
+Test accuracy LDA = 0.9906666666666667
+```
+Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **LDA**.
+
+figura/SCATTER1
+
+Graficamos la matriz de confusión del modelo **LDA**.
+
+figura/CONFUSSION1
+```
+Matriz de confusión
+[[228   3   0]
+ [  1 269   1]
+ [  0   2 246]]
+```
+Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)**.
+```python
+QDA_model = QuadraticDiscriminantAnalysis(store_covariance=True)
+QDA_model.fit(X_test, y_test)
+y_pred_QDA = QDA_model.predict(X_test)
+y_pred_QDA.tofile('predictionQDA.csv',sep=',')
+score = QDA_model.score(X_test, y_test)
+parametros = QDA_model.get_params(deep=False)
+print(score)
+```
+La exactitud del método se muestra en una escala de 0 a 1.
+```
+Test accuracy QDA = 0.9933
+```
+Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **QDA**.
 
 
+figura/SCATTER2
 
+```
+[[0.13 0.01]
+ [0.01 0.06]]
+[[ 0.07 -0.  ]
+ [-0.    0.12]]
+[[ 0.07 -0.  ]
+ [-0.    0.31]]
+```
+Graficamos la matriz de confusión del modelo **QDA**
 
+figura/CONFUSSION2
+```
+Matriz de confusión
+[[230   1   0]
+ [  2 268   1]
+ [  0   1 247]]
+```
 
+## Análisis Discriminante Lineal y Cuadrático aplicada a clasificación de regiones de consumo de electricidad.
+Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias. Las columnas de los datos son los resultados por región y por hora del día. Se dan resultados de generación térmica (GenTer), generación hidráulica (GenHid), generación renovable (GenRE), Gneración no programable (GenNP), Generación total (GenTot), demanda de la región (Demanda), Cortes de energía (Corte), Excedentes de energía(Excedente),Potencia (PotInt), precio Marginal y pérdidas de la región.
 
+La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
 
+A manera de ejmplo se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'], así como de generación hidráulica por región y ['Demanda'].
 
+figura/SCATTER3 figura/SCATTER3
 
+Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)**.
+```
+0.576048329779673
+```
+Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)**.
+```
+0.36204394693200664
+```
 
+Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **QDA**.
 
-
-
-
-
-
-
-
-
-
-
-
+figura/SCATTER5
 
 ## Tarea 5 Expansión de base
 >Fit splines into single features in your project data. Explore options to obtain the best fit.
