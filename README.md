@@ -583,11 +583,11 @@ Test accuracy LDA = 0.9906666666666667
 ```
 Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **LDA**.
 
-figura/SCATTER1
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter1.png)
 
 Graficamos la matriz de confusión del modelo **LDA**.
 
-figura/CONFUSSION1
+![image](https://github.com/urieliram/statistical/blob/main/figures/confusion1.png)
 ```
 Matriz de confusión
 [[228   3   0]
@@ -610,8 +610,7 @@ Test accuracy QDA = 0.9933
 ```
 Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **QDA**.
 
-
-figura/SCATTER2
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter2.png)
 
 ```
 [[0.13 0.01]
@@ -623,7 +622,7 @@ figura/SCATTER2
 ```
 Graficamos la matriz de confusión del modelo **QDA**
 
-figura/CONFUSSION2
+![image](https://github.com/urieliram/statistical/blob/main/figures/confusion2.png)
 ```
 Matriz de confusión
 [[230   1   0]
@@ -636,22 +635,21 @@ Los datos que se usarán en este ejercicio son resultados de la planeación de l
 
 La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
 
-A manera de ejmplo se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'], así como de generación hidráulica por región y ['Demanda'].
+A manera de ejmplo se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Demanda'] (izquierda).
 
-figura/SCATTER3 figura/SCATTER3
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter3.png) ![image](https://github.com/urieliram/statistical/blob/main/figures/scatter4.png)
 
 Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)**.
 ```
-0.576048329779673
+Test accuracy LDA = 0.5760
 ```
 Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)**.
 ```
-0.36204394693200664
+Test accuracy QDA = 0.3620
 ```
-
 Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **QDA**.
 
-figura/SCATTER5
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter5.png)
 
 ## Tarea 5 Expansión de base
 >Fit splines into single features in your project data. Explore options to obtain the best fit.
