@@ -637,9 +637,10 @@ Los datos que se usarán en este ejercicio son resultados de la planeación de l
 
 La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
 
-A manera de ejmplo se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Demanda'] (izquierda).
+Se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Demanda'] (izquierda).
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/scatter3.png) ![image](https://github.com/urieliram/statistical/blob/main/figures/scatter4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter3.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter4.png)
 
 Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
@@ -649,9 +650,9 @@ Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)** en una e
 ```
 Test accuracy QDA = 0.3620
 ```
-Se dibuja un diagrama un dispersión con la separación por hiperplanos y los intervalos de confianza de cada clase al 95% (elipses) para el método **QDA**.
+Graficamos la matriz de confusión del modelo **QDA** aplicado a predicción de regiones eléctricas
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/scatter5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/scatter5.png) 
 
 ## Tarea 5 Expansión de base
 >Fit splines into single features in your project data. Explore options to obtain the best fit.
