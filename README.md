@@ -467,13 +467,13 @@ En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctr
 ### Regresión logística en predicción de enfermedades cardiacas
 A continuación repetiremos el ejemplo 4.4.2 de predicción de enfermedad cardiaca en Sudafrica **(South African Heart Disease)** del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7).
 
-A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión logística de la librería **statsmodels**. Como podemos ver algunas de las variables resultan ser no significativas con un valor P menor que 0.05. Tal es el caso de *alcohol, obesity, adiposity* y *sbp*. 
+A continuación, obtenemos un modelo de predicción de los datos de entrenamiento usando regresión logística de la librería **statsmodels**.
 ```python
 model = sm.Logit(dfy, dfx)
 results = model.fit()
 print(results.summary())
 ```
-El resultado de la regresión logística se muestra a continuación:
+ Como podemos en la tabla de resultados de la regresión algunas de las variables son no significativas al 95% con un valor P menor que 0.05. Tal es el caso de *alcohol, obesity, adiposity* y *sbp*. 
 ```
 Optimization terminated successfully.
          Current function value: 0.522778
@@ -501,7 +501,8 @@ alcohol        0.0005      0.004      0.118      0.906      -0.008       0.009
 age            0.0404      0.012      3.437      0.001       0.017       0.063
 ==============================================================================
 ```
-De acuerdo con el libro, se aplicó una técnica de reducción de variables paso a paso **(Stepwise)** en el se encuentra un subconjunto de las variables que son suficientes para explicar el efecto conjunto de los predictores sobre la variable *chd*. El procedimiento descarta el coeficiente P menos significativo `pmenor` y el modelo se reajusta. Esto se hace repetidamente hasta que no se puedan eliminar más variables del modelo.
+Se aplicó una técnica de reducción de variables paso a paso **(Stepwise)** tal como el libro sugiere. Como resultado se encuentran un subconjunto de variables que son suficientes para explicar el efecto conjunto de los predictores sobre la variable *chd*. El procedimiento descarta una por una las variables con coeficiente P menos significativo `pmenor` reajustando el modelo. Esto se hace repetidamente hasta que no se puedan eliminar más variables del modelo.
+
 Los resultados obtenidos en la tabla coinciden con los del libro.
 ```python
 ## Se ordenan los valores p y se selecciona el más pequeño
