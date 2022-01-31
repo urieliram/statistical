@@ -1,6 +1,6 @@
 # Aprendizaje automático
 
-Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles en [datos](https://hastie.su.domains/ElemStatLearn/datasets/).
+Repositorio de actividades del curso de aprendizaje automático. La descripción del curso y las actividades se pueden encontrar en el [enlace del curso](https://github.com/satuelisa/StatisticalLearning). Los datos a usar del libro están disponibles aquí: [dataset del libro](https://hastie.su.domains/ElemStatLearn/datasets/).
 
 ---
 
@@ -48,7 +48,7 @@ Otras preguntas indirectamente relacionadas pero que se tienen datos para estudi
 
 El código completo de esta tarea se encuentra en [Tarea2.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb), aquí solo se presentan los resultados y partes importantes del código.
 
-Los datos utilizados están disponibles en el [Repositorio](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing).
+Los datos utilizados están disponibles en el [repositorio](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing).
 
 ### Regresión líneal
 A continuación usaremos un modelo de regresión líneal para resolver el problema de ZIP-code [2,3] del libro [liga](https://link.springer.com/book/10.1007/978-0-387-84858-7). Usando la librería sklearn obtenemos un modelo de predicción de los datos de entrenamiento. Posteriomente, calculamos los errores entre la predicción y_pred y los datos de entrenamiento Y. Además, los errores de predicción son representados por un histograma.
@@ -204,6 +204,8 @@ Una forma de utilizar el modelo líneal que se obtiene por la regresión para di
 ## **Tarea 3 Regresión Lineal**
 
 >**Instructions:** Repeat the steps of the prostate cancer example in Section 3.2.1 using Python, first as a uni-variate problem using the book's data set and then as a multi-variate problem with data from your own project. Calculate also the p-values and the confidence intervals for the model's coefficients for the uni-variate version. Experiment, using libraries, also with subset selection.
+>
+El código completo de esta tarea se encuentra en [Tarea3.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb), aquí solo se presentan los resultados y partes importantes del código.
 
 ### Regresión líneal en cáncer de próstata
 A continuación repetiremos el ejercicio 3.2.1 del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) aplicando un modelo de regresión líneal para predecir cáncer de próstata.
@@ -465,6 +467,8 @@ En esta tarea se utilizó la **regresión lineal** para predecir demanda eléctr
 ## **Tarea 4 Clasificación**
 >**Instructions:** Pick one of the examples of the chapter that use the data of the book and replicate it in Python. Then, apply the steps in your own data.
 
+El código completo de esta tarea se encuentra en [Tarea4.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb), aquí solo se presentan los resultados y partes importantes del código.
+
 ### Regresión logística en predicción de enfermedades cardiacas
 A continuación repetiremos el ejemplo 4.4.2 de predicción de enfermedad cardiaca en Sudafrica **(South African Heart Disease)** del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7).
 
@@ -653,6 +657,9 @@ Test accuracy QDA = 0.3620
 Graficamos la matriz de confusión del modelo **QDA** aplicado a predicción de regiones eléctricas
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/confusion3.png) 
+
+### Conclusiones Tarea 4
+
 
 ## Tarea 5 Expansión de base
 >Fit splines into single features in your project data. Explore options to obtain the best fit.
