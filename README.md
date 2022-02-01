@@ -640,7 +640,18 @@ Los datos que se usarán en este ejercicio son resultados de la planeación de l
 
 La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
 
-Se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Pérdidas'] (izquierda).
+Preprocesamos los datos transformando algunas variables aplicando el logaritmo a algunas variables.
+```python
+## Transformamos los datos aplicando el logaritmo a algunas variables.
+dfx = dfx + 0.0001 ## Aplicamos un epsilon para evitar problemas con la transformación de log en valores cero.
+dfx['Demanda' ] = np.log(dfx['Demanda']) 
+dfx['Perdidas'] = np.log(dfx['Perdidas']) 
+
+## Estandarizamos los datos
+scaler = StandardScaler(copy=True, with_mean=True, with_std=True)
+dfx = pd.DataFrame(scaler.fit_transform(dfx), columns = dfx.columns)
+```
+A continuación se muestran las proyecciones de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Pérdidas'] (izquierda).
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_1.png) 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_2.png)
@@ -666,11 +677,11 @@ Se muestra una proyección de los datos entre las variables de generación térm
 
 Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
-Test accuracy LDA = 0.5760
+Test accuracy LDA = 0.6549 
 ```
 Ahora, aplicamos un modelo **QDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
-Test accuracy QDA = 0.3620
+Test accuracy QDA = 0.4054 
 ```
 Graficamos la matriz de confusión del modelo **QDA** aplicado a predicción de regiones eléctricas
 
