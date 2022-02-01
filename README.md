@@ -640,7 +640,8 @@ Los datos que se usarán en este ejercicio son resultados de la planeación de l
 
 La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
 
-Preprocesamos los datos transformando algunas variables aplicando el logaritmo a algunas variables.
+Preprocesamos los datos transformando algunas variables aplicando el logaritmo a algunas variables 
+(el conjunto de variables a los que se les aplicó la transformación es la que mejor **score** de LDA y QDA nos dan)
 ```python
 ## Transformamos los datos aplicando el logaritmo a algunas variables.
 dfx = dfx + 0.0001 ## Aplicamos un epsilon para evitar problemas con la transformación de log en valores cero.
