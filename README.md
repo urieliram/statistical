@@ -527,7 +527,7 @@ print(model.summary())
 ```
 El resultado de la stepwise se muestra a continuación:
 ```
-menorpi.item()  0.9062256410652616
+menorpi.item()  0.9062
 ['alcohol']
 Optimization terminated successfully.
          Current function value: 0.522793
@@ -642,8 +642,29 @@ La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHi
 
 Se muestra una proyección de los datos entre las variables de generación térmica por región ['GenTer'] y ['Demanda'] (derecha), así como ['GenTer'] y ['Pérdidas'] (izquierda).
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/scatter3.png) 
-![image](https://github.com/urieliram/statistical/blob/main/figures/scatter4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_1.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection0_6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection1_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection1_3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection1_4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection1_5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection1_6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection2_3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection2_4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection2_5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection2_6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection3_4.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection3_5.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection3_6.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection4_5.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection4_6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection5_6.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection4_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection5_1.png) 
 
 Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
