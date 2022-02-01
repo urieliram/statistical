@@ -662,9 +662,7 @@ Se muestra una proyección de los datos entre las variables de generación térm
 ![image](https://github.com/urieliram/statistical/blob/main/figures/projection3_6.png) 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/projection4_5.png) 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/projection4_6.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/projection5_6.png) 
-![image](https://github.com/urieliram/statistical/blob/main/figures/projection4_2.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/projection5_1.png) 
+![image](https://github.com/urieliram/statistical/blob/main/figures/projection5_6.png)
 
 Ahora, aplicamos un modelo **LDA** y obtenemos la exactitud **(score)** en una escala de 0 a 1.
 ```
