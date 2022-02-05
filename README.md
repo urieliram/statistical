@@ -713,8 +713,7 @@ for i in random:
     if i not in notmiss:
         notmiss.append(i)
         
-df_notmiss  = df
-dfy_notmiss = df_notmiss.drop( index = notmiss )
+dfy_notmiss = df.drop( index = notmiss )
 
 dfx_notmiss = dfx
 dfx_notmiss = dfx_notmiss.drop( index = notmiss )
@@ -752,3 +751,6 @@ Las gráficas siguientes muestran el ajuste spline a los datos originales (cruz 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda0.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/.png)
