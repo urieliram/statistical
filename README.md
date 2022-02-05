@@ -733,24 +733,22 @@ def spline_by_order_k(x, y, dfx, dfy, k):
        y_or   = interpolate.splev(dfx, tck) ## Esta variable se usará para comparar contra el original
        err_or = mean_absolute_error(dfy,y_or)
        print('!order:', k[item],'| mae',err_or,'|')
-
+       
 k = [1,2,3,4,5] ## orden del polinomio spline
 xspline = []
 yspline = []
 spline_by_order_k(x, y, dfx, dfy, k)
 ```
-
-Los resultados de la interpolación spline a lois datos perdidos es:  
+Los resultados de la interpolación spline a los datos perdidos se muestra en la siguiente tabla:  
 | Orden          | MAE          |
 | :------------- |-------------:|
-| 1              | 10.8581 |
+| 1              | 10.8581      |
 | 2              | 10.8100      |
-| 3              | 11.1600       |
-| 4              | 13.0515       |
-| 5              | 13.8680       |
+| 3              | 11.1600      |
+| 4              | 13.0515      |
+| 5              | 13.8680      |
 
-!order: 1 | mae 10.858136422743053 |
-!order: 2 | mae 10.810026975929235 |
-!order: 3 | mae 11.160054735682339 |
-!order: 4 | mae 13.05159952895415 |
-!order: 5 | mae 13.868068418630621 |
+Las gráficas siguientes muestran el ajuste spline a los datos originales (cruz color rojo)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda0.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda1.png)
