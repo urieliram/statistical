@@ -570,7 +570,7 @@ Confusion Matrix :
  [ 76  84]]
 Test accuracy =  0.7316
 ```
-## Análisis Discriminante Lineal y Cuadrático con datos de prueba en dos dimensiones
+### Análisis Discriminante Lineal y Cuadrático con datos de prueba en dos dimensiones
 Haremos algunas pruebas con datos de dos dimensiones divididos en tres clases [1,2,3] usando el Análisis Discriminante Lineal **(LDA)** y Análisis Discriminante Cuadrático **(QDA)** usando la librería **sklearn**.
 
 Iniciamos con el método **LDA** y obtenemos la exactitud **(score)**.
@@ -635,7 +635,7 @@ Matriz de confusión
  [  0   1 247]]
 ```
 
-## Análisis Discriminante Lineal y Cuadrático aplicada a clasificación de regiones de consumo de electricidad.
+### Análisis Discriminante Lineal y Cuadrático aplicada a clasificación de regiones de consumo de electricidad.
 Los datos que se usarán en este ejercicio son resultados de la planeación de la operación eléctrica del sistema eléctrico interconectado en México que consta de 320 instancias. Las columnas de los datos son los resultados por región y por hora del día. Se dan resultados de generación térmica (GenTer), generación hidráulica (GenHid), generación renovable (GenRE), Generación no programable (GenNP), Generación total (GenTot), demanda de la región (Demanda), Cortes de energía (Corte), Excedentes de energía(Excedente),Potencia (PotInt), precio Marginal y pérdidas de la región.
 
 La clases [1,2,3,4,..,67] son las regiones y los regresores son ['GenTer','GenHid','GenRE','GenNP','Demanda','Perdidas','PrecioMarginal'].
@@ -691,5 +691,57 @@ Graficamos la matriz de confusión del modelo **QDA** aplicado a predicción de 
 ### Conclusiones Tarea 4
 En esta tarea se utilizaron los métodos **Regresión Logística**, **LDA** y **QDA**. Se resolvió el ejemplo del libro sobre predicción de enfermedades cardiacas con multifactores usando regresión logística y **stepwise**. Además, se utilizó LDA y QDA para resolver un ejemplo sencillo de clasificación de dos variables con tres clases, se hizo el análisis exactitud de los métodos, resultando con muy buenos resultados (score LDA = 0.9906, score QDA = 0.9933), para ambos casos se realizaron figuras donde se observa la clasificación en áreas por medio de hiperplanos. Por último, se realizó el ejercicio de clasificación con datos de regiones eléctricas donde las clases son las regiones y los regresores los resultados de planeación de demanda, generación y pérdidas eléctricas en cada región. Los resultados de **score** sin tranformaciones logarítmicas fueron de LDA = 0.5760 y QDA = 0.3620. Aplicando la transformación logarítmica a las variables de pérdidas y demanda obtuvimos LDA = 0.6549 y QDA = 0.4054.
 
-## Tarea 5 Expansión de base
->Fit splines into single features in your project data. Explore options to obtain the best fit.
+## **Tarea 5 Expansión de base**
+>**Instructions:** Fit splines into single features in your project data. Explore options to obtain the best fit.
+
+El código completo de esta tarea se encuentra en [Tarea5.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb), aquí solo se presentan los resultados y partes importantes del código.
+
+### Interpolación spline en datos de demanda eléctrica
+Aplicaremos el ajuste splines a datos de demanda eléctrica de una región en México. 
+
+Queremos probar el uso de splines en interpolación de datos perdidos. La serie original está completa y borraremos algunos datos aleatoriamente. Después los completaremos usando interpolación spline de primer hasta quinto orden y compararemos su desempeño con el error absoluto medio **Mean Absolute Error (MAE)**.
+
+De la serie original borramos algunos datos aleatoriamente.
+```python
+r = round( len(df) * 0.2 )
+np.random.seed(0)
+random = []
+for i in range(r):
+    random.append(np.random.randint(0,len(df)))
+notmiss = []
+for i in random:
+    if i not in notmiss:
+        notmiss.append(i)
+        
+df_notmiss  = df
+dfy_notmiss = df_notmiss.drop( index = notmiss )
+
+dfx_notmiss = dfx
+dfx_notmiss = dfx_notmiss.drop( index = notmiss )
+```
+Una función calcula la interpolación de los datos y lo almacena en `xspline` y `yspline`. Además, calcula el error MAE y lo guarda en el arreglo  `err_or`
+```python
+def spline_by_order_k(x, y, dfx, dfy, k):
+   for item in range(len(k)):
+       tck  = interpolate.splrep(x, y, k=k[item])
+       xor  = np.arange(0, n-1, 1/50)
+       yor  = interpolate.splev(xor, tck)
+       xspline.append( xor )
+       yspline.append( yor )
+
+       ## Comparamos contra los datos originales usando el MAE
+       y_or   = interpolate.splev(dfx, tck) ## Esta variable se usará para comparar contra el original
+       err_or = mean_absolute_error(dfy,y_or)
+       print('!order:', k[item],'| mae',err_or,'|')
+
+k = [1,2,3,4,5] ## orden del polinomio spline
+xspline = []
+yspline = []
+spline_by_order_k(x, y, dfx, dfy, k)
+```
+el resultado de la interpolación es la siguiente con  
+!order: 1 | mae 10.858136422743053 |
+!order: 2 | mae 10.810026975929235 |
+!order: 3 | mae 11.160054735682339 |
+!order: 4 | mae 13.05159952895415 |
+!order: 5 | mae 13.868068418630621 |
