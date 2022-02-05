@@ -739,7 +739,16 @@ xspline = []
 yspline = []
 spline_by_order_k(x, y, dfx, dfy, k)
 ```
-el resultado de la interpolación es la siguiente con  
+
+Los resultados de la interpolación spline a lois datos perdidos es:  
+| Orden          | MAE          |
+| :------------- |-------------:|
+| 1              | 10.8581 |
+| 2              | 10.8100      |
+| 3              | 11.1600       |
+| 4              | 13.0515       |
+| 5              | 13.8680       |
+
 !order: 1 | mae 10.858136422743053 |
 !order: 2 | mae 10.810026975929235 |
 !order: 3 | mae 11.160054735682339 |
