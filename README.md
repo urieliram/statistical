@@ -751,6 +751,7 @@ Las gráficas siguientes muestran el ajuste spline a los datos originales (cruz 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda0.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda1.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse0.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse3.png)
