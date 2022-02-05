@@ -699,7 +699,7 @@ El código completo de esta tarea se encuentra en [Tarea5.ipynb](https://github.
 ### Interpolación spline en datos de demanda eléctrica
 Aplicaremos el ajuste splines a datos de demanda eléctrica de una región en México. 
 
-Queremos probar el uso de splines en interpolación de datos perdidos. La serie original está completa y borraremos algunos datos aleatoriamente. Después los completaremos usando interpolación spline de primer hasta quinto orden y compararemos su desempeño con el error absoluto medio **Mean Absolute Error (MAE)**.
+Queremos probar el uso de splines en la interpolación de datos perdidos. La serie original está completa y borraremos algunos datos aleatoriamente. Después los completaremos usando interpolación spline de primero hasta quinto orden y compararemos su desempeño con el error absoluto medio **Mean Absolute Error (MAE)**.
 
 De la serie original borramos algunos datos aleatoriamente.
 ```python
@@ -747,13 +747,26 @@ Los resultados de la interpolación spline a los datos perdidos se muestra en la
 | 4              | 13.0515      |
 | 5              | 13.8680      |
 
-Las gráficas siguientes muestran el ajuste spline a los datos originales (cruz color rojo)
-
+Las gráficas siguientes muestran el ajuste spline a los datos originales con puntos de color rojo, así como los datos perdidos en cruces de color rojo. Además se observan los distintos ajustes **spline** desde el orden uno hasta el cinco. Se puede ver que la mayoria de los datos perdidos si estan cerca del ajuste, todos con un desempeño muy parecido.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda0.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda1.png)
+
+## Interpolación spline en series de tiempo de aportaciones en embalses
+A continuación, haremos ajustes spline a datos de aportaciones hidrológicas (lluvias) en el embalse (presa) Manuel Moreno Torres (MMT) una de las principales centrales hidroeléctricas en el país, ubicada en Chiapas, México. Solo tomaremos MMT pero podría ser cualquiera de los demás embalses del [Aportaciones_Embalses.csv](https://drive.google.com/drive/folders/159GnBJQDxTY9oYqPBZzdNghyb4Gd9pDS?usp=sharing)
+
+Al igual que en el ejercicio anterior, probaremos el uso de splines en la interpolación de datos perdidos. La serie original está completa y borraremos algunos datos aleatoriamente. Después los completaremos usando interpolación spline de primero hasta quinto orden y compararemos su desempeño con el error absoluto medio **Mean Absolute Error (MAE)**.
+Los resultados de la interpolación spline a los datos perdidos de aportaciones hidrológicas se muestra en la siguiente tabla:  
+| Orden          | MAE          |
+| :------------- |-------------:|
+| 1 | 13.5144 |
+| 2 | 16.4834 |
+| 3 | 17.4133 |
+| 4 | 20.9248 |
+| 5 | 22.2923 |
+
+Las gráficas siguientes muestran algunos fragmentos de los datos con el ajuste spline. Los datos originales en color rojo, así como los datos perdidos en cruces de color rojo. Además se observan los distintos ajustes **spline** desde el orden uno hasta el cinco. Se oberva algunos datos perdidos que no son cubiertos por el ajuste.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse0.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse2.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse3.png)
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda.png)
