@@ -746,6 +746,8 @@ Los resultados de la interpolación spline a los datos perdidos se muestra en la
 | 3              | 11.1600      |
 | 4              | 13.0515      |
 | 5              | 13.8680      |
+
+
 \* *muestra el mejor ajuste según el MAE*
 
 Las gráficas siguientes muestran el ajuste spline a los datos originales con puntos de color rojo, así como los datos perdidos en cruces de color rojo. Además se observan los distintos ajustes spline desde el orden uno hasta el cinco. Se puede ver que la mayoria de los datos perdidos si estan cerca del ajuste, todos con un desempeño muy parecido.
@@ -764,11 +766,16 @@ Los resultados de la interpolación spline a los datos perdidos de aportaciones 
 | 3 | 17.4133 |
 | 4 | 20.9248 |
 | 5 | 22.2923 |
+
 \* *muestra el mejor ajuste según el MAE*
 
 Las gráficas siguientes muestran algunos fragmentos de los datos con el ajuste spline. Los datos originales en color rojo, así como los datos perdidos en cruces de color rojo. En la siguiente figura se observan los distintos ajustes spline desde el orden uno hasta el cinco. 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse0.png)
-En esta figura Se oberva algunos datos perdidos que no son cubiertos por el ajuste.
+En esta figura Se oberva algunos datos perdidos que no son cubiertos por el ajuste, además de que el ajuste incluye datos que en nuestro caso no pueden ser positivos. 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse2.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/splineEmbalse3.png)
+
+
+### Conclusiones Tarea 5
+En esta tarea se utilizó el método **Spline** para calcular datos perdidos en dos series de datos, una de demanda eléctrica y otra de aportaciones hidráulicas en presas. Se evaluó la exactitud de la interpolación spline con grados polinómicos desde el uno al cinco, resultando para el caso de demanda eléctrica el cúbico con un error MAE=10.8100, sin mebargo los resultados de los demás splines fueron muy cercanos. Para el caso de aportaciones hidrológicas el mejor ajuste de interpolación fue el líneal de orden uno con un MAE = 13.5144. Se realizaron figuras donde se observa el ajuste de los spline a los datos originales así como a los datos perdidos.
