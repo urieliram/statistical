@@ -9,6 +9,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 3 Regresión lineal](#tarea-3-regresión-lineal)
 + [Tarea 4 Clasificación](#tarea-4-clasificación)
 + [Tarea 5 Expansión de base](#tarea-5-expansión-de-base)
++ [Tarea 6 Suavizado](#tarea-5-suavizado)
 
 ---
 
@@ -779,3 +780,6 @@ En esta figura Se oberva algunos datos perdidos que no son cubiertos por el ajus
 
 ### Conclusiones Tarea 5
 En esta tarea se utilizó el método **spline** para calcular datos perdidos en dos series de datos, una de demanda eléctrica y otra de aportaciones hidrológicas en presas. Se comparó la exactitud de la interpolación spline con grados polinómicos desde el uno al cinco. El mejor para el caso de demanda eléctrica es el de grado dos (cuadrático) con un error MAE=10.8100. Sin embargo, los resultados de los demás splines fueron muy cercanos. Para el caso de aportaciones hidrológicas, el mejor ajuste de interpolación fue el de orden uno (lineal) con un MAE = 13.5144. Además, se presentan figuras donde se observa el ajuste de los spline a los datos originales así como a los datos perdidos.
+
+## **Tarea 6 Suavizado**
+>**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
