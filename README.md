@@ -783,3 +783,8 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 
 ## **Tarea 6 Suavizado**
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
+
+| REGRESIÓN      | MAE            | MSD            | MAPE         |
+| :------------- | -------------: | -------------: |-------------:|
+|    lineal   | 138.5861 | 32615.1951 | 0.0159 |
+|  local K1,k=25 | 83.5068 | 14118.722 | 0.0096 |
