@@ -788,3 +788,4 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 | :------------- | -------------: | -------------: |-------------:|
 |    lineal   | 138.5861 | 32615.1951 | 0.0159 |
 |  local K1,k=25 | 83.5068 | 14118.722 | 0.0096 |
+|  local K1,k=5 | 109.66    | 21942.63    |    0.01 |
