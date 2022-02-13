@@ -784,9 +784,85 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 ## **Tarea 6 Suavizado**
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
+### Regresión local en $\mathcal{Rp}$  en predicción de demanda eléctrica
+En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones $p$ en cada punto de una variable dependiente.
+
+La implementación fue realizada basada en las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) secciones; 6.1 One-Dimensional Kernel Smoothers; 6.1.1 Local Linear Regression; y 6.3 Local Regression in IRp.
+
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación con $X$. En esta sección, aplicaremos técnicas de regresión local con multiples regresores X.
+
+Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
+Iniciamos calcuando los pesos de los puntos $x_i\in\mathcal{Rp}$ del vecindario alrededor del punto $x_o\in\mathcal{Rp}$.
+
+**Cálculo de pesos con kernel cuasi-normal** Damos mayor peso a las puntos $x_i$ mas cercanos al punto $x_o$ y menos peso a las observaciones más lejanas. 
+Calcularemos los pesos de los puntos utilizando un kernel que asigna importancia a cada uno de los k vecinos de $x_i$ según su distancia a $x_o$.
+```python
+# Calcula los pesos y regresa una matriz diagonal con los pesos
+def get_weight_exp(xo, X, k): 
+## k    : tamanio del vecindario (bandwidth)
+## X    : Regresores
+## xo   : punto donde se desea hacer la predicción.
+
+    n = X.shape[0]             ## numero de datos
+    weight = np.mat(np.eye(n)) ## Matriz de pesos identidad W.
+    
+  # Cálculo de pesos para todos los datos de entrenamiento xi.
+    for i in range(n): 
+        xi = X[i] 
+        d = (-2 * k * k) 
+        weight[i, i] = np.exp(np.dot((xi-xo), (xi-xo).T)/d) 
+        
+    return weight
+```
+A continuación estimamos los coeficientes de regresión $\beta = (Xt W(xo))^{-1}) (Xt W)$
+
+```python
+def local_regression(X,W,Xo):
+    # W     --> Matriz diagonal de pesos
+    # X     --> Regresores
+    # xo    --> punto donde se desea hacer la predicción.
+    Xt = X.T
+    a = np.matmul(Xt, np.matmul(W,X) ) 
+    a = np.linalg.inv( a )
+    b = np.matmul(Xt, np.matmul(W,Y)) 
+    beta = np.matmul(a,b)
+    prediccion = np.matmul(Xo,beta)
+    return prediccion, beta
+```
+
+En el siguiente código se recorre uno a uno los puntos de la función de `X_test` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un problema de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
+
+```python
+k = 50 # Tamanio del vecindario #17 #25 #50
+
+Y_local = []
+for i in range(X.shape[0]):
+    xo = X[[i]]
+    W = get_weight_exp(xo, X, k)
+    Ygorro, beta = local_regression(X, W, xo)
+    Y_local.append(Ygorro.item(0))
+```
+
+En esta sección calculamos la predicción de `Y` usando unicamente la regresión lineal múltiple. Como se observa los pesos `W` son la matriz identidad.
+```python
+Y_pred = []
+for i in range(X.shape[0]):
+    xo = X[[i]]
+    W = np.mat(np.eye(X.shape[0])) 
+    Ygorro, beta = local_regression(X, W, xo)
+    Y_pred.append(Ygorro.item(0))
+```
+
+Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
+
+
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
 |    lineal      | 138.5861       | 32615.1951     |    0.0159    |
 |  local K1,k=17 | 68.3866        | 51771.7855     |    0.0078    |
 |  local K1,k=25 | 83.5068        | 14118.722      |    0.0       |
 |  local K1,k=50 | 109.66         | 21942.63       |    0.01      |
+
+Graficamos los resultados de predicción de las diferentes técnicas de regresión para pronosticar los datos de prueba Y.
+
+
