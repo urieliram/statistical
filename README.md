@@ -871,4 +871,3 @@ Calculamos los errores de los métodos de regresión, para el caso de regresión
 
 ### **Conclusión tarea 6** 
 En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple. Además, podemos notar que mientras el valor de `k` se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a uno tri-cúbico por ejemplo y analizar los resultados.
-
