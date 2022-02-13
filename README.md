@@ -858,14 +858,14 @@ Ahora mostramos los ajustes usando la regresión local con diferentes valores de
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_4.png)
 
 Calculamos los errores de los métodos de regresión, para el caso de regresión local variamos los tamaños de las vecindades `k`.
-| REGRESIÓN      | MAE            | MSD            | MAPE         |
+|| REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
-|    lineal      | 138.5861       | 32615.1951     |    0.0159    |
-| local K1, k=17 | 68.3866        | 51771.7855     |    0.0078    |
-| local K1, k=25 | 83.5068        | 14118.722      |    0.0096    |
-| local K1, k=35 | 98.6564        | 18483.2236     |    0.0113    |
-| local K1, k=50 | 109.6632       | 21942.6356     |    0.0126    |
-| local K1, k=100| 123.9285       | 26331.6078     |    0.0142    |
+|    lineal      | 138.5861     | 32615.1951    |    0.0159 |
+| local K1, k=17 | 67.2623    | 10332.8283    |    0.0077 |
+| local K1, k=25 | 83.5068    | 14118.722    |    0.0096 |
+| local K1, k=35 | 98.6564    | 18483.2236    |    0.0113 |
+| local K1, k=50 | 109.6632    | 21942.6356    |    0.0126 |
+| local K1, k=100| 123.9285    | 26331.6078    |    0.0142 |
 
 ### **Conclusión tarea 6** 
 En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple. Además, podemos notar que mientras el valor de `k` se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a uno tri-cúbico por ejemplo y analizar los resultados.
