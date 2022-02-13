@@ -853,6 +853,9 @@ for i in range(X.shape[0]):
 Graficamos los resultados de predicción de la regresión local con `k`= [17,25,35,50] y regresión local para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_4.png)
 
 Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
