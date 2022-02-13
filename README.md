@@ -791,8 +791,7 @@ A continuación haremos la comparación de resultados de regresión para datos d
 
 Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
 
-
-**Cálculo de pesos con kernel cuasi-normal:** Iniciamos calculando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo`,  utilizando un kernel da mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas de acuerdo a un tamaño del vecindario `k`.
+Iniciamos calculando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo`,  utilizando un kernel con distribución cuasi-normal que da mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas de acuerdo a un tamaño del vecindario `k`.
 ```python
 # Calcula los pesos y regresa una matriz diagonal con los pesos
 def get_weight_exp(xo, X, k): 
@@ -811,7 +810,7 @@ def get_weight_exp(xo, X, k):
         
     return weight
 ```
-A continuación estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`. Note que el peso W obtenido por el Kernel se incluye en las operaciones matriciales.
+A continuación estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`. Note que el peso `W` obtenido por el Kernel se incluye en las operaciones matriciales.
 
 ```python
 def local_regression(X,W,Xo):
@@ -840,7 +839,7 @@ for i in range(X.shape[0]):
     Y_local.append(Ygorro.item(0))
 ```
 
-Con fines de comparación calculamos la predicción de `Y` usando unicamente la *regresión lineal múltiple*. Como se observa los pesos `W` son la matriz identidad.
+Con fines de comparar el desempeño de la regresión local calculamos el ajuste de `Y` usando unicamente la *regresión lineal múltiple*. Como se puede observar en este caso los pesos `W` son la matriz identidad.
 ```python
 Y_pred = []
 for i in range(X.shape[0]):
@@ -855,11 +854,11 @@ En esta gráfica se observan los datos de demanda `Y` (puntos rojos), así como 
 
 Ahora mostramos los ajustes usando la regresión local con diferentes valores de `k`= [17,25,35,50] y regresión local (línea punteada roja) en diferentes intervalos de la serie de datos. En general podemos observar un mejor ajuste usando regresión local sobre la regresión lineal (línea punteada roja).
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_4.png)
 
-Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
+Calculamos los errores de los métodos de regresión, para el caso de regresión local variamos los tamaños de las vecindades `k`.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
 |    lineal      | 138.5861       | 32615.1951     |    0.0159    |
@@ -870,6 +869,6 @@ Calculamos los errores de los métodos de regresión comparados, variando ademá
 | local K1, k=100| 123.9285       | 26331.6078     |    0.0142    |
 
 ### **Conclusión tarea 6** 
-Para nuestros datos observamos que la regresión local realizada punto por punto tuvo un menor error en el ajuste a los datos reales que el modelo de regresión lineal múltiple. Podemos notar que mientras el valor de `k` se hace más péqueño el error en el ajuste disminuye. El kernel usado fue una distribución cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a uno tri-cúbico por ejemplo.
+En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple. Además, podemos notar que mientras el valor de `k` se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a uno tri-cúbico por ejemplo y analizar los resultados.
 
 
