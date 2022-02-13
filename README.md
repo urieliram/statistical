@@ -858,7 +858,7 @@ Ahora mostramos los ajustes usando la regresión local con diferentes valores de
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_4.png)
 
 Calculamos los errores de los métodos de regresión, para el caso de regresión local variamos los tamaños de las vecindades `k`.
-|| REGRESIÓN      | MAE            | MSD            | MAPE         |
+| REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
 |    lineal      | 138.5861     | 32615.1951    |    0.0159 |
 | local K1, k=17 | 67.2623    | 10332.8283    |    0.0077 |
