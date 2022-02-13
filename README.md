@@ -786,7 +786,7 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 ## **Tarea 6 Suavizado**
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
-### Regresión local en predicción de demanda eléctrica
+### Regresión local en la predicción de demanda eléctrica
 En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones `k` en cada punto `xo ∈ Rp` de la variable `Y`. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
 
 Haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y la variable independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con múltiples regresores `X`.
