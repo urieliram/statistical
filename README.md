@@ -850,7 +850,7 @@ for i in range(X.shape[0]):
     Y_pred.append(Ygorro.item(0))
 ```
 
-Graficamos los resultados de predicción de la regresión local con `k`= [17,25,35,50] y regresión local para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal.
+Graficamos los resultados de predicción de la regresión local con `k`= [17,25,35,50] y regresión local para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal (línea punteada roja).
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
@@ -868,6 +868,6 @@ Calculamos los errores de los métodos de regresión comparados, variando ademá
 | local K1, k=100| 123.9285       | 26331.6078     |    0.0142    |
 
 ### **Conclusión tarea 6** 
-Para nuestros datos observamos que la regresión local punto por punto tuvo un mejor ajuste de un modelo de regresión local general.
+Para nuestros datos observamos que la regresión local realizada punto por punto tuvo un menor error en el ajuste a los datos reales que el modelo de regresión lineal múltiple. Podemos notar que mientras el valor de `k` se hace más péqueño el error en el ajuste disminuye. El kernel usado fue una distribución cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a uno tri-cúbico por ejemplo.
 
 
