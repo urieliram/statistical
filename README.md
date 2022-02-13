@@ -861,3 +861,8 @@ Calculamos los errores de los métodos de regresión comparados, variando ademá
 |  local K1,k=17 | 68.3866        | 51771.7855     |    0.0078    |
 |  local K1,k=25 | 83.5068        | 14118.722      |    0.0       |
 |  local K1,k=50 | 109.66         | 21942.63       |    0.01      |
+
+### **Conclusión tarea 6** 
+Para nuestros datos observamos que la regresión local punto por punto tuvo un mejor ajuste de un modelo de regresión local general.
+
+
