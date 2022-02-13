@@ -850,8 +850,10 @@ for i in range(X.shape[0]):
     Y_pred.append(Ygorro.item(0))
 ```
 
-Graficamos los resultados de predicción de la regresión local con `k`= [17,25,35,50] y regresión local para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal (línea punteada roja).
+En esta gráfica se observan los datos de demanda `Y` (puntos rojos), así como el ajuste usando regresión líneal (línea punteada roja) y regresión local con `k`= 17.
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_0.png)
 
+Ahora mostramos los ajustes usando la regresión local con diferentes valores de `k`= [17,25,35,50] y regresión local (línea punteada roja) en diferentes intervalos de la serie de datos. En general podemos observar un mejor ajuste usando regresión local sobre la regresión lineal (línea punteada roja).
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_2.png)
