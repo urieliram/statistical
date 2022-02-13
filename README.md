@@ -784,16 +784,15 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 ## **Tarea 6 Suavizado**
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
-### Regresión local en $\mathcal{Rp}$  en predicción de demanda eléctrica
-En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones en cada punto $x_o\in\mathcal{Rp}$ de la variable dependiente. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
+### Regresión local en `Rp` en predicción de demanda eléctrica
+En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones en cada punto `xo ∈ Rp` de la variable `Y`. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
 
-A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con multiples regresores `X`.
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y la variable independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con múltiples regresores `X`.
 
 Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
-Iniciamos calcuando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo ∈ Rp`.
 
-**Cálculo de pesos con kernel cuasi-normal** Damos mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas. 
-Calcularemos los pesos de los puntos utilizando un kernel que asigna importancia a cada uno de los `k` vecinos de `xi` según su distancia a `xo`.
+
+**Cálculo de pesos con kernel cuasi-normal:** Iniciamos calculando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo`,  utilizando un kernel da mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas de acuerdo a un tamaño del vecindario `k`.
 ```python
 # Calcula los pesos y regresa una matriz diagonal con los pesos
 def get_weight_exp(xo, X, k): 
@@ -812,7 +811,7 @@ def get_weight_exp(xo, X, k):
         
     return weight
 ```
-A continuación estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`
+A continuación estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`. Note que el peso W obtenido por el Kernel se incluye en las operaciones matriciales.
 
 ```python
 def local_regression(X,W,Xo):
@@ -828,7 +827,7 @@ def local_regression(X,W,Xo):
     return prediccion, beta
 ```
 
-En el siguiente código se recorre uno a uno los puntos de la función de `X_test` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un problema de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
+En el siguiente código se recorre uno a uno los puntos de `X` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un problema de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
 
 ```python
 k = 50 # Tamanio del vecindario #17 #25 #50
@@ -841,7 +840,7 @@ for i in range(X.shape[0]):
     Y_local.append(Ygorro.item(0))
 ```
 
-En esta sección calculamos la predicción de `Y` usando unicamente la regresión lineal múltiple. Como se observa los pesos `W` son la matriz identidad.
+Con fines de comparación calculamos la predicción de `Y` usando unicamente la *regresión lineal múltiple*. Como se observa los pesos `W` son la matriz identidad.
 ```python
 Y_pred = []
 for i in range(X.shape[0]):
@@ -851,18 +850,14 @@ for i in range(X.shape[0]):
     Y_pred.append(Ygorro.item(0))
 ```
 
-Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
+Graficamos los resultados de predicción de las diferentes técnicas de regresión para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 
-
+Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
 |    lineal      | 138.5861       | 32615.1951     |    0.0159    |
 |  local K1,k=17 | 68.3866        | 51771.7855     |    0.0078    |
 |  local K1,k=25 | 83.5068        | 14118.722      |    0.0       |
 |  local K1,k=50 | 109.66         | 21942.63       |    0.01      |
-
-Graficamos los resultados de predicción de las diferentes técnicas de regresión para pronosticar los datos de prueba `Y`.
-
-
