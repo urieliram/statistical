@@ -819,11 +819,11 @@ def local_regression(X,W,Xo):
     # W     --> Matriz diagonal de pesos
     # X     --> Regresores
     # xo    --> punto donde se desea hacer la predicción.
-    Xt = X.T
-    a = np.matmul(Xt, np.matmul(W,X) ) 
-    a = np.linalg.inv( a )
-    b = np.matmul(Xt, np.matmul(W,Y)) 
-    beta = np.matmul(a,b)
+    Xt = X.T  # Calcula transpuesta de X
+    A = np.matmul(Xt, np.matmul(W,X)) 
+    A = np.linalg.inv(A)   # Calcula inversa de A
+    B = np.matmul(Xt, np.matmul(W,Y)) 
+    beta = np.matmul(A,B)
     prediccion = np.matmul(Xo,beta)
     return prediccion, beta
 ```
@@ -863,6 +863,6 @@ Calculamos los errores de los métodos de regresión comparados, variando ademá
 |  local K1,k=25 | 83.5068        | 14118.722      |    0.0       |
 |  local K1,k=50 | 109.66         | 21942.63       |    0.01      |
 
-Graficamos los resultados de predicción de las diferentes técnicas de regresión para pronosticar los datos de prueba Y.
+Graficamos los resultados de predicción de las diferentes técnicas de regresión para pronosticar los datos de prueba `Y`.
 
 
