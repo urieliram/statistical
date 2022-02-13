@@ -785,17 +785,15 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
 ### Regresión local en $\mathcal{Rp}$  en predicción de demanda eléctrica
-En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones $p$ en cada punto de una variable dependiente.
+En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones en cada punto $x_o\in\mathcal{Rp}$ de la variable dependiente. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
 
-La implementación fue realizada basada en las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) secciones; 6.1 One-Dimensional Kernel Smoothers; 6.1.1 Local Linear Regression; y 6.3 Local Regression in IRp.
-
-A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación con $X$. En esta sección, aplicaremos técnicas de regresión local con multiples regresores X.
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con multiples regresores `X`.
 
 Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
-Iniciamos calcuando los pesos de los puntos $x_i\in\mathcal{Rp}$ del vecindario alrededor del punto $x_o\in\mathcal{Rp}$.
+Iniciamos calcuando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo ∈ Rp`.
 
-**Cálculo de pesos con kernel cuasi-normal** Damos mayor peso a las puntos $x_i$ mas cercanos al punto $x_o$ y menos peso a las observaciones más lejanas. 
-Calcularemos los pesos de los puntos utilizando un kernel que asigna importancia a cada uno de los k vecinos de $x_i$ según su distancia a $x_o$.
+**Cálculo de pesos con kernel cuasi-normal** Damos mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas. 
+Calcularemos los pesos de los puntos utilizando un kernel que asigna importancia a cada uno de los `k` vecinos de `xi` según su distancia a `xo`.
 ```python
 # Calcula los pesos y regresa una matriz diagonal con los pesos
 def get_weight_exp(xo, X, k): 
@@ -814,7 +812,7 @@ def get_weight_exp(xo, X, k):
         
     return weight
 ```
-A continuación estimamos los coeficientes de regresión $\beta = (Xt W(xo))^{-1}) (Xt W)$
+A continuación estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`
 
 ```python
 def local_regression(X,W,Xo):
