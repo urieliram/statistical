@@ -853,6 +853,8 @@ for i in range(X.shape[0]):
 
 Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
 
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
+
 
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
