@@ -695,7 +695,7 @@ En esta tarea se utilizaron los métodos **Regresión Logística**, **LDA** y **
 ## **Tarea 5 Expansión de base**
 >**Instructions:** Fit splines into single features in your project data. Explore options to obtain the best fit.
 
-El código completo de esta tarea se encuentra en [Tarea5.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea2.ipynb), aquí solo se presentan los resultados y partes importantes del código.
+El código completo de esta tarea se encuentra en [Tarea5.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea5.ipynb), aquí solo se presentan los resultados y partes importantes del código.
 
 ### Interpolación spline en datos de demanda eléctrica
 Aplicaremos el ajuste splines a datos de demanda eléctrica de una región en México. 
@@ -785,11 +785,11 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
 
 ### Regresión local en `Rp` en predicción de demanda eléctrica
-En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones en cada punto `xo ∈ Rp` de la variable `Y`. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
+En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones `k` en cada punto `xo ∈ Rp` de la variable `Y`. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
 
-A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y la variable independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con múltiples regresores `X`.
+Haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y la variable independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con múltiples regresores `X`.
 
-Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
+Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea6.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6.ipynb), aquí solo se presentan los resultados y partes rel.evantes del código.
 
 Iniciamos calculando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo`,  utilizando un kernel con distribución cuasi-normal que da mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas de acuerdo a un tamaño del vecindario `k`.
 ```python
@@ -810,8 +810,8 @@ def get_weight_exp(xo, X, k):
         
     return weight
 ```
-A continuación estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`. Note que el peso `W` obtenido por el Kernel se incluye en las operaciones matriciales.
 
+A continuación, estimamos los coeficientes de regresión `β = (Xt W(xo) X)^{-1}) (Xt W Y)`. Note que el peso `W` obtenido por el Kernel se incluye en las operaciones matriciales.
 ```python
 def local_regression(X,W,Xo):
     # W     --> Matriz diagonal de pesos
@@ -827,7 +827,6 @@ def local_regression(X,W,Xo):
 ```
 
 En el siguiente código se recorre uno a uno los puntos de `X` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un problema de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
-
 ```python
 k = 50 # Tamanio del vecindario #17 #25 #50
 
