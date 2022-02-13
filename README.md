@@ -850,17 +850,18 @@ for i in range(X.shape[0]):
     Y_pred.append(Ygorro.item(0))
 ```
 
-Graficamos los resultados de predicción de las diferentes técnicas de regresión para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal.
+Graficamos los resultados de predicción de la regresión local con `k`= [17,25,35,50] y regresión local para pronosticar los datos de prueba `Y`. En general observamos un mejor ajuste en las predicciones que usan la regresión local sobre la regresión lineal.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 
 Calculamos los errores de los métodos de regresión comparados, variando además los tamaños de las vecindades `k`.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
-|    lineal      | 138.5861       | 32615.1951     |    0.0159    |
-|  local K1,k=17 | 68.3866        | 51771.7855     |    0.0078    |
-|  local K1,k=25 | 83.5068        | 14118.722      |    0.0       |
-|  local K1,k=50 | 109.66         | 21942.63       |    0.01      |
+|    lineal      | 138.5861     | 32615.1951    |    0.0159 |
+| local K1, k=17 | 68.3866    | 51771.7855    |    0.0078 |
+| local K1, k=25 | 83.5068    | 14118.722    |    0.0096 |
+| local K1, k=35 | 98.6564    | 18483.2236    |    0.0113 |
+| local K1, k=50 | 109.6632    | 21942.6356    |    0.0126 |
 
 ### **Conclusión tarea 6** 
 Para nuestros datos observamos que la regresión local punto por punto tuvo un mejor ajuste de un modelo de regresión local general.
