@@ -789,9 +789,11 @@ En esta tarea se utilizó el método **spline** para calcular datos perdidos en 
 ### Regresión local en la predicción de demanda eléctrica
 En esta tarea se implementa el método de regresión (lineal) local con suavización con kernel en multiples dimensiones `k` en cada punto `xo ∈ Rp` de la variable `Y`. La implementación fue realizada con las consideraciones del libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/978-0-387-84858-7) en las secciones: *6.1 One-Dimensional Kernel Smoothers*; *6.1.1 Local Linear Regression*; y *6.3 Local Regression in Rp*.
 
-Haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y la variable independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de regresión local con múltiples regresores `X`.
+Haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y la variable independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos técnicas de **regresión local con múltiples regresores `X`**.
 
-Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea6.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6.ipynb), aquí solo se presentan los resultados y partes rel.evantes del código.
+Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea6.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6.ipynb), aquí solo se presentan los resultados y partes relevantes del código.
+
+Adicionalmente, algunos ejemplos de uso de librerias de regresión local en dos dimensiones (`R2`) pueden  encontrarse aquí [Tarea6_b.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6_b.ipynb).
 
 Iniciamos calculando los pesos de los puntos `xi ∈ Rp` del vecindario alrededor del punto `xo`,  utilizando un kernel con distribución cuasi-normal que da mayor peso a las puntos `xi` mas cercanos al punto `xo` y menos peso a las observaciones más lejanas de acuerdo a un tamaño del vecindario `k`.
 ```python
@@ -828,7 +830,7 @@ def local_regression(X,W,Xo):
     return prediccion, beta
 ```
 
-En el siguiente código se recorre uno a uno los puntos de `X` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un problema de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
+En el siguiente código se recorre uno a uno los puntos de `X` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un modelo de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
 ```python
 k = 50 # Tamanio del vecindario #17 #25 #50
 
@@ -870,8 +872,8 @@ Calculamos los errores de los métodos de regresión, para el caso de regresión
 | local K1, k=100| 123.9285    | 26331.6078    |    0.0142 |
 
 ### **Conclusión tarea 6** 
-En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario 'k' no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17.` se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a uno tri-cúbico por ejemplo y analizar los resultados. 
+En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario 'k' no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17.` se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el Kernel a  por ejemplo un tri-cúbico y analizar los resultados. 
 
 ### **Por hacer...** 
-* Probar si usar una descomposición QR con pesos para calcular los coeficientes y evitar las no singularidades de algunas matrices `X` en el cálculo de los coeficientes beta de la regresión con pesos.
+* Probar si usar una descomposición QR con pesos para calcular los coeficientes y ver si es posible disminuir las no singularidades de algunas matrices `X` en el cálculo de los coeficientes beta de la regresión con pesos.
 * Probar cambiar a otros kernels como el tri-cúbico y analizar los resultados.
