@@ -870,10 +870,10 @@ Calculamos los errores de los métodos de regresión, para el caso de regresión
 | local K1, k=35 | 98.6564    | 18483.2236    |    0.0113 |
 | local K1, k=50 | 109.6632    | 21942.6356    |    0.0126 |
 | local K1, k=100| 123.9285    | 26331.6078    |    0.0142 |
-*Valores menores de este nos trae singularidades emn el cálculo de los coeficientes de regresión.
+*Valores menores de este nos trae singularidades en el cálculo de los coeficientes de regresión.
 
 ### **Conclusión tarea 6** 
-En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario 'k' no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17.` se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el kernel a por ejemplo un tri-cúbico y analizar los resultados. 
+En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario 'k' no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17 se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el kernel a por ejemplo un tri-cúbico y analizar los resultados. 
 
 ### **Por hacer...** 
 * Probar si usar una descomposición QR con pesos para calcular los coeficientes y ver si es posible disminuir las no singularidades de algunas matrices `X` en el cálculo de los coeficientes beta de la regresión con pesos.
