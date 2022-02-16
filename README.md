@@ -911,10 +911,9 @@ En esta gráfica se observan los datos de demanda `Y` (puntos rojos), así como 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_0.png)
 
 Ahora mostramos los ajustes usando la regresión local con diferentes valores de `k`= [10,25,35,50,100] y regresión local (línea punteada roja) en diferentes intervalos de la serie de datos. En general podemos observar un mejor ajuste usando regresión local sobre la regresión lineal (línea punteada roja).
-![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_4.png)
 
 Calculamos los errores de los métodos de regresión, para el caso de regresión local variamos los tamaños de las vecindades `k`.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
