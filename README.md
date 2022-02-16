@@ -831,15 +831,70 @@ def local_regression(X,W,Xo):
 ```
 
 En el siguiente código se recorre uno a uno los puntos de `X` para calcular la predicción. Es decir, para cada uno de los datos, seleccionaremos una vecindad de `k` puntos muestreados y los usaremos como conjunto de entrenamiento para un modelo de regresión lineal con pesos. Aunque ajustamos un modelo lineal completo a los datos de la vecindad, solamente lo usamos para evaluar el ajuste en el único punto `xo`. 
-```python
-k = 50 # Tamanio del vecindario #17 #25 #50
 
+En específico esta sección del código es para encontrar el valor mínimo del tamaño `k` sin caer en una singularidad.
+```python
+k = 0 # Tamanio del vecindario
+kmin = 10
+kmax = 19
+Y_local_list= []
 Y_local = []
+aux = 0
+
 for i in range(X.shape[0]):
-    xo = X[[i]]
-    W = get_weight_exp(xo, X, k)
-    Ygorro, beta = local_regression(X, W, xo)
-    Y_local.append(Ygorro.item(0))
+    k = kmin
+    flag = True
+    while(flag==True):
+        try:
+            xo = X[[i]]
+            W = get_weight_exp(xo, X, k)
+            pred = local_regression(X, W, xo)
+            Y_local.append(pred.item(0))
+            aux = pred.item(0)
+        except:
+            print("Sorry! Singular matrix found in position i=",str(i),"k=", k)
+            k = k + 1
+            if(k>kmax):                
+                flag = False
+                Y_local.append(0)
+        else:
+            flag = False 
+            
+Y_local_list.append(Y_local)
+```
+Se han encontrado algunas singularidades que son manejadas incrementando el tamaño del vecindario `k`. Por ejemplo e encontró en la posición 335 una singularidad y se incrementó el tamaño del vecindario de `k`=10 hasta `k`=16.
+```
+>Sorry! Singular matrix found in position i= 42 k= 10
+>Sorry! Singular matrix found in position i= 93 k= 10
+>Sorry! Singular matrix found in position i= 93 k= 11
+>Sorry! Singular matrix found in position i= 245 k= 10
+>Sorry! Singular matrix found in position i= 335 k= 10
+>Sorry! Singular matrix found in position i= 335 k= 11
+>Sorry! Singular matrix found in position i= 335 k= 12
+>Sorry! Singular matrix found in position i= 335 k= 13
+>Sorry! Singular matrix found in position i= 335 k= 14
+>Sorry! Singular matrix found in position i= 335 k= 15
+>Sorry! Singular matrix found in position i= 335 k= 16
+```
+En esta sección del código evaluamos el desempeño de la regresión local con otros `k` tamaños de vecindarios.
+```python
+k = 0 # Tamanio del vecindario
+klist = [25,35,50,100]
+aux=0
+for item in klist:
+    k = item
+    Y_local = []
+    for i in range(X.shape[0]):
+        try:
+            xo = X[[i]]
+            W = get_weight_exp(xo, X, k)
+            Ygorro = local_regression(X, W, xo)
+            Y_local.append(Ygorro.item(0))
+            aux = Ygorro.item(0)
+        except:
+            Y_local.append(aux)
+            print("Sorry! Singular matrix found in position i=",str(i))
+    Y_local_list.append(Y_local)
 ```
 
 Con fines de comparar el desempeño de la regresión local calculamos el ajuste de `Y` usando unicamente la *regresión lineal múltiple*. Como se puede observar en este caso los pesos `W` son la matriz identidad.
@@ -852,10 +907,10 @@ for i in range(X.shape[0]):
     Y_pred.append(Ygorro.item(0))
 ```
 
-En esta gráfica se observan los datos de demanda `Y` (puntos rojos), así como el ajuste usando regresión líneal (línea punteada roja) y regresión local con `k`= 17.
+En esta gráfica se observan los datos de demanda `Y` (puntos rojos), así como el ajuste usando regresión líneal (línea punteada roja) y regresión local con `k`= 10.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_0.png)
 
-Ahora mostramos los ajustes usando la regresión local con diferentes valores de `k`= [17,25,35,50] y regresión local (línea punteada roja) en diferentes intervalos de la serie de datos. En general podemos observar un mejor ajuste usando regresión local sobre la regresión lineal (línea punteada roja).
+Ahora mostramos los ajustes usando la regresión local con diferentes valores de `k`= [10,25,35,50,100] y regresión local (línea punteada roja) en diferentes intervalos de la serie de datos. En general podemos observar un mejor ajuste usando regresión local sobre la regresión lineal (línea punteada roja).
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_2.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t6_3.png)
@@ -864,17 +919,12 @@ Ahora mostramos los ajustes usando la regresión local con diferentes valores de
 Calculamos los errores de los métodos de regresión, para el caso de regresión local variamos los tamaños de las vecindades `k`.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
+| local, k=10 | 77.4973    | 323440.045    |    0.009 |
+| local, k=25 | 83.5068    | 14118.722    |    0.0096 |
+| local, k=35 | 98.6564    | 18483.2236    |    0.0113 |
+| local, k=50 | 109.6632    | 21942.6356    |    0.0126 |
+| local, k=100| 123.9285    | 26331.6078    |    0.0142 |
 |    lineal      | 138.5861     | 32615.1951    |    0.0159 |
-| local K1, k=17* | 67.2623    | 10332.8283    |    0.0077 |
-| local K1, k=25 | 83.5068    | 14118.722    |    0.0096 |
-| local K1, k=35 | 98.6564    | 18483.2236    |    0.0113 |
-| local K1, k=50 | 109.6632    | 21942.6356    |    0.0126 |
-| local K1, k=100| 123.9285    | 26331.6078    |    0.0142 |
-*Valores menores de este nos trae singularidades en el cálculo de los coeficientes de regresión.
 
 ### **Conclusión tarea 6** 
-En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario 'k' no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17 se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el kernel a por ejemplo un tri-cúbico y analizar los resultados. 
-
-### **Por hacer...** 
-* Probar si usar una descomposición QR con pesos para calcular los coeficientes y ver si es posible disminuir las no singularidades de algunas matrices `X` en el cálculo de los coeficientes beta de la regresión con pesos.
-* Probar cambiar a otros kernels como el tri-cúbico y analizar los resultados.
+En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario 'k' no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17 se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el kernel a por ejemplo un tri-cúbico y analizar los resultados. Se ha observado que para algunos vecindarios de menor tamaño es posible encontrar singularidades, posiblemente por colinealidad en los regresores, para ello se ha incremenetado el tamaño de la ventana. Otra opción alternativa para manejar la singularidad es identificar los regresores que pueden estar inflando la varianza y eliminarlos del cálculo de los coeficiente de la  regresión y puede verse aquí [Tarea6_c.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6_c.ipynb).
