@@ -862,7 +862,7 @@ for i in range(X.shape[0]):
             
 Y_local_list.append(Y_local)
 ```
-Se han encontrado algunas singularidades que son manejadas incrementando el tamaño del vecindario `k`. Por ejemplo e encontró en la posición 335 una singularidad y se incrementó el tamaño del vecindario de `k`=10 hasta `k`=16.
+Se han encontrado algunas singularidades que son manejadas incrementando el tamaño del vecindario `k`. Por ejemplo se encontró una singularidad en la posición 335 y se incrementó el tamaño del vecindario de `k`=10 hasta `k`=16, hasta encontrar un modelo para ese punto.
 ```
 >Sorry! Singular matrix found in position i= 42 k= 10
 >Sorry! Singular matrix found in position i= 93 k= 10
