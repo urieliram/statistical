@@ -1071,7 +1071,8 @@ with first_model:
     first_burned_trace=trace[15000:]
 ```
 Ahora, graficamos las distribuciones resultantes de nuestro primer modelo:
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_1.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_1.png)
 
 Ahora calculamos la media de nuestra primera versión de las muestras generadas por la simulación:
 ```python
@@ -1114,18 +1115,19 @@ with pm.Model() as second_model:
     beta_age = pm.Uniform('beta_age', lower=0.314423,   upper=0.487489)
 ```
 Si graficamos las distribuciones resultantes de nuestro segundo modelo queda:
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_2.png)
 
 Ahora, entrenemos el modelo asumiendo que los coeficientes de la regresión logistica siguen **distribuciones normales**. Es decir cambiaremos el conjunto de priors en un tercer modelo.
 ```python
 with pm.Model() as third_model:  
     ## Priors on parameters
     beta_0   = pm.Normal('beta_0'  , mu=-23.764747, sd=10**4)
-    beta_sex = pm.Normal('beta_sex', mu=1.572192, sd=10**4)
-    beta_age = pm.Normal('beta_age', mu=0.37384, sd=10**4)
+    beta_sex = pm.Normal('beta_sex', mu=1.572192,   sd=10**4)
+    beta_age = pm.Normal('beta_age', mu=0.37384,    sd=10**4)
 ```
 Si graficamos las distribuciones resultantes de nuestro segundo modelo queda:
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_3.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_3.png)
 
 Ahora, en la tabla siguiente compararemos la media de los modelos y los intervalos del 95% de cada modelo.
 Como podemos ver los intervalos son mas cerrados a los que teníamos en el primer modelo.
@@ -1177,7 +1179,7 @@ plt.show()
 ```
 Ahora, mostramos las distribuciones de los parámetros
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_5.png)
 ```python
 with fourth_model:
     map_solution=pm.find_MAP()
