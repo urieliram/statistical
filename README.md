@@ -1229,6 +1229,9 @@ fourth_model_prediction=[1 if x >0.5 else 0 for x in fourth_y_score]
 fourth_model_confussion_matrix = confusion_matrix(df['L3'], fourth_model_prediction)
 fourth_model_confussion_matrix
 ```
+array([[104,  42],
+       [ 17, 172]])
+       
 ### **Conclusión tarea 8** 
 Hemos utilizado *PyMC3* para implementar la regresión logistica bayesiana para varias variables, además de la función *Logit* de la librería *statsmodel*, que implementa un enfoque frecuentista.
 Los resultados de estimación de parámetros entre el enfoque frecuentista y el bayesiano son muy parecidos, sin embargo, el enfoque bayesiano da algunas ventajas ya que da la posibilidad de actualizar el modelo con nueva información, mientras que los modelos de regresión lineal generan valores únicos de los parámetros de ajuste, mientras que los modelos de regresión lineal bayesianos pueden generar distribuciones de los parámetros, esto tiene la ventaja de que podemos cuantificar la incertidumbre de nuestra estimación.
