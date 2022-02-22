@@ -11,7 +11,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 5 Expansión de base](#tarea-5-expansión-de-base)
 + [Tarea 6 Suavizado](#tarea-6-suavizado)
 + [Tarea 7 Evaluación](#tarea-7-evaluación)
-+ [Tarea 8 Inferencia](#tarea-7-inferencia)
++ [Tarea 8 Inferencia](#tarea-8-inferencia)
 
 ---
 
