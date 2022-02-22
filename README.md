@@ -1040,10 +1040,12 @@ Se realizó un ejercicio de predicción de demanda eléctrica usando una regresi
 
 
 ## **Tarea 8 Inferencia**
->**Instrucciones:** Modelar la sobrecarga a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad".
+>**Instrucciones:** Modelar la sobrecarga a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad tal".
+
+Los datos usados en esta sección están disponibles en [bones.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea8.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Inferencia Bayesiana
-Queremos saber las distribuciones de probabilidad de los parámetros desconocidos de un modelo. Además, probar que tan buenos son los parámetros. Cuanto mayor sea la probabilidad P(θ|x) de los valores de los parámetros dados los datos, más probable será que sean los parámetros "reales" de la distribución de la población (θ es la distribución a priori y x la evidencia). Esto significa que podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población, a encontrar los valores de los parámetros que maximizan el valor P(θ|x). En otras palabras podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población a encontrar los valores de los parámetros que maximizan el valor de P(θ|x).
+Queremos saber las distribuciones de probabilidad de los parámetros desconocidos de un modelo. Además, probar que tan buenos son estos parámetros. Cuanto mayor sea la probabilidad P(θ|x) de los valores de los parámetros dados los datos, más probable será que sean los parámetros "reales" de la distribución de la población (θ es la distribución a priori y x la evidencia). Esto significa que podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población a encontrar los valores de los parámetros que maximizan el valor P(θ|x).
 
 ### Un ejemplo básico de regresión logistica bayesiana
 Se usará este ejemplo de un modelo de regresión logística básico, que simula fracturas óseas con variables independientes de edad y sexo. Fuente: [Lawrence Joseph](http://www.medicine.mcgill.ca/epidemiology/Joseph/courses/EPIB-621/main.html) [PDF](http://www.medicine.mcgill.ca/epidemiology/joseph/courses/EPIB-621/bayeslogit.pdf)
@@ -1162,8 +1164,8 @@ age            0.3447      0.069      5.027      0.000       0.210       0.479
 Hasta ahora se ha realizado un análisis inferencial bayesiano expresando los priors de cada una de las variables. Sin embargo, cuando el número de variables es muy grande se recomienda el uso de la lobrería **PyMC3** tiene un modelo lineal generalizado(GLM) que facilita el análisis. Se usará este modelo para ajustar los datos de sobrecarga en líneas de transmisión en la red eléctrica de México.
 
 ## **Predicción de sobrecarga en grupos de líneas de transmisión en la red eléctrica en México.**
-En esta sección se usará inferencia bayesiana para ajustar un modelo de regresión logística a datos de violación de flujo de potencia eléctrica en grupos de líneas de transmisión, que interconectan regiones eléctricas. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEE,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto dede la red eléctrica en México. 
-Los datos usados en esta sección están disponibles en [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea8.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+En esta sección se usará inferencia bayesiana para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno, si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
+
 ```python
 with pm.Model() as fourth_model:
     pm.glm.GLM.from_formula('L3 ~ CEN + GUA + NES + NOR + NTE + OCC + ORI + PEE + PEN + CEN_min + GUA_min + NES_min + NOR_min + NTE_min + OCC_min + ORI_min + PEE_min + PEN_min',df, 
@@ -1176,7 +1178,7 @@ plt.show()
 ```
 Ahora, mostramos las distribuciones de los parámetros
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_5.png)
+Entrenamos el modelo:
 ```python
 with fourth_model:
     map_solution=pm.find_MAP()
@@ -1187,6 +1189,8 @@ for item in map_solution.keys():
 fourth_map_coeffs=pd.DataFrame.from_dict(d)    
 fourth_map_coeffs
 ```
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_5.png)
 
 Ahora calculamos la media de de las muestras generadas por la simulación.
 ```python
@@ -1199,6 +1203,10 @@ for item in coeffs:
 result_coeffs=pd.DataFrame.from_dict(d)    
 print(result_coeffs)
 ```
+
+CEN	GUA	NES	NOR	NTE	OCC	ORI	PEN	CEN_min	GUA_min	NES_min	NOR_min	NTE_min	OCC_min	ORI_min	PEN_min
+-0.006587409	-0.028222905	0.003787337	0.005528197	0.010036856	-0.002710659	0.008299764	0.005232593	0.013540726	0.039075502	0.003759831	0.001647827	0.00056257	0.010932793	-0.002416544	0.002084585
+
 
 Ahora calculamos intervalos al 95%.
 ```python
@@ -1213,6 +1221,12 @@ for item in coeffs:
 result_coeffs=pd.DataFrame.from_dict(interval).rename(index={0: 'lower', 1: 'upper'})
 print(result_coeffs)
 ```
+
+	CEN	GUA	NES	NOR	NTE	OCC	ORI	PEE	PEN	CEN_min	GUA_min	NES_min	NOR_min	NTE_min	OCC_min	ORI_min	PEE_min	PEN_min	Intercept
+lower	-0.013822894	-0.069692494	0.000319692	0.001606567	0.005782899	-0.005580303	0.004049922	-1893.657733	-0.003931298	0.004824902	-0.015821525	0.001174207	-0.004097367	-0.003886996	0.006399773	-0.00554705	-1963.161634	-0.007922029	-1.083443256
+upper	0.000798104	0.014229185	0.007390146	0.009627234	0.014250696	0.000251693	0.012636176	-0.085117432	0.014722837	0.022651909	0.095752269	0.006451639	0.007414776	0.004812096	0.015514417	0.000640708	1812.848724	0.012059337	42.54368831
+
+
 Por último, calculamos la matriz de confusión del ajuste al modelo de regresión logistica
 ```python
 with fourth_model:
