@@ -956,6 +956,7 @@ dibuja_hist(dfb,colour='#76ced6',name='hist_t7_1.png',Xlabel="Error",Ylabel="Fre
 print(bootstrap_mean)
 print(bootstrap_std)
 ```
+La media y la varianza del error del modelo calculada por medio de la distribución del error es: 111.18 y 12.54.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_1.png)
 
@@ -992,6 +993,7 @@ print(cross_mean_fx)
 print(cross_std_fx)
 ```
 
+La media y la varianza del error del modelo calculada por medio de la distribución del error es: 184.10 y 76.38.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_1.png)
 
@@ -1028,6 +1030,8 @@ dibuja_hist(dfb,colour='#17cb49',name='hist_t7_3.png',Xlabel="Error",Ylabel="Fre
 print(cross_mean)
 print(cross_std)
 ```
+
+La media y la varianza del error del modelo calculada por medio de la distribución del error es:229.18 y 63.85
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_3.png)
 
