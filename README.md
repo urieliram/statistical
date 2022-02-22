@@ -931,8 +931,7 @@ En general la regresión local realizada punto por punto tuvo en general un mejo
 
 ## **Tarea 7 Evaluación**
 >**Instructions:** Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
-
-A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica y evaluaresmos el error del modelo usando **cross-validation** y **bootstrap**. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos regresión lineal múltiple con multiples regresores `X`. Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica y evaluaresmos el error del modelo usando **cross-validation** y **bootstrap**. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos regresión lineal múltiple con multiples regresores `X`. Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing) El código completo de esta tarea se encuentra en [Tarea7.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea7.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Muestreo **bootstrap** en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple.
 A continuación se calcula un modelo de regresión lineal múltiple para una de las muestras `X_train` elegidas aleatoriamente un 50% de datos del total del conjunto `X`. Los datos de error (MAE) de todas las réplicas del muestreo aleatorio se guardan en la lista `bootstrap_ols`.
@@ -1041,6 +1040,194 @@ Se realizó un ejercicio de predicción de demanda eléctrica usando una regresi
 
 
 ## **Tarea 8 Inferencia**
->**Instructions:** Modelar la probabilidad de falla a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad".
+>**Instrucciones:** Modelar la sobrecarga a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad".
 
+### Inferencia Bayesiana
+Queremos saber las distribuciones de probabilidad de los parámetros desconocidos de un modelo. Además, probar que tan buenos son los parámetros. Cuanto mayor sea la probabilidad P(θ|x) de los valores de los parámetros dados los datos, más probable será que sean los parámetros "reales" de la distribución de la población, θ es la distribución a priori y x la evidencia. Esto significa que podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población, a encontrar los valores de los parámetros que maximizan el valor P(θ|x). En otras palabras podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población a encontrar los valores de los parámetros que maximizan el valor de P(θ|x).
 
+### Un ejemplo básico de regresión logistica bayesiana
+Se usará este ejemplo de un modelo de regresión logística básico, que simula fracturas óseas con variables independientes de edad y sexo. Fuente: [Lawrence Joseph](http://www.medicine.mcgill.ca/epidemiology/Joseph/courses/EPIB-621/main.html) [PDF](http://www.medicine.mcgill.ca/epidemiology/joseph/courses/EPIB-621/bayeslogit.pdf)
+
+Al principio no sabemos nada sobre los parámetros `beta`, así que usaremos una distribución **uniforme**  con límites suficientemente grandes como los valores: `lower = -10**6; higher = 10**6 `
+```python
+lower = -10**6; higher = 10**6
+with pm.Model() as first_model:
+    ## Priors on parameters
+    beta_0   = pm.Uniform('beta_0', lower=lower, upper= higher)
+    beta_sex = pm.Uniform('beta_sex', lower, higher)
+    beta_age = pm.Uniform('beta_age', lower, higher)
+    
+    #the probability of output equal to 1
+    p = pm.Deterministic('p', pm.math.sigmoid(beta_0+beta_sex*df['sex']+ beta_age*df['age']))
+
+with first_model:
+    #fit the data 
+    observed=pm.Bernoulli("frac", p, observed=df['frac'])
+    start = pm.find_MAP()
+    step  = pm.Metropolis()
+    
+    #samples from posterior distribution 
+    trace=pm.sample(25000, step=step, start=start)
+    first_burned_trace=trace[15000:]
+```
+Ahora, graficamos las distribuciones resultantes de nuestro primer modelo:
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_1.png)
+
+Ahora calculamos la media de nuestra primera versión de las muestras generadas por la simulación:
+```python
+coeffs=['beta_0', 'beta_sex', 'beta_age']
+d=dict()
+for item in coeffs:
+    d[item]=[first_burned_trace[item].mean()]
+    
+result_coeffs=pd.DataFrame.from_dict(d)    
+result_coeffs
+```
+La media de las distribuciones de los parámetros de este primer modelo son:
+beta_0	     beta_sex	beta_age
+-24.843256	 1.619084	0.390901
+
+Una ventaja del enfoque de inferencia bayesiana es que no solo nos da la media de los parámtros del modelo, también podemos obtener los intervalos de confianza al 95%. Es decir que los Los parámetros buscados se encontrarán entre los valores siguientes con una probabilidad del 95%. Lo hacemos de la siguiente manera:
+```python
+mean = first_burned_trace['beta_0'].mean()
+hpd = az.hdi(first_burned_trace['beta_0'].flatten())
+
+coeffs=['beta_0', 'beta_sex', 'beta_age']
+interval=dict()
+for item in coeffs:
+    interval[item]=az.hdi(first_burned_trace[item].flatten()) #compute 95% high density interval
+    
+result_coeffs=pd.DataFrame.from_dict(interval).rename(index={0: 'lower', 1: 'upper'})
+result_coeffs
+```
+Los intervalos al 95% del los parámetros del modelo son:
+         beta_0	    beta_sex	beta_age
+lower	-36.607193	0.694889	0.313219
+upper	-19.923850	3.237995	0.575355
+
+Los valores buscados se encuentran entre estos valores, ahora podemos refinar la búsqueda de los parámetros usando estos límites en un segundo modelo, por ejemplo cambiamos los límites superior e inferior de la distribución **uniforme** de la siguiente manera.
+```python
+with pm.Model() as second_model:
+    ## Priors on parameters
+    beta_0   = pm.Uniform('beta_0',   lower=-31.561240, upper= -20.376186)
+    beta_sex = pm.Uniform('beta_sex', lower=0.555843,   upper=2.816436)
+    beta_age = pm.Uniform('beta_age', lower=0.314423,   upper=0.487489)
+```
+Si graficamos las distribuciones resultantes de nuestro segundo modelo queda:
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_2.png)
+
+Ahora, entrenemos el modelo asumiendo que los coeficientes de la regresión logistica siguen **distribuciones normales**. Es decir cambiaremos el conjunto de priors en un tercer modelo.
+```python
+with pm.Model() as third_model:  
+    ## Priors on parameters
+    beta_0   = pm.Normal('beta_0'  , mu=-23.764747, sd=10**4)
+    beta_sex = pm.Normal('beta_sex', mu=1.572192, sd=10**4)
+    beta_age = pm.Normal('beta_age', mu=0.37384, sd=10**4)
+```
+Si graficamos las distribuciones resultantes de nuestro segundo modelo queda:
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_3.png)
+
+Ahora, en la tabla siguiente compararemos la media de los modelos y los intervalos del 95% de cada modelo.
+Como podemos ver los intervalos son mas cerrados a los que teníamos en el primer modelo.
+
+## Versión frecuentista de la regresión logística con la librería *statsmodel*.
+Ahora, comparamos los resultados con un **análisis frecuentista** de regresión logística de la librería statsmodels.
+```python
+model = sm.Logit(dfy, dfx)
+results = model.fit()
+print(results.summary())
+```
+El resultado nos da la siguiente tabla, como vemos los parámetros son muy parecidos a los obtenidos por el **enfoque bayesiano**
+```
+Optimization terminated successfully.
+         Current function value: 0.297593
+         Iterations 8
+                           Logit Regression Results                           
+==============================================================================
+Dep. Variable:                   frac   No. Observations:                  100
+Model:                          Logit   Df Residuals:                       97
+Method:                           MLE   Df Model:                            2
+Date:                Tue, 22 Feb 2022   Pseudo R-squ.:                  0.5484
+Time:                        08:37:38   Log-Likelihood:                -29.759
+converged:                       True   LL-Null:                       -65.896
+Covariance Type:            nonrobust   LLR p-value:                 2.024e-16
+==============================================================================
+                 coef    std err          z      P>|z|      [0.025      0.975]
+------------------------------------------------------------------------------
+const        -21.8504      4.425     -4.938      0.000     -30.524     -13.177
+sex            1.3611      0.733      1.856      0.063      -0.076       2.798
+age            0.3447      0.069      5.027      0.000       0.210       0.479
+==============================================================================
+```
+
+Hasta ahora se ha realizado un análisis inferencial bayesiano expresando los priors de cada una de las variables. Sin embargo, cuando el número de variables es muy grande se recomienda el uso de la lobrería **PyMC3** tiene un modelo lineal generalizado(GLM) que facilita el análisis. Se usará este modelo para ajustar los datos de sobrecarga en líneas de transmisión en la red eléctrica de México.
+
+## **Predicción de sobrecarga en grupos de líneas de transmisión en la red eléctrica en México.**
+En esta sección se usará inferencia bayesiana para ajustar un modelo de regresión logística a datos de violación de flujo de potencia eléctrica en grupos de líneas de transmisión, que interconectan regiones eléctricas. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEE,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto dede la red eléctrica en México. 
+Los datos usados en esta sección están disponibles en [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea8.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+```python
+with pm.Model() as fourth_model:
+    pm.glm.GLM.from_formula('L3 ~ CEN + GUA + NES + NOR + NTE + OCC + ORI + PEE + PEN + CEN_min + GUA_min + NES_min + NOR_min + NTE_min + OCC_min + ORI_min + PEE_min + PEN_min',df, 
+                            family=pm.glm.families.Binomial())
+    fourth_trace = pm.sample(25000, tune=10000, init='adapt_diag')
+pm.traceplot(fourth_trace)
+
+plt.savefig('fig_t8_5.png', transparent=True)
+plt.show()
+```
+Ahora, mostramos las distribuciones de los parámetros
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t8_5.png)
+```python
+with fourth_model:
+    map_solution=pm.find_MAP()
+d=dict()
+for item in map_solution.keys():
+    d[item]=[float(map_solution[item])]
+    
+fourth_map_coeffs=pd.DataFrame.from_dict(d)    
+fourth_map_coeffs
+```
+
+Ahora calculamos la media de de las muestras generadas por la simulación.
+```python
+Ahora calculamos la media de de las muestras generadas por la simulación.
+coeffs=['CEN','GUA','NES','NOR','NTE','OCC','ORI','PEE','PEN','CEN_min','GUA_min','NES_min','NOR_min','NTE_min','OCC_min','ORI_min','PEE_min','PEN_min','Intercept']
+d=dict()
+for item in coeffs:
+    d[item]=[fourth_trace[item].mean()]
+    
+result_coeffs=pd.DataFrame.from_dict(d)    
+print(result_coeffs)
+```
+
+Ahora calculamos intervalos al 95%.
+```python
+mean = fourth_trace['Intercept'].mean()
+hpd = az.hdi(fourth_trace['Intercept'].flatten())
+
+coeffs=['CEN','GUA','NES','NOR','NTE','OCC','ORI','PEE','PEN','CEN_min','GUA_min','NES_min','NOR_min','NTE_min','OCC_min','ORI_min','PEE_min','PEN_min','Intercept']
+interval=dict()
+for item in coeffs:
+    interval[item]=az.hdi(fourth_trace[item].flatten()) #compute 95% high density interval
+    
+result_coeffs=pd.DataFrame.from_dict(interval).rename(index={0: 'lower', 1: 'upper'})
+print(result_coeffs)
+```
+Por último, calculamos la matriz de confusión del ajuste al modelo de regresión logistica
+```python
+with fourth_model:
+    ppc = pm.sample_posterior_predictive(fourth_trace, samples=15000)
+#compute y_score 
+with fourth_model:
+    fourth_y_score = np.mean(ppc['y'], axis=0)
+#convert y_score into binary decisions    
+fourth_model_prediction=[1 if x >0.5 else 0 for x in fourth_y_score]
+#compute confussion matrix 
+fourth_model_confussion_matrix = confusion_matrix(df['L3'], fourth_model_prediction)
+fourth_model_confussion_matrix
+```
+### **Conclusión tarea 8** 
+Hemos utilizado *PyMC3* para implementar la regresión logistica bayesiana para varias variables, además de la función *Logit* de la librería *statsmodel*, que implementa un enfoque frecuentista.
+Los resultados de estimación de parámetros entre el enfoque frecuentista y el bayesiano son muy parecidos, sin embargo, el enfoque bayesiano da algunas ventajas ya que da la posibilidad de actualizar el modelo con nueva información, mientras que los modelos de regresión lineal generan valores únicos de los parámetros de ajuste, mientras que los modelos de regresión lineal bayesianos pueden generar distribuciones de los parámetros, esto tiene la ventaja de que podemos cuantificar la incertidumbre de nuestra estimación.
+Otra cosa que observamos es que a pesar de que los modelos modelos bayesianos que usamos usan distribuciones prior diferentes, los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
