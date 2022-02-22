@@ -1161,10 +1161,10 @@ age            0.3447      0.069      5.027      0.000       0.210       0.479
 ==============================================================================
 ```
 
-Hasta ahora se ha realizado un análisis inferencial bayesiano expresando los priors de cada una de las variables. Sin embargo, cuando el número de variables es muy grande se recomienda el uso de la lobrería **PyMC3** tiene un modelo lineal generalizado(GLM) que facilita el análisis. Se usará este modelo para ajustar los datos de sobrecarga en líneas de transmisión en la red eléctrica de México.
+Hasta ahora se ha realizado un análisis inferencial bayesiano expresando los priors de cada una de las variables. Sin embargo, cuando el número de variables es muy grande se recomienda el uso de la librería **PyMC3** tiene un modelo lineal generalizado(GLM) que facilita el análisis. Se usará este modelo para ajustar los datos de sobrecarga en líneas de transmisión en la red eléctrica de México.
 
 ## **Predicción de sobrecarga en grupos de líneas de transmisión en la red eléctrica en México.**
-En esta sección se usará inferencia bayesiana para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno, si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
+En esta sección se usará inferencia bayesiana para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
 
 ```python
 with pm.Model() as fourth_model:
@@ -1173,7 +1173,6 @@ with pm.Model() as fourth_model:
     fourth_trace = pm.sample(25000, tune=10000, init='adapt_diag')
 pm.traceplot(fourth_trace)
 
-plt.savefig('fig_t8_5.png', transparent=True)
 plt.show()
 ```
 Ahora, mostramos las distribuciones de los parámetros
@@ -1202,11 +1201,11 @@ for item in coeffs:
     
 result_coeffs=pd.DataFrame.from_dict(d)    
 print(result_coeffs)
-```
-``` 
+
         CEN       GUA       NES  ...   PEE_min   PEN_min  Intercept
 0 -0.006587 -0.028223  0.003787  ... -6.568944  0.002085  20.682454
-``` 
+```
+
 Ahora calculamos intervalos al 95%.
 ```python
 mean = fourth_trace['Intercept'].mean()
@@ -1219,14 +1218,15 @@ for item in coeffs:
     
 result_coeffs=pd.DataFrame.from_dict(interval).rename(index={0: 'lower', 1: 'upper'})
 print(result_coeffs)
-``` 
-``` 
+
             CEN       GUA      NES  ...      PEE_min   PEN_min  Intercept
 lower -0.013823 -0.069692  0.00032  ... -1963.161634 -0.007922  -1.083443
 upper  0.000798  0.014229  0.00739  ...  1812.848724  0.012059  42.543688
 ``` 
+ 
 
-Por último, calculamos la matriz de confusión del ajuste al modelo de regresión logistica
+Por último, calculamos la matriz de confusión del ajuste al modelo de regresión logistica.
+
 ```python
 with fourth_model:
     ppc = pm.sample_posterior_predictive(fourth_trace, samples=15000)
@@ -1238,11 +1238,9 @@ fourth_model_prediction=[1 if x >0.5 else 0 for x in fourth_y_score]
 #compute confussion matrix 
 fourth_model_confussion_matrix = confusion_matrix(df['L3'], fourth_model_prediction)
 fourth_model_confussion_matrix
-```
-```
 array([[104,  42],
        [ 17, 172]])
-```       
+```
 ### **Conclusión tarea 8** 
 Hemos utilizado *PyMC3* para implementar la regresión logistica bayesiana para varias variables, además de la función **Logit** de la librería **statsmodel**, que implementa un enfoque frecuentista.
 Los resultados de estimación de parámetros entre el enfoque frecuentista y el bayesiano son muy parecidos para el caso de estudio de fracturas de huesos, sin embargo, el enfoque bayesiano da algunas ventajas ya que da la posibilidad de actualizar el modelo con nueva información, mientras que los modelos de regresión lineal generan valores únicos de los parámetros de ajuste, mientras que los modelos de regresión lineal bayesianos pueden generar distribuciones de los parámetros, esto tiene la ventaja de que podemos cuantificar la incertidumbre de nuestra estimación.
