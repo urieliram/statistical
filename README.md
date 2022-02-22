@@ -1129,9 +1129,6 @@ Si graficamos las distribuciones resultantes de nuestro segundo modelo queda:
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t8_3.png)
 
-Ahora, en la tabla siguiente compararemos la media de los modelos y los intervalos del 95% de cada modelo.
-Como podemos ver los intervalos son mas cerrados a los que teníamos en el primer modelo.
-
 ## Versión frecuentista de la regresión logística con la librería *statsmodel*.
 Ahora, comparamos los resultados con un **análisis frecuentista** de regresión logística de la librería statsmodels.
 ```python
