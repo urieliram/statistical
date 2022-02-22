@@ -958,7 +958,7 @@ print(bootstrap_std)
 ```
 La media y la varianza del error del modelo calculada por medio de la distribución del error es: 111.18 y 12.54.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_1.png)
 
 ### Muestreo **cross-validation** en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple
 En esta función se calcula un modelo de regresión lineal múltiple para cada una de las una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Los datos de error del muestreo cross-validation se guardan en la lista cross_ols.
@@ -995,7 +995,7 @@ print(cross_std_fx)
 
 La media y la varianza del error del modelo calculada por medio de la distribución del error es: 184.10 y 76.38.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_2.png)
 
 
 Esta versión de cross-validation elige aleatoriamente el inicio de las muestras de prueba X_test
@@ -1033,7 +1033,7 @@ print(cross_std)
 
 La media y la varianza del error del modelo calculada por medio de la distribución del error es:229.18 y 63.85
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_3.png)
 
 ### **Conclusión tarea 7** 
 En general...
