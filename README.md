@@ -1036,4 +1036,4 @@ La media y la varianza del error del modelo calculada por medio de la distribuci
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_3.png)
 
 ### **Conclusión tarea 7** 
-En general...
+Se realizó un ejercicio de predicción de demanda eléctrica usando una regresión lineal múltiple, sin ambargo debido a los pocos datos que se tienen para evaluar el modelo. Se aplicaron téecnicas de **cross-validation** y **bootstrap**, las cuales son una herramienta poderosa para evaluar la función del error. Ambas técnicas hacen un muestreo con los datos y evaluan el error en el modelo, resulta interesante observar las distribuciones que resultan parecidas a la distribución nornal para el **bootstrap** y para el caso del **cross-validation** una distribución exponencial. El uso de estas técnicas tiene como ventaja obtener una distribución más realista del comportamiento del error, y establecer incluso intervalos de confianza.
