@@ -1203,10 +1203,10 @@ for item in coeffs:
 result_coeffs=pd.DataFrame.from_dict(d)    
 print(result_coeffs)
 ```
-```
-	CEN	GUA	NES	NOR	NTE	OCC	ORI	PEE	PEN	CEN_min	GUA_min	NES_min	NOR_min	NTE_min	OCC_min	ORI_min	PEE_min	PEN_min	Intercept
-0	-0.006587	-0.028223	0.003787	0.005528	0.010037	-0.002711	0.0083	-798.434289	0.005233	0.013541	0.039076	0.00376	0.001648	0.000563	0.010933	-0.002417	-6.568944	0.002085	20.682454
-```
+``` 
+        CEN       GUA       NES  ...   PEE_min   PEN_min  Intercept
+0 -0.006587 -0.028223  0.003787  ... -6.568944  0.002085  20.682454
+``` 
 Ahora calculamos intervalos al 95%.
 ```python
 mean = fourth_trace['Intercept'].mean()
@@ -1221,7 +1221,9 @@ result_coeffs=pd.DataFrame.from_dict(interval).rename(index={0: 'lower', 1: 'upp
 print(result_coeffs)
 ``` 
 ``` 
-
+            CEN       GUA      NES  ...      PEE_min   PEN_min  Intercept
+lower -0.013823 -0.069692  0.00032  ... -1963.161634 -0.007922  -1.083443
+upper  0.000798  0.014229  0.00739  ...  1812.848724  0.012059  42.543688
 ``` 
 
 Por último, calculamos la matriz de confusión del ajuste al modelo de regresión logistica
@@ -1237,9 +1239,10 @@ fourth_model_prediction=[1 if x >0.5 else 0 for x in fourth_y_score]
 fourth_model_confussion_matrix = confusion_matrix(df['L3'], fourth_model_prediction)
 fourth_model_confussion_matrix
 ```
+```
 array([[104,  42],
        [ 17, 172]])
-       
+```       
 ### **Conclusión tarea 8** 
 Hemos utilizado *PyMC3* para implementar la regresión logistica bayesiana para varias variables, además de la función **Logit** de la librería **statsmodel**, que implementa un enfoque frecuentista.
 Los resultados de estimación de parámetros entre el enfoque frecuentista y el bayesiano son muy parecidos para el caso de estudio de fracturas de huesos, sin embargo, el enfoque bayesiano da algunas ventajas ya que da la posibilidad de actualizar el modelo con nueva información, mientras que los modelos de regresión lineal generan valores únicos de los parámetros de ajuste, mientras que los modelos de regresión lineal bayesianos pueden generar distribuciones de los parámetros, esto tiene la ventaja de que podemos cuantificar la incertidumbre de nuestra estimación.
