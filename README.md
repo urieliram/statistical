@@ -10,8 +10,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 4 Clasificación](#tarea-4-clasificación)
 + [Tarea 5 Expansión de base](#tarea-5-expansión-de-base)
 + [Tarea 6 Suavizado](#tarea-6-suavizado)
-  * [Regresión local en la predicción de demanda eléctrica](#regresion-local-en-la-prediccion-de-demanda-electrica)
-  * [Conclusión tarea 6](#conclusion-tarea-6)
++ [Tarea 7 Evaluación](#tarea-7-evaluación)
 
 ---
 
