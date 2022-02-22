@@ -11,6 +11,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 5 Expansión de base](#tarea-5-expansión-de-base)
 + [Tarea 6 Suavizado](#tarea-6-suavizado)
 + [Tarea 7 Evaluación](#tarea-7-evaluación)
++ [Tarea 8 Inferencia](#tarea-7-inferencia)
 
 ---
 
@@ -1037,3 +1038,9 @@ La media y la varianza del error del modelo calculada por medio de la distribuci
 
 ### **Conclusión tarea 7** 
 Se realizó un ejercicio de predicción de demanda eléctrica usando una regresión lineal múltiple, sin ambargo debido a los pocos datos que se tienen para evaluar el modelo. Se aplicaron téecnicas de **cross-validation** y **bootstrap**, las cuales son una herramienta poderosa para evaluar la función del error. Ambas técnicas hacen un muestreo con los datos y evaluan el error en el modelo, resulta interesante observar las distribuciones que resultan parecidas a la distribución nornal para el **bootstrap** y para el caso del **cross-validation** una distribución exponencial. El uso de estas técnicas tiene como ventaja obtener una distribución más realista del comportamiento del error e inclusive poder calcular intervalos de confianza.
+
+
+## **Tarea 8 Inferencia**
+>**Instructions:** Modelar la probabilidad de falla a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad".
+
+
