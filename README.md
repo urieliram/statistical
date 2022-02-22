@@ -927,3 +927,110 @@ Calculamos los errores de los métodos de regresión, para el caso de regresión
 
 ### **Conclusión tarea 6** 
 En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario `k` no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17 se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el kernel a por ejemplo un tri-cúbico y analizar los resultados. Se ha observado que para algunos vecindarios de menor tamaño es posible encontrar singularidades que nos hace imposible encontrar un modelo de regresión, este problema posiblemente se presente por dependencias lineales en los regresores, para resolverlo se implementó  un procedimiento que incremeneta el tamaño de la ventana hasta encontrar un modelo. Otra opción alternativa para manejar la singularidad es identificar los regresores que pueden estar inflando la varianza y eliminarlos del cálculo de los coeficiente de la regresión, este procedimiento  alternativo puede verse aquí [Tarea6_c.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6_c.ipynb).
+
+
+## **Tarea 7 Evaluación**
+>**Instructions:** Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
+
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos regresión lineal múltiple con multiples regresores `X`. Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
+
+### Muestreo **bootstrap** en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple.
+A continuación se calcula un modelo de regresión lineal múltiple para una de las muestras `X_train` elegidas aleatoriamente un 50% de datos del total del conjunto `X`. Los datos de error (MAE) de todas las réplicas del muestreo aleatorio se guardan en la lista `bootstrap_ols`.
+```python
+bootstrap_ols= []
+replicas = 1000
+for rep in range(replicas):
+    a = np.arange(0,X.shape[0])
+    b = np.sort(np.random.choice(a, replace=False, size = int(len(a)*0.9)))
+    X_train = np.delete(X, b, axis = 0)
+    Y_train = np.delete(Y, b, axis = 0)
+    
+    olsmod = sm.OLS(Y_train, X_train)
+    olsres = olsmod.fit()
+    Y_pred = olsres.predict(X_train)  
+    bootstrap_ols.append(mean_absolute_error(Y_train,Y_pred))
+
+dfb = pd.DataFrame((np.asarray(bootstrap_ols)).T)
+bootstrap_mean = dfb.mean(numeric_only = True)
+bootstrap_std = dfb.std(numeric_only = True)
+dibuja_hist(dfb,colour='#76ced6',name='hist_t7_1.png',Xlabel="Error",Ylabel="Frecuencia",title="Error de predicción de demanda estimado con Boostrap")
+print(bootstrap_mean)
+print(bootstrap_std)
+```
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_1.png)
+
+### Muestreo **cross-validation** en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple
+En esta función se calcula un modelo de regresión lineal múltiple para cada una de las una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Los datos de error del muestreo cross-validation se guardan en la lista cross_ols.
+```python
+cross_ols_fx = []
+nblocks    = 100
+nblocks    = X.shape[0] 
+print(X.shape[0] )
+size = int( X.shape[0] / nblocks)
+intervals = np.arange(size, X.shape[0], size)
+
+for i in intervals:  
+    a = np.arange(0,X.shape[0])
+    b = np.arange(i-size,i)
+    c = np.sort(np.setdiff1d(a, b)) #El complemento del conjunto seleccionado
+    X_test  = np.delete(X, b, axis = 0)
+    Y_test  = np.delete(Y, b, axis = 0)    
+    X_train = np.delete(X, c, axis = 0)
+    Y_train = np.delete(Y, c, axis = 0)
+
+    olsmod  = sm.OLS(Y_train, X_train)
+    olsres  = olsmod.fit()
+    Y_pred  = olsres.predict(X_test)  
+    error = abs(Y_test - Y_pred)
+    cross_ols_fx.append(mean_absolute_error(Y_test,Y_pred))
+
+dfb = pd.DataFrame((np.asarray(cross_ols_fx)).T)
+cross_mean_fx = dfb.mean(numeric_only = True)
+cross_std_fx = dfb.std(numeric_only = True)
+dibuja_hist(dfb,colour='#777bd4',name='hist_t7_2.png',Xlabel="Error",Ylabel="Frecuencia",title="Error de predicción de demanda estimado con Cross-validation")
+print(cross_mean_fx)
+print(cross_std_fx)
+```
+
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_1.png)
+
+
+Esta versión de cross-validation elige aleatoriamente el inicio de las muestras de prueba X_test
+```python
+cross_ols = []
+nblocks   = 10
+size = int( X.shape[0] / nblocks)
+
+replicas = 180
+arr = np.sort(np.random.choice(a, replace=False, size = replicas))
+print(arr)
+for i in arr:
+
+      a = np.arange(1,X.shape[0])
+      b = np.arange(i-size,i)
+      c = np.sort(np.setdiff1d(a, b)) #El complemento del conjunto seleccionado
+      X_test  = np.delete(X, b, axis = 0)
+      Y_test  = np.delete(Y, b, axis = 0)    
+      X_train = np.delete(X, c, axis = 0)
+      Y_train = np.delete(Y, c, axis = 0)
+
+      olsmod  = sm.OLS(Y_train, X_train)
+      olsres  = olsmod.fit()
+      Y_pred  = olsres.predict(X_test)  
+      error = abs(Y_test - Y_pred)
+      cross_ols.append(mean_absolute_error(Y_test,Y_pred))
+
+dfb = pd.DataFrame((np.asarray(cross_ols)).T)
+cross_mean = dfb.mean(numeric_only = True)
+cross_std = dfb.std(numeric_only = True)
+dibuja_hist(dfb,colour='#17cb49',name='hist_t7_3.png',Xlabel="Error",Ylabel="Frecuencia",title="Error de predicción de demanda estimado con Cross-validation")
+print(cross_mean)
+print(cross_std)
+```
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/figura_t7_3.png)
+
+### **Conclusión tarea 7** 
+En general...
