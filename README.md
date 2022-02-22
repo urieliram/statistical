@@ -931,7 +931,8 @@ En general la regresión local realizada punto por punto tuvo en general un mejo
 
 ## **Tarea 7 Evaluación**
 >**Instructions:** Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
-A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica y evaluaresmos el error del modelo usando **cross-validation** y **bootstrap**. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos regresión lineal múltiple con multiples regresores `X`. Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing) El código completo de esta tarea se encuentra en [Tarea7.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea7.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+
+A continuación haremos la comparación de resultados de regresión para datos de demanda eléctrica y evaluaremos el error del modelo usando validación cruzada **(cross-validation)**  y **bootstrap**. La variable independiente `X` serán los datos de demanda del día anterior, y los datos independiente `Y` serán los datos de días con una mayor correlación con `X`. En esta sección, aplicaremos regresión lineal múltiple con multiples regresores `X`. Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing) El código completo de esta tarea se encuentra en [Tarea7.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea7.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Muestreo **bootstrap** en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple.
 A continuación se calcula un modelo de regresión lineal múltiple para una de las muestras `X_train` elegidas aleatoriamente un 50% de datos del total del conjunto `X`. Los datos de error (MAE) de todas las réplicas del muestreo aleatorio se guardan en la lista `bootstrap_ols`.
@@ -960,7 +961,7 @@ La media y la varianza del error del modelo calculada por medio de la distribuci
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_1.png)
 
-### Muestreo **cross-validation** en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple
+### Validación cruzada en estimación de error en la predicción de demanda eléctrica usando regresión líneal múltiple
 En esta función se calcula un modelo de regresión lineal múltiple para cada una de las una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Los datos de error del muestreo cross-validation se guardan en la lista cross_ols.
 ```python
 cross_ols_fx = []
@@ -998,7 +999,7 @@ La media y la varianza del error del modelo calculada por medio de la distribuci
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_2.png)
 
 
-Esta versión de cross-validation elige aleatoriamente el inicio de las muestras de prueba X_test
+Esta versión de validación cruzada elige aleatoriamente el inicio de las muestras de prueba X_test
 ```python
 cross_ols = []
 nblocks   = 10
@@ -1026,17 +1027,17 @@ for i in arr:
 dfb = pd.DataFrame((np.asarray(cross_ols)).T)
 cross_mean = dfb.mean(numeric_only = True)
 cross_std = dfb.std(numeric_only = True)
-dibuja_hist(dfb,colour='#17cb49',name='hist_t7_3.png',Xlabel="Error",Ylabel="Frecuencia",title="Error de predicción de demanda estimado con Cross-validation")
+dibuja_hist(dfb,colour='#17cb49',name='hist_t7_3.png',Xlabel="Error",Ylabel="Frecuencia",title="Error de predicción de demanda estimado con validación cruzada")
 print(cross_mean)
 print(cross_std)
 ```
 
-La media y la varianza del error del modelo calculada por medio de la distribución del error es:229.18 y 63.85
+La media y la varianza del error del modelo calculada por medio de la distribución del error es: 229.18 y 63.85
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_3.png)
 
 ### **Conclusión tarea 7** 
-Se realizó un ejercicio de predicción de demanda eléctrica usando una regresión lineal múltiple, sin ambargo debido a los pocos datos que se tienen para evaluar el modelo. Se aplicaron téecnicas de **cross-validation** y **bootstrap**, las cuales son una herramienta poderosa para evaluar la función del error. Ambas técnicas hacen un muestreo con los datos y evaluan el error en el modelo, resulta interesante observar las distribuciones que resultan parecidas a la distribución nornal para el **bootstrap** y para el caso del **cross-validation** una distribución exponencial. El uso de estas técnicas tiene como ventaja obtener una distribución más realista del comportamiento del error e inclusive poder calcular intervalos de confianza.
+Se realizó un ejercicio de predicción de demanda eléctrica usando una regresión lineal múltiple, sin embargo debido a los pocos datos que se tienen para evaluar el modelo. Se aplicaron técnicas de validación cruzada y **bootstrap**, las cuales son una herramienta poderosa para evaluar la función del error. Ambas técnicas hacen un muestreo con los datos y evaluan el error en el modelo, resulta interesante observar las distribuciones que resultan parecidas a la distribución nornal para el **bootstrap** y para el caso de validación cruzada una distribución exponencial. El uso de estas técnicas tiene como ventaja obtener una distribución más realista del comportamiento del error e inclusive poder calcular intervalos de confianza.
 
 
 ## **Tarea 8 Inferencia**
@@ -1045,7 +1046,7 @@ Se realizó un ejercicio de predicción de demanda eléctrica usando una regresi
 Los datos usados en esta sección están disponibles en [bones.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea8.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Inferencia Bayesiana
-Queremos saber las distribuciones de probabilidad de los parámetros desconocidos de un modelo. Además, probar que tan buenos son estos parámetros. Cuanto mayor sea la probabilidad P(θ|x) de los valores de los parámetros dados los datos, más probable será que sean los parámetros "reales" de la distribución de la población (θ es la distribución a priori y x la evidencia). Esto significa que podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población a encontrar los valores de los parámetros que maximizan el valor P(θ|x).
+Queremos saber las distribuciones de probabilidad de los parámetros desconocidos de un modelo. Además, probar que tan buenos son estos parámetros. Cuanto mayor sea la probabilidad P(θ|x) de los valores de los parámetros dados los datos, más probable será que sean los parámetros "reales" de la distribución de la población ('θ' es la distribución a priori y 'x' la evidencia). Esto significa que podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población a encontrar los valores de los parámetros que maximizan el valor P(θ|x).
 
 ### Un ejemplo básico de regresión logistica bayesiana
 Se usará este ejemplo de un modelo de regresión logística básico, que simula fracturas óseas con variables independientes de edad y sexo. Fuente: [Lawrence Joseph](http://www.medicine.mcgill.ca/epidemiology/Joseph/courses/EPIB-621/main.html) [PDF](http://www.medicine.mcgill.ca/epidemiology/joseph/courses/EPIB-621/bayeslogit.pdf)
@@ -1090,7 +1091,7 @@ La media de las distribuciones de los parámetros de este primer modelo son:
 beta_0	     beta_sex	beta_age
 -24.843256	 1.619084	0.390901
 
-Una ventaja del enfoque de inferencia bayesiana es que no solo nos da la media de los parámtros del modelo, también podemos obtener los intervalos de confianza al 95%. Es decir que los Los parámetros buscados se encontrarán entre los valores siguientes con una probabilidad del 95%. Lo hacemos de la siguiente manera:
+Una ventaja del enfoque de inferencia bayesiana es que no solo nos da la media de los parámetros del modelo, también podemos obtener los intervalos de confianza al 95%. Es decir que los parámetros buscados se encontrarán entre los valores siguientes con una probabilidad del 95%. Lo hacemos de la siguiente manera:
 ```python
 mean = first_burned_trace['beta_0'].mean()
 hpd = az.hdi(first_burned_trace['beta_0'].flatten())
@@ -1161,7 +1162,7 @@ age            0.3447      0.069      5.027      0.000       0.210       0.479
 ==============================================================================
 ```
 
-Hasta ahora se ha realizado un análisis inferencial bayesiano expresando los priors de cada una de las variables. Sin embargo, cuando el número de variables es muy grande se recomienda el uso de la librería **PyMC3** tiene un modelo lineal generalizado(GLM) que facilita el análisis. Se usará este modelo para ajustar los datos de sobrecarga en líneas de transmisión en la red eléctrica de México.
+Hasta ahora se ha realizado un análisis inferencial bayesiano expresando suposiciones previas de distribución de cada una de las variables. Sin embargo, cuando el número de variables es muy grande se recomienda el uso de la librería **PyMC3** tiene un modelo lineal generalizado (GLM) que facilita el análisis. Se usará este modelo para ajustar los datos de sobrecarga en líneas de transmisión en la red eléctrica de México.
 
 ## **Predicción de sobrecarga en grupos de líneas de transmisión en la red eléctrica en México.**
 En esta sección se usará inferencia bayesiana para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
@@ -1193,7 +1194,6 @@ fourth_map_coeffs
 
 Ahora calculamos la media de de las muestras generadas por la simulación.
 ```python
-Ahora calculamos la media de de las muestras generadas por la simulación.
 coeffs=['CEN','GUA','NES','NOR','NTE','OCC','ORI','PEE','PEN','CEN_min','GUA_min','NES_min','NOR_min','NTE_min','OCC_min','ORI_min','PEE_min','PEN_min','Intercept']
 d=dict()
 for item in coeffs:
@@ -1236,13 +1236,14 @@ with fourth_model:
 #convert y_score into binary decisions    
 fourth_model_prediction=[1 if x >0.5 else 0 for x in fourth_y_score]
 #compute confussion matrix 
-fourth_model_confussion_matrix = confusion_matrix(df['L3'], fourth_model_prediction)
-fourth_model_confussion_matrix
+fourth_model_confusion_matrix = confusion_matrix(df['L3'], fourth_model_prediction)
+fourth_model_confusion_matrix
 array([[104,  42],
        [ 17, 172]])
 ```
 ### **Conclusión tarea 8** 
 Hemos utilizado *PyMC3* para implementar la regresión logistica bayesiana para varias variables, además de la función **Logit** de la librería **statsmodel**, que implementa un enfoque frecuentista.
 Los resultados de estimación de parámetros entre el enfoque frecuentista y el bayesiano son muy parecidos para el caso de estudio de fracturas de huesos, sin embargo, el enfoque bayesiano da algunas ventajas ya que da la posibilidad de actualizar el modelo con nueva información, mientras que los modelos de regresión lineal generan valores únicos de los parámetros de ajuste, mientras que los modelos de regresión lineal bayesianos pueden generar distribuciones de los parámetros, esto tiene la ventaja de que podemos cuantificar la incertidumbre de nuestra estimación.
-Otra cosa que observamos es que a pesar de que los modelos modelos bayesianos que usamos usan distribuciones prior diferentes, los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
-Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de regresión logistica ajustado con inferencia bayesiana con ayuda de la librería mencionada. Los resultados fueron predecidos correctamente en su mayoria, como lo evidencia la matriz de confisión. Las distribuciones de los parámetros se asemejan  en su mayoria a una distribución normal. Los resultados animan a seguir trabajando en mejorar la modelación del comportamiento de la sobrecarga eléctrica incluyendo más variables y tranformandolas así como variando las distribuciones a priori, entre otras mejoras.
+Otra cosa que observamos es que a pesar de que los modelos modelos bayesianos que usamos usan distribuciones a priori diferentes, los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
+Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de regresión logistica ajustado con inferencia bayesiana con ayuda de la librería mencionada. Los resultados fueron predecidos correctamente en su mayoria, como lo evidencia la matriz de confisión. Las distribuciones de los parámetros se asemejan  en su mayoria a una distribución normal. Los resultados animan a seguir trabajando en mejorar la modelación del comportamiento de la sobrecarga eléctrica incluyendo más variables y tranformándolas así como variando las distribuciones a priori.
+
