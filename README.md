@@ -1036,7 +1036,7 @@ La media y la varianza del error del modelo calculada por medio de la distribuci
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_3.png)
 
-### Evaluación del desempeño del muestreo bootstrap variando tamaño de las muestra y numero de muestreos akleatorios (repeticiones).
+### Evaluación del desempeño del bootstrap variando tamaño de las muestra y número de muestreos aleatorios (repeticiones).
 Adicionalmente se ha hecho un análisis del error del **bootstrap**, variando el tamaño de la muestra en porciento del total de los datos `percent = [10,20,30,40,50,60,70,80,90]` y un número de simulaciones `replicas = [250,500,1000,1500,2000]`, los resultados se muestran en la gráfica siguiente.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t7_4.png)
