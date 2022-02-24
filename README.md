@@ -1041,11 +1041,11 @@ Adicionalmente se ha hecho un análisis del error del **bootstrap**, variando el
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t7_4.png)
 
-Se ha determinado que para estos datos el número mínimo de muestras aleatorias es de 80% de los datos con 500 repeticiones para obtener un resultado aceptable, la gráfica de error vs número de réplicas se muestra a continuación. La línea roja representa la media del error, y las líneas pubnteadas los intervalos de confianza del 5% y 95% , Asumiendo una distribución normal en el error. 
+Se ha determinado que para obtener un resultado aceptable de error en estos datos el número mínimo de muestras aleatorias es de un 80% de los datos con 500 repeticiones, la gráfica de error vs número de réplicas se muestra a continuación. La línea roja representa la media del error, y las líneas azules los intervalos de confianza del 5% y 95% (asumiendo una distribución normal en el error). 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t7_5.png)
 
-**Con este análisis podemos cuantificar el efecto en la calidad del modelo de usar diferente número de réplicas o muestras para conocer la cantidad de valores "suficientes" o "ideales" para los datos y determinar el punto en que agregar más datos o más réplicas ya no cambia nada en el modelo.**
+**Con este análisis podemos cuantificar el efecto en la calidad del modelo en usar diferentes números de réplicas y/o muestras para conocer la cantidad de valores "suficientes" o "ideales" para los datos y determinar un punto en que agregar más datos o más réplicas ya no cambia nada en el modelo.**
 
 ### **Conclusión tarea 7** 
 Se realizó un ejercicio de predicción de demanda eléctrica usando una regresión lineal múltiple, sin embargo debido a los pocos datos que se tienen para evaluar el modelo. Se aplicaron técnicas de validación cruzada y **bootstrap**, las cuales son una herramienta poderosa para evaluar la función del error. Ambas técnicas hacen un muestreo con los datos y evaluan el error en el modelo, resulta interesante observar las distribuciones que resultan parecidas a la distribución nornal para el **bootstrap** y para el caso de validación cruzada una distribución exponencial. El uso de estas técnicas tiene como ventaja obtener una distribución más realista del comportamiento del error e inclusive poder calcular intervalos de confianza.
