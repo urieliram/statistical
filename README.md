@@ -1037,7 +1037,46 @@ La media y la varianza del error del modelo calculada por medio de la distribuci
 ![image](https://github.com/urieliram/statistical/blob/main/figures/hist_t7_3.png)
 
 ### Evaluación del desempeño del bootstrap variando tamaño de las muestra y número de muestreos aleatorios (repeticiones).
-Adicionalmente se ha hecho un análisis del error del **bootstrap**, variando el tamaño de la muestra en porciento del total de los datos `percent = [10,20,30,40,50,60,70,80,90]` y un número de simulaciones `replicas = [250,500,1000,1500,2000]`, los resultados se muestran en la gráfica siguiente.
+Adicionalmente se ha hecho un análisis del error del **bootstrap**, variando el tamaño de la muestra en porciento del total de los datos `percent = [10,20,30,40,50,60,70,80,90]` y un número de simulaciones `replicas = [250,500,1000,1500,2000]`, el código utilizado y resultados obtenidos se muestran a continuación.
+
+```python
+from numpy.ma.core import mean
+percent   = [10,20,30,40,50,60,70,80,90] # porcentaje de muestreo
+replicas  = [250,500,1000,1500,2000] # porcentaje de muestreo 1500,2000,2500,5000
+test      = []
+ylist     = []
+
+for rep in replicas:
+    mean      = []
+    desv_up   = []
+    desv_down = []
+    for per in percent:
+        bootstrap_ols= []
+        for rep in range(rep):
+            a = np.arange(0,X.shape[0])
+            b = np.sort(np.random.choice(a, replace=False, size = int(len(a) * (per/100))))
+            X_train = np.delete(X, b, axis = 0)
+            Y_train = np.delete(Y, b, axis = 0)            
+            olsmod = sm.OLS(Y_train, X_train)
+            olsres = olsmod.fit()
+            Y_pred = olsres.predict(X_train)  
+            bootstrap_ols.append(mean_absolute_error(Y_train, Y_pred))
+        dfb = pd.DataFrame((np.asarray(bootstrap_ols)).T)
+        bootstrap_mean = dfb.mean(numeric_only = True)
+        bootstrap_std = dfb.std(numeric_only   = True)        
+        mean.append(bootstrap_mean)
+        desv_up.append(bootstrap_mean   + bootstrap_std*2)
+        desv_down.append(bootstrap_mean - bootstrap_std*2)
+    test.append(mean)
+
+labels   = ['250 reps','500 reps','1000 reps','1500 reps','2000 reps']
+Xlabel   = '% de muestreo'
+Ylabel   = 'error'
+title    = "Error en muestreo usando bootstrap con repeticiones"
+namefile = 'fig_t7_4'
+print(test)
+dibuja_lineas(percent, test, labels, namefile, Xlabel, Ylabel, title)
+```
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t7_4.png)
 
