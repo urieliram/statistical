@@ -1041,7 +1041,7 @@ Adicionalmente se ha hecho un análisis del error del **bootstrap**, variando el
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t7_4.png)
 
-Se ha determinado que para estos datos el número mínimo de muestras aleatorias es de 80% de los datos con 500 repeticiones para obtener un resultado aceptable, la gráfica de error contra número de réplicas se muestra a continuación. La línea roja representa la media del error, y las líneas pubnteadas los intervalos de confianza del 5% y 95% , Asumiendo una distribución normal en el error. 
+Se ha determinado que para estos datos el número mínimo de muestras aleatorias es de 80% de los datos con 500 repeticiones para obtener un resultado aceptable, la gráfica de error vs número de réplicas se muestra a continuación. La línea roja representa la media del error, y las líneas pubnteadas los intervalos de confianza del 5% y 95% , Asumiendo una distribución normal en el error. 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t7_5.png)
 
@@ -1234,8 +1234,6 @@ print(result_coeffs)
 lower -0.013823 -0.069692  0.00032  ... -1963.161634 -0.007922  -1.083443
 upper  0.000798  0.014229  0.00739  ...  1812.848724  0.012059  42.543688
 ``` 
- 
-
 Por último, calculamos la matriz de confusión del ajuste al modelo de regresión logistica.
 
 ```python
