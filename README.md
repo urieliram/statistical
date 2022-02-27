@@ -12,6 +12,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 6 Suavizado](#tarea-6-suavizado)
 + [Tarea 7 Evaluación](#tarea-7-evaluación)
 + [Tarea 8 Inferencia](#tarea-8-inferencia)
++ [Tarea 9 Modelos aditivos y Árboles](#tarea-9-modelos-aitivos-y-árboles)
 
 ---
 
@@ -1093,7 +1094,7 @@ Se realizó un ejercicio de predicción de demanda eléctrica usando una regresi
 ## **Tarea 8 Inferencia**
 >**Instrucciones:** Modelar la sobrecarga a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad tal".
 
-Los datos usados en esta sección están disponibles en [bones.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea8.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos usados en esta sección están disponibles en [overload.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea8.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Inferencia Bayesiana
 Queremos saber las distribuciones de probabilidad de los parámetros desconocidos de un modelo. Además, probar que tan buenos son estos parámetros. Cuanto mayor sea la probabilidad P(θ|x) de los valores de los parámetros dados los datos, más probable será que sean los parámetros "reales" de la distribución de la población ('θ' es la distribución a priori y 'x' la evidencia). Esto significa que podemos transformar nuestro problema de encontrar los parámetros de la distribución de la población a encontrar los valores de los parámetros que maximizan el valor P(θ|x).
@@ -1294,4 +1295,10 @@ Hemos utilizado **PyMC3** para implementar la regresión logistica bayesiana par
 Los resultados de estimación de parámetros entre el enfoque frecuentista y el bayesiano son muy parecidos para el caso de estudio de fracturas de huesos, sin embargo, el enfoque bayesiano da algunas ventajas ya que da la posibilidad de actualizar el modelo con nueva información, mientras que los modelos de regresión lineal generan valores únicos de los parámetros de ajuste, mientras que los modelos de regresión lineal bayesianos pueden generar distribuciones de los parámetros, esto tiene la ventaja de que podemos cuantificar la incertidumbre de nuestra estimación.
 Otra cosa que observamos es que a pesar de que los modelos modelos bayesianos que usamos usan distribuciones a priori diferentes, los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
 Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de regresión logistica ajustado con inferencia bayesiana con ayuda de la librería mencionada. Los resultados fueron predecidos correctamente en su mayoria, como lo evidencia la matriz de confisión. Las distribuciones de los parámetros se asemejan  en su mayoria a una distribución normal. Los resultados animan a seguir trabajando en mejorar la modelación del comportamiento de la sobrecarga eléctrica incluyendo más variables y tranformándolas así como variando las distribuciones a priori.
+
+## **Tarea 9 Modelos aditivos y Árboles**
+>**Instrucciones:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
+
+Los datos usados en esta sección están disponibles en [overload.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+
 
