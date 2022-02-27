@@ -12,7 +12,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 6 Suavizado](#tarea-6-suavizado)
 + [Tarea 7 Evaluación](#tarea-7-evaluación)
 + [Tarea 8 Inferencia](#tarea-8-inferencia)
-+ [Tarea 9 Modelos aditivos y Árboles](#tarea-9-modelos-aitivos-y-árboles)
++ [Tarea 9 Modelos aditivos y Árboles](#tarea-9-modelos-aditivos-y-árboles)
 
 ---
 
