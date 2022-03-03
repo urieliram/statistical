@@ -1299,6 +1299,17 @@ Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de re
 ## **Tarea 9 Modelos aditivos y Árboles**
 >**Instrucciones:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
 
-Los datos usados en esta sección están disponibles en [overload.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos usados en esta sección están disponibles en [overloadlog.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
+### Modelos aditivos en predicción de sobrecarga en líneas de transmisión 
+En esta sección se usará un modelo logístico aditivo para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
 
+Usaremos **LogisticGAM** de la la librería **pygam**  que es un modelo de regresión lógistica aditiva generalizada **(GAM)**. Para resolver nuestro problema seguiremos el procedimiento del libro en la sección `9.1.2 Example: Additive Logistic Regression` en que resuelve el problema de predicción de spam. Los datos que estamos utilizando fueron transformados previamente a con `log(x + 0.1)` como lo sugiere el libro. Además se separan los datos en entrenamiento `X_train` y prueba `X_test`.
+```python
+X = df[['CEN','NES','NOR','NTE','OCC','ORI','PEN','CEN_min','NES_min','NOR_min','NTE_min','OCC_min','ORI_min','PEN_min']] ## Predictors
+y = df['L3']
+
+## Crea conjuntos de datos de entrenamiento y prueba
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.7, random_state = 5)
+```
+Hemos intendato aplicar directamente el procedimiento a todos los regresores, sin embargo, se ha presentado problemas de convergencia. 
