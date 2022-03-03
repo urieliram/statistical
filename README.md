@@ -1304,7 +1304,9 @@ Los datos usados en esta sección están disponibles en [overloadlog.csv](https:
 ### Modelos aditivos en predicción de sobrecarga en líneas de transmisión 
 En esta sección se usará un modelo logístico aditivo para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
 
-Usaremos **LogisticGAM** de la la librería **pygam**  que es un modelo de regresión lógistica aditiva generalizada **(GAM)**. Para resolver nuestro problema seguiremos el procedimiento del libro en la sección `9.1.2 Example: Additive Logistic Regression` en que resuelve el problema de predicción de spam. Los datos que estamos utilizando fueron transformados previamente a con `log(x + 0.1)` como lo sugiere el libro. Además se separan los datos en entrenamiento `X_train` y prueba `X_test`.
+Usaremos la función **LogisticGAM** de la librería **pygam**  que es la implemenetación logística de un modelo de Regresión Aditiva Generalizada **(GAM)**. Para resolver nuestro problema hemos seguido el procedimiento del libro en la sección `9.1.2 Example: Additive Logistic Regression`. Las diferencias entre el procedimiento original para predicción de spam y el de nuestro problema de predicción de sobrecarga en líneas de transmisión serán discutidas. 
+
+Los datos que utilizamos fueron transformados previamente a con `log(x + 0.1)` como lo sugiere el libro. Además se separan los datos de entrenamiento `X_train` y prueba `X_test`.
 ```python
 X = df[['CEN','NES','NOR','NTE','OCC','ORI','PEN','CEN_min','NES_min','NOR_min','NTE_min','OCC_min','ORI_min','PEN_min']] ## Predictors
 y = df['L3']
@@ -1312,4 +1314,68 @@ y = df['L3']
 ## Crea conjuntos de datos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.7, random_state = 5)
 ```
-Hemos intendato aplicar directamente el procedimiento a todos los regresores, sin embargo, se ha presentado problemas de convergencia. 
+Al intentar entrenar un modelo con todas los regresores, hemos tenido problema de convergencia, a+ún modificando el número de iteraciones `max_iter` y la tolerancia `tol`. Por lo que hemos realizado un proceso para detectar aquellos regresores que pudieran estar causando problemas en este caso de multicolinealidad, debido a la correlación entre algunos de los regresores. El procedimiento implemenetado consiste en detectar cual de ellos es el que más factor de inflación de la varianza presenta y es retirado del modelo hasta encontrar un modelo válido.
+
+```python
+while(Flag == True):
+
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore", category=UserWarning)
+        # Fit a GAM    
+        gam = LogisticGAM(max_iter=1000, tol=0.001, verbose=True).fit(X_train[column], y_train)
+        
+        if len(column) >1 :
+            print(str(len(column))+'----------------------------------------------------')
+            
+            ## DETECTAMOS EL FACTOR DE INFLACIÓN DE LA VARIANZA
+            # VIF dataframe 
+            vif = pd.DataFrame()
+            vif["feature"] = X_train.columns
+            # calculating VIF for each feature
+            vif["VIF"] = [variance_inflation_factor(X_train.values, i) for i in range(len(X_train.columns))]
+            #vif["VIF"] = [variance_inflation_factor(X_train.values, i) for i in range(X_train.values.shape[1])]
+
+            column = vif["VIF"]
+            max_value = column.max()
+            indx = vif[vif['VIF'] == max_value].index
+
+            X_train.drop(X_train.columns[indx.values[0]], axis=1, inplace=True)
+            column = X_train.columns
+            print(column)
+            _ = plt.plot(gam.logs_['deviance'])
+            
+        else:
+            Flag = False
+```
+
+Al final nos quedaremos con el subconjunto de regresores:
+```
+X = df[['NOR', 'NTE', 'ORI', 'PEN', 'CEN_min', 'NTE_min', 'OCC_min', 'PEN_min']] ## Predictors
+```
+
+Se muestra un resumen de la regresión logística aditiva en la que vemos los regresores con una significancia al 0.001.
+```
+LogisticGAM                                                                                               
+=============================================== ==========================================================
+Distribution:                      BinomialDist Effective DoF:                                     11.1091
+Link Function:                        LogitLink Log Likelihood:                                   -35.2326
+Number of Samples:                          100 AIC:                                               92.6832
+                                                AICc:                                               96.337
+                                                UBRE:                                               3.0157
+                                                Scale:                                                 1.0
+                                                Pseudo R-Squared:                                   0.4917
+==========================================================================================================
+Feature Function                  Lambda               Rank         EDoF         P > x        Sig. Code   
+================================= ==================== ============ ============ ============ ============
+s(0)                              [0.6]                20                        0.00e+00     ***         
+s(1)                              [0.6]                20                        1.97e-04     ***         
+s(2)                              [0.6]                20                        0.00e+00     ***         
+s(3)                              [0.6]                20                        7.77e-16     ***         
+s(4)                              [0.6]                20                        2.43e-03     **          
+s(5)                              [0.6]                20                        4.15e-08     ***         
+s(6)                              [0.6]                20                        0.00e+00     ***         
+s(7)                              [0.6]                20                        1.37e-05     ***         
+intercept                                              1                         1.66e-01                 
+==========================================================================================================
+Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+```
