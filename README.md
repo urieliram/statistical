@@ -1314,7 +1314,7 @@ y = df['L3']
 ## Crea conjuntos de datos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.7, random_state = 5)
 ```
-Al intentar entrenar un modelo con todas los regresores, hemos tenido problema de convergencia, a+ún modificando el número de iteraciones `max_iter` y la tolerancia `tol`. Por lo que hemos realizado un proceso para detectar aquellos regresores que pudieran estar causando problemas en este caso de multicolinealidad, debido a la correlación entre algunos de los regresores. El procedimiento implemenetado consiste en detectar cual de ellos es el que más factor de inflación de la varianza presenta y es retirado del modelo hasta encontrar un modelo válido.
+Al intentar entrenar un modelo con todas los regresores, hemos tenido problema de convergencia, aún aumentando el número de iteraciones `max_iter` a 10000 y disminuyendo la tolerancia `tol` a 0.01. Por lo que hemos realizado un proceso para detectar aquellos regresores que pudieran estar causando problemas por multicolinealidad, debido a la alta correlación entre algunos de los regresores. El procedimiento implemenetado consiste en detectar cual de ellos es el que más factor de inflación de la varianza presenta y es retirado del modelo hasta encontrar un modelo válido. A diferencia del procedimiento del libro que usa un subconjunto de los regresores más significativos, usaremos todo el subconjunto de regresores que nos quedan despues del procedimiento descrito a continuación:
 
 ```python
 while(Flag == True):
@@ -1348,12 +1348,12 @@ while(Flag == True):
             Flag = False
 ```
 
-Al final nos quedaremos con el subconjunto de regresores:
+El subconjunto de regresores que nos quedan despues del procedimiento de descarte de variables por inflación de varianza es:
 ```
 X = df[['NOR', 'NTE', 'ORI', 'PEN', 'CEN_min', 'NTE_min', 'OCC_min', 'PEN_min']] ## Predictors
 ```
 
-Se muestra un resumen de la regresión logística aditiva en la que vemos los regresores con una significancia al 0.001.
+Se muestra un resumen de la regresión logística aditiva en la que vemos los regresores con una significancia al 0.001. 
 ```
 LogisticGAM                                                                                               
 =============================================== ==========================================================
@@ -1379,3 +1379,29 @@ intercept                                              1                        
 ==========================================================================================================
 Significance codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ```
+La librería nos permite graficar los diagramas de dependencia parcial de los rgeresores que se muestran a continuación.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_1.png)
+
+
+La exactitud del modelo y matriz de confusión son: 
+```
+Test accuracy GAM =  0.7319148936170212
+[[ 69  27]
+ [ 36 103]]
+ ```
+En el procedimiento del libro se compara con los resultados de una **Regresión logística**. Para nuestro problema hemos comparado además con una **Regresión Logística con Stepwise**. Los resultados se muestran a continuación:
+
+Regresión logística:
+ ```
+ Test accuracy RegLogit =  0.7531914893617021
+[[79 17]
+ [41 98]]
+ ```
+ 
+ Regresión logística con stepwise:
+```
+Test accuracy RegLogit + stepwise=  0.7702127659574468
+[[ 65  31]
+ [ 23 116]]
+ ```
