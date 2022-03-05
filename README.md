@@ -1407,7 +1407,7 @@ Test accuracy RegLogit + stepwise=  0.7702127659574468
  El detalle de estos procedimientos se muestra en el cuaderno [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb)
  
 #### Regresión logística aditiva con búsqueda de mejor subconjunto **(Best-Subset selection)**
-Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando [5,6,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] como el conjunto con los mejores resultados con una exactitud de 0.8xxxxxxxxxxxxx. El código implemenetado se muestra a continuación. 
+Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando ['NTE_min','OCC_min'] como el conjunto con los mejores resultados con una exactitud de 0.846809. El código implemenetado se muestra a continuación. 
 
 ```python
 ## Loop over all possible numbers of features to be included
@@ -1431,8 +1431,32 @@ subset_best = list(results.sort_values('accuracy')['features'].head(1)[0]) ## Se
 ```
 
 ### Poda de árbol de decisión usando validación cruzadas **cross-validation**
-Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Para aplicar el procedimiento de validación cruzada hemos utilizado las funciones **KFold** y **cross_val_score** de la librería **sklearn**. 
+Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. De acuerdo al procedimeinto del libro se aplicó validación cruzada con k=10. 
+
+Para aplicar el procedimiento de validación cruzada hemos utilizado las funciones **KFold** y **cross_val_score** de la librería **sklearn**. 
 
 Los datos de error del muestreo cross-validation se guardan en la lista `cross_ols`. 
+
+```python
+#Evaluación del desempeño del bootstrap variando tamaño de las muestra y número de muestreos aleatorios (repeticiones).
+# evaluate a decision tree model using k-fold cross-validation
+size =[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] #,
+test = []
+accuracy = []
+
+for i in size:
+    cv = KFold(n_splits = 10, random_state = 1, shuffle = True)
+    clf = tree.DecisionTreeClassifier(max_leaf_nodes = i,criterion = "entropy", random_state = 100,
+                                  max_depth=100, min_samples_leaf=5)
+    scores = cross_val_score(clf, X_train, y_train, scoring='accuracy', cv=cv, n_jobs=-1)
+    print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
+    accuracy.append(mean(scores))
+
+test.append(accuracy) 
+```
+
+A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
+Con le objetivo de comparar el modelo del árbol con los demás procedimientos (logistic regression, l..........zxxxxxxxxxxx) hemos , 
+
+El detalle de estos procedimientos se muestra en el cuaderno [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb)
  
-  
