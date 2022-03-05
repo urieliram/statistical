@@ -1458,7 +1458,9 @@ test.append(accuracy)
 ```
 A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
 
-El resultado de la validación cruzada para estimar la mejor exactitud nos da un número de ocho nodos, el árbol se muestra a continuación:
+El resultado de la validación cruzada para estimar la mejor exactitud nos da un óptimo de ocho nodos, el árbol resultante se muestra a continuación:
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_3.png)
 
 ```python
 clf = tree.DecisionTreeClassifier(max_leaf_nodes=8, criterion = "gini", random_state = 100,
@@ -1478,5 +1480,4 @@ Test accuracy árbol =  0.7489
 ```
 
 ### **Conclusión tarea 9**
-
 Hemos 
