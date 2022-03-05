@@ -1435,9 +1435,9 @@ subset_best = list(results.sort_values('accuracy')['features'].head(1)[0]) ## Se
 ### Poda de árbol de decisión usando validación cruzadas **cross-validation**
 Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. De acuerdo al procedimeinto del libro se aplicó validación cruzada con `n_splits=10`. 
 
-Para aplicar el procedimiento de validación cruzada hemos utilizado las funciones **KFold** y **cross_val_score** de la librería **sklearn**. 
+Para aplicar el procedimiento de validación cruzada hemos utilizado las funciones **KFold** y **cross_val_score** de la librería **sklearn**. A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
 
-Los datos de error del muestreo cross-validation se guardan en la lista `cross_ols`. 
+Los datos de error de la validación cruzada se guardan en la lista `cross_ols`. 
 
 ```python
 #Evaluación del desempeño del bootstrap variando tamaño de las muestra y número de muestreos aleatorios (repeticiones).
@@ -1456,9 +1456,10 @@ for i in size:
 
 test.append(accuracy)
 ```
-A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
+La gráfica con los valores de el número de odos y la exactitud del modelo se muestran a continuación:
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_2.png)
 
-El resultado de la validación cruzada para estimar la mejor exactitud nos da un óptimo de ocho nodos, el árbol resultante se muestra a continuación:
+El resultado de la validación cruzada para estimar la mejor exactitud nos da un óptimo de ocho nodos, el árbol resultante queda de la siguiente manera:
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_3.png)
 
