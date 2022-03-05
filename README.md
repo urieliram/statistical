@@ -1461,7 +1461,7 @@ La gráfica con los valores de el número de odos y la exactitud del modelo se m
 
 El resultado de la validación cruzada para estimar la mejor exactitud nos da un óptimo de ocho nodos, el árbol resultante queda de la siguiente manera:
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_3.jpg)
 
 ```python
 clf = tree.DecisionTreeClassifier(max_leaf_nodes=8, criterion = "gini", random_state = 100,
