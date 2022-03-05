@@ -1430,9 +1430,9 @@ print(results.sort_values('accuracy'))
 subset_best = list(results.sort_values('accuracy')['features'].head(1)[0]) ## Select the Best-Subset of variables
 ```
 
-### Poda de árbol de decisión usando cross-validation
-Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Para aplicar el procedimiento de validación cruzada hemos utilizado la función **KFold** de la librería **sklearn**.
+### Poda de árbol de decisión usando validación cruzadas **cross-validation**
+Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Para aplicar el procedimiento de validación cruzada hemos utilizado las funciones **KFold** y **cross_val_score** de la librería **sklearn**. 
 
 Los datos de error del muestreo cross-validation se guardan en la lista `cross_ols`. 
  
- 
+  
