@@ -1296,17 +1296,19 @@ Los resultados de estimación de parámetros entre el enfoque frecuentista y el 
 Otra cosa que observamos es que a pesar de que los modelos modelos bayesianos que usamos usan distribuciones a priori diferentes, los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
 Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de regresión logistica ajustado con inferencia bayesiana con ayuda de la librería mencionada. Los resultados fueron predecidos correctamente en su mayoria, como lo evidencia la matriz de confisión. Las distribuciones de los parámetros se asemejan  en su mayoria a una distribución normal. Los resultados animan a seguir trabajando en mejorar la modelación del comportamiento de la sobrecarga eléctrica incluyendo más variables y tranformándolas así como variando las distribuciones a priori.
 
-## **Tarea 9 Modelos aditivos y Árboles**
+## **Tarea 9 Modelos Aditivos y Árboles**
 >**Instrucciones:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
 
-Los datos usados en esta sección están disponibles en [overloadlog.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb), aquí solo se presentan los resultados y las secciones relevantes del código.
+Los datos usados en esta sección están disponibles en [overloadlog.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb).
+
+Aquí solo se presentan los resultados y las secciones relevantes del código.
 
 ### Modelos aditivos en predicción de sobrecarga en líneas de transmisión 
 En esta sección se usará un modelo logístico aditivo para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
 
-Usaremos la función **LogisticGAM** de la librería **pygam**  que es la implemenetación logística de un modelo de Regresión Aditiva Generalizada **(GAM)**. Para resolver nuestro problema hemos seguido el procedimiento del libro en la sección `9.1.2 Example: Additive Logistic Regression`. Las diferencias entre el procedimiento original para predicción de spam y el de nuestro problema de predicción de sobrecarga en líneas de transmisión serán discutidas. 
+Usaremos la función **LogisticGAM** de la librería **pygam**  que es la implemenetación logística de un modelo de Regresión Aditiva Generalizada **(GAM)**. Para resolver nuestro problema hemos seguido el procedimiento del libro en la sección `9.1.2 Example: Additive Logistic Regression`. Las diferencias entre el procedimiento original para predicción de spam y el de nuestro problema de predicción de sobrecarga en líneas de transmisión serán discutidas. El ejemplo de predicción de spam del libro se encuentra en el cuaderno [Tarea9_spam.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9_spam.ipynb).
 
-Los datos que utilizamos fueron transformados previamente a con `log(x + 0.1)` como lo sugiere el libro. Además se separan los datos de entrenamiento `X_train` y prueba `X_test`.
+Los datos que utilizamos fueron transformados previamente a con `log(x + 0.1)` como lo sugiere el libro. Además se separan los datos de entrenamiento `X_train` y prueba `X_test` en un 70% entrenamiento y 30% de prueba.
 ```python
 X = df[['CEN','NES','NOR','NTE','OCC','ORI','PEN','CEN_min','NES_min','NOR_min','NTE_min','OCC_min','ORI_min','PEN_min']] ## Predictors
 y = df['L3']
@@ -1314,7 +1316,7 @@ y = df['L3']
 ## Crea conjuntos de datos de entrenamiento y prueba
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.7, random_state = 5)
 ```
-Al intentar entrenar un modelo con todas los regresores, hemos tenido problema de convergencia, aún aumentando el número de iteraciones `max_iter` a 10000 y disminuyendo la tolerancia `tol` a 0.01. Por lo que hemos realizado un proceso para detectar aquellos regresores que pudieran estar causando problemas por multicolinealidad, debido a la alta correlación entre algunos de los regresores. El procedimiento implemenetado consiste en detectar cual de ellos es el que más factor de inflación de la varianza presenta y es retirado del modelo hasta encontrar un modelo válido. A diferencia del procedimiento del libro que usa un subconjunto de los regresores más significativos, usaremos todo el subconjunto de regresores que nos quedan despues del procedimiento descrito a continuación:
+Al intentar entrenar un modelo con todas los regresores se presentaron problemas de convergencia, aún aumentando el número de iteraciones `max_iter` a 10000 y disminuyendo la tolerancia `tol` a 0.01. Por lo que hemos realizado un proceso para detectar aquellos regresores que pudieran estar causando problemas por multicolinealidad, debido a la alta correlación entre algunos de los regresores. El procedimiento implementado consiste en detectar cual de ellos es el que más factor de inflación de la varianza presenta y es retirado del modelo hasta encontrar un modelo válido. A diferencia del procedimiento del libro que usa un subconjunto de los regresores más significativos, usaremos todo el subconjunto de regresores que nos quedan despues del procedimiento descrito a continuación:
 
 ```python
 while(Flag == True):
@@ -1385,7 +1387,7 @@ La librería nos permite graficar los diagramas de dependencia parcial de los rg
 
 La exactitud del modelo y matriz de confusión obtenidas con el **modelo logístico aditivo** son: 
 ```
-Test accuracy Logistic aditive =  0.7319148936170212
+Test accuracy Logistic aditive =  0.7319
 [[ 69  27]
  [ 36 103]]
  ```
@@ -1393,14 +1395,14 @@ En el procedimiento del libro los resultados se comparan con los obtenidos por u
 
 Resultados con **Regresión logística**:
  ```
- Test accuracy RegLogit =  0.7531914893617021
+ Test accuracy RegLogit =  0.7531
 [[79 17]
  [41 98]]
  ```
  
 Resultados con **Regresión logística con stepwise**:
 ```
-Test accuracy RegLogit + stepwise=  0.7702127659574468
+Test accuracy RegLogit + stepwise=  0.7702
 [[ 65  31]
  [ 23 116]]
  ```
@@ -1431,7 +1433,7 @@ subset_best = list(results.sort_values('accuracy')['features'].head(1)[0]) ## Se
 ```
 
 ### Poda de árbol de decisión usando validación cruzadas **cross-validation**
-Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. De acuerdo al procedimeinto del libro se aplicó validación cruzada con k=10. 
+Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. De acuerdo al procedimeinto del libro se aplicó validación cruzada con `n_splits=10`. 
 
 Para aplicar el procedimiento de validación cruzada hemos utilizado las funciones **KFold** y **cross_val_score** de la librería **sklearn**. 
 
@@ -1440,7 +1442,7 @@ Los datos de error del muestreo cross-validation se guardan en la lista `cross_o
 ```python
 #Evaluación del desempeño del bootstrap variando tamaño de las muestra y número de muestreos aleatorios (repeticiones).
 # evaluate a decision tree model using k-fold cross-validation
-size =[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] #,
+size =[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25] 
 test = []
 accuracy = []
 
@@ -1452,12 +1454,14 @@ for i in size:
     print('Accuracy: %.3f (%.3f)' % (mean(scores), std(scores)))
     accuracy.append(mean(scores))
 
-test.append(accuracy) 
+test.append(accuracy)
 ```
 A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
 
+El resultado de la validación cruzada para estimar la mejor exactitud nos da un número de ocho nodos, el árbol se muestra a continuación:
+
 ```python
-clf = tree.DecisionTreeClassifier(max_leaf_nodes=8,criterion = "gini", random_state = 100,
+clf = tree.DecisionTreeClassifier(max_leaf_nodes=8, criterion = "gini", random_state = 100,
                                max_depth=10, min_samples_leaf=5)
 clf = clf.fit(X_train, y_train)
 print('Test accuracy árbol = ', accuracy_score(y_test, clf.predict(X_test)))
@@ -1465,9 +1469,14 @@ print('Test accuracy árbol = ', accuracy_score(y_test, clf.predict(X_test)))
 #compute confussion matrix 
 confussion_matrix = confusion_matrix(y_test, clf.predict(X_test))
 ```
-Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise, modelo logístico aditivo) calculamos la exactitud y la matriz de confusión.
+Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise y modelo logístico aditivo) calculamos la exactitud y su matriz de confusión.
+
 ```
-Test accuracy árbol =  0.7489361702127659
+Test accuracy árbol =  0.7489
 [[77 19]
  [40 99]]
 ```
+
+### **Conclusión tarea 9**
+
+Hemos 
