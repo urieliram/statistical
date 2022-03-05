@@ -1,0 +1,33 @@
+digraph Tree {
+node [shape=box, style="filled, rounded", color="black", fontname="helvetica"] ;
+edge [fontname="helvetica"] ;
+0 [label=<ORI &le; 2.804<br/>gini = 0.5<br/>samples = 100<br/>value = [50, 50]<br/>class = CEN>, fillcolor="#ffffff"] ;
+1 [label=<NTE &le; 2.79<br/>gini = 0.153<br/>samples = 36<br/>value = [33, 3]<br/>class = CEN>, fillcolor="#e78c4b"] ;
+0 -> 1 [labeldistance=2.5, labelangle=45, headlabel="True"] ;
+5 [label=<gini = 0.0<br/>samples = 31<br/>value = [31, 0]<br/>class = CEN>, fillcolor="#e58139"] ;
+1 -> 5 ;
+6 [label=<gini = 0.48<br/>samples = 5<br/>value = [2, 3]<br/>class = NES>, fillcolor="#bddef6"] ;
+1 -> 6 ;
+2 [label=<PEN_min &le; 1.725<br/>gini = 0.39<br/>samples = 64<br/>value = [17, 47]<br/>class = NES>, fillcolor="#81c0ee"] ;
+0 -> 2 [labeldistance=2.5, labelangle=-45, headlabel="False"] ;
+3 [label=<OCC &le; 3.584<br/>gini = 0.42<br/>samples = 10<br/>value = [7, 3]<br/>class = CEN>, fillcolor="#f0b78e"] ;
+2 -> 3 ;
+13 [label=<gini = 0.0<br/>samples = 5<br/>value = [5, 0]<br/>class = CEN>, fillcolor="#e58139"] ;
+3 -> 13 ;
+14 [label=<gini = 0.48<br/>samples = 5<br/>value = [2, 3]<br/>class = NES>, fillcolor="#bddef6"] ;
+3 -> 14 ;
+4 [label=<NTE &le; 2.833<br/>gini = 0.302<br/>samples = 54<br/>value = [10, 44]<br/>class = NES>, fillcolor="#66b3eb"] ;
+2 -> 4 ;
+7 [label=<NOR &le; 2.76<br/>gini = 0.422<br/>samples = 33<br/>value = [10, 23]<br/>class = NES>, fillcolor="#8fc8f0"] ;
+4 -> 7 ;
+9 [label=<gini = 0.111<br/>samples = 17<br/>value = [1, 16]<br/>class = NES>, fillcolor="#45a3e7"] ;
+7 -> 9 ;
+10 [label=<CEN_min &le; 3.31<br/>gini = 0.492<br/>samples = 16<br/>value = [9, 7]<br/>class = CEN>, fillcolor="#f9e3d3"] ;
+7 -> 10 ;
+11 [label=<gini = 0.198<br/>samples = 9<br/>value = [8, 1]<br/>class = CEN>, fillcolor="#e89152"] ;
+10 -> 11 ;
+12 [label=<gini = 0.245<br/>samples = 7<br/>value = [1, 6]<br/>class = NES>, fillcolor="#5aade9"] ;
+10 -> 12 ;
+8 [label=<gini = 0.0<br/>samples = 21<br/>value = [0, 21]<br/>class = NES>, fillcolor="#399de5"] ;
+4 -> 8 ;
+}
