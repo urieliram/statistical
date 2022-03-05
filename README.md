@@ -1454,12 +1454,9 @@ for i in size:
 
 test.append(accuracy) 
 ```
-
-```python
 A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
 
-Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise, modelo logístico aditivo) calculamos la exactitud y la matriz de confusión.
-
+```python
 clf = tree.DecisionTreeClassifier(max_leaf_nodes=8,criterion = "gini", random_state = 100,
                                max_depth=10, min_samples_leaf=5)
 clf = clf.fit(X_train, y_train)
@@ -1468,7 +1465,7 @@ print('Test accuracy árbol = ', accuracy_score(y_test, clf.predict(X_test)))
 #compute confussion matrix 
 confussion_matrix = confusion_matrix(y_test, clf.predict(X_test))
 ```
-
+Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise, modelo logístico aditivo) calculamos la exactitud y la matriz de confusión.
 ```
 Test accuracy árbol =  0.7489361702127659
 [[77 19]
