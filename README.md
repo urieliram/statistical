@@ -1406,12 +1406,33 @@ Test accuracy RegLogit + stepwise=  0.7702127659574468
  ```
  El detalle de estos procedimientos se muestra en el cuaderno [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb)
  
-### Regresión logística aditiva con búsqueda de mejor subconjunto **(Best-Subset selection)**
-Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando [5,6,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] como el conjunto con los mejores resultados.
- 
- 
- 
- 
- 
+#### Regresión logística aditiva con búsqueda de mejor subconjunto **(Best-Subset selection)**
+Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando [5,6,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] como el conjunto con los mejores resultados con una exactitud de 0.8xxxxxxxxxxxxx. El código implemenetado se muestra a continuación. 
+
+```python
+## Loop over all possible numbers of features to be included
+results = pd.DataFrame(columns=['num_features', 'features', 'accuracy'])
+for k in range(1, X_train.shape[1] + 1):
+
+    # Loop over all possible subsets of size k
+    for subset in itertools.combinations(range(X_train.shape[1]), k):
+        subset = list(subset)            
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", category=UserWarning)
+            # Fit a logistic GAM    
+            gam = LogisticGAM(max_iter=1000, tol=0.001, verbose=True).fit(X_train.iloc[:, subset], y_train)         
+        
+            accuracy = accuracy_score(y_test, gam.predict(X_test.iloc[:, subset]))
+            results = results.append(pd.DataFrame([{'num_features': k,
+                                                    'features': subset,
+                                                    'accuracy': accuracy}]))
+print(results.sort_values('accuracy'))
+subset_best = list(results.sort_values('accuracy')['features'].head(1)[0]) ## Select the Best-Subset of variables
+```
+
+### Poda de árbol de decisión usando cross-validation
+Para obtener un árbol de decisión para predecir la sobrecarga en líneas de transmisión hemos utilizado la función **DecisionTreeClassifier** de la librería **sklearn**. Calcularemos un árbol para cada una de las muestras `X_test` extraidas del total del conjunto de entrenamiento `X_train`. Para aplicar el procedimiento de validación cruzada hemos utilizado la función **KFold** de la librería **sklearn**.
+
+Los datos de error del muestreo cross-validation se guardan en la lista `cross_ols`. 
  
  
