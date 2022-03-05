@@ -1299,7 +1299,7 @@ Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de re
 ## **Tarea 9 Modelos aditivos y Árboles**
 >**Instrucciones:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
 
-Los datos usados en esta sección están disponibles en [overloadlog.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea8.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos usados en esta sección están disponibles en [overloadlog.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb), aquí solo se presentan los resultados y las secciones relevantes del código.
 
 ### Modelos aditivos en predicción de sobrecarga en líneas de transmisión 
 En esta sección se usará un modelo logístico aditivo para ajustar un modelo de regresión logística a datos de sobrecarga en grupos de líneas de transmisión, que interconectan las regiones eléctricas en México. La variable dependientes es de naturaleza binaria con un valor de uno si la línea presenta sobrecarga y cero si no. Las variables independientes son el flujo neto máximo y mínimo en un área de control [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] para un día y se calcula como la diferencia entre la demanda menos la generación en cada área de control. Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México. 
@@ -1383,25 +1383,35 @@ La librería nos permite graficar los diagramas de dependencia parcial de los rg
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_1.png)
 
-
-La exactitud del modelo y matriz de confusión son: 
+La exactitud del modelo y matriz de confusión obtenidas con el modelo logístico aditivo son: 
 ```
-Test accuracy GAM =  0.7319148936170212
+Test accuracy Logistic aditive =  0.7319148936170212
 [[ 69  27]
  [ 36 103]]
  ```
-En el procedimiento del libro se compara con los resultados de una **Regresión logística**. Para nuestro problema hemos comparado además con una **Regresión Logística con Stepwise**. Los resultados se muestran a continuación:
+En el procedimiento del libro los resultados se comparan con los obtenidos por una **Regresión logística**. Adicionalmente, en nuestro problema hemos comparado con una **Regresión Logística con Stepwise** con los resultados que se muestran a continuación.
 
-Regresión logística:
+Resultados con **Regresión logística**:
  ```
  Test accuracy RegLogit =  0.7531914893617021
 [[79 17]
  [41 98]]
  ```
  
- Regresión logística con stepwise:
+Resultados con **Regresión logística con stepwise**:
 ```
 Test accuracy RegLogit + stepwise=  0.7702127659574468
 [[ 65  31]
  [ 23 116]]
  ```
+ El detalle de estos procedimientos se muestra en el cuaderno [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb)
+ 
+### Regresión logística aditiva con búsqueda de mejor subconjunto **(Best-Subset selection)**
+Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando [5,6,xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx ] como el conjunto con los mejores resultados.
+ 
+ 
+ 
+ 
+ 
+ 
+ 
