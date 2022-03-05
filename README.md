@@ -1383,7 +1383,7 @@ La librería nos permite graficar los diagramas de dependencia parcial de los rg
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t9_1.png)
 
-La exactitud del modelo y matriz de confusión obtenidas con el modelo logístico aditivo son: 
+La exactitud del modelo y matriz de confusión obtenidas con el **modelo logístico aditivo** son: 
 ```
 Test accuracy Logistic aditive =  0.7319148936170212
 [[ 69  27]
@@ -1455,8 +1455,22 @@ for i in size:
 test.append(accuracy) 
 ```
 
+```python
 A diferencia del libro que utiliza **Misclassification error** en el problema de spam, la medida de error que usaremos será **Gini index** que es más sensible a cambios en las probabilidades de cada nodo a diferencia del propuesto en el libro. 
-Con le objetivo de comparar el modelo del árbol con los demás procedimientos (logistic regression, l..........zxxxxxxxxxxx) hemos , 
 
-El detalle de estos procedimientos se muestra en el cuaderno [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb)
- 
+Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise, modelo logístico aditivo) calculamos la exactitud y la matriz de confusión.
+
+clf = tree.DecisionTreeClassifier(max_leaf_nodes=8,criterion = "gini", random_state = 100,
+                               max_depth=10, min_samples_leaf=5)
+clf = clf.fit(X_train, y_train)
+print('Test accuracy árbol = ', accuracy_score(y_test, clf.predict(X_test)))
+
+#compute confussion matrix 
+confussion_matrix = confusion_matrix(y_test, clf.predict(X_test))
+```
+
+```
+Test accuracy árbol =  0.7489361702127659
+[[77 19]
+ [40 99]]
+```
