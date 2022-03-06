@@ -1480,6 +1480,6 @@ Test accuracy árbol =  0.7489
 ```
 
 ### **Conclusión tarea 9**
-Hemos utilizado **pygam** para implementar regresión logistica aditiva y la librería **sklearn*** para calcular un árbol de decisión. Además, se utilizó la función **Logit** de la librería **statsmodel** con el objetivo de comparar los resultados con modelos logísticos con y sin stepwise,además de el mejor subconjunto. Aunque los resultados en exactitud fueron muy semejantes, se encontró que la exacttitud de la regresión logística aditiva fue de 0.7319 y para el árbol de ocho nodos la exactitud de 0.7489. De todos los modelos comparados el que mejor desempeño tuvo fue el de selección del mejor subconjunto con un 0.84680 de exactitud.
+Hemos utilizado **pygam** para implementar regresión logistica aditiva y la librería **sklearn*** para calcular un árbol de decisión. Además, se utilizó la función **Logit** de la librería **statsmodel** con el objetivo de comparar los resultados con modelos logísticos con y sin stepwise, además de el mejor subconjunto. Aunque los resultados en exactitud fueron muy semejantes, se encontró que la exacttitud de la regresión logística aditiva fue de 0.7319 y para el árbol de ocho nodos la exactitud de 0.7489. De todos los modelos comparados el que mejor desempeño tuvo fue el de selección del mejor subconjunto con un 0.84680 de exactitud.
 
 
