@@ -1323,7 +1323,6 @@ while(Flag == True):
 
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", category=UserWarning)
-        # Fit a GAM    
         gam = LogisticGAM(max_iter=1000, tol=0.001, verbose=True).fit(X_train[column], y_train)
         
         if len(column) >1 :
@@ -1409,7 +1408,7 @@ Test accuracy RegLogit + stepwise=  0.7702
  El detalle de estos procedimientos se muestra en el cuaderno [Tarea9.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea9.ipynb)
  
 #### Regresión logística aditiva con búsqueda de mejor subconjunto **(Best-Subset selection)**
-Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando ['NTE_min','OCC_min'] como el conjunto con los mejores resultados con una exactitud de 0.846809. El código implemenetado se muestra a continuación. 
+Con el objetivo de encontrar el conjunto de regresores que mejor ajusten a nuestros datos, hemos realizado un procedimiento de búqueda del mejor subconjunto. Encontrando ['NTE_min','OCC_min'] como el conjunto con los mejores resultados con una exactitud de 0.8468. El código implemenetado se muestra a continuación. 
 
 ```python
 ## Loop over all possible numbers of features to be included
@@ -1472,7 +1471,7 @@ print('Test accuracy árbol = ', accuracy_score(y_test, clf.predict(X_test)))
 #compute confussion matrix 
 confussion_matrix = confusion_matrix(y_test, clf.predict(X_test))
 ```
-Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise y modelo logístico aditivo) calculamos la exactitud y su matriz de confusión.
+Además, con el objetivo de comparar el modelo del árbol con los demás procedimientos utilizados (regresión logística, regresión logística con stepwise, mejor subconjunto en regresión logística y el modelo logístico aditivo) calculamos la exactitud y su matriz de confusión.
 
 ```
 Test accuracy árbol =  0.7489
@@ -1481,4 +1480,6 @@ Test accuracy árbol =  0.7489
 ```
 
 ### **Conclusión tarea 9**
-Hemos utilizado **pygam** para implementar implementar una regresión logistica aditiva y la librería **sklearn*** para calcular un árbol de decisión. Además, se utilizó la función **Logit** de la librería **statsmodel** con el objetivo de comparar los resultados con modelos logísticos con y sin stepwise.
+Hemos utilizado **pygam** para implementar regresión logistica aditiva y la librería **sklearn*** para calcular un árbol de decisión. Además, se utilizó la función **Logit** de la librería **statsmodel** con el objetivo de comparar los resultados con modelos logísticos con y sin stepwise,además de el mejor subconjunto. Aunque los resultados en exactitud fueron muy semejantes, se encontró que la exacttitud de la regresión logística aditiva fue de 0.7319 y para el árbol de ocho nodos la exactitud de 0.7489. De todos los modelos comparados el que mejor desempeño tuvo fue el de selección del mejor subconjunto con un 0.84680 de exactitud.
+
+
