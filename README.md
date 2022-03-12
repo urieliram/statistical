@@ -1543,8 +1543,19 @@ Estas figuras nos pueden ayudar a tomar decisiones para hacer un modelo mas esbe
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X17.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X18.png)
 
-La figura que se muestra a continuación compara la relevancia entre las dos  variables principales, las zonas de color muestran la dependencia parcial entre las dos variables. Esta figura en dos dimensiones es semejante a la de tres dimensiones presentada en el libro en: `FIGURE 10.16. Partial dependence of house value on median age and average occupancy`.
+La figura que se muestra a continuación compara la relevancia entre las dos  variables principales, las zonas de color muestran la dependencia parcial entre las dos variables. Esta figura en dos dimensiones es semejante a la de tres dimensiones presentada en el libro en: *FIGURE 10.16. Partial dependence of house value on median age and average occupancy.*
 
 En este caso se observa una relación fuerte entre las dos principales variables `X11` y `X1` principalmente en los cuadrantes inferior-izquierdo y superior-derecho. 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X_X_.png)
+
+Por último, podemos comparar el error obtenido con otros modelos de regresión líneal y local reportados en la la [Tarea6.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6.ipynb). Para el caso de regresión local `k` son los tamaños de las vecindades.
+| REGRESIÓN      | MAE            | MSD            | MAPE         |
+| :------------- | -------------: | -------------: |-------------:|
+| local, k=10    | 77.4973    | 323440.045    |    0.009 |
+| local, k=25    | 83.5068    | 14118.722    |    0.0096 |
+| local, k=35    | 98.6564    | 18483.2236    |    0.0113 |
+| local, k=50    | 109.6632    | 21942.6356    |    0.0126 |
+| local, k=100   | 123.9285    | 26331.6078    |    0.0142 |
+| lineal         | 138.5861     | 32615.1951    |    0.0159 |
+| **boosting-árbol** | **199.5699**     |     |     |
