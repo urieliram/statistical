@@ -1558,4 +1558,9 @@ Por último, podemos comparar el error obtenido con otros modelos de regresión 
 | local, k=50    | 109.6632    | 21942.6356    |    0.0126 |
 | local, k=100   | 123.9285    | 26331.6078    |    0.0142 |
 | lineal         | 138.5861     | 32615.1951    |    0.0159 |
-| **boosting-árbol** | **186.3801**     |  **60367.8724**   |  **0.0214**   |
+| **GradientBoostingRegressor** | **186.3801**     |  **60367.8724**   |  **0.0214**   |
+
+
+
+### **Conclusión tarea 10**
+Estos modelos pueden ser de gran utilidad ya que al crear muchas réplicas con modelos débiles (weak) podemos analizar la relevancia de los predictores en su capacidad de predicción de la variable dependiente y hacer gráficas para analizar su importancia, por ejemplo podemos observar el comportamiento de gráficas de dependencia parcial en que la variación de un predictor tendrá poca relevancia sin importar el valor que tome. La densidad de la importancia de una variable se puede interpretar en los deciles. En nuestro caso se observó una distribución casi uniforme. Aunque otros métodos pueden tener mejores resultados de las predicciones como los de regresión lineal o regresión local, la ventaja de estos métodos es que podemos hacer estudios de sensibilidad de los predictores.
