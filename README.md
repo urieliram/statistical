@@ -1510,7 +1510,7 @@ mae = mean_absolute_error(y_test, reg.predict(X_test))
 print("El error medio absoluto (MAE) en datos de prueba es: {:.4f}".format(mae))
 ```
 ```
-El error medio absoluto (MAE) en datos de prueba es: **199.5699**
+El error medio absoluto (MAE) en datos de prueba es: **186.3801**
 ```
 Ahora visualizaremos el proceso de ajuste con los datos de entrenamiento y prueba. Calcularemos el error del conjunto de datos de entrenamiento y luego la compararemos con las iteraciones del conjunto de datos de prueba.
 
@@ -1549,7 +1549,7 @@ En este caso se observa una relación fuerte entre las dos principales variables
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X_X_.png)
 
-Por último, podemos comparar el error obtenido con otros modelos de regresión líneal y local reportados en la la [Tarea6.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6.ipynb). Para el caso de regresión local `k` son los tamaños de las vecindades.
+Por último, comparamos el error obtenido con otros modelos de regresión líneal y local reportados en la la [Tarea6.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6.ipynb). Para el caso de regresión local `k` son los tamaños de las vecindades.
 | REGRESIÓN      | MAE            | MSD            | MAPE         |
 | :------------- | -------------: | -------------: |-------------:|
 | local, k=10    | 77.4973    | 323440.045    |    0.009 |
@@ -1560,7 +1560,7 @@ Por último, podemos comparar el error obtenido con otros modelos de regresión 
 | lineal         | 138.5861     | 32615.1951    |    0.0159 |
 | **GradientBoostingRegressor** | **186.3801**     |  **60367.8724**   |  **0.0214**   |
 
-
+Como puede verse el método **GradientBoostingRegressor** tiene un menor desempeño que otros métodos. Sin embargo, podemos hacer análisis del comportamiento de los predictores en la predicción de la variable dependiente.
 
 ### **Conclusión tarea 10**
 Hemos utilizado la función **ensemble.GradientBoostingRegressor** de la librería **sklearn** para implementar el método de aumento de gradiente en árboles de decisión regresivos. Estos modelos pueden ser de gran utilidad ya que al crear muchas réplicas con modelos de árbol débiles (weak) podemos analizar la relevancia de los predictores en su capacidad de predicción de la variable dependiente e incluso hacer gráficas para analizar su importancia. Por ejemplo, podemos observar el comportamiento de gráficas de dependencia parcial. La densidad de la importancia de una variable se puede interpretar en deciles sobrepuestos en el eje horizontal. En nuestro caso se observaron una gran variedad de comportamientos de los predictores. Aunque otros métodos pueden dar mejores resultados en exactitud  de las predicciones como los de regresión lineal o regresión local, la ventaja de estos métodos radica en poder hacer estudios de sensibilidad de los predictores.
