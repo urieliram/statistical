@@ -1487,10 +1487,64 @@ Hemos utilizado **pygam** para implementar regresión logistica aditiva y la lib
 ## **Tarea 10 Boosting**
 >**Instrucciones:** Replicate the steps of the California housing example of Section 10.14.1 (with some library implementation) unless you really want to go all-in with this) to explore potential dependencies and interactions in the features of your data.
 
-En esta tarea aplicaremos el procedimiento de predicción de precios de casas desarrollado en el libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/) de la `sección 10.14.1 California Housing`.
+En esta tarea aplicaremos el procedimiento de predicción de precios de casas desarrollado en el libro [The Elements of Statistical Learning](https://link.springer.com/book/10.1007/) de la `sección 10.14.1 California Housing` a nuestros datos para predecir demanda eléctrica. El código completo de esta tarea se encuentra en [Tarea10.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea10.ipynb). Aquí solo se presentan los resultados y las secciones relevantes del código. Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing).
 
 Usaremos el modelo de aumento de gradiente **(Gradient Boosting)** para producir un modelo predictivo a partir de un conjunto de modelos predictivos débiles **(weak)**, usando la función **ensemble.GradientBoostingRegressor** de la librería **sklearn**. El **Gradient Boosting** se puede utilizar para problemas de regresión y clasificación. En esta tarea, entrenaremos un modelo de regresión para predecir demanda eléctrica usando datos de demanda de días semejantes. La variable independiente $X$ serán los datos de demanda del día anterior, y los datos independiente $Y$ serán los datos de días con una mayor correlación con $X$.
 
-Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing)
+Iniciamos definiendo los parámetros del modelo **GradientBoostingRegressor** con 1000 árboles de regresión `n_estimators=500`, con una profundidad de `max_depth=6` y una tasa de aprendizaje de `learning_rate": 0.1`. La función de pérdida será la desviación absoluta.
 
+```python
+params = { "n_estimators": 1000,
+           "max_depth": 6,
+           "min_samples_split": 5,
+           "learning_rate": 0.1,
+           "loss": "absolute_error",} # "squared_error", "absolute_error", "huber", "quantile"
+```
+Ahora, ajustaremos un modelo con nuestros datos de entrenamiento. y calculamos el error cuadrático medio (MAE) en los datos de prueba.
 
+```python
+reg = ensemble.GradientBoostingRegressor(**params)
+reg.fit(X_train, y_train)
+
+mae = mean_absolute_error(y_test, reg.predict(X_test))
+print("El error medio absoluto (MAE) en datos de prueba es: {:.4f}".format(mae))
+```
+```
+El error medio absoluto (MAE) en datos de prueba es: **199.5699**
+```
+Ahora visualizaremos el proceso de ajuste con los datos de entrenamiento y prueba. Calcularemos el error del conjunto de datos de entrenamiento y luego la compararemos con las iteraciones del conjunto de datos de prueba.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_1.jpg)
+
+En la gráfica siguiente se muestra la importancia relativa de los predictores. Podemos observar  que el regresor `X11` Y `X1` tienen una ligera importancia sobre los demás, todas las demás variables tienen una relevancia ligeramente menor con un decremento monotónicamente decreciente.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_2.jpg)
+
+La dependencia de cada una de las variables la podemos analizar por medio de las figuras siguientes. En el eje horizontal se observa el valor que ha tomado la variable con múltiples modelos débiles **(weak)**. Y en el eje vertical la relevancia relativa, todas las figuras tienen la misma escala así que la comparación es directa. Las discontinuidades que se observan en las figuras se deben al uso del modelo de árbol. Podemos observar algunas figuras con una curva cuasi-horizontal cercana al cero que indica baja relevancia, tal es el caso de `X6` o  `X7`, aunque se observan algunos valores extremos en los últimos deciles. Tambien se presentan algunos casos en que se observan en la misma figura simultamenamente relevancias altas positivas y negativas divididas por discontinuidades como por ejemplo en `X2`,`X3`, `X10` y `X11`. Otros predictores presentan relevancias relativamente más suaves en toda la distribución de los deciles como por ejemplo `X8`,`X9` y `X17`. Otras tienen una importancia más cercana al cero y son ruidosas como por ejemplo `X15` y `X18`.
+
+Estas figuras nos pueden ayudar a tomar decisiones para hacer un modelo mas esbelto, eliminanado variables o poniendo especial atención en algunas de las variables mas relevantes y sus rangos de sensibilidad.  
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X1.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X2.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X3.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X4.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X5.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X6.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X7.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X8.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X9.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X10.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X11.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X12.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X13.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X14.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X15.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X16.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X17.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X18.jpg)
+
+La figura que se muestra a continuación compara la relevancia entre las dos  variables principales, las zonas de color muestran la dependencia parcial entre las dos variables. Esta figura en dos dimensiones es semejante a la de tres dimensiones presentada en el libro en: `FIGURE 10.16. Partial dependence of house value on median age and average occupancy`.
+
+En este caso se observa una relación fuerte entre las dos principales variables `X11` y `X1` principalmente en los cuadrantes inferior-izquierdo y superior-derecho. 
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X_X_.jpg)
