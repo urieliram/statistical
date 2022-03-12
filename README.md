@@ -1547,4 +1547,4 @@ La figura que se muestra a continuación compara la relevancia entre las dos  va
 
 En este caso se observa una relación fuerte entre las dos principales variables `X11` y `X1` principalmente en los cuadrantes inferior-izquierdo y superior-derecho. 
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X_X_.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X_X_.png)
