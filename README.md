@@ -1511,14 +1511,20 @@ print("El error medio absoluto (MAE) en datos de prueba es: {:.4f}".format(mae))
 ```
 ```
 El error medio absoluto (MAE) en datos de prueba es: **186.3801**
+El error cuadrático medio (MSD) en datos de prueba es: **60367.8724**
+El error medio absoluto porcentual (MAPE) en datos de prueba es: **0.0214**
 ```
 Ahora visualizaremos el proceso de ajuste con los datos de entrenamiento y prueba. Calcularemos el error del conjunto de datos de entrenamiento y luego la compararemos con las iteraciones del conjunto de datos de prueba.
 
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_1.png)
+
 
 En la gráfica siguiente se muestra la importancia relativa de los predictores. Podemos observar  que el regresor `X11` Y `X1` tienen una ligera importancia sobre los demás, todas las demás variables tienen una relevancia ligeramente menor con un decremento monotónicamente decreciente.
 
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_2.png)
+
 
 La dependencia de cada una de las variables la podemos analizar por medio de las figuras siguientes. En el eje horizontal se observa el valor que ha tomado la variable con múltiples modelos débiles **(weak)**. Y en el eje vertical la relevancia relativa, todas las figuras tienen la misma escala así que la comparación es directa. Las discontinuidades que se observan en las figuras se deben al uso del modelo de árbol. Podemos observar algunas figuras con una curva cuasi-horizontal cercana al cero que indica baja relevancia, tal es el caso de `X6` o  `X7`, aunque se observan algunos valores extremos en los últimos deciles. Tambien se presentan algunos casos en que se observan en la misma figura simultamenamente relevancias altas positivas y negativas divididas por discontinuidades como por ejemplo en `X2`,`X3`, `X10` y `X11`. Otros predictores presentan relevancias relativamente más suaves en toda la distribución de los deciles como por ejemplo `X8`,`X9` y `X17`. Otras tienen una importancia más cercana al cero y son ruidosas como por ejemplo `X15` y `X18`.
 
