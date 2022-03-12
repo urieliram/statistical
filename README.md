@@ -1514,34 +1514,34 @@ El error medio absoluto (MAE) en datos de prueba es: **199.5699**
 ```
 Ahora visualizaremos el proceso de ajuste con los datos de entrenamiento y prueba. Calcularemos el error del conjunto de datos de entrenamiento y luego la compararemos con las iteraciones del conjunto de datos de prueba.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_1.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_1.png)
 
 En la gráfica siguiente se muestra la importancia relativa de los predictores. Podemos observar  que el regresor `X11` Y `X1` tienen una ligera importancia sobre los demás, todas las demás variables tienen una relevancia ligeramente menor con un decremento monotónicamente decreciente.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_2.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_2.png)
 
 La dependencia de cada una de las variables la podemos analizar por medio de las figuras siguientes. En el eje horizontal se observa el valor que ha tomado la variable con múltiples modelos débiles **(weak)**. Y en el eje vertical la relevancia relativa, todas las figuras tienen la misma escala así que la comparación es directa. Las discontinuidades que se observan en las figuras se deben al uso del modelo de árbol. Podemos observar algunas figuras con una curva cuasi-horizontal cercana al cero que indica baja relevancia, tal es el caso de `X6` o  `X7`, aunque se observan algunos valores extremos en los últimos deciles. Tambien se presentan algunos casos en que se observan en la misma figura simultamenamente relevancias altas positivas y negativas divididas por discontinuidades como por ejemplo en `X2`,`X3`, `X10` y `X11`. Otros predictores presentan relevancias relativamente más suaves en toda la distribución de los deciles como por ejemplo `X8`,`X9` y `X17`. Otras tienen una importancia más cercana al cero y son ruidosas como por ejemplo `X15` y `X18`.
 
 Estas figuras nos pueden ayudar a tomar decisiones para hacer un modelo mas esbelto, eliminanado variables o poniendo especial atención en algunas de las variables mas relevantes y sus rangos de sensibilidad.  
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X1.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X2.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X3.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X4.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X5.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X6.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X7.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X8.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X9.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X10.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X11.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X12.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X13.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X14.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X15.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X16.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X17.jpg)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X18.jpg)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X2.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X3.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X4.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X7.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X8.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X9.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X10.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X11.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X12.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X13.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X14.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X15.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X16.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X17.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t10_X18.png)
 
 La figura que se muestra a continuación compara la relevancia entre las dos  variables principales, las zonas de color muestran la dependencia parcial entre las dos variables. Esta figura en dos dimensiones es semejante a la de tres dimensiones presentada en el libro en: `FIGURE 10.16. Partial dependence of house value on median age and average occupancy`.
 
