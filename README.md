@@ -1558,4 +1558,4 @@ Por último, podemos comparar el error obtenido con otros modelos de regresión 
 | local, k=50    | 109.6632    | 21942.6356    |    0.0126 |
 | local, k=100   | 123.9285    | 26331.6078    |    0.0142 |
 | lineal         | 138.5861     | 32615.1951    |    0.0159 |
-| **boosting-árbol** | **199.5699**     |     |     |
+| **boosting-árbol** | **186.3801**     |  **60367.8724**   |  **0.0214**   |
