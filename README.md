@@ -14,6 +14,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 8 Inferencia](#tarea-8-inferencia)
 + [Tarea 9 Modelos Aditivos y Árboles](#tarea-9-modelos-aditivos-y-árboles) 
 + [Tarea 10 Impulso](#tarea-10-impulso)
++ [Tarea 11 Redes neuronales](#tarea-11-redes-neuronales)
 
 ---
 
@@ -1566,3 +1567,7 @@ Como puede verse el método **GradientBoostingRegressor** tiene un menor desempe
 
 ### **Conclusión tarea 10**
 Hemos utilizado la función **ensemble.GradientBoostingRegressor** de la librería **sklearn** para implementar el método de aumento de gradiente en árboles de decisión regresivos. Estos modelos pueden ser de gran utilidad ya que al crear muchas réplicas con modelos de árbol débiles (weak) podemos analizar la relevancia de los predictores en su capacidad de predicción de la variable dependiente e incluso hacer gráficas para analizar su importancia. Por ejemplo, podemos observar el comportamiento de gráficas de dependencia parcial. La densidad de la importancia de una variable se puede interpretar en deciles superpuestos en el eje horizontal. En nuestro caso se observaron una gran variedad de comportamientos de los predictores. Aunque otros métodos pueden dar mejores resultados en exactitud como los de regresión lineal o regresión local, la ventaja de estos métodos radica en poder hacer estudios de sensibilidad de los predictores.
+
+
+## **Tarea 11 Redes Neuronales**
+>**Instrucciones:** Go over the steps of the ZIP code examples in Chapter 11 and replicate as much as you can with your own project data. Don't forget to read the whole chapter before you start.
