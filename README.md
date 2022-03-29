@@ -1674,28 +1674,91 @@ Exactitud obtenida: 42.5531
 
 **Net-4**
 ```python
-
+input_dim = (14,1)
+input_ = Input(input_dim, name = 'the_input')
+layer1 = Conv1D(filters=2, kernel_size=2, strides=2, activation='sigmoid', name='layer1')(input_) 
+layer2 = LocallyConnected1D(1, 5, activation='sigmoid', name='layer2')(layer1)
+layer3 = Flatten(name='layer3')(layer2) 
+output = Dense(units=num_classes, activation='sigmoid', name = 'output')(layer3)
+model = Model(inputs = input_, outputs = output)
+input_dim = np.expand_dims(input_dim, axis=0)
 ```
 ```
-
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ the_input (InputLayer)      [(None, 14, 1)]           0         
+                                                                 
+ layer1 (Conv1D)             (None, 7, 2)              6         
+                                                                 
+ layer2 (LocallyConnected1D)  (None, 3, 1)             33        
+                                                                 
+ layer3 (Flatten)            (None, 3)                 0         
+                                                                 
+ output (Dense)              (None, 26)                104       
+                                                                 
+=================================================================
+Total params: 143
+Trainable params: 143
+Non-trainable params: 0
+_________________________________________________________________
 ```
 
 
-Exactitud obtenida: 
+Exactitud obtenida: 0.0
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_4a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_4b.png)
 
 **Net-5**
 ```python
-
+input_dim = (14,1)
+input_ = Input(input_dim, name = 'the_input')
+layer1 = Conv1D(2, 2, strides= 2, activation= 'sigmoid', name = 'layer1')(input_)
+layer2 = Conv1D(4, 5, activation='sigmoid', name = 'layer2')(layer1)
+layer3 = Flatten(name='layer3')(layer2) 
+output = Dense(units=num_classes, activation='sigmoid', name = 'output')(layer3)
+model = Model(inputs = input_, outputs = output)
+input_dim = np.expand_dims(input_dim, axis=0)
 ```
 ```
-
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ the_input (InputLayer)      [(None, 14, 1)]           0         
+                                                                 
+ layer1 (Conv1D)             (None, 7, 2)              6         
+                                                                 
+ layer2 (Conv1D)             (None, 3, 4)              44        
+                                                                 
+ layer3 (Flatten)            (None, 12)                0         
+                                                                 
+ output (Dense)              (None, 26)                338       
+                                                                 
+=================================================================
+Total params: 388
+Trainable params: 388
+Non-trainable params: 0
+_________________________________________________________________
 ```
 
 
-Exactitud obtenida: 
+Exactitud obtenida: 0.0
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_5a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_5b.png)
 
+Los párámetros de ajuste de epoch (numero de macro-iteraciones) y de batch_size (número de muestras que se enviamos al modelo a la vez), Además se mueastran los procesos de compilación y ajuste del modelo con datos de entrenamiento y de validación en datos de prueba.
+```python
+epochs     = 100 
+batch_size = 64
+verbose    = 0
+model.compile(loss='categorical_crossentropy', optimizer='adam', metrics=['accuracy'])
+history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verbose=verbose) 
+history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=epochs, batch_size=batch_size,verbose=verbose)
+```
 
+### **Conclusión:** 
+Hemos utilizado la API secuencial de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
+
+Los resultados indican que la mejor estructura es........... sin embargo, el ............ algunas ventajas ya que da la posibilidad de ................, mientrass.
+
+Otra cosa que observamos es que .............., los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
