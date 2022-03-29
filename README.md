@@ -1607,7 +1607,7 @@ Trainable params: 390
 Non-trainable params: 0
 _________________________________________________________________
 ```
-Exactitud obtenida: 1.7021
+Exactitud obtenida  Net-1: 1.7021
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_1a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_1b.png)
 
@@ -1630,7 +1630,7 @@ Trainable params: 518
 Non-trainable params: 0
 _________________________________________________________________
 ```
-Exactitud obtenida: 42.5531
+Exactitud obtenida Net-2: 42.5531
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2b.png)
 
@@ -1666,7 +1666,7 @@ Trainable params: 143
 Non-trainable params: 0
 _________________________________________________________________
 ```
-Exactitud obtenida: 42.5531
+Exactitud obtenida Net-3: 42.5531
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_3a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_3b.png)
 
@@ -1705,7 +1705,7 @@ _________________________________________________________________
 ```
 
 
-Exactitud obtenida: 0.0
+Exactitud obtenida Net-4: 0.0
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_4a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_4b.png)
 
@@ -1742,7 +1742,7 @@ _________________________________________________________________
 ```
 
 
-Exactitud obtenida: 0.0
+Exactitud obtenida Net-5 : 0.0
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_5a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_5b.png)
 
