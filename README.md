@@ -1595,7 +1595,7 @@ num_classes = 26      ## {salidas}
 model  = Sequential()
 model.add(Dense(units = num_classes, input_dim = 14, activation='sigmoid' ))
 ```
-'''
+```
 _________________________________________________________________
  Layer (type)                Output Shape              Param #   
 =================================================================
@@ -1606,7 +1606,7 @@ Total params: 390
 Trainable params: 390
 Non-trainable params: 0
 _________________________________________________________________
-'''
+```
 Exactitud obtenida: 1.7021
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_1a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_1b.png)
