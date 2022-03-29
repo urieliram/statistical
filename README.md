@@ -1578,7 +1578,7 @@ En esta sección se usaran redes neuronales para ajustar un modelo de predicció
 
 Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México y están disponibles en [overload.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea11.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea11.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
-A continuación se enlista las configuraciones de red usadas en el libro (para resolver el problema *11.7 Example: ZIP Code Data*), las que fueron aplicadas a nuestro problema de predicción de sobrecarga en líneas de transmisión.
+A continuación se enlista las configuraciones de red usadas en el libro (para resolver el problema *11.7 Example: ZIP Code Data*), las que fueron aplicadas a nuestro problema de predicción de sobrecarga en líneas de transmisión. 
 
 *   Net-1: Sin capa oculta, equivalente a regresión logística multinomial.
 *   Net-2: Una capa oculta, 12 unidades ocultas totalmente conectadas.
@@ -1590,16 +1590,112 @@ Trataremos de replicar el ejercicio aplicando a nuestros datos. A diferencia del
 
 **Net-1**
 ```python
-input_dim   = 14
-num_classes = 26 ## {salidas}
+input_dim   = 14      ## {entradas}
+num_classes = 26      ## {salidas}
 model  = Sequential()
 model.add(Dense(units = num_classes, input_dim = 14, activation='sigmoid' ))
 ```
-
-
-Exactitud obtenida: 1.702127659574468
-
+'''
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense (Dense)               (None, 26)                390       
+                                                                 
+=================================================================
+Total params: 390
+Trainable params: 390
+Non-trainable params: 0
+_________________________________________________________________
+'''
+Exactitud obtenida: 1.7021
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_1a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_1b.png)
+
+**Net-2**
+```python
+model.add(Dense(units=12, input_dim = input_dim,  activation ='sigmoid' ))
+model.add(Dense(units=num_classes,                activation ='sigmoid'))
+```
+```
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ dense (Dense)               (None, 12)                180       
+                                                                 
+ dense_1 (Dense)             (None, 26)                338       
+                                                                 
+=================================================================
+Total params: 518
+Trainable params: 518
+Non-trainable params: 0
+_________________________________________________________________
+```
+Exactitud obtenida: 42.5531
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2b.png)
+
+
+**Net-3**
+```python
+input_dim = (14,1)
+input_ = Input(input_dim, name = 'the_input')
+layer1 = LocallyConnected1D(1, 2, strides= 2, activation= 'sigmoid', name = 'layer1')(input_)
+layer2 = LocallyConnected1D(1, 5, activation='sigmoid', name = 'layer2')(layer1)
+layer3 = Flatten(name='layer3')(layer2) 
+output = Dense(units=num_classes, activation='sigmoid', name = 'output')(layer3)
+model = Model(inputs = input_, outputs = output)
+input_dim = np.expand_dims(input_dim, axis=0)
+```
+```
+_________________________________________________________________
+ Layer (type)                Output Shape              Param #   
+=================================================================
+ the_input (InputLayer)      [(None, 14, 1)]           0         
+                                                                 
+ layer1 (LocallyConnected1D)  (None, 7, 1)             21        
+                                                                 
+ layer2 (LocallyConnected1D)  (None, 3, 1)             18        
+                                                                 
+ layer3 (Flatten)            (None, 3)                 0         
+                                                                 
+ output (Dense)              (None, 26)                104       
+                                                                 
+=================================================================
+Total params: 143
+Trainable params: 143
+Non-trainable params: 0
+_________________________________________________________________
+```
+Exactitud obtenida: 42.5531
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_3a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_3b.png)
+
+
+
+**Net-4**
+```python
+
+```
+```
+
+```
+
+
+Exactitud obtenida: 
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_4a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_4b.png)
+
+**Net-5**
+```python
+
+```
+```
+
+```
+
+
+Exactitud obtenida: 
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_5a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_5b.png)
 
 
