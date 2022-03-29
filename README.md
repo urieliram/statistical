@@ -1630,7 +1630,7 @@ Trainable params: 518
 Non-trainable params: 0
 _________________________________________________________________
 ```
-Exactitud obtenida Net-2: 42.5531
+Exactitud obtenida Net-2: 14.4680
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2a.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2b.png)
 
