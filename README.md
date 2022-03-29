@@ -1757,8 +1757,7 @@ history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=
 ```
 
 ### **Conclusión:** 
-Hemos utilizado la API secuencial de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
+Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
 
-Los resultados indican que la mejor estructura es........... sin embargo, el ............ algunas ventajas ya que da la posibilidad de ................, mientrass.
-
-Otra cosa que observamos es que .............., los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
+En los resultados podemos observar que mientras la complejidad de la estructura en las redes Net-1, Net-2 y Net-2 aumenta, la exactutud del modelo mejora. Sin embargo, en el caso de las redes Net-4 y Net-5 la exactitud del modelo fue de cero, la característica común de estas dos redes son que comparten pesos entre capas. Por lo que podemos suponer que para nuestros datos, esta estrategia puede no ser adecuada.
+En general el desempeño de las cinco redes fue muy malo para nuestros datos, para poder obtener mejores resultados, podriamos cambiar las arquitecturas,  parámetros e incluso optimizadores (para esta tarea se usaron estrictamente las estructuras y parpametros del libro).
