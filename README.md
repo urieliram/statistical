@@ -1573,10 +1573,10 @@ Hemos utilizado la función **ensemble.GradientBoostingRegressor** de la librer�
 >**Instrucciones:** Go over the steps of the ZIP code examples in Chapter 11 and replicate as much as you can with your own project data. Don't forget to read the whole chapter before you start.
 
 
-##Predicción de sobrecarga en grupos de líneas de transmisión usando Redes Neuronales Artificiales.
-En esta sección se usaran redes neuronales para ajustar un modelo de predicción en datos de violación de flujo de potencia eléctrica en grupos de líneas de transmisión, que interconectan regiones eléctricas. La variable dependientes son un vector de naturaleza binaria dónde cada componenete del vector representa una línea de transmisión. El valor cuando una línea presenta sobrecarga es uno y cero si no. Las variables independientes son el flujo neto máximo y mínimo en la región eléctrica [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] en un día y se calcula como la diferencia entre la demanda menos la generación en cada región.
+### Predicción de sobrecarga en grupos de líneas de transmisión usando Redes Neuronales Artificiales.
+En esta sección se usaran redes neuronales para ajustar un modelo de predicción en datos de violación de flujo de potencia eléctrica en grupos de líneas de transmisión, que interconectan regiones eléctricas. La variable dependientes son un vector de naturaleza binaria dónde cada componente del vector representa una línea de transmisión. El valor cuando una línea presenta sobrecarga es uno y cero si no. Las variables independientes son el flujo neto máximo y mínimo en la región eléctrica [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] en un día y se calcula como la diferencia entre la demanda menos la generación en cada región.
 
-Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México y están disponibles en [overload.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing) [overload.csv](https://drive.google.com/file/d/1-ZCl-XLmmCpe_yNGryl7Eudg3Q_Xhyh8/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea11.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea11.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos son obtenidos de 334 simulaciones de planeación de la operación de un día en adelanto de la red eléctrica en México y están disponibles en [overload.csv](https://drive.google.com/file/d/1Q8Pk5apApNbcoqmKQp3RvQFvuk4DKylU/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea11.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea11.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
 A continuación se enlista las configuraciones de red usadas en el libro (para resolver el problema *11.7 Example: ZIP Code Data*), las que fueron aplicadas a nuestro problema de predicción de sobrecarga en líneas de transmisión. 
 
@@ -1586,7 +1586,7 @@ A continuación se enlista las configuraciones de red usadas en el libro (para r
 *   Net-4: Dos capas ocultas, conectadas localmente con peso compartido.
 *   Net-5: dos capas ocultas, conectadas localmente, dos niveles de peso compartido.
 
-Trataremos de replicar el ejercicio aplicando a nuestros datos. A diferencia del problema de 2 dimensiones del libro, usaremos redes para una sola dimensión. El objetivo es predecir un vector de binarios (sobrecarga o no de algunas líneas de tranmisión) a partir de un vector de datos reales (datos de demanda de las regiones eléctricas).
+Trataremos de replicar el ejercicio aplicando a nuestros datos. A diferencia del problema de 2 dimensiones del libro, usaremos redes para una sola dimensión. El objetivo es predecir un vector binarios (sobrecarga o no de algunas líneas de transmisión) a partir de un vector de datos reales (datos de demanda de las regiones eléctricas).
 
 **Net-1**
 ```python
