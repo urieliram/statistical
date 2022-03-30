@@ -1758,7 +1758,7 @@ history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=
 
 ### Predicción de sobrecarga en líneas de transmisión biclasificación de fallas por modelos independientes.
 
-Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**,**Net-4**, **Net-5**. Sin embargo nuestra variables ependiente a predecir será bimodal (1/0), una por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
+Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**,**Net-4**, **Net-5**. Sin embargo, nuestra variables dependiente a predecir será bimodal (1/0), una por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
 
 
 **EXACTITUD**
@@ -1796,6 +1796,9 @@ Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1
 |L51 |44.948|38.1959|37.0743|42.1671|37.7331|
 |L58 |31.0068|26.3312|50.3344|46.6807|52.6871|
 |L65 |43.3772|29.6185|40.8491|43.6041|41.8996|
+
+
+
 
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
