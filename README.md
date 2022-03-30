@@ -1757,9 +1757,9 @@ history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=
 ```
 
 ### Predicción de sobrecarga en líneas de transmisión biclasificación de fallas por modelos independientes.
+Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**, **Net-4** y **Net-5** para predecir solo una línea a la vez, como una variable bimodal (1/0), es decir, un modelo por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
 
-Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**,**Net-4**, **Net-5**. Sin embargo, nuestra variables dependiente a predecir será bimodal (1/0), una por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
-
+En las siguientes tablas vemos en las columnas los resultados de la exactitud de cada una de las líneas para cada configuración de red.
 
 **EXACTITUD**
 
@@ -1779,6 +1779,8 @@ Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1
 |L58 |84.2553|85.9574|86.8085|85.9574|85.9574|
 |L65 |74.0426|90.2128|91.0638|91.9149|86.8085|
 
+
+En las siguientes tablas vemos en las columnas los resultados de la función de pérdida de cada una de las líneas para cada configuración de red.
 
 **PÉRDIDA**
 |LÍNEA          |Net-1      | Net-2   | Net-3      | Net-4      | Net-5      |
