@@ -1756,6 +1756,98 @@ history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verb
 history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=epochs, batch_size=batch_size,verbose=verbose)
 ```
 
+### Predicción de sobrecarga en líneas de transmisión biclasificación de fallas por modelos independientes.
+
+Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**,**Net-4**, **Net-5**. Sin embargo nuestra variables ependiente a predecir será bimodal (1/0), una por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
+
+El resumen de los resultados se muetra en las siguientes tablas: 
+
+**Net-1**
+| LÍNEA          | EXACTITUD      | PÉRDIDA        |
+| :------------- | -------------: | -------------: |
+| L3 | 72.3404 | 53.1204 |
+| L5 | 79.1489 | 50.1347 |
+| L6 | 82.1277 | 40.46 |
+| L7 | 78.7234 | 58.8839 |
+| L14 | 97.4468 | 26.695 |
+| L15 | 98.2979 | 15.6178 |
+| L22 | 97.0213 | 11.1231 |
+| L31 | 76.1702 | 44.9927 |
+| L38 | 74.4681 | 51.9048 |
+| L39 | 92.766 | 24.2014 |
+| L51 | 80.0 | 44.948 |
+| L58 | 84.2553 | 31.0068 |
+| L65 | 74.0426 | 43.3772 |
+
+**Net-2**
+| LÍNEA          | EXACTITUD      | PÉRDIDA        |
+| :------------- | -------------: | -------------: |
+| L3 | 82.5532 | 45.0035 |
+| L5 | 85.5319 | 30.8434 |
+| L6 | 87.6596 | 33.268 |
+| L7 | 81.7021 | 53.4267 |
+| L14 | 98.7234 | 6.8277 |
+| L15 | 97.4468 | 9.9675 |
+| L22 | 97.4468 | 12.2467 |
+| L31 | 76.5957 | 43.514 |
+| L38 | 80.0 | 43.0399 |
+| L39 | 98.2979 | 11.4021 |
+| L51 | 80.4255 | 38.1959 |
+| L58 | 85.9574 | 26.3312 |
+| L65 | 90.2128 | 29.6185 |
+
+**Net-3**
+| LÍNEA          | EXACTITUD      | PÉRDIDA        |
+| :------------- | -------------: | -------------: |
+| L3 | 55.7447 | 67.187 |
+| L5 | 87.6596 | 36.9167 |
+| L6 | 61.2766 | 56.7403 |
+| L7 | 52.766 | 85.2434 |
+| L14 | 99.1489 | 11.267 |
+| L15 | 97.4468 | 12.2179 |
+| L22 | 76.1702 | 59.2656 |
+| L31 | 77.8723 | 54.2052 |
+| L38 | 79.1489 | 61.0198 |
+| L39 | 94.4681 | 28.8163 |
+| L51 | 83.4043 | 37.0743 |
+| L58 | 86.8085 | 50.3344 |
+| L65 | 91.0638 | 40.8491 |
+
+**Net-4**
+| LÍNEA          | EXACTITUD      | PÉRDIDA        |
+| :------------- | -------------: | -------------: |
+| L3 | 42.5532 | 74.8684 |
+| L5 | 89.3617 | 37.1918 |
+| L6 | 62.9787 | 56.8913 |
+| L7 | 27.234 | 79.3586 |
+| L14 | 99.1489 | 15.7961 |
+| L15 | 98.2979 | 9.3693 |
+| L22 | 78.7234 | 42.9494 |
+| L31 | 74.8936 | 64.0531 |
+| L38 | 57.8723 | 64.1516 |
+| L39 | 70.6383 | 41.8075 |
+| L51 | 81.7021 | 42.1671 |
+| L58 | 85.9574 | 46.6807 |
+| L65 | 91.9149 | 43.6041 |
+
+**Net-5**
+| LÍNEA          | EXACTITUD      | PÉRDIDA        |
+| :------------- | -------------: | -------------: |
+| L3 | 82.1277 | 59.4786 |
+| L5 | 85.9574 | 38.9338 |
+| L6 | 74.0426 | 49.6091 |
+| L7 | 47.6596 | 77.2211 |
+| L14 | 99.1489 | 5.5693 |
+| L15 | 97.4468 | 11.3037 |
+| L22 | 96.1702 | 21.7902 |
+| L31 | 77.0213 | 60.6316 |
+| L38 | 77.8723 | 53.3356 |
+| L39 | 95.7447 | 22.2485 |
+| L51 | 81.7021 | 37.7331 |
+| L58 | 85.9574 | 52.6871 |
+| L65 | 86.8085 | 41.8996 |
+
+
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
 
