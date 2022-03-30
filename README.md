@@ -1756,16 +1756,15 @@ history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verb
 history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=epochs, batch_size=batch_size,verbose=verbose)
 ```
 
+En la isguiente tabla se resumen las exactitudes obtenidas por cada una de las configuraciones de red.
 |                |Net-1           | Net-2          | Net-3          | Net-4          | Net-5          |  
 | :------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 |Exactitud |1.7021|14.4680|42.5531|0.0|0.0|
 
-
- 
-
+***Como podemos ver la estategia de predicción de fallas simultanea de todas las líneas de transmisión no da buenos resultados.*** Por lo que cambiaremos la estrategia a modelos de predicción separados por cada una de las líneas.
 
 ### Predicción de sobrecarga en líneas de transmisión biclasificación de fallas por modelos independientes.
-Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**, **Net-4** y **Net-5** para predecir solo una línea a la vez, como una variable bimodal (1/0), es decir, un modelo por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
+Repetiremos el ejercicio anterior con las cinco configuraciones de red: **Net-1**, **Net-2**, **Net-3**, **Net-4** y **Net-5** para predecir solo una línea a la vez como una variable bimodal, donde 1=sobrecarga y 0=no sobrecarga. Con este ejercicio esperamos mejorar la exactitud de la predicción.
 
 En las siguientes tablas vemos en las columnas los resultados de la exactitud de cada una de las líneas para cada configuración de red.
 
@@ -1786,6 +1785,8 @@ En las siguientes tablas vemos en las columnas los resultados de la exactitud de
 |L51 |80|80.4255|83.4043|81.7021|81.7021|
 |L58 |84.2553|85.9574|86.8085|85.9574|85.9574|
 |L65 |74.0426|90.2128|91.0638|91.9149|86.8085|
+|Promedio|83.6007|87.8887|80.2291|73.9443|83.6661|
+|Desv. Estandard|9.5209|7.8284|15.3276|21.5522|13.6176|
 
 
 En las siguientes tablas vemos en las columnas los resultados de la función de pérdida de cada una de las líneas para cada configuración de red.
@@ -1806,9 +1807,15 @@ En las siguientes tablas vemos en las columnas los resultados de la función de 
 |L51 |44.948|38.1959|37.0743|42.1671|37.7331|
 |L58 |31.0068|26.3312|50.3344|46.6807|52.6871|
 |L65 |43.3772|29.6185|40.8491|43.6041|41.8996|
+|Promedio|38.1897|29.5142|46.2413|47.6068|40.9570|
+|Desv. Estandard|15.0761|15.3161|21.2580|20.5469|20.9668|
 
+Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notas que los mejores resultados los tenemos con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-5**.
 
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_6.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
 
+Finalmente, como podemos ver en los resultados, la calidad en la predicción mejora si hacemos un modelo por cada línea separadamente.
 
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
