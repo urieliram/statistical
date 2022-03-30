@@ -1763,6 +1763,8 @@ Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1
 El resumen de los resultados se muetra en las siguientes tablas: 
 
 **Net-1**
+
+| LÍNEA          | Net-1      |
 | LÍNEA          | EXACTITUD      | PÉRDIDA        |
 | :------------- | -------------: | -------------: |
 | L3 | 72.3404 | 53.1204 |
