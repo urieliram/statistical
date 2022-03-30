@@ -1824,5 +1824,8 @@ Finalmente, como podemos ver en los resultados, la calidad en la predicción mej
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
 
-En los resultados podemos observar que mientras la complejidad de la estructura en las redes Net-1, Net-2 y Net-2 aumenta, la exactutud del modelo mejora. Sin embargo, en el caso de las redes Net-4 y Net-5 la exactitud del modelo fue de cero, la característica común de estas dos redes son que comparten pesos entre capas. Por lo que podemos suponer que para nuestros datos, esta estrategia puede no ser adecuada.
+Sobre el primer ejercicio donde se pretende predecir de manera conjunta las sobrecargas podemos observar que mientras la complejidad de la estructura en las redes Net-1, Net-2 y Net-2 aumenta, la exactutud del modelo mejora. Sin embargo, en el caso de las redes Net-4 y Net-5 la exactitud del modelo fue de cero, la característica común de estas dos redes son que comparten pesos entre capas. Por lo que podemos suponer que para nuestros datos, esta estrategia puede no ser adecuada.
 En general el desempeño de las cinco redes fue muy malo para nuestros datos, para poder obtener mejores resultados, podriamos cambiar las arquitecturas,  parámetros e incluso optimizadores (para esta tarea se usaron estrictamente las estructuras y parpametros del libro).
+
+En el segundo ejercico donde se realizaron redes neuronales independientes uno por cada línea, se tuvieron mejores resultados con la red **Net-2** y la red  **Net-1**. La exactitud de los modelos de predicción por línea fue en general mayor que de manera conjunta.
+
