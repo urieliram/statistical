@@ -1760,12 +1760,11 @@ history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=
 
 Repetiremos el ejercicio anterior con las cinco configuraciones de redes **Net-1**, **Net-2**, **Net-3**,**Net-4**, **Net-5**. Sin embargo nuestra variables ependiente a predecir será bimodal (1/0), una por cada línea, con este ejercicio esperamos mejorar la exactitud de la predicción.
 
-El resumen de los resultados se muestran en las siguientes tablas: 
 
 **EXACTITUD**
 
 |LÍNEA          |Net-1      | Net-2   | Net-3      | Net-4      | Net-5    |  
-| :------------- | -------------: | -------------: | -------------: | -------------: |
+| :------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 |L3 |72.3404|82.5532|55.7447|42.5532|82.1277|
 |L5 |79.1489|85.5319|87.6596|89.3617|85.9574|
 |L6 |82.1277|87.6596|61.2766|62.9787|74.0426|
@@ -1783,8 +1782,7 @@ El resumen de los resultados se muestran en las siguientes tablas:
 
 **PÉRDIDA**
 |LÍNEA          |Net-1      | Net-2   | Net-3      | Net-4      | Net-5      |
-
-| :------------- | -------------: | -------------: | -------------: | -------------: |
+| :------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 |L3 |53.1204|45.0035|67.187|74.8684|59.4786|
 |L5 |50.1347|30.8434|36.9167|37.1918|38.9338|
 |L6 |40.46|33.268|56.7403|56.8913|49.6091|
