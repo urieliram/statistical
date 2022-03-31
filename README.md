@@ -1771,12 +1771,12 @@ En las siguiente tabla podemos ver los resultados de exactitud de cada una de la
 |L93|99.1489|99.1489|94.0426|99.5745|99.1489|
 |L94|86.8085|96.5957|90.2128|81.2766|94.0426|
 |L95|96.1702|98.7234|95.3192|92.766|95.3192|
-|Promedio|88.9078|92.7092|75.2908|77.7872|79.9433|
+|Promedio|88.9078|**92.7092**|75.2908|77.7872|79.9433|
 |Desv.Estandar|9.7242|7.9445|15.7039|12.7479|17.0098|
 
 En las siguiente tabla podemos ver los resultados de la función de pérdida de cada una de las líneas para cada una de las configuraciones de red.
 
-**PÉRDIDA**
+**FUNCIÓN DE PÉRDIDA**
 |LÍNEA          |Net-1      | Net-2   | Net-3      | Net-4      | Net-5      |
 | :------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 |L3|53.6114|46.4257|69.5333|67.3124|68.1058|
@@ -1794,11 +1794,10 @@ En las siguiente tabla podemos ver los resultados de la función de pérdida de 
 |L93|15.307|4.3076|29.9451|19.2315|11.3876|
 |L94|43.1572|14.9036|32.9231|36.4453|19.3367|
 |L95|35.0614|8.4832|21.32|22.504|12.8717|
-|Promedio|40.9748|22.4319|52.7526|51.1036|44.8118|
+|Promedio|40.9748|**22.4319**|52.7526|51.1036|44.8118|
 |Desv.Estandar|17.9433|16.9910|15.9336|16.9863|22.2217|
 
 Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notar que los mejores resultados se han logrado con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-1**. Como podemos ver en los resultados, la calidad en la predicción mejora si hacemos un modelo por cada línea separadamente.
-
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_6.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
@@ -1809,34 +1808,33 @@ Algo interesante que se observó es que para algunos casos con niveles de exacti
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2b.png)
 
 
-Paralelamanete se utilizó un modelo de árbol de desición para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol. La exactitud medida con el número de nodos en el árbol. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que **las mismas líneas que presentaron el comportamiento de recta horizontal en redes neuronales coincidieron con los modelos de árbol menos complejos de tres nodos**. Estos resultadoa puede verse en la tabla siguiente:
+Paralelamanete se utilizó un modelo de árbol de decisión para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol. La exactitud medida con el número de nodos en el árbol. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que **las mismas líneas que presentaron el comportamiento de recta horizontal en redes neuronales coincidieron con los modelos de árbol menos complejos de tres nodos**. Estos resultados puede verse en la tabla siguiente:
 
 
 **REDES NEURONALES VS ÁRBOL DE DECISIÓN**
 
-|LINEA|Net-2(EXACTITUD)|ÁRBOL(EXACTITUD)|NUM. DE NODOS|
+|LINEA           |Net-2(EXACTITUD)|ÁRBOL(EXACTITUD)|NUM. DE NODOS   |
 | :------------- | -------------: | -------------: | -------------: |
-|L3|79.5745 |73.617  |19|
-|L6|90.6383 |89.3617 |15|
-|L7|78.2979 |76.1702 |13|
-|L38|80     |78.7234 |15|
-|L39|97.4468|92.766  |9 |
-|L42|90.2128|88.0851 |11|
-|L50|99.5745|98.7234 |3 |
-|L65|87.6596|90.2128 |11|
-|L67|100    |99.1489 |3 |
-|L72|99.5745|98.7234 |3 |
-|L75|94.0426|95.7447 |5 |
-|L92|99.1489|99.1489 |3 |
-|L93|99.1489|99.1489 |3 |
-|L94|96.5957|92.3404 |5 |
-|L95|98.7234|92.3404 |5 |
+|L3|79.5745      |73.617  |19|
+|L6|90.6383      |89.3617 |15|
+|L7|78.2979      |76.1702 |13|
+|L38|80          |78.7234 |15|
+|L39|97.4468     |92.766  |9 |
+|L42|90.2128     |88.0851 |11|
+|L50|**99.5745** |98.7234 |**3** |
+|L65|87.6596     |90.2128 |11|
+|L67|**100**     |99.1489 |**3** |
+|L72|**99.5745** |98.7234 |**3** |
+|L75|94.0426     |95.7447 |5 |
+|L92|**99.1489** |99.1489 |**3** |
+|L93|**99.1489** |99.1489 |**3**|
+|L94|96.5957     |92.3404 |5 |
+|L95|98.7234     |92.3404 |5 |
 
-De acuerdo a estos resultados, podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo tanto para una red neuronal de predicción como para un árbol de decisión tambien. Concluimos para nuestro problema que la complejidad del árbol de decisión está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
+De acuerdo a estos resultados, podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo tanto para una red neuronal de predicción como para un árbol de decisión tambien. Concluimos para nuestro problema que la complejidad del árbol está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
 
-Ejemplo de un árbol de decisión de tres nodos para la línea **L50**
+Ejemplo de un árbol de decisión de tres nodos para la línea **L50** con perfil de entremiento horizontal en red neuronal **Net-2**.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_tree.png)
-
 
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
@@ -1844,5 +1842,7 @@ Hemos utilizado la API funcional de **Keras** para implementar diferentes estruc
 Sobre el primer ejercicio donde se pretende predecir de manera conjunta las sobrecargas podemos observar que mientras la complejidad de la estructura en las redes Net-1, Net-2 y Net-2 aumenta, la exactutud del modelo mejora. Sin embargo, en el caso de las redes Net-4 y Net-5 la exactitud del modelo fue de cero, la característica común de estas dos redes son que comparten pesos entre capas. Por lo que podemos suponer que para nuestros datos, esta estrategia puede no ser adecuada.
 En general el desempeño de las cinco redes fue muy malo para nuestros datos, para poder obtener mejores resultados, podriamos cambiar las arquitecturas,  parámetros e incluso optimizadores (para esta tarea se usaron estrictamente las estructuras y parpametros del libro).
 
-En el segundo ejercico donde se realizaron redes neuronales independientes uno por cada línea, se tuvieron mejores resultados con la red **Net-2** y la red  **Net-1**. La exactitud de los modelos de predicción por línea fue en general mayor que de manera conjunta.
+En el segundo ejercico donde se realizaron redes neuronales independientes uno por cada línea, se tuvieron mejores resultados con la red **Net-2** y la red  **Net-1**. La exactitud de los modelos de predicción por línea fue en general mayor que de manera conjunta. 
+
+Concluimos para nuestro problema que la complejidad del árbol está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
 
