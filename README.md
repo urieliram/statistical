@@ -1747,7 +1747,7 @@ En la isguiente tabla se resumen las exactitudes obtenidas por cada una de las c
 
 ***Como podemos ver la estategia de predicción de fallas simultanea de todas las líneas de transmisión no ha dado buenos resultados.*** Por lo que cambiaremos la estrategia a modelos de predicción separados por cada una de las líneas.
 
-### Predicción de sobrecarga en líneas de transmisión biclasificación de fallas por modelos independientes.
+### Predicción de sobrecarga en líneas de transmisión por modelos independientes usando redes neuronales.
 Repetiremos el ejercicio anterior con las cinco configuraciones de red: **Net-1**, **Net-2**, **Net-3**, **Net-4** y **Net-5** para predecir solo una línea a la vez como una variable bimodal, donde 1 = sobrecarga y 0 = no sobrecarga. Además, usaremos las series de datos más balanceadas entre el 30% y 70% de sobrecargas. Las líneas estudiadas fueron: **L3,L6,L7,L38,L39,L42,L50,L65,L67,L72,L75,L92,L93,L94,L95**. 
 
 En las siguiente tabla podemos ver los resultados de exactitud de cada una de las líneas para cada una de las configuraciones de red.
