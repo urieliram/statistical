@@ -1810,7 +1810,8 @@ Como podemos ver en los resultados, la calidad en la predicción mejora si hacem
 
 Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol medida en el número de nodos en cada modelo de cada línea. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que las mismas líneas que presentaron el comportamiento de recta horizontal coincidieron con los modelos de árbol menos complejos de tres nodos. Estos resultadoa puede verse en la tabla siguiente:
 
-**PÉRDIDA**
+
+**REDES NEURONALES VS ÁRBOL DE DECISIÓN**
 
 |LINEA|Net-2(EXACTITUD)|ÁRBOL(EXACTITUD)|NUM. DE NODOS|
 | :------------- | -------------: | -------------: | -------------: |
@@ -1830,10 +1831,7 @@ Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en to
 |L94|96.5957|92.3404|5|
 |L95|98.7234|92.3404|5|
 
-
-Lo que podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo de obtener para una red neuronal de predicción incluso desde el principio del entrenamiento y para un árbol de decisión tambien. 
-
-Concluimos para nuestro problema que la complejidad del árbol de decisión está relacionada también con el tiempo de entrenamiento y complejidad de una RNN. 
+De acuerdo a estos resultados, podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo tanto para una red neuronal de predicción como para un árbol de decisión tambien. Concluimos para nuestro problema que la complejidad del árbol de decisión está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
 
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
