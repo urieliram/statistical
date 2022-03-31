@@ -1788,7 +1788,7 @@ En las siguientes tablas vemos en las columnas los resultados de la exactitud de
 |L94|86.8085|96.5957|90.2128|81.2766|94.0426|
 |L95|96.1702|98.7234|95.3192|92.766|95.3192|
 |Promedio|88.9078|92.7092|75.2908|77.7872|79.9433
-|Desv.Estandard|9.7242|7.9445|15.7039|12.7479|17.0098
+|Desv.Estandar|9.7242|7.9445|15.7039|12.7479|17.0098
 
 
 En las siguientes tablas vemos en las columnas los resultados de la función de pérdida de cada una de las líneas para cada configuración de red.
@@ -1812,7 +1812,7 @@ En las siguientes tablas vemos en las columnas los resultados de la función de 
 |L94|43.1572|14.9036|32.9231|36.4453|19.3367|
 |L95|35.0614|8.4832|21.32|22.504|12.8717|
 |Promedio|40.9748|22.4319|52.7526|51.1036|44.8118|
-|Desv.Estandard|17.9433|16.9910|15.9336|16.9863|22.2217|
+|Desv.Estandar|17.9433|16.9910|15.9336|16.9863|22.2217|
 
 Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notas que los mejores resultados los tenemos con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-1**.
 
