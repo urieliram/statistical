@@ -1804,8 +1804,8 @@ Con el objetivo de analizar los resultados de exactitud y pérdida por cada mode
 
 Algo interesante que se observó es que para algunos casos con niveles de exactitud muy altos cercanos al 100% la gráfica de exactitud vs epoch presenta una recta horizontal tanto en datos de entrenamiento como en datos de prueba. Este comportamiento se presenta en las líneas: **L50 L67 L72 L92 L93** con la red **Net-2** de mejor desempeño. A manera de ejemplo se muestra el comportamiento de la línea **L50**.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2a.png)
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2b.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2_a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2_b.png)
 
 
 Paralelamanete se utilizó un modelo de árbol de decisión para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol. La exactitud medida con el número de nodos en el árbol. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que **las mismas líneas que presentaron el comportamiento de recta horizontal en redes neuronales coincidieron con los modelos de árbol menos complejos de tres nodos**. Estos resultados puede verse en la tabla siguiente:
