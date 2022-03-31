@@ -1797,18 +1797,19 @@ En las siguiente tabla podemos ver los resultados de la función de pérdida de 
 |Promedio|40.9748|22.4319|52.7526|51.1036|44.8118|
 |Desv.Estandar|17.9433|16.9910|15.9336|16.9863|22.2217|
 
-Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notar que los mejores resultados se han logrado con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-1**.
+Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notar que los mejores resultados se han logrado con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-1**. Como podemos ver en los resultados, la calidad en la predicción mejora si hacemos un modelo por cada línea separadamente.
+
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_6.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
 
 Algo interesante que se observó es que para algunos casos con niveles de exactitud muy altos cercanos al 100% la gráfica de exactitud vs epoch presenta una recta horizontal tanto en datos de entrenamiento como en datos de prueba. Este comportamiento se presenta en las líneas: **L50 L67 L72 L92 L93** con la red **Net-2** de mejor desempeño. A manera de ejemplo se muestra el comportamiento de la línea **L50**.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2a.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2b.png)
 
-Como podemos ver en los resultados, la calidad en la predicción mejora si hacemos un modelo por cada línea separadamente.
 
-Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol medida en el número de nodos en cada modelo de cada línea. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que las mismas líneas que presentaron el comportamiento de recta horizontal coincidieron con los modelos de árbol menos complejos de tres nodos. Estos resultadoa puede verse en la tabla siguiente:
+Paralelamanete se utilizó un modelo de árbol de desición para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol. La exactitud medida con el número de nodos en el árbol. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que **las mismas líneas que presentaron el comportamiento de recta horizontal en redes neuronales coincidieron con los modelos de árbol menos complejos de tres nodos**. Estos resultadoa puede verse en la tabla siguiente:
 
 
 **REDES NEURONALES VS ÁRBOL DE DECISIÓN**
@@ -1833,8 +1834,8 @@ Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en to
 
 De acuerdo a estos resultados, podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo tanto para una red neuronal de predicción como para un árbol de decisión tambien. Concluimos para nuestro problema que la complejidad del árbol de decisión está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
 
-Ejemplo de un árbol de desición de tres nodos para la línea
-![image](https://user-images.githubusercontent.com/54382451/160989758-5c51a5b7-8e72-447e-a671-6d13ef16a99e.png)
+Ejemplo de un árbol de decisión de tres nodos para la línea **L50**
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_tree.png)
 
 
 ### **Conclusión:** 
