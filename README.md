@@ -1808,7 +1808,28 @@ Algo interesante que se observó es que para algunos casos con niveles de exacti
 
 Como podemos ver en los resultados, la calidad en la predicción mejora si hacemos un modelo por cada línea separadamente.
 
-Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol medida en el número de nodos en cada modelo de cada línea. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que las mismas líneas que presentaron el comportamiento de recta horizontal coincidieron con los modelos de árbol menos complejos de tres nodos.  
+Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol medida en el número de nodos en cada modelo de cada línea. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que las mismas líneas que presentaron el comportamiento de recta horizontal coincidieron con los modelos de árbol menos complejos de tres nodos. Estos resultadoa puede verse en la tabla siguiente:
+
+**PÉRDIDA**
+
+|LINEA|Net-2(EXACTITUD)|ÁRBOL(EXACTITUD)|NUM. DE NODOS|
+| :------------- | -------------: | -------------: | -------------: |
+|L3|79.5745|73.617|19|
+|L6|90.6383|89.3617|15|
+|L7|78.2979|76.1702|13|
+|L38|80|78.7234|15|
+|L39|97.4468|92.766|9|
+|L42|90.2128|88.0851|11|
+|L50|99.5745|98.7234|3|
+|L65|87.6596|90.2128|11|
+|L67|100|99.1489|3|
+|L72|99.5745|98.7234|3|
+|L75|94.0426|95.7447|5|
+|L92|99.1489|99.1489|3|
+|L93|99.1489|99.1489|3|
+|L94|96.5957|92.3404|5|
+|L95|98.7234|92.3404|5|
+
 
 Lo que podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo de obtener para una red neuronal de predicción incluso desde el principio del entrenamiento y para un árbol de decisión tambien. 
 
