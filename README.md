@@ -1802,7 +1802,7 @@ Con el objetivo de analizar los resultados de exactitud y pérdida por cada mode
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_6.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
 
-Algo interesante que se observó es que para algunos casos con niveles de exactitud muy altos cercanos al 100% la gráfica de exactitud vs epoch presenta una recta horizontal tanto en datos de entrenamiento como en datos de prueba. Este comportamiento se presenta en las líneas: **L39 L50 L67 L75 L92 L93 L95** para la red **Net-2**. A manera de ejemplo se muestra el comportamiento de la línea **L39**.
+Algo interesante que se observó es que para algunos casos con niveles de exactitud muy altos cercanos al 100% la gráfica de exactitud vs epoch presenta una recta horizontal tanto en datos de entrenamiento como en datos de prueba. Este comportamiento se presenta en las líneas: **L50 L67 L72 L92 L93** con la red **Net-2** de mejor desempeño. A manera de ejemplo se muestra el comportamiento de la línea **L50**.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
 
@@ -1815,23 +1815,27 @@ Paralelamanete se utilizó un modelo de árbol para predecir la sobrecarga en to
 
 |LINEA|Net-2(EXACTITUD)|ÁRBOL(EXACTITUD)|NUM. DE NODOS|
 | :------------- | -------------: | -------------: | -------------: |
-|L3|79.5745|73.617|19|
-|L6|90.6383|89.3617|15|
-|L7|78.2979|76.1702|13|
-|L38|80|78.7234|15|
-|L39|97.4468|92.766|9|
-|L42|90.2128|88.0851|11|
-|L50|99.5745|98.7234|3|
-|L65|87.6596|90.2128|11|
-|L67|100|99.1489|3|
-|L72|99.5745|98.7234|3|
-|L75|94.0426|95.7447|5|
-|L92|99.1489|99.1489|3|
-|L93|99.1489|99.1489|3|
-|L94|96.5957|92.3404|5|
-|L95|98.7234|92.3404|5|
+|L3|79.5745 |73.617  |19|
+|L6|90.6383 |89.3617 |15|
+|L7|78.2979 |76.1702 |13|
+|L38|80     |78.7234 |15|
+|L39|97.4468|92.766  |9 |
+|L42|90.2128|88.0851 |11|
+|L50|99.5745|98.7234 |3 |
+|L65|87.6596|90.2128 |11|
+|L67|100    |99.1489 |3 |
+|L72|99.5745|98.7234 |3 |
+|L75|94.0426|95.7447 |5 |
+|L92|99.1489|99.1489 |3 |
+|L93|99.1489|99.1489 |3 |
+|L94|96.5957|92.3404 |5 |
+|L95|98.7234|92.3404 |5 |
 
 De acuerdo a estos resultados, podemos deducir es que el modelo de predicción de sobrecarga de algunas líneas es muy sencillo tanto para una red neuronal de predicción como para un árbol de decisión tambien. Concluimos para nuestro problema que la complejidad del árbol de decisión está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
+
+Ejemplo de un árbol de desición de tres nodos para la línea
+![image](https://user-images.githubusercontent.com/54382451/160989758-5c51a5b7-8e72-447e-a671-6d13ef16a99e.png)
+
 
 ### **Conclusión:** 
 Hemos utilizado la API funcional de **Keras** para implementar diferentes estructuras de redes neuronales para predicción de sobrecarga en líneas de transmisión de acuerdo a la demanda en las regiones.
