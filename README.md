@@ -1761,12 +1761,11 @@ En la isguiente tabla se resumen las exactitudes obtenidas por cada una de las c
 | :------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 |Exactitud |1.7021|14.4680|42.5531|0.0|0.0|
 
-***Como podemos ver la estategia de predicción de fallas simultanea de todas las líneas de transmisión no da buenos resultados.*** Por lo que cambiaremos la estrategia a modelos de predicción separados por cada una de las líneas.
+***Como podemos ver la estategia de predicción de fallas simultanea de todas las líneas de transmisión no ha dado buenos resultados.*** Por lo que cambiaremos la estrategia a modelos de predicción separados por cada una de las líneas.
 
 ### Predicción de sobrecarga en líneas de transmisión biclasificación de fallas por modelos independientes.
-Repetiremos el ejercicio anterior con las cinco configuraciones de red: **Net-1**, **Net-2**, **Net-3**, **Net-4** y **Net-5** para predecir solo una línea a la vez como una variable bimodal, donde 1=sobrecarga y 0=no sobrecarga. Con este ejercicio esperamos mejorar la exactitud de la predicción.
-
-En las siguientes tablas vemos en las columnas los resultados de la exactitud de cada una de las líneas para cada configuración de red.
+Repetiremos el ejercicio anterior con las cinco configuraciones de red: **Net-1**, **Net-2**, **Net-3**, **Net-4** y **Net-5** para predecir solo una línea a la vez como una variable bimodal, donde 1 = sobrecarga y 0 = no sobrecarga. Con este ejercicio esperamos mejorar la exactitud de la predicción. Se repitió el ejercicio con las series de datos más balanceadas entre el 30% y 70% de sobrecargas. Las líneas estudiadas fueron: **L3,L6,L7,L38,L39,L42,L50,L65,L67,L72,L75,L92,L93,L94,L95**.
+En las siguiente tabla podemos ver los resultados de la exactitud de cada una de las líneas para cada una de las configuraciones de red.
 
 **EXACTITUD**
 
@@ -1790,8 +1789,7 @@ En las siguientes tablas vemos en las columnas los resultados de la exactitud de
 |Promedio|88.9078|92.7092|75.2908|77.7872|79.9433
 |Desv.Estandar|9.7242|7.9445|15.7039|12.7479|17.0098
 
-
-En las siguientes tablas vemos en las columnas los resultados de la función de pérdida de cada una de las líneas para cada configuración de red.
+En las siguiente tabla podemos ver los resultados de la pérdida de cada una de las líneas para cada una de las configuraciones de red.
 
 **PÉRDIDA**
 |LÍNEA          |Net-1      | Net-2   | Net-3      | Net-4      | Net-5      |
@@ -1814,10 +1812,17 @@ En las siguientes tablas vemos en las columnas los resultados de la función de 
 |Promedio|40.9748|22.4319|52.7526|51.1036|44.8118|
 |Desv.Estandar|17.9433|16.9910|15.9336|16.9863|22.2217|
 
-Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notas que los mejores resultados los tenemos con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-1**.
+Con el objetivo de analizar los resultados de exactitud y pérdida por cada modelo, hemos dibujado un diagrama de caja para exactitud y para pérdida. Cada serie nos representa los resultados de cada configuración de red en todas la líneas. En los diagramas podemos notar que los mejores resultados e han tenido con la red **Net-2** que tiene en promedio una mayor exactitud y una menor perdida. Otra red con resultados semejantes es la **Net-1**.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_6.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_7.png)
+
+Algo interesante que se observó es que para algunos casos con niveles de exactitud muy altos cercanos al 100% la gráfica de exactitud vs epoch presenta una recta horizontal tanto en datos de entrenamiento como en datos de prueba, tal como se presenta en las líneas:**L39 L50 L67 L75 L92 L93 L95**
+
+![image](https://user-images.githubusercontent.com/54382451/160985404-74cf7cb9-48f2-4b90-ab66-e896f5c441c1.png)
+
+
+Se repitió el ejercicio con las series de datos más balanceadas entre el 30% y 70% de sobrecargas ( L3,L6,L7,L38,L39,L42,L50,L65,L67,L72,L75,L92,L93,L94,L95). Los resultados fueron interesantes. Parece que la regla es que aquellas líneas que tenían un aprendizaje como una recta horizontal, tenían altos niveles de exactitud, incluso en modelos sencillos (Net-1 y Net-2), independiente del balance de los datos. Por lo que puedo deducir que es muy fácil para la red obtener el modelo de predicción incluso desde el principio del entrenamiento. Se me ocurre probar estas series en un modelo de árbol de decisión, para ver si la complejidad del árbol coincide de alguna manera con los resultados de RNN. 
 
 Finalmente, como podemos ver en los resultados, la calidad en la predicción mejora si hacemos un modelo por cada línea separadamente.
 
