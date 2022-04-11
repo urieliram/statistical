@@ -15,8 +15,9 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 9 Modelos Aditivos y Árboles](#tarea-9-modelos-aditivos-y-árboles) 
 + [Tarea 10 Impulso](#tarea-10-impulso)
 + [Tarea 11 Redes neuronales](#tarea-11-redes-neuronales)
-
----
++ [Tarea 12 Máquinas de Vectores de Soporte](#tarea-12-máquinas-de-vectores-de-soporte)
++ [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
++ ---
 
 ## Tarea 1 Introducción
 >**Instructions:** Identify one or more learning problems in your thesis work and identify goals and elements.
@@ -1846,3 +1847,16 @@ En el segundo ejercico donde se realizaron redes neuronales independientes uno p
 
 Concluimos para nuestro problema que la complejidad del árbol está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
 
+## **Tarea 12 Máquinas de Vectores de Soporte**
+>**Instrucciones:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
+
+### Predicción de demanda eléctrica usando máquinas de vectores de soporte (regresión)
+
+### Predicción de fallas en líneas usando máquinas de vectores de soporte (clasificación)
+
+
+
+## **Tarea 13 Prototipos y vecinos**
+>**Instrucciones:** After a complete read-through of Chapter 13, make a comparison between (some variants) of k-means, LVQ, Gaussian mixtures, and KNN for your project data. Since these models are pretty simple, implement at least one of them fully from scratch without using a library that already does it for you.
+
+### Predicción
