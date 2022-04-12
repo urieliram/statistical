@@ -1741,7 +1741,7 @@ history = model.fit(X_train, y_train, epochs=epochs, batch_size=batch_size, verb
 history = model.fit(X_train, y_train, validation_data = (X_test,y_test), epochs=epochs, batch_size=batch_size,verbose=verbose)
 ```
 
-En la isguiente tabla se resumen las exactitudes obtenidas por cada una de las configuraciones de red.
+En la siguiente tabla se resumen las exactitudes obtenidas por cada una de las configuraciones de red.
 |                |Net-1           | Net-2          | Net-3          | Net-4          | Net-5          |  
 | :------------- | -------------: | -------------: | -------------: | -------------: | -------------: |
 |Exactitud |1.7021|14.4680|42.5531|0.0|0.0|
@@ -1809,7 +1809,7 @@ Algo interesante que se observó es que para algunos casos con niveles de exacti
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t11_2_b.png)
 
 
-Paralelamanete se utilizó un modelo de árbol de decisión para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol. La exactitud medida con el número de nodos en el árbol. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que **las mismas líneas que presentaron el comportamiento de recta horizontal en redes neuronales coincidieron con los modelos de árbol menos complejos de tres nodos**. Estos resultados puede verse en la tabla siguiente:
+Paralelamente se utilizó un modelo de árbol de decisión para predecir la sobrecarga en todas las líneas, de este estudio se obtuvo la exactitud y la complejidad del árbol. La exactitud medida con el número de nodos en el árbol. Los resultados arrojaron niveles de exactitud semejantes al de la red neuronal y lo más interesante es que **las mismas líneas que presentaron el comportamiento de recta horizontal en redes neuronales coincidieron con los modelos de árbol menos complejos de tres nodos**. Estos resultados puede verse en la tabla siguiente:
 
 
 **REDES NEURONALES VS ÁRBOL DE DECISIÓN**
