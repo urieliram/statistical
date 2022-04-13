@@ -1855,7 +1855,7 @@ A continuación utilizaremos **máquinas de vectores de soporte** en su extensi�
 
 Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea12.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea12.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
-Primero hacemos una lista con los parámetros a probar en los modelos de SVM, en este caso modificaremos el tipo de kernel y el valor epsilon, este valor de epsilon será el que defina el margen de error aceptable hacia arriba y hacia abajo del hiperplano que se busca ajustar.
+Primero hacemos una lista con los parámetros a probar en los modelos de SVM, en este caso modificaremos el tipo de kernel y el valor epsilon, este valor de epsilon será el que defina el margen de error aceptable hacia arriba y hacia abajo del hiperplano que se está buscando.
 ```python
 kernel_list = ['poly','rbf']
 epsilon_list = [1,5,10,15,25]
