@@ -1851,6 +1851,20 @@ Concluimos para nuestro problema que la complejidad del árbol está relacionada
 >**Instrucciones:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
 
 ### Predicción de demanda eléctrica usando máquinas de vectores de soporte (regresión)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_10.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_15.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_25.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_5.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_10.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_15.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_25.png)
+
+
+
 
 ### Conclusiones tarea 12
 En esta tarea se utilizó el método de **máquinas de vectores de soporte** (SVM) usado como regresión para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Para poder sintonizar los parámetros del modelo, se hicieron pruebas con diferentes kernels: líneal, polinómico, y radial. Tambien se modificaron los tamaños de una tolerancia epsilon que establece un rango de error aceptado de alejamiento del hiperplano. Tambien se modificó C, que es el "costo" de la distancia de los puntos al hiperplano que estan fuera de la banda de error permitida establecida en 2 unidades de epsilon. Con el objetivo de analizar el comportamiento de los parámetros se trazaron gráficas en las que podemos comparar el error de la predicción contra el porcentaje de datos qe caen dentro de la banda de tolerancia del error. Con esta información podemos elegir el mejor model. El método de SVM nos da esta flexibilidad de decidir el nivel de error aceptado en el modelo a traves del valor de epsilon. 
