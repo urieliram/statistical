@@ -1892,14 +1892,14 @@ Si graficamos los resultados de costo  `C` contra el porcentaje de datos `perc_w
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_15.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_25.png)
 
-Ahora seleccionaremos un modelo usando el método **GridSearchCV** de **sklearn** que nos da los parámetros 'kernel','C' y 'epsilon' del mejor ajuste de acuerdo a una métrica de error establecida (neg_mean_absolute_error).
+Ahora seleccionaremos un modelo usando el método **GridSearchCV** de **sklearn** que nos da los parámetros `kernel`, `C` y `epsilon` del mejor ajuste de acuerdo a una métrica de error establecida (neg_mean_absolute_error).
 
 ```python
 Clist = []
 for c in range(1, 60, 1):
     Clist.append(c)
 
-parameters = {'kernel': ('poly', 'rbf'), 'C': Clist,'epsilon': [1,2,5,10,15,25]} #'epsilon': np.linspace(1, 20),'kernel':('linear', 'poly', 'rbf', 'sigmoid')
+parameters = {'kernel': ('poly', 'rbf'), 'C': Clist,'epsilon': [1,2,5,10,15,25]} 
 model = svm.SVR()
 clf   = GridSearchCV(model, parameters,scoring='neg_mean_absolute_error', cv=5)
 clf.fit(X_train, y_train)
@@ -1916,9 +1916,10 @@ perc_within_eps = 100*np.sum(y_test - model.predict(X_test) < model.epsilon) / l
 print("Percentage within Epsilon = {:,.2f}%".format(perc_within_eps))
 ```
 
-Graficamos los resultados de predicción de la máquina de vector de soporte del modelo seleccionado y regresión local para pronosticar los datos de prueba.
+    El método **GridSearchCV** nos sugiere un modelo con los parámetros `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx, sin embargo esta combinación de parámetros aunque nos da el mínimo error  entre la combinación de lops parámetros, nos condiciona a tener un porcentaje alto (%) de tolerancia de datos en error. Por lo que elegiremos un conjunto de parámetros usando las gráficas de costo y porcentaje dentro de la toleracia. Los parpametros de nuestro segundo modelo son: `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx.    
+    
 
-A continuación, compararemos los resultados de predicción entre los modelos de **máquinas de vectores de soporte** y otros métodos de regresión lineales. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
+A continuación, compararemos los resultados de predicción entre los modelos 1 y 2 de **máquinas de vectores de soporte** y otros métodos de regresión lineales. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_hist1.png)
 
