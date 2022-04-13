@@ -1851,6 +1851,43 @@ Concluimos para nuestro problema que la complejidad del árbol está relacionada
 >**Instrucciones:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
 
 ### Predicción de demanda eléctrica usando máquinas de vectores de soporte (regresión)
+A continuación utilizaremos **máquinas de vectores de soporte** en su extensión de regresión para predecir demanda eléctrica. La variable independiente Y serán los datos de demanda de 24 horas en intervalos de 5 minutos (288 datos), y las variables independientes X serán los datos de otros días con una mayor correlación. Los datos se han dividido en datos de entrenamiento (`X_train`,`y_train`) y datos de prueba (`X_test`,`y_test`). El objetivo es encontrar el mejor modelo de pronóstico para los datos de demanda.
+
+Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea12.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea12.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
+
+Primero hacemos una lista con los parámetros a probar en los modelos de SVM, en este caso modificaremos el tipo de kernel y el valor epsilon, este valor de epsilon será el que defina el margen de error aceptable hacia arriba y hacia abajo del hiperplano que se busca ajustar.
+```python
+kernel_list = ['poly','rbf']
+epsilon_list = [1,5,10,15,25]
+```
+
+Ahora, haremos un ciclo con estos parámetros modificando el valor del C="costo", este valor C es la penalización en la funcion objetivo del problema de minimización del SVM de la desviación de los datos a la banda de tolerancia de error.
+```python
+for k in kernel_list:
+    for e in epsilon_list:
+        mae_svm = []; mse_svm = []; mape_svm = []; Clist = []; perc_within_eps_list = []    
+        for c in range(1, 55, 1):
+            Clist.append(c)
+            model = svm.SVR(kernel=k, C=c, epsilon=e)
+            model.fit(X_train, y_train)
+            #r_sq = model.score(X_test, y_test)
+            #print('coefficient of determination:', r_sq)
+            
+            y_pred = model.predict(X_test)
+            mae_svm.append(trunc(mean_absolute_error(y_test,y_pred),4))
+            mse_svm.append(trunc(mean_squared_error(y_test,y_pred),4))
+            mape_svm.append(trunc(mean_absolute_percentage_error(y_test,y_pred),4))
+            
+            perc_within_eps = 100 * np.sum(abs(y_test-y_pred) <= e) / len(y_test)
+            perc_within_eps_list.append(perc_within_eps)
+```
+Además guardamos el porcentaje de datos que quedan fuera de la banda de tolerancia de error (que no se penaliza con ningún costo en la función objetivo). El objetivo es observar la cantidad de datos que se estan dejando de cuantificar para el ajuste.
+```python
+            perc_within_eps = 100 * np.sum(abs(y_test-y_pred) <= e) / len(y_test)
+            perc_within_eps_list.append(perc_within_eps)
+```
+Si graficamos los resultados de costo (C) contra el % de datos dentro de la tolrancia queda: 
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_1.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_5.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_poly_10.png)
@@ -1864,7 +1901,12 @@ Concluimos para nuestro problema que la complejidad del árbol está relacionada
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_25.png)
 
 
+Graficamos los resultados de predicción de la máquina de vector de soporte del modelo seleccionado y regresión local para pronosticar los datos de prueba.
 
+A continuación, compararemos los resultados de predicción entre el método de **máquinas de vectores de soporte** y otros métodos de regresión lineales. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_hist1.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_hist2.png)
 
 ### Conclusiones tarea 12
 En esta tarea se utilizó el método de **máquinas de vectores de soporte** (SVM) usado como regresión para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Para poder sintonizar los parámetros del modelo, se hicieron pruebas con diferentes kernels: líneal, polinómico, y radial. Tambien se modificaron los tamaños de una tolerancia epsilon que establece un rango de error aceptado de alejamiento del hiperplano. Tambien se modificó C, que es el "costo" de la distancia de los puntos al hiperplano que estan fuera de la banda de error permitida establecida en 2 unidades de epsilon. Con el objetivo de analizar el comportamiento de los parámetros se trazaron gráficas en las que podemos comparar el error de la predicción contra el porcentaje de datos qe caen dentro de la banda de tolerancia del error. Con esta información podemos elegir el mejor model. El método de SVM nos da esta flexibilidad de decidir el nivel de error aceptado en el modelo a traves del valor de epsilon. 
