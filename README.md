@@ -1916,8 +1916,16 @@ perc_within_eps = 100*np.sum(y_test - model.predict(X_test) < model.epsilon) / l
 print("Percentage within Epsilon = {:,.2f}%".format(perc_within_eps))
 ```
 
-    El método **GridSearchCV** nos sugiere un modelo con los parámetros `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx, sin embargo esta combinación de parámetros aunque nos da el mínimo error  entre la combinación de lops parámetros, nos condiciona a tener un porcentaje alto (%) de tolerancia de datos en error. Por lo que elegiremos un conjunto de parámetros usando las gráficas de costo y porcentaje dentro de la toleracia. Los parpametros de nuestro segundo modelo son: `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx.    
+    El método **GridSearchCV** nos sugiere un modelo con los parámetros `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx, sin embargo esta combinación de parámetros aunque nos da el mínimo error  entre la combinación de lops parámetros, nos condiciona a tener un porcentaje alto (%) de tolerancia de datos en error. Por lo que elegiremos un conjunto de parámetros usando las gráficas de costo y porcentaje dentro de la toleracia. Los parpametros de nuestro segundo modelo son: `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx.  
     
+`    
+coefficient of determination: 0.7466049842240431
+C:       2
+Epsilon: 10
+Kernel:  poly
+MAE = 170,731.45
+Percentage within Epsilon = 37.15%
+`
 
 A continuación, compararemos los resultados de predicción entre los modelos 1 y 2 de **máquinas de vectores de soporte** y otros métodos de regresión lineales. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
 
@@ -1927,9 +1935,7 @@ A continuación, compararemos los resultados de predicción entre los modelos 1 
 En esta tarea se utilizó el método de **máquinas de vectores de soporte** (SVM) usado como regresión para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Para poder sintonizar los parámetros del modelo, se hicieron pruebas con diferentes kernels: líneal, polinómico, y radial. Tambien se modificaron los tamaños de una tolerancia epsilon que establece un rango de error aceptado de alejamiento del hiperplano. Tambien se modificó C, que es el "costo" de la distancia de los puntos al hiperplano que estan fuera de la banda de error permitida establecida en 2 unidades de epsilon. Con el objetivo de analizar el comportamiento de los parámetros se trazaron gráficas en las que podemos comparar el error de la predicción contra el porcentaje de datos qe caen dentro de la banda de tolerancia del error. Con esta información podemos elegir el mejor model. El método de SVM nos da esta flexibilidad de decidir el nivel de error aceptado en el modelo a traves del valor de epsilon. 
 Usamos el método de **GridSearchCV** de **sklearn** que nos da los parámetros del mejor ajuste de acuerdo a una métrica de error establecida. Los resultados aunque minimizan el error, están condicionados a aceptar un margen de error alto que vemos con un alto porcentaje de datos en esta banda de tolerancia.  Por lo que decidimos usar otro modelo con un nivel de error aceptable pero con un margen de error menor. 
 Se compararon los resultados con otras técnicas de regresión líneal utilizadas en la tarea 3. Se comprobó que el SVM tuvo un mejor desempeño en nuestros datos que las otras técnicas líneales. La idea principal de un SVM es identificar el hiperplano que cubre la mayoria de los datos teniendo en cuenta que se tolera parte del error.
-
 ---
-
 
 ## **Tarea 13 Prototipos y vecinos**
 >**Instrucciones:** After a complete read-through of Chapter 13, make a comparison between (some variants) of k-means, LVQ, Gaussian mixtures, and KNN for your project data. Since these models are pretty simple, implement at least one of them fully from scratch without using a library that already does it for you.
