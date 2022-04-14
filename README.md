@@ -1931,6 +1931,12 @@ A continuación, compararemos los resultados de predicción entre los modelos 1 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_hist1.png)
 
+| REGRESIÓN      | MAE            | MSD            | MAPE         | 
+| :------------- | -------------: | -------------: |-------------:|
+|    lineal      | 167.1343       | 48064.1398     |     0.0192   |
+|    SVM rbf      | 167.1343       | 48064.1398     |     0.0192   |
+|    SVM rbf      | 167.1343       | 48064.1398     |     0.0192   |
+
 ### Conclusiones tarea 12
 En esta tarea se utilizó el método de **máquinas de vectores de soporte** (SVM) usado como regresión para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Para poder sintonizar los parámetros del modelo, se hicieron pruebas con diferentes kernels: líneal, polinómico, y radial. Tambien se modificaron los tamaños de una tolerancia epsilon que establece un rango de error aceptado de alejamiento del hiperplano. Tambien se modificó C, que es el "costo" de la distancia de los puntos al hiperplano que estan fuera de la banda de error permitida establecida en 2 unidades de epsilon. Con el objetivo de analizar el comportamiento de los parámetros se trazaron gráficas en las que podemos comparar el error de la predicción contra el porcentaje de datos qe caen dentro de la banda de tolerancia del error. Con esta información podemos elegir el mejor model. El método de SVM nos da esta flexibilidad de decidir el nivel de error aceptado en el modelo a traves del valor de epsilon. 
 Usamos el método de **GridSearchCV** de **sklearn** que nos da los parámetros del mejor ajuste de acuerdo a una métrica de error establecida. Los resultados aunque minimizan el error, están condicionados a aceptar un margen de error alto que vemos con un alto porcentaje de datos en esta banda de tolerancia.  Por lo que decidimos usar otro modelo con un nivel de error aceptable pero con un margen de error menor. 
