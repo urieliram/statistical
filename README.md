@@ -1916,7 +1916,7 @@ perc_within_eps = 100*np.sum(y_test - model.predict(X_test) < model.epsilon) / l
 print("Percentage within Epsilon = {:,.2f}%".format(perc_within_eps))
 ```
 
-El método **GridSearchCV** nos sugiere un conjunto de parámetros para cada kernel, por ejemplo para el kernel radial:  `kernel`=`rbf`, `C`=1799,`epsilon`= 0.7, con estos parámetros obtenemos los siguientes resultados:    
+El método **GridSearchCV** nos sugiere un conjunto de parámetros para cada kernel, por ejemplo para el kernel **radial** obtenemos los siguientes resultados:    
 ```  
 coefficient of determination: 0.7466049842240431
 C:       2
@@ -1925,7 +1925,7 @@ Kernel:  poly
 MAE = 170,731.45
 Percentage within Epsilon = 37.15%
 ```
-El mejor conjunto de parámetros del kernel lineal:
+El mejor conjunto de parámetros del kernel **lineal**:
 ```
 C:       0.0001
 Epsilon: 0.0001
@@ -1936,7 +1936,7 @@ mse_linear : 44209.1792
 mape_linear : 0.0185
 Percentage within Epsilon = 34.38%
 ```
-El mejor conjunto de parámetros del kernel polinómico:
+El mejor conjunto de parámetros del kernel **polinómico**:
 ```
 C:       1
 Epsilon: 0
