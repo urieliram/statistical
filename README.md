@@ -1851,7 +1851,7 @@ Concluimos para nuestro problema que la complejidad del árbol está relacionada
 >**Instrucciones:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
 
 ### Predicción de demanda eléctrica usando máquinas de vectores de soporte (regresión)
-A continuación utilizaremos **máquinas de vectores de soporte** en su extensión de regresión para predecir demanda eléctrica. La variable independiente Y serán los datos de demanda de 24 horas en intervalos de 5 minutos (288 datos), y las variables independientes X serán los datos de otros días con una mayor correlación. Los datos se han dividido en datos de entrenamiento (`X_train`,`y_train`) y datos de prueba (`X_test`,`y_test`). El objetivo es encontrar el mejor modelo de pronóstico para los datos de demanda.
+A continuación utilizaremos **máquinas de vectores de soporte** en su extensión de regresión para predecir demanda eléctrica. La variable independiente `Y` serán los datos de demanda de 24 horas en intervalos de 5 minutos (288 datos), y las variables independientes X serán los datos de otros días con una mayor correlación. Los datos se han dividido en datos de entrenamiento (`X_train`,`y_train`) y datos de prueba (`X_test`,`y_test`). El objetivo es encontrar el mejor modelo de pronóstico para los datos de demanda.
 
 Los datos usados en esta sección están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea12.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea12.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
@@ -1892,14 +1892,14 @@ Si graficamos los resultados de costo  `C` contra el porcentaje de datos `perc_w
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_15.png)
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_rbf_25.png)
 
-Ahora seleccionaremos un modelo usando el método **GridSearchCV** de **sklearn** que nos da los parámetros `kernel`, `C` y `epsilon` del mejor ajuste de acuerdo a una métrica de error establecida (neg_mean_absolute_error).
+Ahora seleccionaremos un modelo usando el método **GridSearchCV** de **sklearn** que nos da los parámetros `kernel`, `C` y `epsilon` del mejor ajuste de acuerdo a una métrica de error establecida (neg_mean_absolute_error). Repetiremos el procedimiento para cada tipo de kernel ('poly', 'rbf', 'linear')
 
 ```python
 Clist = []
 for c in range(1, 60, 1):
     Clist.append(c)
 
-parameters = {'kernel': ('poly', 'rbf'), 'C': Clist,'epsilon': [1,2,5,10,15,25]} 
+parameters = {'kernel': ('rbf'), 'C': Clist,'epsilon': [1,2,5,10,15,25]} 
 model = svm.SVR()
 clf   = GridSearchCV(model, parameters,scoring='neg_mean_absolute_error', cv=5)
 clf.fit(X_train, y_train)
@@ -1916,26 +1916,50 @@ perc_within_eps = 100*np.sum(y_test - model.predict(X_test) < model.epsilon) / l
 print("Percentage within Epsilon = {:,.2f}%".format(perc_within_eps))
 ```
 
-    El método **GridSearchCV** nos sugiere un modelo con los parámetros `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx, sin embargo esta combinación de parámetros aunque nos da el mínimo error  entre la combinación de lops parámetros, nos condiciona a tener un porcentaje alto (%) de tolerancia de datos en error. Por lo que elegiremos un conjunto de parámetros usando las gráficas de costo y porcentaje dentro de la toleracia. Los parpametros de nuestro segundo modelo son: `kernel`=`rbf`, `C`=xxxxxxxxxxxx,`epsilon`= xxxxxxxx.  
-    
-`    
+El método **GridSearchCV** nos sugiere un conjunto de parámetros para cada kernel, por ejemplo para el kernel radial:  `kernel`=`rbf`, `C`=1799,`epsilon`= 0.7, con estos parámetros obtenemos los siguientes resultados:    
+```  
 coefficient of determination: 0.7466049842240431
 C:       2
 Epsilon: 10
 Kernel:  poly
 MAE = 170,731.45
 Percentage within Epsilon = 37.15%
-`
+```
+El mejor conjunto de parámetros del kernel lineal:
+```
+C:       0.0001
+Epsilon: 0.0001
+Kernel:  linear
+coefficient of determination: 0.7663451754599173
+mae_linear : 161.3644
+mse_linear : 44209.1792
+mape_linear : 0.0185
+Percentage within Epsilon = 34.38%
+```
+El mejor conjunto de parámetros del kernel polinómico:
+```
+C:       1
+Epsilon: 0
+Kernel:  poly
+coefficient of determination: 0.7524545558665545
+mae_poly : 168.2798
+mse_poly : 46837.3847
+mape_poly : 0.0192
+Percentage within Epsilon = 35.76%
+```
 
-A continuación, compararemos los resultados de predicción entre los modelos 1 y 2 de **máquinas de vectores de soporte** y otros métodos de regresión lineales. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
+A continuación, compararemos los resultados de predicción entre los modelos de **máquinas de vectores de soporte** y el método de regresión lineal múltiple. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_hist1.png)
 
 | REGRESIÓN      | MAE            | MSD            | MAPE         | 
 | :------------- | -------------: | -------------: |-------------:|
 |    lineal      | 167.1343       | 48064.1398     |     0.0192   |
-|    SVM rbf      | 167.1343       | 48064.1398     |     0.0192   |
-|    SVM rbf      | 167.1343       | 48064.1398     |     0.0192   |
+|    SVM rbf     | 163.5971       | 46870.6049     |     0.0184   |
+|    SVM poly    | 168.2798       | 46837.3847     |     0.0192   |
+|    SVM linear  | 161.3644       | 44209.1792     |     0.0185   |
+
+El ajuste de manera gráfica de las predicciones a los datos reales se ven en:
 
 ### Conclusiones tarea 12
 En esta tarea se utilizó el método de **máquinas de vectores de soporte** (SVM) usado como regresión para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Para poder sintonizar los parámetros del modelo, se hicieron pruebas con diferentes kernels: líneal, polinómico, y radial. Tambien se modificaron los tamaños de una tolerancia epsilon que establece un rango de error aceptado de alejamiento del hiperplano. Tambien se modificó C, que es el "costo" de la distancia de los puntos al hiperplano que estan fuera de la banda de error permitida establecida en 2 unidades de epsilon. Con el objetivo de analizar el comportamiento de los parámetros se trazaron gráficas en las que podemos comparar el error de la predicción contra el porcentaje de datos qe caen dentro de la banda de tolerancia del error. Con esta información podemos elegir el mejor model. El método de SVM nos da esta flexibilidad de decidir el nivel de error aceptado en el modelo a traves del valor de epsilon. 
