@@ -1948,9 +1948,7 @@ mape_poly : 0.0192
 Percentage within Epsilon = 35.76%
 ```
 
-A continuación, compararemos los resultados de predicción entre los modelos de **máquinas de vectores de soporte** y el método de regresión lineal múltiple. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`. Los errores son representados por un histograma.
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t12_hist1.png)
+A continuación, compararemos los resultados de predicción entre los modelos de **máquinas de vectores de soporte** y el método de regresión lineal múltiple. Ahora, calculamos los errores entre la predicción `y_pred` y los datos de entrenamiento `y_train`.
 
 | REGRESIÓN      | MAE            | MSD            | MAPE         | 
 | :------------- | -------------: | -------------: |-------------:|
@@ -1959,12 +1957,14 @@ A continuación, compararemos los resultados de predicción entre los modelos de
 |    SVM poly    | 168.2798       | 46837.3847     |     0.0192   |
 |    SVM linear  | 161.3644       | 44209.1792     |     0.0185   |
 
-El ajuste de manera gráfica de las predicciones a los datos reales se ven en:
+El ajuste de manera gráfica de las predicciones a los datos reales se ven en la siguiente gráfica:
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/pronodemanda_t12_1.png)
 
 ### Conclusiones tarea 12
 En esta tarea se utilizó el método de **máquinas de vectores de soporte** (SVM) usado como regresión para predecir demanda eléctrica en una región partir de datos de días semejantes (variable independientes) y datos de 24 horas antes (variable dependiente). Para poder sintonizar los parámetros del modelo, se hicieron pruebas con diferentes kernels: líneal, polinómico, y radial. Tambien se modificaron los tamaños de una tolerancia epsilon que establece un rango de error aceptado de alejamiento del hiperplano. Tambien se modificó C, que es el "costo" de la distancia de los puntos al hiperplano que estan fuera de la banda de error permitida establecida en 2 unidades de epsilon. Con el objetivo de analizar el comportamiento de los parámetros se trazaron gráficas en las que podemos comparar el error de la predicción contra el porcentaje de datos qe caen dentro de la banda de tolerancia del error. Con esta información podemos elegir el mejor model. El método de SVM nos da esta flexibilidad de decidir el nivel de error aceptado en el modelo a traves del valor de epsilon. 
-Usamos el método de **GridSearchCV** de **sklearn** que nos da los parámetros del mejor ajuste de acuerdo a una métrica de error establecida. Los resultados aunque minimizan el error, están condicionados a aceptar un margen de error alto que vemos con un alto porcentaje de datos en esta banda de tolerancia.  Por lo que decidimos usar otro modelo con un nivel de error aceptable pero con un margen de error menor. 
-Se compararon los resultados con otras técnicas de regresión líneal utilizadas en la tarea 3. Se comprobó que el SVM tuvo un mejor desempeño en nuestros datos que las otras técnicas líneales. La idea principal de un SVM es identificar el hiperplano que cubre la mayoria de los datos teniendo en cuenta que se tolera parte del error.
+Usamos el método de **GridSearchCV** de **sklearn** que nos da los parámetros del mejor ajuste de acuerdo a una métrica de error establecida. Los resultados aunque minimizan el error, están condicionados a aceptar un margen de error alto que vemos con un alto porcentaje de datos en esta banda de tolerancia.
+Además, se compararon los resultados con el método de regresión líneal múltiple. Se comprobó que el SVM tuvo un mejor desempeño en nuestros datos que el método de regresioón linael. La idea principal de un SVM es identificar el hiperplano que cubre la mayoria de los datos teniendo en cuenta que se tolera parte del error.
 ---
 
 ## **Tarea 13 Prototipos y vecinos**
