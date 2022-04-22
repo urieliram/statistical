@@ -1971,14 +1971,18 @@ Además, se compararon los resultados con el método de regresión líneal múlt
 ## **Tarea 13 Prototipos y vecinos**
 >**Instrucciones:** After a complete read-through of Chapter 13, make a comparison between (some variants) of k-means, LVQ, Gaussian mixtures, and KNN for your project data. Since these models are pretty simple, implement at least one of them fully from scratch without using a library that already does it for you.
 
-### Agrupamiento de perfiles de radiación solar horaria en un campo fotovoltaico.
+Los datos de radiación solar se están disponibles en [rg1_horas.csv](https://drive.google.com/file/d/1jrrJgZhSsoQRWUUOZ0-I2ZCmMT1iDJT7/view?usp=sharing). Los datos de aportaciones hidráulicas en cuencas se encuentran disponibles en [Aportaciones_Embalses.csv](https://drive.google.com/file/d/1GJTg0J5W-061Dh8O4bNNCBiMpHwlCr9L/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea13.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea13.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
-A continuación utilizaremos las técnicas de **k-means, LVQ, Gaussian mixtures** y **KNN** usando librerias para clasificar los días en `n_clusters`. Además, implementaremos el método de **KNN** para encontrar los `k` vecinos mas cercanos a prototipos (centroides) obtenidos previamente con **k-means**.
+### Agrupamiento de perfiles de radiación solar horaria en una planta fotovoltaica.
 
-Adicionalmente, usaremos el método de **KNN** para encontrar los vecinos más parecidos en una serie de tiempo, usando como prototipo la última ventana de la serie de tiempo. Para probar el método usaremos una serie de tiempo de aportaciones hidráulicas mensuales en la presa Peñitas en Tabasco.
+A continuación utilizaremos las técnicas de **k-means, LVQ, Gaussian mixtures** y **KNN** usando las librerias de **sklearn** para clasificar los días en `n_clusters`. Además, implementaremos el método de **KNN** "a mano" para encontrar los `k` vecinos mas cercanos a prototipos (centroides) obtenidos previamente con **k-means**.
 
-Los datos de radiación solar se encuentran están disponibles en [rg1_horas.csv](). Los datos de aportaciones hidráulicas en cuencas se encuentran disponibles en [Aportaciones_Embalses.csv](https://drive.google.com/file/d/1GJTg0J5W-061Dh8O4bNNCBiMpHwlCr9L/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea13.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea13.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
 
+### Agrupamiento de aportaciones hidráulicas en presas.
+
+Usaremos el método de **KNN** en un método que selecciona las `k` ventanas más parecidas en una serie de tiempo, usando como prototipo la última ventana de una serie, con los k vecinos seleccionados posteriormente se hace una predicción con los datos inmediatos para hacer un pronóstico. Para probar el método usaremos una serie de tiempo de aportaciones hidráulicas (lluvias) mensuales en la presa Peñitas en Tabasco.
+
+Esta idea es  obtenida de el artículo de Grzegorz Dudek [Pattern-based local linear regression models for short-term load forecasting](https://doi.org/10.1016/j.epsr.2015.09.001) y aplicada a aportaciones hidrúalicas en presas.
 
 
 
