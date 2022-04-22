@@ -1971,4 +1971,10 @@ Además, se compararon los resultados con el método de regresión líneal múlt
 ## **Tarea 13 Prototipos y vecinos**
 >**Instrucciones:** After a complete read-through of Chapter 13, make a comparison between (some variants) of k-means, LVQ, Gaussian mixtures, and KNN for your project data. Since these models are pretty simple, implement at least one of them fully from scratch without using a library that already does it for you.
 
-### Predicción
+### Agrupamiento de perfiles de radiación solar horaria en un campo fotovoltaico.
+
+A continuación utilizaremos las técnicas de **k-means, LVQ, Gaussian mixtures** y **KNN** usando librerias para clasificar los días en `n_clusters` grupos. Además, implementaremos el método de **KNN** para encontrar los `k` vecinos mas cercanos a prototipos obtenidos previamente con **k-means**.
+
+Adicionalmente, usaremos el método de **KNN** para encontrar los vecinos más parecidos en una serie de tiempo, usando como prototipo la última ventana de la serie de tiempo. Para probar el método usaremos una serie de tiempo de aportaciones hidráulicas en la presa Peñitas en Tabasco.
+
+Los datos de radiación solar se encuentran están disponibles en [rg1_horas.csv](). Los datos de aportaciones hidráulicas en cuencas se encuentran disponibles en [rg1_horas.csv.csv](). El código completo de esta tarea se encuentra en [Tarea13.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea13.ipynb), aquí solo se presentan los resultados y secciones relevantes del código.
