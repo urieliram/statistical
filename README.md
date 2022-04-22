@@ -1982,7 +1982,7 @@ A continuación utilizaremos las técnicas de **k-means, LVQ, Gaussian mixtures*
 
 Usaremos el método de **KNN** en un método que selecciona las `k` ventanas más parecidas en una serie de tiempo, usando como prototipo la última ventana de una serie, con los k vecinos seleccionados posteriormente se hace una predicción con los datos inmediatos para hacer un pronóstico. Para probar el método usaremos una serie de tiempo de aportaciones hidráulicas (lluvias) mensuales en la presa Peñitas en Tabasco.
 
-Esta idea es  obtenida de el artículo de Grzegorz Dudek [Pattern-based local linear regression models for short-term load forecasting](https://doi.org/10.1016/j.epsr.2015.09.001) y aplicada a aportaciones hidrúalicas en presas.
+Esta idea es  obtenida de el artículo de Grzegorz Dudek [Pattern-based local linear regression models for short-term load forecasting](https://doi.org/10.1016/j.epsr.2015.09.001) y aplicada a aportaciones hidráulicas en presas.
 
 
 
