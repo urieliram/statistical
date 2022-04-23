@@ -1977,12 +1977,254 @@ Los datos de radiación solar se están disponibles en [rg1_horas.csv](https://d
 
 A continuación utilizaremos las técnicas de **k-means, LVQ, Gaussian mixtures** y **KNN** usando las librerias de **sklearn** para clasificar los días en `n_clusters`. Además, implementaremos el método de **KNN** "a mano" para encontrar los `k` vecinos mas cercanos a prototipos (centroides) obtenidos previamente con **k-means**.
 
+En la gráficas siguientes se muestra la radiación solar horaria. Cada serie representa un día y cada dato es el promedio de radiación de un día. Los datos fueron divididos en los meses de verano e invierno. Se han eliminado de la serie las horas de noche.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_Verano.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_Invierno.png)
 
-### Agrupamiento de aportaciones hidráulicas en presas.
+#### **K-means**
+El objetivo es agrupar las series para obtener prototipos, en el caso de **k-means** son llamados centroides.
+```python
+n_clusters = 10
+k_means = MiniBatchKMeans(init='k-means++', n_clusters=n_clusters, n_init=10) # una variante  de KMeans
+k_means = k_means.fit(X_train)
+values  = k_means.cluster_centers_.squeeze()
+labels  = k_means.labels_
+kmeans_centers_= k_means.cluster_centers_
+y_kmeans = k_means.predict(X_test)
+y_kmeans_train = k_means.predict(X_train)
+print_serie(kmeans_centers_,'Centroides','Radiación solar','horas',True,'fig_t13_centroids_kmeans')
+```
+Los centroides de **k-means** se muestran a continuación:
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_centroids_kmeans.png)
 
+Ahora imprimimos los centroides con las series de datos que le corresponden. Cada subplot representa un conglomerado o cluster.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_kmeans_train.png)
+
+
+#### **LVQ**
+```python
+print('GLVQ')
+glvq = GlvqModel(prototypes_per_class=1, initial_prototypes=None)
+glvq.fit(X_train,labels)
+glvq_pred = glvq.predict(X_test)
+glvq_pred_train = glvq.predict(X_train)
+print_patrones(list_series=X_train,list_categorias=glvq_pred_train,list_patrones=[],title_='Conglomerado ',namefile_='fig_t13_lvq_train')
+```
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_lvq_train.png)
+
+#### **GaussianMixture**
+```python
+gm = GaussianMixture(n_components=n_clusters, init_params='kmeans',covariance_type='full') #full, tied, diag, spherical
+gm.fit(X_train)
+gm_pred_train = gm.predict(X_train)
+gm_pred       = gm.predict(X_test)
+print('classification accuracy train:', gm.score(X_train, gm_pred_train))
+print_patrones(list_series=X_train,list_categorias=gm_pred_train,list_patrones=[],title_='Conglomerado ',namefile_='fig_t13_gm_train')
+```
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_gm_train.png)
+
+#### **KNN**
+```python
+knn = KNeighborsClassifier(n_neighbors=10)
+knn.fit(X_train, labels)
+knn_pred_train = knn.predict(X_train)
+knn_pred       = knn.predict(X_test)
+print(knn.score(X_test,knn_pred))
+print_patrones(list_series=X_train,list_categorias=knn_pred_train,list_patrones=[],title_='Conglomerado ',namefile_='fig_t13_knn_train')
+```
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_knn_train.png)
+
+
+#### **KNN form scratch** 
+Implementaremos el método de KNN para dado un elemento, determinar los k vecinos más cercanos.
+```python
+## Calculamos la ditancia euclidiana de un elemento a todos los vecinos.
+def euclidean(neig1, neig2):
+	  distance = 0.0
+	  for i in range(len(neig1)):
+		    distance += (neig1[i] - neig2[i])**2
+	  return sqrt(distance)
+
+## Encuentra los vecinos más cercanos
+def get_neighbors(train, test_row, num_neighbors):  
+    distances = list()
+    for train_row in train:
+        dist = euclidean(test_row, train_row)
+        distances.append((train_row, dist))
+    distances.sort(key=lambda tup: tup[1])
+    neighbors = list()
+    for i in range(num_neighbors):
+        neighbors.append(distances[i][0])
+    return neighbors
+
+# Predecimos un elemento con KNN
+def predict_classification(train, test_row, num_neighbors):
+	  neighbors = get_neighbors(train, test_row, num_neighbors)
+	  output_values = [row[-1] for row in neighbors]
+	  prediction = max(set(output_values), key=output_values.count)
+	  return prediction
+```
+
+Probaremos el método para obtener los `k` vecinos mas cercanos a los centroides obtenidos por el método de **k-means**.
+```python
+serie = []
+cat   = []
+i     = 0 
+for center in kmeans_centers_:
+    neighbors = get_neighbors(X_train, center, num_neighbors=5)
+    for neighbor in neighbors:
+        serie.append(neighbor)
+        cat.append(i)
+    i = i  + 1
+print_patrones(list_series=serie,list_categorias=cat,list_patrones=kmeans_centers_,title_='Centroide ',namefile_='fig_t13_knn_scratch')
+```
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_knn_scratch.png)
+
+### Agrupamiento de aportaciones KNN hidrológicas en presas.
 Usaremos el método de **KNN** en un método que selecciona las `k` ventanas más parecidas en una serie de tiempo, usando como prototipo la última ventana de una serie, con los k vecinos seleccionados posteriormente se hace una predicción con los datos inmediatos para hacer un pronóstico. Para probar el método usaremos una serie de tiempo de aportaciones hidráulicas (lluvias) mensuales en la presa Peñitas en Tabasco.
 
-Esta idea es  obtenida de el artículo de Grzegorz Dudek [Grzegorz Dudek](https://doi.org/10.1016/j.epsr.2015.09.001) y aplicada a aportaciones hidráulicas en presas.
+Esta idea de usar **KNN** para extraer regresores de una serie de tiempo es obtenida de el artículo de [Grzegorz Dudek](https://doi.org/10.1016/j.epsr.2015.09.001) y es implementada y aplicada en esta tarea a aportaciones hidráulicas en presas.
+```python
+df = pd.read_csv('Aportaciones_Embalses.csv')
+apor = df['PEA'].to_numpy()
+v = 12                    ## tamanio de la ventana (un año)
+k = 10                    ## número de vecinos a buscar k
+vecindario    = []        ## vecindario completo
+vecindario_b  = [] 
+distances     = []
+n             = len(apor) ## longitud total de la serie
+tol           = 0.6       ## tolerancia de tamaño de ventanas para seleccion de vecinos
+n             = n - 12    ## datos de test (comentar esta linea!!!)
 
+#print(apor[n-v:n],'**')  ## imprime el prototipo
+## Se calcula la distancia euclidiana entre todos los vecinos.
+for i in range(n-2*v+1):
+    dist = euclidean(apor[n-v:n],apor[i:i+v])
+    distances.append((i, dist))
+    #print(apor[n-v:n],apor[i:i+v],i, dist)
 
+## Se ordena el vecindario por distancia de menor a mayor y se guardan las posiciones.
+distances.sort(key=lambda tup: tup[1])
+neighbors  = []
+neighbors2 = []
+position   = []
+
+## Se escogen los k vecinos mas cercanos y guardamos las posiciones.
+i = 0
+for pos, dis in distances:
+    #print(apor[pos:pos+v],dis,pos)
+
+    if i==0:      
+        position.append(pos)   
+        neighbors.append(apor[pos:pos+v])
+        neighbors2.append(apor[pos+v:pos+2*v])
+    else:
+        bandera = True
+        for p in position:
+            if (abs(pos - p) < tol*v):
+                bandera = False
+                i = i - 1
+                break
+        if bandera == True:
+            #print(pos,p)
+            position.append(pos)   
+            neighbors.append(apor[pos:pos+v])
+            neighbors2.append(apor[pos+v:pos+2*v])
+            bandera = False
+    i = i + 1
+    if i == k:
+        break
+
+## Convertimos a numpy.  
+neighbors  = np.array(neighbors)
+neighbors2 = np.array(neighbors2)
+print('position',position)    ## posición de los k vecinos mas cercanos.
+#print(neighbors)   ## k vecinos mas cercanos.
+#print(neighbors2)  ## ventana de datos posterior a los k vecinos mas cercanos.
+
+print_serie(neighbors, 'KNN - Aportaciones hidrológicas en Presa Peñitas','MMC','meses', False,'fig_t13_aportaciones')
+```
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_aportaciones.png)
+
+Aprovecharemos estos patrones para hacer un pronóstico usando regresión lineal múltiple con stepwise.
+
+```python
+X   = sm.add_constant(neighbors.T)
+X_2 = sm.add_constant(neighbors2.T)
+y   = apor[n-v:n]
+
+model   = sm.OLS(y, X)
+results = model.fit()
+result_prediction = results.predict(X_2)
+#print(result_prediction)
+#print(results.summary())
+
+## Se ordenan los valores p y se selecciona el más grande.
+i = 0
+pvalues = []
+for pi in results.pvalues:
+    pvalues.append((i,pi))
+    i = i + 1
+pvalues.sort(key=lambda tup: tup[1])
+(i, pi) = pvalues[0]
+
+## Proceso de stepwise
+while pi > 0.05:
+    print('Retiramos regresor X' + str(i))
+    X   = np.delete(arr=X,   obj=i, axis=1)
+    X_2 = np.delete(arr=X_2, obj=i, axis=1)
+    model   = sm.OLS(y, X)
+    results = model.fit()
+
+    ## Se ordenan los valores p y se selecciona el más grande
+    i = 0
+    pvalues = []
+    for pi in results.pvalues:
+        pvalues.append((i,pi))
+        i = i + 1
+    pvalues.sort(key=lambda tup: tup[1])
+    (i, pi) = pvalues[0]
+    print(pi)
+
+result_prediction = results.predict(X)
+print(result_prediction)
+print(results.summary())
+
+# Exactitud del modelo
+print('Test MAE OLS + stepwise= ', mean_absolute_error(y,y_real))
+```
+El resultado de la regresión stepwise y el pronóstico de aportaciones se muestran a continuación:
+```
+                                 OLS Regression Results                                
+=======================================================================================
+Dep. Variable:                      y   R-squared (uncentered):                   0.928
+Model:                            OLS   Adj. R-squared (uncentered):              0.903
+Method:                 Least Squares   F-statistic:                              38.44
+Date:                Fri, 22 Apr 2022   Prob (F-statistic):                    1.85e-05
+Time:                        22:56:32   Log-Likelihood:                         -71.320
+No. Observations:                  12   AIC:                                      148.6
+Df Residuals:                       9   BIC:                                      150.1
+Df Model:                           3                                                  
+Covariance Type:            nonrobust                                                  
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+x1             0.3070      0.445      0.690      0.507      -0.699       1.313
+x2             0.4654      0.188      2.479      0.035       0.041       0.890
+x3             0.2166      0.479      0.452      0.662      -0.867       1.300
+==============================================================================
+Omnibus:                        0.830   Durbin-Watson:                   0.950
+Prob(Omnibus):                  0.660   Jarque-Bera (JB):                0.586
+Skew:                          -0.480   Prob(JB):                        0.746
+Kurtosis:                       2.501   Cond. No.                         11.7
+==============================================================================
+
+Warnings:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+Test MAE OLS + stepwise=  149.97166666666666
+
+```
+### Conclusiones tarea 12
+En esta tarea se utilizaron diferentes métodos de agrupamiento tales como **k-means, LVQ, Gaussian mixtures** y **KNN** usando las librerias de **sklearn**
 
