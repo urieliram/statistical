@@ -2094,7 +2094,6 @@ vecindario_b  = []
 distances     = []
 n             = len(apor) ## longitud total de la serie
 tol           = 0.6       ## tolerancia de tamaño de ventanas para seleccion de vecinos
-n             = n - 12    ## datos de test (comentar esta linea!!!)
 
 #print(apor[n-v:n],'**')  ## imprime el prototipo
 ## Se calcula la distancia euclidiana entre todos los vecinos.
