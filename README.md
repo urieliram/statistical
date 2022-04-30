@@ -2229,3 +2229,13 @@ Test MAE OLS + stepwise=  149.97166666666666
 ### Conclusiones tarea 12
 En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hora. Diversas condiciones climáticas principalmente la nubosidad provocan que la producción de una planta fotovoltaica sea diferente a la de cielo despejado. Los métodos de agrupamiento utilizados fueron **k-means, LVQ, Gaussian mixtures** y **KNN** usando las librerias de **sklearn**. Además se implementó el **KNN** para encontrar los `k` dias mas parecidos a un día determinado. Este método se probó con los centroides previamente encontrados en el **k-means**. Adicionalmente, se implementó el método propuesto por [Grzegorz Dudek](https://doi.org/10.1016/j.epsr.2015.09.001) para extraer muestras de una serie de tiempo usando **KNN**  y haciendo una regresión con las muestras encontradas para obtener un pronóstico. Para probar el método se usaron datos de aportaciones hidrológicas de presa Peñitas en México.
 
+
+---
+
+## **Tarea 14 Aprendizaje no supervisado**
+>**Instrucciones:** After reading the whole chapter, pick any three techniques introduced in it and apply them to your data. Make use of as many libraries as you please in this occasion. Discuss the drawbacks and advantages of each of the chosen techniques.
+
+### Análisis de Componentes principales en la reducción de dimensiones de Aportaciones a embalses
+
+
+
