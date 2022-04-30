@@ -17,6 +17,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 11 Redes neuronales](#tarea-11-redes-neuronales)
 + [Tarea 12 Máquinas de Vectores de Soporte](#tarea-12-máquinas-de-vectores-de-soporte)
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
++ [Tarea 14 Aprendizaje no supervisadp](#tarea-14-aprendizaje-no-supervisado)
 + ---
 
 ## Tarea 1 Introducción
