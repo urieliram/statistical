@@ -2236,7 +2236,7 @@ En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hor
 ## **Tarea 14 Aprendizaje no supervisado**
 >**Instrucciones:** After reading the whole chapter, pick any three techniques introduced in it and apply them to your data. Make use of as many libraries as you please in this occasion. Discuss the drawbacks and advantages of each of the chosen techniques.
 
-### Análisis de Componentes principales en la reducción de dimensiones de Aportaciones a embalses
+### Análisis de Componentes principales en la reducción de dimensiones de aportaciones hidrológicas a embalses
 
 
 
