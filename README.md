@@ -2243,4 +2243,4 @@ En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hor
 ### Análisis de Componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
 Análisis de componentes principales es un métodos de reducción de dimensiones que puede ser usado paraescoger un subconjunto de variables que expliquen la mayor varianza, es decir que representen en mayor medida los datos originales. Además, el método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y ser ortogonales entre si. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo por ejemplo una regresión.
 
-
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_aportaciones_prono3.png)
