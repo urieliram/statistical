@@ -19,6 +19,8 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
 + [Tarea 14 Aprendizaje no supervisadp](#tarea-14-aprendizaje-no-supervisado)
 + ---
+Una clasificación intercativa de la técnicas de aprendizaje máquina se puede encontrar en este enlace.
+[clasificación](https://towardsdatascience.com/mds-multidimensional-scaling-smart-way-to-reduce-dimensionality-in-python-7c126984e60b).
 
 ## Tarea 1 Introducción
 >**Instructions:** Identify one or more learning problems in your thesis work and identify goals and elements.
