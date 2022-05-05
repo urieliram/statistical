@@ -19,7 +19,9 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
 + [Tarea 14 Aprendizaje no supervisadp](#tarea-14-aprendizaje-no-supervisado)
 + ---
-Una excelente clasificación interactiva de la técnicas de aprendizaje máquina se puede encontrar en este enlace.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/clasificación disco.png)
+Figura extraida de:
 [clasificación](https://towardsdatascience.com/k-nearest-neighbors-knn-how-to-make-quality-predictions-with-supervised-learning-d5d2f326c3c2).
 
 ## Tarea 1 Introducción
@@ -2238,7 +2240,7 @@ En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hor
 ## **Tarea 14 Aprendizaje no supervisado**
 >**Instrucciones:** After reading the whole chapter, pick any three techniques introduced in it and apply them to your data. Make use of as many libraries as you please in this occasion. Discuss the drawbacks and advantages of each of the chosen techniques.
 
-### Análisis de Componentes principales en la reducción de dimensiones de aportaciones hidrológicas a embalses
-
+### Análisis de Componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
+Análisis de componentes principales es un métodos de reducción de dimensiones que puede ser usado paraescoger un subconjunto de variables que expliquen la mayor varianza, es decir que representen en mayor medida los datos originales. Además, el método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y ser ortogonales entre si. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo por ejemplo una regresión.
 
 
