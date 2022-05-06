@@ -22,8 +22,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 ---
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/clasificación disco.png)
-Figura extraida de:
-[clasificación](https://towardsdatascience.com/k-nearest-neighbors-knn-how-to-make-quality-predictions-with-supervised-learning-d5d2f326c3c2).
+Figura extraida de [clasificación ML](https://towardsdatascience.com/k-nearest-neighbors-knn-how-to-make-quality-predictions-with-supervised-learning-d5d2f326c3c2).
 
 ## Tarea 1 Introducción
 >**Instructions:** Identify one or more learning problems in your thesis work and identify goals and elements.
@@ -2382,17 +2381,18 @@ Adicionalmente, un diagrama de correlación entre los componentes puede confirma
 
 ### Análisis factorial en la selección de parques eólicos representativos por regiones.
 
-En México, una gran cantidad de párques eólicos se han instalado en el territorio en los últimos años. Los parques están distribuidos en su mayoria en en el Itzmo de Tehuantepec, Oaxaca. Pero tenemos algunos en Chiapas, Nuevo León, Baja California y otros estados. La generación eólica es tan intermitente como su fuente primaria por lo que es necesario preveer su producción de manera efectiva. Algunas técnicas de pronóstico, son mas eficientes si se hace un pronóstico de producción eólica por región y no por parque, esta técnica llamada **Upscalling** fue inicialmente propuesta por [Nils Siebert y Georges Kariniotakis](https://hal-mines-paristech.archives-ouvertes.fr/file/index/docid/526690/filename/EWEC_2006_SIEBERT_KARINIOTAKIS.pdf) y aplicada a un caso en dinamarca. 
+En México, una gran cantidad de párques eólicos se han instalado en el territorio en los últimos años. Los parques están distribuidos en su mayoria en en el Itzmo de Tehuantepec, Oaxaca. Pero tenemos algunos en Chiapas, Nuevo León, Baja California y otros estados. La generación eólica es tan intermitente como su fuente primaria, el viento. Por lo que es necesario preveer su producción de la mejor manera. Algunas técnicas de pronóstico son mas eficientes si se hace un pronóstico por región y no por parque, esta técnica llamada **Upscalling** fue inicialmente propuesta por [Nils Siebert y Georges Kariniotakis](https://hal-mines-paristech.archives-ouvertes.fr/file/index/docid/526690/filename/EWEC_2006_SIEBERT_KARINIOTAKIS.pdf) y aplicada en Dinamarca. 
 
-En esta tarea usaremos la técnica de análisis factorial (**AF**) para agrupar 35 parques eólicos de diferentes regiones con datos de generación de aproximadamente un año en un número de factores propuesto.
+En esta sección de la tarea usaremos la técnica de análisis factorial (**AF**) para hacer **upscalling** en 35 parques eólicos de diferentes regiones con datos de generación de aproximadamente un año.
 
-Iniciamos haciendo un análisis exploratorio para confirmar la alta correlación entre algunos de los parques debido a que la mayoria de ellos se encuentran en la región de Oaxaca y Chiapas.
+Iniciamos haciendo un análisis exploratorio para confirmar la alta correlación entre algunos de los parques debido a que la mayoría de ellos se encuentran en la región de Oaxaca y Chiapas.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_eol.PNG)
 
+Ahora, haremos el análisis factorial. Tal como lo sugiere el [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) en el apartado `14.7.1 Latent Variables and Factor Analysis`, compararemos los resultados de los componentes del **PCA**, los factores del **AF** con y sin la rotación **varimax**. El número de factores escogido es de cuatro.
+
 ```python
 n_fact= 4
-
 methods = [("PCA", PCA()),("FA sin rotación", FactorAnalysis()),("FA con varimax", FactorAnalysis(rotation="varimax")),]
 fig, axes = plt.subplots(ncols=len(methods), figsize=(10,9))
 
@@ -2427,7 +2427,7 @@ plt.tight_layout()
 plt.savefig('fig_t14_varimax', transparent=True) 
 plt.show()
 ```
+Los resultados de 
 
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_varimax.png)
 
