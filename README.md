@@ -2356,10 +2356,25 @@ VIF X_pca[ 16 ] = 1.08919860941622
 VIF X_pca[ 17 ] = 1.0832319910231567
 ```
 
+Finalmente, aplicaremos **PCA** para reducción de dimensiones en nuestros datos. Explicaremos el 98% de la varianza en nuestros datos. El número de componentes resultante es de ocho, en la gráfica siguiente se muestra cada componente y su varianza explicada.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png).
+ Además, la reducción del VIF es notable y el error es muy semejante a los errores obtenidos con los datos originales.
+```
+VIF X_pca[ 0 ] = 1.0202126662701723
+VIF X_pca[ 1 ] = 1.0309617986088888
+VIF X_pca[ 2 ] = 1.0433254564831038
+VIF X_pca[ 3 ] = 1.0802131687107597
+VIF X_pca[ 4 ] = 1.0239019535969995
+VIF X_pca[ 5 ] = 1.0637878942632697
+VIF X_pca[ 6 ] = 1.0605053887139235
+VIF X_pca[ 7 ] = 1.0088605587066386
 
+MAE del modelo de regresión con datos de entrenamiento con sklearn: 111.79413703293265
+MAE del modelo de regresión con datos de prueba con sklearn: 130.55280746630132
+```
+Adicionalmente, un diagrama de correlación entre los componentes puede confirmar que la baja correlación entre las nuevas variables.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
 
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png)
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
 
