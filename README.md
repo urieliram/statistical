@@ -2279,32 +2279,33 @@ MAE del modelo de regresión con datos de entrenamiento con sklearn: 102.0365322
 MAE del modelo de regresión con datos de prueba con sklearn: 131.86027342669107
 ```
 
-Además, se calculan los datos del VIF de cada regresor, un VIF de arriba de 20 es un factor muy alto, que puede traer problemas para la solución del sistema lineal que encuentra los coeficientes de la regresión. Como s epuede ver los niveles de VIF son muy altos en nuestros datos originales.
+Además, se calculan los datos del **VIF** de cada regresor, un **VIF** de arriba de 20 es un factor muy alto, que puede traer problemas para la solución del sistema lineal que encuentra los coeficientes de la regresión. Como se puede ver los niveles de **VIF** son muy altos en nuestros datos originales.
 ```python
 # calculating VIF for each feature
 for i in range(X_train.shape[1]):
     print('X[',i,'] =',variance_inflation_factor(X_train,i))  
-X[ 1 ] = 19.268815602047138
-X[ 2 ] = 25.900291272307413
-X[ 3 ] = 21.75005645732436
-X[ 4 ] = 31.3039369332227
-X[ 5 ] = 16.94503888144909
-X[ 6 ] = 23.182547018706778
-X[ 7 ] = 21.415405802141464
-X[ 8 ] = 32.21371857799564
-X[ 9 ] = 13.042998282179228
-X[ 10 ] = 19.990213915947887
-X[ 11 ] = 18.269618431784952
-X[ 12 ] = 9.088089141611725
-X[ 13 ] = 4.594616265979086
-X[ 14 ] = 33.45388030260464
-X[ 15 ] = 26.546509209585857
-X[ 16 ] = 31.938715377963362
-X[ 17 ] = 17.948772566166706
-X[ 18 ] = 21.219310770169713
+    
+VIF X[ 1 ] = 19.268815602047138
+VIF X[ 2 ] = 25.900291272307413
+VIF X[ 3 ] = 21.75005645732436
+VIF X[ 4 ] = 31.3039369332227
+VIF X[ 5 ] = 16.94503888144909
+VIF X[ 6 ] = 23.182547018706778
+VIF X[ 7 ] = 21.415405802141464
+VIF X[ 8 ] = 32.21371857799564
+VIF X[ 9 ] = 13.042998282179228
+VIF X[ 10 ] = 19.990213915947887
+VIF X[ 11 ] = 18.269618431784952
+VIF X[ 12 ] = 9.088089141611725
+VIF X[ 13 ] = 4.594616265979086
+VIF X[ 14 ] = 33.45388030260464
+VIF X[ 15 ] = 26.546509209585857
+VIF X[ 16 ] = 31.938715377963362
+VIF X[ 17 ] = 17.948772566166706
+VIF X[ 18 ] = 21.219310770169713
 ```
 
-Ahora, usaremos PCA para obtener los componentes que capturen la información de un porcentaje de la varianza. Los componenetes encontrados, serán usados como variables se utilizan como regresores al ajustar un nuevo modelo de regresión.
+Ahora, usaremos **PCA** para obtener los componentes que capturen la información de un porcentaje de la varianza. Los componenetes encontrados, serán usados como variables se utilizan como regresores al ajustar un nuevo modelo de regresión.
 Obtenemos los **componentes principales** tratando de explicar la mayor cantidad de varianza posible al 99.99%.
 ```python
 pca = PCA(0.9999) 
@@ -2316,10 +2317,9 @@ print(sum(pca.explained_variance_ratio_ * 100))
 El diagrama siguiente muestra en el eje de las `x` los componentes y en el eje de las `y` el nivel de varianza explicado, la suma de toda la varianza explicada es aproximadamente de 99.99%. El número de componentes encontrado es de 17.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14__variance_pca_9999per.png)
 
-
 Ahora, calculamos la **regresión lineal múltiple** entre los datos de demanda del día de hoy `y_train` y los componentes `X_pca`. También calculamos el error MAE entre la regresión con los datos de entrenamiento y los de prueba `X_pcat`.
 ```python
-linreg_model      = LinearRegression().fit(X_pca[:, :], y_train)
+linreg_model = LinearRegression().fit(X_pca[:, :], y_train)
 err2_mae = np.mean(np.abs(y_train - linreg_model.predict(X_pca)))
 err2_mae_test = np.mean(np.abs(y_test - linreg_model.predict(X_pcat)))
 print("MAE del modelo de regresión con datos de entrenamiento con sklearn:", err2_mae)
@@ -2335,24 +2335,25 @@ Además, una ventaja de las nuevas variables es que el VIF se ha reducido tal co
 # calculating VIF for each feature
 for i in range(X_pcat.shape[1]):
     print('X_pca[',i,'] =',variance_inflation_factor(X_pcat,i))
-X_pca[ 0 ] = 1.0916455582847158
-X_pca[ 1 ] = 1.0601004320461906
-X_pca[ 2 ] = 1.1168117876529722
-X_pca[ 3 ] = 1.1457894613708417
-X_pca[ 4 ] = 1.1523412120435788
-X_pca[ 5 ] = 1.1536215578353162
-X_pca[ 6 ] = 1.1491477461449198
-X_pca[ 7 ] = 1.0731741487998225
-X_pca[ 8 ] = 1.1136973711933749
-X_pca[ 9 ] = 1.0868154380237036
-X_pca[ 10 ] = 1.0707778739647433
-X_pca[ 11 ] = 1.1465545728928228
-X_pca[ 12 ] = 1.1145628898435251
-X_pca[ 13 ] = 1.0872008821946384
-X_pca[ 14 ] = 1.1077344674401515
-X_pca[ 15 ] = 1.1459797454302063
-X_pca[ 16 ] = 1.08919860941622
-X_pca[ 17 ] = 1.0832319910231567
+    
+VIF X_pca[ 0 ] = 1.0916455582847158
+VIF X_pca[ 1 ] = 1.0601004320461906
+VIF X_pca[ 2 ] = 1.1168117876529722
+VIF X_pca[ 3 ] = 1.1457894613708417
+VIF X_pca[ 4 ] = 1.1523412120435788
+VIF X_pca[ 5 ] = 1.1536215578353162
+VIF X_pca[ 6 ] = 1.1491477461449198
+VIF X_pca[ 7 ] = 1.0731741487998225
+VIF X_pca[ 8 ] = 1.1136973711933749
+VIF X_pca[ 9 ] = 1.0868154380237036
+VIF X_pca[ 10 ] = 1.0707778739647433
+VIF X_pca[ 11 ] = 1.1465545728928228
+VIF X_pca[ 12 ] = 1.1145628898435251
+VIF X_pca[ 13 ] = 1.0872008821946384
+VIF X_pca[ 14 ] = 1.1077344674401515
+VIF X_pca[ 15 ] = 1.1459797454302063
+VIF X_pca[ 16 ] = 1.08919860941622
+VIF X_pca[ 17 ] = 1.0832319910231567
 ```
 
 
