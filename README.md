@@ -2263,3 +2263,5 @@ Análisis de componentes principales es un métodos de reducción de dimensiones
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png)
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/OaxacaEol.PNG)
