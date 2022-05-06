@@ -2427,7 +2427,22 @@ plt.tight_layout()
 plt.savefig('fig_t14_varimax', transparent=True) 
 plt.show()
 ```
-Los resultados de 
+La técnica de **FA** a diferencia de **PCA**, puede ayudar a descubrir patrones latentes. Además, aunque la rotación **varimax** a los componentes no mejora la calidad de la predicción, puede ayudar a visualizar su estructura. Podemos decir que el FA con varimax puede dar más nitidéz de la pertenencia de las variables a los factores.
 
+Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede ayudar a identificar los parques que tienen un comportamiento parecido. En el siguiente gráfico se observa que en *FA con rotación varimax* la pertenencia de las variables [EOL1,EOL2...EOL36] a los factores [F1,F2,F3,F4] es más evidente. 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_varimax.png)
+
+Podemos formar los siguientes grupos:
+FACTOR 1 EOL1-EOL22, EOL24, EOL27-EOL28, EOL30-EOL32
+FACTOR 2 EOL23,EOL26
+FACTOR 3 EOL33,EOL34,EOL25
+FACTOR 4 EOL35,EOL36
+
+
+| FACTOR      | MAE            |
+| :------------- | -------------: |
+|    1      | EOL1-EOL22, EOL24, EOL27-EOL28, EOL30-EOL32       |
+|    2     | EOL23,EOL26    |
+|    3    | EOL33,EOL34,EOL25     |
+|    4  | EOL35,EOL36     |
 
