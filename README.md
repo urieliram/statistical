@@ -2436,7 +2436,7 @@ Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede
 | :------------- | :-------------:      |
 |    1           | EOL1-EOL22, EOL24, EOL27-EOL28, EOL30-EOL32       |
 |    2           | EOL23, EOL26         |
-|    3           | EOL33, EOL34, EOL25  |
+|    3           | EOL33, EOL34, EOL25, EOL29 |
 |    4           | EOL35, EOL36         |
 
 
@@ -2444,5 +2444,14 @@ Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede
 En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un dendograma como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. Un tutorial para aprender a interpretar el dendograma es encontrado [Dendograma Minitab](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/cluster-observations/interpret-the-results/all-statistics-and-graphs/dendrogram/)
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.PNG)
+
+El dendrograma presentado está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables: 18,16,17,4,28,2,3,5,6,20,26,22,11,12,10,1,13,15,8,14,19,25,7,9,0,30; que corresponden a los parques: EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31. El segundo conglomerado, se compone de las nueve variables: 33,34,29,23,27,31,32,21,24; que corresponden a los parques: EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25.  
+
+| CONGLOMERADO         | PARQUES              |
+| :------------- | :-------------:      |
+|    1           | EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31       |
+|    2           | EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25         |
+
+Si se cortara el dendrograma más arriba, entonces habría menos conglomerados finales, pero su nivel de similitud sería menor. Si se cortara el dendrograma más abajo, entonces el nivel de similitud sería mayor, pero habría más conglomerados finales.
 
 
