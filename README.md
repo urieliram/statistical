@@ -2257,5 +2257,9 @@ Los datos de demanda están disponibles en [demanda.csv](https://drive.google.co
 Análisis de componentes principales es un métodos de reducción de dimensiones que puede ser usado paraescoger un subconjunto de variables que expliquen la mayor varianza, es decir, que representen en mayor medida los datos originales. Además, el método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y ser ortogonales entre si. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo por ejemplo una regresión.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_dem.png)
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14__variance_pca_9999per.png)
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
