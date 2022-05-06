@@ -21,10 +21,10 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 
 ---
 
-
-Figura extraida de [clasificación ML](https://towardsdatascience.com/k-nearest-neighbors-knn-how-to-make-quality-predictions-with-supervised-learning-d5d2f326c3c2).
-
 ![image](https://github.com/urieliram/statistical/blob/main/figures/clasificaciondisco.PNG)
+
+
+Figura de [Saul Dobilas](https://towardsdatascience.com/k-nearest-neighbors-knn-how-to-make-quality-predictions-with-supervised-learning-d5d2f326c3c2).
 
 ## Tarea 1 Introducción
 >**Instructions:** Identify one or more learning problems in your thesis work and identify goals and elements.
