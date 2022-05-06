@@ -2380,6 +2380,54 @@ Adicionalmente, un diagrama de correlación entre los componentes puede confirma
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
 
 
+### Análisis factorial en la selección de parques eólicos representativos por regiones.
+
+En México, una gran cantidad de párques eólicos se han instalado en el territorio en los últimos años. Los parques están distribuidos en su mayoria en en el Itzmo de Tehuantepec, Oaxaca. Pero tenemos algunos en Chiapas, Nuevo León, Baja California y otros estados. La generación eólica es tan intermitente como su fuente primaria por lo que es necesario preveer su producción de manera efectiva. Algunas técnicas de pronóstico, son mas eficientes si se hace un pronóstico de producción eólica por región y no por parque, esta técnica llamada **Upscalling** fue inicialmente propuesta por [Nils Siebert y Georges Kariniotakis](https://hal-mines-paristech.archives-ouvertes.fr/file/index/docid/526690/filename/EWEC_2006_SIEBERT_KARINIOTAKIS.pdf) y aplicada a un caso en dinamarca. 
+
+En esta tarea usaremos la técnica de análisis factorial (**AF**) para agrupar 35 parques eólicos de diferentes regiones con datos de generación de aproximadamente un año en un número de factores propuesto.
+
+Iniciamos haciendo un análisis exploratorio para confirmar la alta correlación entre algunos de los parques debido a que la mayoria de ellos se encuentran en la región de Oaxaca y Chiapas.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_eol.PNG)
+
+```python
+n_fact= 4
+
+methods = [("PCA", PCA()),("FA sin rotación", FactorAnalysis()),("FA con varimax", FactorAnalysis(rotation="varimax")),]
+fig, axes = plt.subplots(ncols=len(methods), figsize=(10,9))
+
+for ax, (method, fa) in zip(axes, methods):
+    fa.set_params(n_components=n_fact)
+    fa.fit(X)
+
+    components = fa.components_.T
+    print("\n\n %s :\n" % method)
+    print(components)
+
+    vmax = np.abs(components).max()
+    ax.imshow(components, cmap="bwr", vmax=vmax, vmin=-vmax)
+    ax.set_yticks(np.arange(len(feature_names)))
+    if ax.is_first_col():
+        ax.set_yticklabels(feature_names, color=LETRASNARA, fontsize='large')
+        plt.tick_params(colors = LETRASNARA)
+    else:
+        ax.set_yticklabels([], color=LETRASNARA, fontsize='large')
+        plt.tick_params(colors = LETRASNARA)
+
+    ax.set_title(str(method), color=LETRASNARA, fontsize='x-large')
+    ax.set_xticks([0,1,2,3])
+    ax.set_xticklabels(["F1","F2","F3","F4"], color=LETRASNARA, fontsize='large')
+
+    ax.spines['bottom'].set_color(LETRASNARA)
+    ax.spines['top'   ].set_color(LETRASNARA) 
+    ax.spines['right' ].set_color(LETRASNARA)
+    ax.spines['left'  ].set_color(LETRASNARA)
+
+plt.tight_layout()
+plt.savefig('fig_t14_varimax', transparent=True) 
+plt.show()
+```
+
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/OaxacaEol.PNG)
