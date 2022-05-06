@@ -2441,7 +2441,7 @@ Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede
 
 
 ### Agrupamiento jerárquico
-En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un dendograma como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. Un tutorial para aprender a interpretar el dendograma es encontrado [Dendograma Minitab](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/cluster-observations/interpret-the-results/all-statistics-and-graphs/dendrogram/#:~:text=Interpretaci%C3%B3n,una%20l%C3%ADnea%20horizontal%20del%20dendrograma.)
+En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un dendograma como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. Un tutorial para aprender a interpretar el dendograma es encontrado [Dendograma Minitab](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/cluster-observations/interpret-the-results/all-statistics-and-graphs/dendrogram/)
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.PNG)
 
