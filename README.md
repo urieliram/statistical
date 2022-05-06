@@ -2391,7 +2391,7 @@ En esta sección de la tarea usaremos la técnica de análisis factorial (**AF**
 
 Iniciamos haciendo un análisis exploratorio para confirmar la alta correlación entre algunos de los parques debido a que la mayoría de ellos se encuentran en la región de Oaxaca y Chiapas.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_eol.PNG)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_eol.png)
 
 Ahora, haremos el análisis factorial. Tal como lo sugiere el [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) en el apartado `14.7.1 Latent Variables and Factor Analysis`, compararemos los resultados de los componentes del **PCA**, los factores del **AF** con y sin la rotación **varimax**. El número de factores escogido es de cuatro.
 
@@ -2471,7 +2471,7 @@ plt.show()
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.png)
 
-El dendrograma presentado que jerarquiza los parques por similitud está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables: 18,16,17,4,28,2,3,5,6,20,26,22,11,12,10,1,13,15,8,14,19,25,7,9,0,30; que corresponden a los parques: EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31. El segundo conglomerado, se compone de las nueve variables: 33,34,29,23,27,31,32,21,24; que corresponden a los parques: EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25.  Los resltados de la agrupación en 2 conglomerados se resume en la siguiente tabla:
+El dendrograma presentado que jerarquiza los parques por similitud está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables, el segundo conglomerado, se compone de las nueve variables restantes. Los resltados de la agrupación en dos conglomerados se resume en la siguiente tabla:
 
 | CONGLOMERADO   | PARQUES                                        |
 | :------------- | :-------------:                                |
