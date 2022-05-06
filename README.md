@@ -2471,22 +2471,23 @@ plt.show()
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.png)
 
-El dendrograma presentado que jerarquiza los parques por similitud está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables, el segundo conglomerado, se compone de las nueve variables restantes. Los resltados de la agrupación en dos conglomerados se resume en la siguiente tabla:
+El dendrograma presentado jerarquiza los parques por similitud, está dividido en dos conglomerados (uno en color verde y uno en azul), a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables, el segundo conglomerado (azul), se compone de las otras nueve variables. Los resultados de la agrupación se resumen en la siguiente tabla:
 
 | CONGLOMERADO   | PARQUES                                        |
 | :------------- | :-------------:                                |
 |    1           | EOL1-EOL21, EOL23, EOL26, EOL27, EOL29, EOL31  |
 |    2           | EOL22, EOL24, EOL25, EOL28, EOL30, EOL32-EOL35 |
 
-Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las propuestas por el método **AF**, sin embargo, con el dendograma podemos hacer un análisis de similitud entre parques que con el **AF**. Además, que si cortamos el dendograma más abajo, podemos crear un mayor número de conglomeradosde menor tamaño que hará que el nivel de similitud de los elementos sea mayor.
+Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las propuestas por el método **AF**, sin embargo, a diferencia del **AF**, con el dendograma podemos hacer un análisis de similitud entre cada parque. Además, si cortamos el dendograma más abajo, podemos definir un mayor número de conglomerados de menor tamaño que hará que el nivel de similitud de los elementos sea mayor y crear nuevas agrupaciones.
 
 ### Conclusiones tarea 12
-En esta tarea se demostró la utilidad del **PCA** como reductor de dimensiones y además como reductor de la índice de inflación de la varianza VIF, se utilizaron los  componentes reduciendo el número de regresores en pronóstico de demanda. Las pruebas demostraron la equivalencia en exactitud entre las variables originales y las variables  por componetes. El método es eficaz para reducir la multicolinealidad. Además, se agruparon parques eólicos usando la técnica de **análisis factorial** y la de **conglomerados jerárquicos**. en el método de **AF** se obtuvieron los pesos de cada variable sobre el cada factor y se agruparon las que tenian un peso mayor. Para el cado de conglomerados jerárquicos, se usó un dendograma. En el que facilmente puede visualizarse la cercania o similitud entre los elementos. Los resultados entre ambas técnicas fueron en su mayoria semejentes. Sin embargo el dendograma permite visualizar la relación entre las variables. 
+En esta tarea se demostró la utilidad del **PCA** como reductor de dimensiones y además como reductor del índice de inflación de la varianza **VIF**, se utilizaron los componentes principales para reducir el número de regresores en el pronóstico de demanda. Las pruebas demostraron la equivalencia en exactitud entre las variables originales y las variables calculadas por **PCA**. Muy importante que el método es eficaz para reducir la multicolinealidad.
+Por otro lado, se agruparon parques eólicos usando la técnica de análisis factorial **AF**y el de **conglomerados jerárquicos**. En el método de **AF** se obtuvieron los pesos de cada variable sobre cada factor y se agruparon las que tenian un peso mayor. Para el caso del método de conglomerados jerárquicos, se dibujó un dendograma, en el que facilmente puede visualizarse la cercania o similitud entre los elementos o variables. Los resultados entre ambas técnicas fueron en su mayoria semejentes. Sin embargo el dendograma permite visualizar la relación entre las variables, es decir es posible ver en las últimas hojas del dendograma aquellos parques  que tienen un comportamiento más parecido.
 
 ---
 
 ## **Tarea 15 Bosque aleatorio**
->**Instrucciones:** .
+>**Instrucciones:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest..
 
 Los datos de demanda están disponibles en [XXX.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [XX.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
