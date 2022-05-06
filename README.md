@@ -21,7 +21,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 
 ---
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/clasificacióndisco.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/clasificaciondisco.png)
 Figura extraida de [clasificación ML](https://towardsdatascience.com/k-nearest-neighbors-knn-how-to-make-quality-predictions-with-supervised-learning-d5d2f326c3c2).
 
 ## Tarea 1 Introducción
