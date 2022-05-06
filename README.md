@@ -2452,7 +2452,6 @@ El dendrograma presentado está dividido en dos conglomerados (uno en verde y un
 |    1           | EOL1-EOL21, EOL23, EOL26, EOL27, EOL29, EOL31  |
 |    2           | EOL22, EOL24, EOL25, EOL28, EOL30, EOL32-EOL35 |
 
-El resultado de la agrupación difiere de
-Si se cortara el dendrograma más arriba, entonces habría menos conglomerados finales, pero su nivel de similitud sería menor. Si se cortara el dendrograma más abajo, entonces el nivel de similitud sería mayor, pero habría más conglomerados finales.
+Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las propuestas por el método **FA**, sin embargo, con el dendograma podemos hacer un análisis de similitud entre parques que con el **FA**. Además, que si cortamos el dendograma más abajo, podemos crear un mayor número de conglomeradosde menor tamaño que hará que el nivel de similitud de los elementos sea mayor.
 
 
