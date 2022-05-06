@@ -18,7 +18,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 12 Máquinas de Vectores de Soporte](#tarea-12-máquinas-de-vectores-de-soporte)
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
 + [Tarea 14 Aprendizaje no supervisadp](#tarea-14-aprendizaje-no-supervisado)
-+ ---
+---
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/clasificación disco.png)
 Figura extraida de:
@@ -703,6 +703,8 @@ Graficamos la matriz de confusión del modelo **QDA** aplicado a predicción de 
 ### Conclusiones Tarea 4
 En esta tarea se utilizaron los métodos **Regresión Logística**, **LDA** y **QDA**. Se resolvió el ejemplo del libro sobre predicción de enfermedades cardiacas con multifactores usando regresión logística y **stepwise**. Además, se utilizó LDA y QDA para resolver un ejemplo sencillo de clasificación de dos variables con tres clases, se hizo el análisis exactitud de los métodos, resultando con muy buenos resultados (score LDA = 0.9906, score QDA = 0.9933), para ambos casos se realizaron figuras donde se observa la clasificación en áreas por medio de hiperplanos. Por último, se realizó el ejercicio de clasificación con datos de regiones eléctricas donde las clases son las regiones y los regresores los resultados de planeación de demanda, generación y pérdidas eléctricas en cada región. Los resultados de **score** sin tranformaciones logarítmicas fueron de LDA = 0.5760 y QDA = 0.3620. Aplicando la transformación logarítmica a las variables de pérdidas y demanda obtuvimos LDA = 0.6549 y QDA = 0.4054.
 
+---
+
 ## **Tarea 5 Expansión de base**
 >**Instructions:** Fit splines into single features in your project data. Explore options to obtain the best fit.
 
@@ -791,6 +793,8 @@ En esta figura Se oberva algunos datos perdidos que no son cubiertos por el ajus
 
 ### Conclusiones Tarea 5
 En esta tarea se utilizó el método **spline** para calcular datos perdidos en dos series de datos, una de demanda eléctrica y otra de aportaciones hidrológicas en presas. Se comparó la exactitud de la interpolación spline con grados polinómicos desde el uno al cinco. El mejor para el caso de demanda eléctrica es el de grado dos (cuadrático) con un error MAE=10.8100. Sin embargo, los resultados de los demás splines fueron muy cercanos. Para el caso de aportaciones hidrológicas, el mejor ajuste de interpolación fue el de orden uno (lineal) con un MAE = 13.5144. Además, se presentan figuras donde se observa el ajuste de los spline a los datos originales así como a los datos perdidos.
+
+---
 
 ## **Tarea 6 Suavizado**
 >**Instructions:** Build some local regression model for your data and adjust the parameters. Remember to read all of Chapter 6 first to get as many ideas as possible.
@@ -937,6 +941,7 @@ Calculamos los errores de los métodos de regresión, para el caso de regresión
 ### **Conclusión tarea 6** 
 En general la regresión local realizada punto por punto tuvo en general un mejor desempeño que el modelo de regresión lineal múltiple (en el caso en que el tamaño del vecindario `k` no conduce a singularidades en el cálculo de los coeficientes beta de la regresión). Además, podemos notar que mientras el tamaño del vecindario `k`=100,50,35,25,17 se hace más péqueño el error (MAE, MSD y MAPE) en el ajuste disminuye. El kernel usado para establecer los pesos fue una distribución radial cuasi-normal, sin embargo pueden hacerse pruebas cambiando el kernel a por ejemplo un tri-cúbico y analizar los resultados. Se ha observado que para algunos vecindarios de menor tamaño es posible encontrar singularidades que nos hace imposible encontrar un modelo de regresión, este problema posiblemente se presente por dependencias lineales en los regresores, para resolverlo se implementó  un procedimiento que incremeneta el tamaño de la ventana hasta encontrar un modelo. Otra opción alternativa para manejar la singularidad es identificar los regresores que pueden estar inflando la varianza y eliminarlos del cálculo de los coeficiente de la regresión, este procedimiento  alternativo puede verse aquí [Tarea6_c.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea6_c.ipynb).
 
+---
 
 ## **Tarea 7 Evaluación**
 >**Instructions:** Apply both cross-validation and bootstrap to your project data to study how variable your results are when you switch the test set around.
@@ -1098,6 +1103,7 @@ Se ha determinado que para obtener un resultado aceptable de error en estos dato
 ### **Conclusión tarea 7** 
 Se realizó un ejercicio de predicción de demanda eléctrica usando una regresión lineal múltiple, sin embargo debido a los pocos datos que se tienen para evaluar el modelo. Se aplicaron técnicas de validación cruzada y **bootstrap**, las cuales son una herramienta poderosa para evaluar la función del error. Ambas técnicas hacen un muestreo con los datos y evaluan el error en el modelo, resulta interesante observar las distribuciones que resultan parecidas a la distribución nornal para el **bootstrap** y para el caso de validación cruzada una distribución exponencial. El uso de estas técnicas tiene como ventaja obtener una distribución más realista del comportamiento del error e inclusive poder calcular intervalos de confianza.
 
+---
 
 ## **Tarea 8 Inferencia**
 >**Instrucciones:** Modelar la sobrecarga a base de observaciones que tienes para llegar a un modelo tipo "en estas condiciones, va a fallar con probabilidad tal".
@@ -1304,6 +1310,8 @@ Los resultados de estimación de parámetros entre el enfoque frecuentista y el 
 Otra cosa que observamos es que a pesar de que los modelos modelos bayesianos que usamos usan distribuciones a priori diferentes, los rendimientos de predicción son similares. Esto quiere decir que a medida que crece el conjunto de datos los resultados deberían converger en la misma solución.
 Para el caso de predicción de sobrecarga en líneas, se aplicó el modelo de regresión logistica ajustado con inferencia bayesiana con ayuda de la librería mencionada. Los resultados fueron predecidos correctamente en su mayoria, como lo evidencia la matriz de confisión. Las distribuciones de los parámetros se asemejan  en su mayoria a una distribución normal. Los resultados animan a seguir trabajando en mejorar la modelación del comportamiento de la sobrecarga eléctrica incluyendo más variables y tranformándolas así como variando las distribuciones a priori.
 
+---
+
 ## **Tarea 9 Modelos Aditivos y Árboles**
 >**Instrucciones:** Read through the spam example used throughout Chapter 9 and make an effort to replicate the steps for your own data. When something isn't quite applicable, discuss the reasons behind this. Be sure to read Sections 9.6 and 9.7 before getting started.
 
@@ -1490,6 +1498,7 @@ Test accuracy árbol =  0.7489
 ### **Conclusión tarea 9**
 Hemos utilizado **pygam** para implementar regresión logistica aditiva y la librería **sklearn*** para calcular un árbol de decisión. Además, se utilizó la función **Logit** de la librería **statsmodel** con el objetivo de comparar los resultados con modelos logísticos con y sin stepwise, además de el mejor subconjunto. Aunque los resultados en exactitud fueron muy semejantes, se encontró que la exacttitud de la regresión logística aditiva fue de 0.7319 y para el árbol de ocho nodos la exactitud de 0.7489. De todos los modelos comparados el que mejor desempeño tuvo fue el de selección del mejor subconjunto con un 0.84680 de exactitud.
 
+---
 
 ## **Tarea 10 Impulso**
 >**Instrucciones:** Replicate the steps of the California housing example of Section 10.14.1 (with some library implementation) unless you really want to go all-in with this) to explore potential dependencies and interactions in the features of your data.
@@ -1574,6 +1583,7 @@ Como puede verse el método **GradientBoostingRegressor** tiene un menor desempe
 ### **Conclusión tarea 10**
 Hemos utilizado la función **ensemble.GradientBoostingRegressor** de la librería **sklearn** para implementar el método de aumento de gradiente en árboles de decisión regresivos. Estos modelos pueden ser de gran utilidad ya que al crear muchas réplicas con modelos de árbol débiles (weak) podemos analizar la relevancia de los predictores en su capacidad de predicción de la variable dependiente e incluso hacer gráficas para analizar su importancia. Por ejemplo, podemos observar el comportamiento de gráficas de dependencia parcial. La densidad de la importancia de una variable se puede interpretar en deciles superpuestos en el eje horizontal. En nuestro caso se observaron una gran variedad de comportamientos de los predictores. Aunque otros métodos pueden dar mejores resultados en exactitud como los de regresión lineal o regresión local, la ventaja de estos métodos radica en poder hacer estudios de sensibilidad de los predictores.
 
+---
 
 ## **Tarea 11 Redes Neuronales**
 >**Instrucciones:** Go over the steps of the ZIP code examples in Chapter 11 and replicate as much as you can with your own project data. Don't forget to read the whole chapter before you start.
@@ -1851,6 +1861,8 @@ En general el desempeño de las cinco redes fue muy malo para nuestros datos, pa
 En el segundo ejercico donde se realizaron redes neuronales independientes uno por cada línea, se tuvieron mejores resultados con la red **Net-2** y la red  **Net-1**. La exactitud de los modelos de predicción por línea fue en general mayor que de manera conjunta. 
 
 Concluimos para nuestro problema que la complejidad del árbol está relacionada también con el tiempo de entrenamiento y complejidad de una red neuronal. 
+
+---
 
 ## **Tarea 12 Máquinas de Vectores de Soporte**
 >**Instrucciones:** Pick either (a variant of) SVM or a generalization of LDA and apply it on your project data. Remember to analyze properly the effects of parameters and design choices in the prediction error.
@@ -2234,13 +2246,16 @@ Test MAE OLS + stepwise=  149.97166666666666
 ### Conclusiones tarea 12
 En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hora. Diversas condiciones climáticas principalmente la nubosidad provocan que la producción de una planta fotovoltaica sea diferente a la de cielo despejado. Los métodos de agrupamiento utilizados fueron **k-means, LVQ, Gaussian mixtures** y **KNN** usando las librerias de **sklearn**. Además se implementó el **KNN** para encontrar los `k` dias mas parecidos a un día determinado. Este método se probó con los centroides previamente encontrados en el **k-means**. Adicionalmente, se implementó el método propuesto por [Grzegorz Dudek](https://doi.org/10.1016/j.epsr.2015.09.001) para extraer muestras de una serie de tiempo usando **KNN**  y haciendo una regresión con las muestras encontradas para obtener un pronóstico. Para probar el método se usaron datos de aportaciones hidrológicas de presa Peñitas en México.
 
-
 ---
 
 ## **Tarea 14 Aprendizaje no supervisado**
 >**Instrucciones:** After reading the whole chapter, pick any three techniques introduced in it and apply them to your data. Make use of as many libraries as you please in this occasion. Discuss the drawbacks and advantages of each of the chosen techniques.
 
-### Análisis de Componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
-Análisis de componentes principales es un métodos de reducción de dimensiones que puede ser usado paraescoger un subconjunto de variables que expliquen la mayor varianza, es decir que representen en mayor medida los datos originales. Además, el método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y ser ortogonales entre si. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo por ejemplo una regresión.
+Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [Eolicas.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea14.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_aportaciones_prono3.png)
+### Análisis de componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
+Análisis de componentes principales es un métodos de reducción de dimensiones que puede ser usado paraescoger un subconjunto de variables que expliquen la mayor varianza, es decir, que representen en mayor medida los datos originales. Además, el método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y ser ortogonales entre si. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo por ejemplo una regresión.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_dem.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14__variance_pca_9999per.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png)
