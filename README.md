@@ -2257,15 +2257,15 @@ En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hor
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [Eolicas.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea14.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Análisis de componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
-Análisis de componentes principales es un método de reducción de dimensiones que puede ser usado para representen con menos variables los datos originales. El método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y demás ser ortogonales entre si, esto ayuda a prevenir multicolinealidad en modelos de regresión. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo.
+Análisis de componentes principales es un método de reducción de dimensiones que puede ser usado para representar con menos variables los datos originales. El método genera otras variables sintéticas llamadas **componentes** que pueden explicar partes importantes del fenómeno y demás ser ortogonales entre si, esto ayuda a prevenir [multicolinealidad](https://medium.com/@awabmohammedomer/principal-component-analysis-pca-in-python-6897664f97d6#:~:text=PCA%20aims%20to%20reduce%20dimensionality,original%20data%20with%20less%20noise.) en modelos de regresión. Estos **componentes** principales pueden utilizarse como regresores para ajustar un nuevo modelo.
 
-Por ejemplo, tenemos un conjunto de datos de demanda de 18 dias y queremos obtener un modelo de regresión que explique los datos de hoy con los días pasados. Sin embargo, al graficar los días observamos una alta correlación entre estos dias, por supuesto este es un comportamiento esperado debido a que estos dias fueron seleccionados por una similitud con el actual. Por lo que necesitamos un método que además de reducir las dimensiones también sea capaz de reducir el factor de inflación de la varianza (VIF).
+Por ejemplo, tenemos un conjunto de datos de demanda de 18 dias y queremos obtener un modelo de regresión que explique los datos de hoy con los días pasados. Sin embargo, al graficar los días observamos una alta correlación entre estos dias, por supuesto este es un comportamiento esperado debido a que estos dias fueron seleccionados por una similitud con el actual. Por lo que necesitamos un método que además de reducir las dimensiones también sea capaz de reducir el factor de inflación de la varianza (**VIF**).
 
 A continuación se muestra la matriz de correlación de los regresores [X]:
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_dem.png)
 
-Se calculan los datos del VIF de cada regresor, un VIF de arriba de 20 es muy alto y puede traer problemas para la solución del sistema lineal que encuentra los coeficientes de la regresión.
+Se calculan los datos del **VIF** de cada regresor, un **VIF** de arriba de 20 es muy alto y puede traer problemas para la solución del sistema lineal que encuentra los coeficientes de la regresión.
 
 Ahora, calculamos la **regresión lineal múltiple** entre los datos de demanda del día de hoy `y_train` y los datos de los días pasados `X_train`. También calculamos el error MAE entre la regresión con los datos de entrenamiento y los de prueba `X_test`.
 ```python
@@ -2284,7 +2284,8 @@ Además, se calculan los datos del **VIF** de cada regresor, un **VIF** de arrib
 # calculating VIF for each feature
 for i in range(X_train.shape[1]):
     print('X[',i,'] =',variance_inflation_factor(X_train,i))  
-    
+```
+```    
 VIF X[ 1 ] = 19.268815602047138
 VIF X[ 2 ] = 25.900291272307413
 VIF X[ 3 ] = 21.75005645732436
@@ -2335,7 +2336,8 @@ Además, una ventaja de las nuevas variables es que el VIF se ha reducido tal co
 # calculating VIF for each feature
 for i in range(X_pcat.shape[1]):
     print('X_pca[',i,'] =',variance_inflation_factor(X_pcat,i))
-    
+```
+```
 VIF X_pca[ 0 ] = 1.0916455582847158
 VIF X_pca[ 1 ] = 1.0601004320461906
 VIF X_pca[ 2 ] = 1.1168117876529722
@@ -2356,9 +2358,11 @@ VIF X_pca[ 16 ] = 1.08919860941622
 VIF X_pca[ 17 ] = 1.0832319910231567
 ```
 
-Finalmente, aplicaremos **PCA** para reducción de dimensiones en nuestros datos. Explicaremos el 98% de la varianza en nuestros datos. El número de componentes resultante es de ocho, en la gráfica siguiente se muestra cada componente y su varianza explicada.
+Finalmente, después de demostrar las ventajas y utilidad del **PCA** en la regresión, la utilizaremos para reducir las dimensiones en nuestros datos. Explicaremos el 98% de la varianza con nuestras nuevas variables. El número de **componentes** resultante es de ocho, en la gráfica siguiente se muestra cada **componente** y su varianza explicada.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png).
- Además, la reducción del VIF es notable y el error es muy semejante a los errores obtenidos con los datos originales.
+
+Además, la reducción del **VIF** es notable y el error MAE es muy semejante a los errores obtenidos con los datos originales.
+ 
 ```
 VIF X_pca[ 0 ] = 1.0202126662701723
 VIF X_pca[ 1 ] = 1.0309617986088888
@@ -2372,7 +2376,7 @@ VIF X_pca[ 7 ] = 1.0088605587066386
 MAE del modelo de regresión con datos de entrenamiento con sklearn: 111.79413703293265
 MAE del modelo de regresión con datos de prueba con sklearn: 130.55280746630132
 ```
-Adicionalmente, un diagrama de correlación entre los componentes puede confirmar que la baja correlación entre las nuevas variables.
+Adicionalmente, un diagrama de correlación entre los componentes puede confirmar que la baja correlación entre los componentes.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
 
 
