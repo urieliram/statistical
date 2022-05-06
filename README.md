@@ -2439,3 +2439,9 @@ Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede
 |    3           | EOL33, EOL34, EOL25  |
 |    4           | EOL35, EOL36         |
 
+
+### Agrupamiento jerárquico
+En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un dendograma como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. 
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.PNG)
+
+
