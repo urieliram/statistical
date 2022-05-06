@@ -2256,6 +2256,7 @@ En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hor
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [Eolicas.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea14.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Análisis de componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
+
 Análisis de componentes principales es un método de reducción de dimensiones que puede ser usado para representar con menos variables los datos originales. El método genera otras variables sintéticas llamadas **componentes** que pueden explicar partes importantes del fenómeno y demás ser ortogonales entre si, esto ayuda a prevenir [multicolinealidad](https://medium.com/@awabmohammedomer/principal-component-analysis-pca-in-python-6897664f97d6#:~:text=PCA%20aims%20to%20reduce%20dimensionality,original%20data%20with%20less%20noise.) en modelos de regresión. Estos **componentes** principales pueden utilizarse como regresores para ajustar un nuevo modelo.
 
 Por ejemplo, tenemos un conjunto de datos de demanda de 18 dias y queremos obtener un modelo de regresión que explique los datos de hoy con los días pasados. Sin embargo, al graficar los días observamos una alta correlación entre estos dias, por supuesto este es un comportamiento esperado debido a que estos dias fueron seleccionados por una similitud con el actual. Por lo que necesitamos un método que además de reducir las dimensiones también sea capaz de reducir el factor de inflación de la varianza (**VIF**).
@@ -2315,6 +2316,7 @@ X_pcat = pca.transform(X_test)
 print(sum(pca.explained_variance_ratio_ * 100))
 ```
 El diagrama siguiente muestra en el eje de las `x` los componentes y en el eje de las `y` el nivel de varianza explicado, la suma de toda la varianza explicada es aproximadamente de 99.99%. El número de componentes encontrado es de 17.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14__variance_pca_9999per.png)
 
 Ahora, calculamos la **regresión lineal múltiple** entre los datos de demanda del día de hoy `y_train` y los componentes `X_pca`. También calculamos el error MAE entre la regresión con los datos de entrenamiento y los de prueba `X_pcat`.
@@ -2324,7 +2326,8 @@ err2_mae = np.mean(np.abs(y_train - linreg_model.predict(X_pca)))
 err2_mae_test = np.mean(np.abs(y_test - linreg_model.predict(X_pcat)))
 print("MAE del modelo de regresión con datos de entrenamiento con sklearn:", err2_mae)
 print("MAE del modelo de regresión con datos de prueba con sklearn:", err2_mae_test)
-
+```
+```
 MAE del modelo de regresión con datos de entrenamiento con sklearn: 102.03653229489727
 MAE del modelo de regresión con datos de prueba con sklearn: 131.86027342669115
 ```
@@ -2356,12 +2359,11 @@ VIF X_pca[ 15 ] = 1.1459797454302063
 VIF X_pca[ 16 ] = 1.08919860941622
 VIF X_pca[ 17 ] = 1.0832319910231567
 ```
-
 Finalmente, después de demostrar las ventajas y utilidad del **PCA** en la regresión, la utilizaremos para reducir las dimensiones en nuestros datos. Explicaremos el 98% de la varianza con nuestras nuevas variables. El número de **componentes** resultante es de ocho, en la gráfica siguiente se muestra cada **componente** y su varianza explicada.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png).
 
 Además, la reducción del **VIF** es notable y el error MAE es muy semejante a los errores obtenidos con los datos originales.
- 
 ```
 VIF X_pca[ 0 ] = 1.0202126662701723
 VIF X_pca[ 1 ] = 1.0309617986088888
@@ -2381,7 +2383,7 @@ Adicionalmente, un diagrama de correlación entre los componentes puede confirma
 
 ### Análisis factorial en la selección de parques eólicos representativos por regiones.
 
-En México, una gran cantidad de párques eólicos se han instalado en el territorio en los últimos años. Los parques están distribuidos en su mayoria en en el Itzmo de Tehuantepec, Oaxaca. Pero tenemos algunos en Chiapas, Nuevo León, Baja California y otros estados. La generación eólica es tan intermitente como su fuente primaria, el viento. Por lo que es necesario preveer su producción de la mejor manera. Algunas técnicas de pronóstico son mas eficientes si se hace un pronóstico por región y no por parque, esta técnica llamada **Upscalling** fue inicialmente propuesta por [Nils Siebert y Georges Kariniotakis](https://hal-mines-paristech.archives-ouvertes.fr/file/index/docid/526690/filename/EWEC_2006_SIEBERT_KARINIOTAKIS.pdf) y aplicada en Dinamarca. 
+En México, se han instalado una gran cantidad de párques eólicos en los últimos años. Los parques están distribuidos en su mayoria en en el Itzmo de Tehuantepec, Oaxaca, pero tenemos algunos en Chiapas, Nuevo León, Tamaulipas, Baja California y otros estados. La generación eólica es tan intermitente como el viento, su fuente  de energía primaria. Por lo que es necesario pronosticar su producción de la mejor manera. Algunas técnicas de pronóstico son mas eficientes si se hace un pronóstico por región y no por parque, estas técnicas llamadas **Upscalling** fueron inicialmente propuestas por [Nils Siebert y Georges Kariniotakis](https://hal-mines-paristech.archives-ouvertes.fr/file/index/docid/526690/filename/EWEC_2006_SIEBERT_KARINIOTAKIS.pdf) y aplicadas en Dinamarca. 
 
 En esta sección de la tarea usaremos la técnica de análisis factorial (**AF**) para hacer **upscalling** en 35 parques eólicos de diferentes regiones con datos de generación de aproximadamente un año.
 
@@ -2427,9 +2429,10 @@ plt.tight_layout()
 plt.savefig('fig_t14_varimax', transparent=True) 
 plt.show()
 ```
-La técnica de **FA** a diferencia de **PCA**, puede ayudar a descubrir patrones latentes. Además, aunque la rotación **varimax** a los componentes no mejora la calidad de la predicción, puede ayudar a visualizar su estructura. Podemos decir que el FA con varimax puede dar más nitidéz de la pertenencia de las variables a los factores.
+La técnica de **AF** a diferencia de **PCA**, puede ayudar a descubrir patrones latentes. Además, aunque la rotación **varimax** a los componentes no mejora la calidad de la predicción, puede ayudar a visualizar su estructura. Podemos decir que el FA con varimax puede dar más nitidéz de la pertenencia de las variables a los factores.
 
-Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede ayudar a identificar los parques que tienen un comportamiento parecido. En el siguiente gráfico se observa que en *FA con rotación varimax* la pertenencia de las variables [EOL1,EOL2...EOL36] a los factores [F1,F2,F3,F4] es más evidente. 
+Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede ayudar a identificar los parques que tienen un comportamiento parecido. En el siguiente gráfico se observa que en *FA con rotación varimax* la pertenencia de las variables [EOL1,EOL2...EOL36] a los factores [F1,F2,F3,F4] es más evidente.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_varimax.png)
 
 | FACTOR         | PARQUES              |
@@ -2441,11 +2444,33 @@ Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede
 
 
 ### Agrupamiento jerárquico
-En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un dendograma como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. Un tutorial para aprender a interpretar el dendograma es encontrado [Dendograma Minitab](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/cluster-observations/interpret-the-results/all-statistics-and-graphs/dendrogram/)
+
+En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un **dendograma** como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. Un tutorial para aprender a interpretar el dendograma es encontrado [Dendograma Minitab](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/cluster-observations/interpret-the-results/all-statistics-and-graphs/dendrogram/)
+
+
+
+```python
+import scipy.cluster.hierarchy as shc
+
+fig, ax = plt.subplots(figsize=(10,10))
+plt.tick_params(colors = LETRASNARA, which='both')
+ax.spines['bottom'].set_color(LETRASNARA)
+ax.spines['top'   ].set_color(LETRASNARA) 
+ax.spines['right' ].set_color(LETRASNARA)
+ax.spines['left'  ].set_color(LETRASNARA)    
+
+plt.title("Dendograma de agrupamiento jerárquico",color=LETRASNARA,fontsize='x-large')
+
+dend = shc.dendrogram(shc.linkage(X.T, method='ward'))
+
+plt.savefig('fig_t14_dendogram2', transparent=True)  
+plt.show()
+
+```
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.png)
 
-El dendrograma presentado está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables: 18,16,17,4,28,2,3,5,6,20,26,22,11,12,10,1,13,15,8,14,19,25,7,9,0,30; que corresponden a los parques: EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31. El segundo conglomerado, se compone de las nueve variables: 33,34,29,23,27,31,32,21,24; que corresponden a los parques: EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25.  
+El dendrograma presentado que jerarquiza los parques por similitud está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables: 18,16,17,4,28,2,3,5,6,20,26,22,11,12,10,1,13,15,8,14,19,25,7,9,0,30; que corresponden a los parques: EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31. El segundo conglomerado, se compone de las nueve variables: 33,34,29,23,27,31,32,21,24; que corresponden a los parques: EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25.  
 
 | CONGLOMERADO   | PARQUES                                        |
 | :------------- | :-------------:                                |
