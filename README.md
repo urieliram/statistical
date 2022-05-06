@@ -2387,6 +2387,9 @@ Adicionalmente, un diagrama de correlación entre los componentes puede confirma
 
 En México, se han instalado una gran cantidad de párques eólicos en los últimos años. Los parques están distribuidos en su mayoria en en el Itzmo de Tehuantepec, Oaxaca, pero tenemos algunos en Chiapas, Nuevo León, Tamaulipas, Baja California y otros estados. La generación eólica es tan intermitente como el viento, su fuente  de energía primaria. Por lo que es necesario pronosticar su producción de la mejor manera. Algunas técnicas de pronóstico son mas eficientes si se hace un pronóstico por región y no por parque, estas técnicas llamadas **Upscalling** fueron inicialmente propuestas por [Nils Siebert y Georges Kariniotakis](https://hal-mines-paristech.archives-ouvertes.fr/file/index/docid/526690/filename/EWEC_2006_SIEBERT_KARINIOTAKIS.pdf) y aplicadas en Dinamarca. 
 
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/01-parques-eolicos-istmo.png)
+
 En esta sección de la tarea usaremos la técnica de análisis factorial (**AF**) para hacer **upscalling** en 35 parques eólicos de diferentes regiones con datos de generación de aproximadamente un año.
 
 Iniciamos haciendo un análisis exploratorio para confirmar la alta correlación entre algunos de los parques debido a que la mayoría de ellos se encuentran en la región de Oaxaca y Chiapas.
