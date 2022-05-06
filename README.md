@@ -18,6 +18,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 12 Máquinas de Vectores de Soporte](#tarea-12-máquinas-de-vectores-de-soporte)
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
 + [Tarea 14 Aprendizaje no supervisadp](#tarea-14-aprendizaje-no-supervisado)
+
 ---
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/clasificación disco.png)
@@ -53,7 +54,9 @@ Preguntas de investigación:
 Otras preguntas indirectamente relacionadas pero que se tienen datos para estudiar:
 
 1. ¿Es posible predecir la aportación de agua de un embalse de un mes teniendo en cuenta las aportaciones mensuales de los demás embalses en una cuenca?. 
+
 ---
+
 ## Tarea 2 Aprendizaje supervisado
 
 >Instructions: First carry out Exercise 2.8 of the textbook with their ZIP-code data and then replicate the process the best you manage to some data from you own problem that was established in the first homework.
@@ -2254,11 +2257,106 @@ En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hor
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [Eolicas.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea14.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
 ### Análisis de componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
-Análisis de componentes principales es un métodos de reducción de dimensiones que puede ser usado paraescoger un subconjunto de variables que expliquen la mayor varianza, es decir, que representen en mayor medida los datos originales. Además, el método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y ser ortogonales entre si. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo por ejemplo una regresión.
+Análisis de componentes principales es un método de reducción de dimensiones que puede ser usado para representen con menos variables los datos originales. El método genera otras variables sintéticas llamadas componentes que pueden explicar partes importantes del fenómeno y demás ser ortogonales entre si, esto ayuda a prevenir multicolinealidad en modelos de regresión. Estos componentes principales pueden utilizarse como regresores para ajustar un nuevo modelo.
+
+Por ejemplo, tenemos un conjunto de datos de demanda de 18 dias y queremos obtener un modelo de regresión que explique los datos de hoy con los días pasados. Sin embargo, al graficar los días observamos una alta correlación entre estos dias, por supuesto este es un comportamiento esperado debido a que estos dias fueron seleccionados por una similitud con el actual. Por lo que necesitamos un método que además de reducir las dimensiones también sea capaz de reducir el factor de inflación de la varianza (VIF).
+
+A continuación se muestra la matriz de correlación de los regresores [X]:
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_dem.png)
 
+Se calculan los datos del VIF de cada regresor, un VIF de arriba de 20 es muy alto y puede traer problemas para la solución del sistema lineal que encuentra los coeficientes de la regresión.
+
+Ahora, calculamos la **regresión lineal múltiple** entre los datos de demanda del día de hoy `y_train` y los datos de los días pasados `X_train`. También calculamos el error MAE entre la regresión con los datos de entrenamiento y los de prueba `X_test`.
+```python
+model = LinearRegression().fit(X_train[:, :], y_train)
+err1_mae = np.mean(np.abs(y_train - model.predict(X_train)))
+err1_mae_test = np.mean(np.abs(y_test - model.predict(X_test)))
+print("MAE del modelo de regresión con datos de entrenamiento con sklearn:", err1_mae)
+print("MAE del modelo de regresión con datos de prueba con sklearn:", err1_mae_test)
+
+MAE del modelo de regresión con datos de entrenamiento con sklearn: 102.03653229489723
+MAE del modelo de regresión con datos de prueba con sklearn: 131.86027342669107
+```
+
+Además, se calculan los datos del VIF de cada regresor, un VIF de arriba de 20 es un factor muy alto, que puede traer problemas para la solución del sistema lineal que encuentra los coeficientes de la regresión. Como s epuede ver los niveles de VIF son muy altos en nuestros datos originales.
+```python
+# calculating VIF for each feature
+for i in range(X_train.shape[1]):
+    print('X[',i,'] =',variance_inflation_factor(X_train,i))  
+X[ 1 ] = 19.268815602047138
+X[ 2 ] = 25.900291272307413
+X[ 3 ] = 21.75005645732436
+X[ 4 ] = 31.3039369332227
+X[ 5 ] = 16.94503888144909
+X[ 6 ] = 23.182547018706778
+X[ 7 ] = 21.415405802141464
+X[ 8 ] = 32.21371857799564
+X[ 9 ] = 13.042998282179228
+X[ 10 ] = 19.990213915947887
+X[ 11 ] = 18.269618431784952
+X[ 12 ] = 9.088089141611725
+X[ 13 ] = 4.594616265979086
+X[ 14 ] = 33.45388030260464
+X[ 15 ] = 26.546509209585857
+X[ 16 ] = 31.938715377963362
+X[ 17 ] = 17.948772566166706
+X[ 18 ] = 21.219310770169713
+```
+
+Ahora, usaremos PCA para obtener los componentes que capturen la información de un porcentaje de la varianza. Los componenetes encontrados, serán usados como variables se utilizan como regresores al ajustar un nuevo modelo de regresión.
+Obtenemos los **componentes principales** tratando de explicar la mayor cantidad de varianza posible al 99.99%.
+```python
+pca = PCA(0.9999) 
+pca.fit(X_train)
+X_pca = pca.transform(X_train)
+X_pcat = pca.transform(X_test)
+print(sum(pca.explained_variance_ratio_ * 100))
+```
+El diagrama siguiente muestra en el eje de las `x` los componentes y en el eje de las `y` el nivel de varianza explicado, la suma de toda la varianza explicada es aproximadamente de 99.99%. El número de componentes encontrado es de 17.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14__variance_pca_9999per.png)
+
+
+Ahora, calculamos la **regresión lineal múltiple** entre los datos de demanda del día de hoy `y_train` y los componentes `X_pca`. También calculamos el error MAE entre la regresión con los datos de entrenamiento y los de prueba `X_pcat`.
+```python
+linreg_model      = LinearRegression().fit(X_pca[:, :], y_train)
+err2_mae = np.mean(np.abs(y_train - linreg_model.predict(X_pca)))
+err2_mae_test = np.mean(np.abs(y_test - linreg_model.predict(X_pcat)))
+print("MAE del modelo de regresión con datos de entrenamiento con sklearn:", err2_mae)
+print("MAE del modelo de regresión con datos de prueba con sklearn:", err2_mae_test)
+
+MAE del modelo de regresión con datos de entrenamiento con sklearn: 102.03653229489727
+MAE del modelo de regresión con datos de prueba con sklearn: 131.86027342669115
+```
+Los resultados del error en el ajuste de los datos de entrenamiento y prueba entre los datos originales (`X_train`,`X_test`) y los componentes calculados con **PCA** (`X_train`,`X_test`) son muy parecidos.
+
+Además, una ventaja de las nuevas variables es que el VIF se ha reducido tal como se muestra a continuación:
+```python
+# calculating VIF for each feature
+for i in range(X_pcat.shape[1]):
+    print('X_pca[',i,'] =',variance_inflation_factor(X_pcat,i))
+X_pca[ 0 ] = 1.0916455582847158
+X_pca[ 1 ] = 1.0601004320461906
+X_pca[ 2 ] = 1.1168117876529722
+X_pca[ 3 ] = 1.1457894613708417
+X_pca[ 4 ] = 1.1523412120435788
+X_pca[ 5 ] = 1.1536215578353162
+X_pca[ 6 ] = 1.1491477461449198
+X_pca[ 7 ] = 1.0731741487998225
+X_pca[ 8 ] = 1.1136973711933749
+X_pca[ 9 ] = 1.0868154380237036
+X_pca[ 10 ] = 1.0707778739647433
+X_pca[ 11 ] = 1.1465545728928228
+X_pca[ 12 ] = 1.1145628898435251
+X_pca[ 13 ] = 1.0872008821946384
+X_pca[ 14 ] = 1.1077344674401515
+X_pca[ 15 ] = 1.1459797454302063
+X_pca[ 16 ] = 1.08919860941622
+X_pca[ 17 ] = 1.0832319910231567
+```
+
+
+
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_variance_pca2_98perc.png)
 
