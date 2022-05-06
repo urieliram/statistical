@@ -2263,7 +2263,7 @@ Análisis de componentes principales es un método de reducción de dimensiones 
 
 Por ejemplo, tenemos un conjunto de datos de demanda de 18 dias y queremos obtener un modelo de regresión que explique los datos de hoy con los días pasados. Sin embargo, al graficar los días observamos una alta correlación entre estos dias, por supuesto este es un comportamiento esperado debido a que estos dias fueron seleccionados por una similitud con el actual. Por lo que necesitamos un método que además de reducir las dimensiones también sea capaz de reducir el factor de inflación de la varianza (**VIF**).
 
-A continuación se muestra la matriz de correlación de los regresores [X]:
+A continuación se muestra la matriz de correlación de los regresores, para una mayor claridad solo se han graficado las variables `X1` al `X12` de las 17.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_dem.png)
 
