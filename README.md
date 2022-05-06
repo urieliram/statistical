@@ -17,7 +17,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 11 Redes neuronales](#tarea-11-redes-neuronales)
 + [Tarea 12 Máquinas de Vectores de Soporte](#tarea-12-máquinas-de-vectores-de-soporte)
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
-+ [Tarea 14 Aprendizaje no supervisadp](#tarea-14-aprendizaje-no-supervisado)
++ [Tarea 14 Aprendizaje no supervisado](#tarea-14-aprendizaje-no-supervisado)
 
 ---
 
@@ -2442,12 +2442,11 @@ Aunque esta técnica es un poco subjetiva (tal como lo menciona el libro), puede
 |    3           | EOL33, EOL34, EOL25, EOL29 |
 |    4           | EOL35, EOL36         |
 
+Un tutorial para interpretar los resultados del **AF** puede verse en esta [liga al tutorial](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/factor-analysis/interpret-the-results/all-statistics-and-graphs/)
 
 ### Agrupamiento jerárquico
 
 En la sección `14.3.12 Hierarchical Clustering` del [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7) se discute la construcción de un **dendograma** como  herramienta de análisis posterior al agrupamiento de en este caso las variables de generación eólica de los 35 parques en México. Un tutorial para aprender a interpretar el dendograma es encontrado [Dendograma Minitab](https://support.minitab.com/es-mx/minitab/18/help-and-how-to/modeling-statistics/multivariate/how-to/cluster-observations/interpret-the-results/all-statistics-and-graphs/dendrogram/)
-
-
 
 ```python
 import scipy.cluster.hierarchy as shc
@@ -2470,13 +2469,22 @@ plt.show()
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_dendogram.png)
 
-El dendrograma presentado que jerarquiza los parques por similitud está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables: 18,16,17,4,28,2,3,5,6,20,26,22,11,12,10,1,13,15,8,14,19,25,7,9,0,30; que corresponden a los parques: EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31. El segundo conglomerado, se compone de las nueve variables: 33,34,29,23,27,31,32,21,24; que corresponden a los parques: EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25.  
+El dendrograma presentado que jerarquiza los parques por similitud está dividido en dos conglomerados (uno en verde y uno en azul), lo cual ocurre a un nivel de similitud de aproximadamente 160. El primer conglomerado (verde) se compone de las 26 variables: 18,16,17,4,28,2,3,5,6,20,26,22,11,12,10,1,13,15,8,14,19,25,7,9,0,30; que corresponden a los parques: EOL19, EOL17, EOL18, EOL5, EOL29, EOL3, EOL4, EOL6, EOL7, EOL21, EOL27, EOL23, EOL12, EOL13, EOL11, EOL2, EOL14, EOL16, EOL9, EOL15, EOL20, EOL26, EOL8, EOL10, EOL1, EOL31. El segundo conglomerado, se compone de las nueve variables: 33,34,29,23,27,31,32,21,24; que corresponden a los parques: EOL34, EOL35, EOL30, EOL24, EOL28, EOL32, EOL33, EOL22, EOL25.  Los resltados de la agrupación en 2 conglomerados se resume en la siguiente tabla:
 
 | CONGLOMERADO   | PARQUES                                        |
 | :------------- | :-------------:                                |
 |    1           | EOL1-EOL21, EOL23, EOL26, EOL27, EOL29, EOL31  |
 |    2           | EOL22, EOL24, EOL25, EOL28, EOL30, EOL32-EOL35 |
 
-Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las propuestas por el método **FA**, sin embargo, con el dendograma podemos hacer un análisis de similitud entre parques que con el **FA**. Además, que si cortamos el dendograma más abajo, podemos crear un mayor número de conglomeradosde menor tamaño que hará que el nivel de similitud de los elementos sea mayor.
+Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las propuestas por el método **AF**, sin embargo, con el dendograma podemos hacer un análisis de similitud entre parques que con el **AF**. Además, que si cortamos el dendograma más abajo, podemos crear un mayor número de conglomeradosde menor tamaño que hará que el nivel de similitud de los elementos sea mayor.
 
+### Conclusiones tarea 12
+En esta tarea se demostró la utilidad del **PCA** como reductor de dimensiones y además como reductor de la índice de inflación de la varianza VIF, se utilizaron los  componentes reduciendo el número de regresores en pronóstico de demanda. Las pruebas demostraron la equivalencia en exactitud entre las variables originales y las variables  por componetes. El método es eficaz para reducir la multicolinealidad. Además, se agruparon parques eólicos usando la técnica de **análisis factorial** y la de **conglomerados jerárquicos**. en el método de **AF** se obtuvieron los pesos de cada variable sobre el cada factor y se agruparon las que tenian un peso mayor. Para el cado de conglomerados jerárquicos, se usó un dendograma. En el que facilmente puede visualizarse la cercania o similitud entre los elementos. Los resultados entre ambas técnicas fueron en su mayoria semejentes. Sin embargo el dendograma permite visualizar la relación entre las variables. 
+
+---
+
+## **Tarea 15 Bosque aleatorio**
+>**Instrucciones:** .
+
+Los datos de demanda están disponibles en [XXX.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [XX.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
