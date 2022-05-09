@@ -2514,7 +2514,6 @@ En la gráfica siguiente mostramos la importancia de las variables en el **RF**,
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importance_pearson_RF.png)
 
-
 Otro modelo de **RT** es entrenado usando la librería **GridSearchCV** para sintonizar los parámetros del modelo. La selección es automática combinando los siguientes parámetros:
 
 ```python
@@ -2539,7 +2538,7 @@ min_samples_split: 2
 
 Ahora mostramos la importancia de las variables del **RF** entrenado con **GridSearchCV**:
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importancia_pearson_AutoRF.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importance_pearson_AutoRF.png)
 
 Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Con el objetivo de comparar los resultados usamos regresión lineal múltiple (**OLS**) con **stepwise**.
 
