@@ -1593,7 +1593,6 @@ Hemos utilizado la función **ensemble.GradientBoostingRegressor** de la librer�
 ## **Tarea 11 Redes Neuronales**
 >**Instrucciones:** Go over the steps of the ZIP code examples in Chapter 11 and replicate as much as you can with your own project data. Don't forget to read the whole chapter before you start.
 
-
 ### Predicción de sobrecarga en grupos de líneas de transmisión usando Redes Neuronales Artificiales.
 En esta sección se usaran redes neuronales para ajustar un modelo de predicción en datos de violación de flujo de potencia eléctrica en grupos de líneas de transmisión, que interconectan regiones eléctricas. La variable dependientes son un vector de naturaleza binaria dónde cada componente del vector representa una línea de transmisión. El valor cuando una línea presenta sobrecarga es uno y cero si no. Las variables independientes son el flujo neto máximo y mínimo en la región eléctrica [CEN,GUA,NES,NOR,NTE,OCC,ORI,PEN] en un día y se calcula como la diferencia entre la demanda menos la generación en cada región.
 
@@ -2381,6 +2380,7 @@ MAE del modelo de regresión con datos de entrenamiento con sklearn: 111.7941370
 MAE del modelo de regresión con datos de prueba con sklearn: 130.55280746630132
 ```
 Adicionalmente, un diagrama de correlación entre los componentes puede confirmar que la baja correlación entre los componentes.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t14_corr_pca.png)
 
 
