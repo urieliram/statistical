@@ -2538,7 +2538,7 @@ Ahora mostramos la importancia de las variables del **RF** entrenado con **GridS
 
 Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Con el objetivo de comparar los resultados usamos regresión lineal múltiple (**OLS**) con **stepwise**.
 
-La comparación de resultados se muestra en la tabla siguiente:
+La comparación de los resultados de error de los pronósticos se muestra en la tabla siguiente:
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
 | :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:        |
 | PEARSON        | OLS + STEP     | 0.4435          | 2.8163          | 9.0354               |    1.6785 |
