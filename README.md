@@ -2546,10 +2546,11 @@ Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usa
 La comparación de los resultados de error de los pronósticos se muestra en la tabla siguiente:
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
 | :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:        |
-| PEARSON        | OLS + STEP     | 0.4435          | 2.8163          | 9.0354               |    1.6785 |
-| EUCLIDIAN      | OLS + STEP     | 0.8996           | 6.1071            | 59.4976              |    0.9918 |
-| PEARSON        | RF             | 0.3975          | 3.1059           | 6.9933               |    3.7904 |
-| EUCLIDIAN      | RF             | 0.2428           | 2.0313          | 33.4863               |    3.7945  |
+| PEARSON        | OLS + STEP     | 0.4435          | 2.8163           |  9.171               |    1.257 |
+| EUCLIDIAN      | OLS + STEP     | 0.8996          | 6.1071           | 33.6121              |    0.6486 |
+| PEARSON        | RF             | 0.3975          | 3.1059           |  5.9242              |    4.2898 |
+| PEARSON        | AutoRF         | 0.3434          | 2.8154           |  6.9289              |    166.409 |
+| EUCLIDIAN      | RF             | 0.2428          | 2.0313           | 22.1438              |    1.8067  |
 
 Por último, se comparan los pronósticos obtenidos contra los datos reales. Los resultados son mucho mejor con la regresión con **RF** que con la regresión lineal.
 
