@@ -2492,8 +2492,11 @@ Por otro lado, se agruparon parques eólicos usando la técnica de análisis fac
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea usaremos la técnica de bosque aleatorio (**RF**) en su versión de regresión para predecir la demanda eléctrica de los próximos siete dias, a partir de datos de semanas con alta correlación con la semana actual, la selección de las semanas correlacionadas será utilizando vecinos más cercanos (**KNN**) y las medidas de correlación serán el coeficiente de correlación de pearson y la distancia euclidiana. Los resultados serán comparados con los obtenidos por **RF** y la regresión lineal múltiple (**OLS**) con su versión de **stepwise** con una significancia de 0.001. 
+En esta tarea usaremos la técnica de bosque aleatorio (**RF**) en su versión de regresión para predecir la demanda eléctrica de los próximos siete dias, a partir de datos de semanas con alta correlación con la semana actual, la selección de las semanas correlacionadas será utilizando vecinos más cercanos (**KNN**) y las medidas de correlación serán el coeficiente de correlación de pearson y la distancia euclidiana. Los resultados serán comparados con los obtenidos por **RF** y la regresión lineal múltiple (**OLS**) con su versión de **stepwise** con una significancia de 0.001.
 
+A continuación, presentamos las serie de tiempo de demanda eléctrica que se desea pronosticar, se muestran solo nueve semanas, la última semana en azul, será usada como prueba, mientras que la serie color café será de entrenamiento.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_demanda.png)
 Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** de la librería **sklearn**. Además, entrenaremos un grupo de **RF** utilizando los parámetros por defecto y otro grupo será entrenado usando la librería **GridSearchCV** para sintonizar los parámetros del modelo. La selección es automática combinando los siguientes parámetros:
 ```
         param_grid = { 
@@ -2504,10 +2507,6 @@ Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** d
         'min_samples_leaf': [1, 2, 4],
         'min_samples_split': [2, 5, 10],}
 ```
-A continuación, presentamos las serie de tiempo de demanda eléctrica que se desea pronosticar, se muestran solo nueve semanas, la última semana en azul, será usada como prueba, mientras que la serie ne café será de entrenamiento.
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_demanda.png)
-
 En la gráfica siguiente mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando el coeficiente de correlación de pearson como distancia. En color rojo se representan los datos de la semana actual.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_pearson_RF.png)
