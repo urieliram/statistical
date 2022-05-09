@@ -2512,7 +2512,7 @@ Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** d
 
 En la gráfica siguiente mostramos la importancia de las variables en el **RF**, las variables en el eje de las 'y' representan las posiciones de inicio en la serie de demanda que fueron elegidas como regresores y en el eje 'x' la importancia relativa de cada una.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importancia_pearson_RF.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importance_pearson_RF.png)
 
 
 Otro modelo de **RT** es entrenado usando la librería **GridSearchCV** para sintonizar los parámetros del modelo. La selección es automática combinando los siguientes parámetros:
@@ -2539,7 +2539,12 @@ Ahora mostramos la importancia de las variables del **RF** entrenado con **GridS
 Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Adicionalemnte, usamos regresión lineal múltiple (**OLS**) con **stepwise**.
 
 La comparación de resultados se muestra en la tabla siguiente:
-
+| SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
+| :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:        |
+| PEARSON        | OLS + STEP     | 0.4435          | 2.8163          | 9.0354               |    1.6785 |
+| EUCLIDIAN      | OLS + STEP     | 0.8996           | 6.1071            | 59.4976              |    0.9918 |
+| PEARSON        | RF             | 0.3975          | 3.1059           | 6.9933               |    3.7904 |
+| EUCLIDIAN      | RF             | 0.2428           | 2.0313          | 33.4863               |    3.7945  |
 
 Por último, se comparan los pronósticos obtenidos contra los datos reales. Los resultados son mucho mejor con la regresión con **RF** que con la regresión lineal.
 
