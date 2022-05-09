@@ -2529,7 +2529,12 @@ Otro modelo de **RT** es entrenado usando la librería **GridSearchCV** para sin
 
 Los parámetros que mejor ajustan a nuestros datos son: 
 ```
-
+bootstrap:         True
+n_estimators:      60
+max_features:      sqrt
+max_depth:         10
+min_samples_leaf:  1
+min_samples_split: 2
 ```
 
 Ahora mostramos la importancia de las variables del **RF** entrenado con **GridSearchCV**:
