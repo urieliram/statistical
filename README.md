@@ -2483,12 +2483,12 @@ Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las pr
 
 ### Conclusiones tarea 14
 En esta tarea se demostró la utilidad del **PCA** como reductor de dimensiones y además como reductor del índice de inflación de la varianza **VIF**, se utilizaron los componentes principales para reducir el número de regresores en el pronóstico de demanda. Las pruebas demostraron la equivalencia en exactitud entre las variables originales y las variables calculadas por **PCA**. Muy importante que el método es eficaz para reducir la multicolinealidad.
-Por otro lado, se agruparon parques eólicos usando la técnica de análisis factorial **AF**y el de **conglomerados jerárquicos**. En el método de **AF** se obtuvieron los pesos de cada variable sobre cada factor y se agruparon las que tenian un peso mayor. Para el caso del método de conglomerados jerárquicos, se dibujó un dendograma, en el que facilmente puede visualizarse la cercania o similitud entre los elementos o variables. Los resultados entre ambas técnicas fueron en su mayoria semejentes. Sin embargo el dendograma permite visualizar la relación entre las variables, es decir es posible ver en las últimas hojas del dendograma aquellos parques  que tienen un comportamiento más parecido.
+Por otro lado, se agruparon parques eólicos usando la técnica de análisis factorial **AF**y el de **conglomerados jerárquicos**. En el método de **AF** se obtuvieron los pesos de cada variable sobre cada factor y se agruparon las que tenian un peso mayor. Para el caso del método de conglomerados jerárquicos, se dibujó un dendograma, en el que facilmente puede visualizarse la cercania o similitud entre los elementos o variables. Los resultados entre ambas técnicas fueron en su mayoria semejentes. Sin embargo, el dendograma permite visualizar la relación entre las variables, es decir que es posible ver en las últimas hojas del dendograma aquellos parques que tienen un comportamiento más parecido.
 
 ---
 
 ## **Tarea 15 Bosque aleatorio**
->**Instrucciones:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest..
+>**Instrucciones:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest.
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
