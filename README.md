@@ -2552,11 +2552,12 @@ La comparación de los erores en los pronósticos se muestran en la tabla siguie
 
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
 | :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:        |
-| PEARSON        | OLS + STEP     | 0.4435          | 2.8163           |  9.171               |    1.257 |
-| EUCLIDIAN      | OLS + STEP     | 0.8996          | 6.1071           | 33.6121              |    0.6486 |
-| PEARSON        | RF             | 0.3975          | 3.1059           |  5.9242              |    4.2898 |
-| PEARSON        | AutoRF         | 0.3434          | 2.8154           |  6.9289              |    166.409 |
-| EUCLIDIAN      | RF             | 0.2428          | 2.0313           | 22.1438              |    1.8067  |
+| PEARSON        | OLS + STEP     | 0.4435          | 2.8163          | 3.2663               |    0.7149 |
+| EUCLIDIAN      | OLS + STEP     | 0.8996           | 6.1071            | 21.7784              |    0.6169 |
+| PEARSON        | RF             | 0.3975          | 3.1059           | 7.6678               |    3.9034 |
+| EUCLIDIAN      | RF             | 0.2428           | 2.0313          | 21.7855               |    1.8006  |
+| PEARSON        | AutoRF            | 0.3434          | 2.8154           | 8.1127               |    398.406 |
+| EUCLIDIAN      | AutoRF            | 0.1982          | 1.2627           | 37.126               |    387.9376 |
 
 Por último, se comparan los pronósticos obtenidos contra los datos reales. Los resultados son mucho mejor con la regresión con **RF** que con la regresión lineal.
 
