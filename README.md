@@ -2498,10 +2498,14 @@ A continuación, presentamos las serie de tiempo de demanda eléctrica que se de
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_demanda.png)
 
-En la gráfica siguiente mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando el coeficiente de correlación de pearson como distancia. En color rojo se representan los datos de la semana actual.
+En la gráfica siguiente mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando el coeficiente de **correlación de pearson** como distancia. En color rojo se representan los datos de la semana actual.
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_pearson_RF.png)
 
+Ahora mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando la **distancia euclidiana***. Nuevamente, en color rojo se representan los datos de la semana actual.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_euclidian_RF.png)
+
 Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** de la librería **sklearn**. Iniciaremos entrenando un **RF** utilizando los parámetros por defecto.
+
 ```python
     if typereg == 'RF':
         model         = RandomForestRegressor(random_state=42) 
@@ -2540,9 +2544,9 @@ Ahora mostramos la importancia de las variables del **RF** entrenado con **GridS
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importance_pearson_AutoRF.png)
 
-Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Con el objetivo de comparar los resultados usamos regresión lineal múltiple (**OLS**) con **stepwise**.
+Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Además, hemos calculado la regresión lineal múltiple con el objetivo de comparar los resultados.
 
-La comparación de los resultados de error de los pronósticos se muestra en la tabla siguiente:
+La comparación de los erores en los pronósticos se muestran en la tabla siguiente:
 
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
 | :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:        |
