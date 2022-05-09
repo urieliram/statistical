@@ -2544,6 +2544,7 @@ Ahora mostramos la importancia de las variables del **RF** entrenado con **GridS
 Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Con el objetivo de comparar los resultados usamos regresión lineal múltiple (**OLS**) con **stepwise**.
 
 La comparación de los resultados de error de los pronósticos se muestra en la tabla siguiente:
+
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
 | :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:        |
 | PEARSON        | OLS + STEP     | 0.4435          | 2.8163           |  9.171               |    1.257 |
@@ -2557,4 +2558,4 @@ Por último, se comparan los pronósticos obtenidos contra los datos reales. Los
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_ajuste_prono1.png)
 
 ### Conclusiones tarea 15
-En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Esta selección de parámetros hacen mucho más lento y costoso computacionalmente el entrenamiento de estos modelos.
+En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Una desventaja de **RF** es que la selección de parámetros en estos modelos es mucho más lenta y costosa computacionalmente que los modelos lineales.
