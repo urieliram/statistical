@@ -2536,7 +2536,7 @@ Ahora mostramos la importancia de las variables del **RF** entrenado con **GridS
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importancia_pearson_AutoRF.png)
 
-Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Adicionalemnte, usamos regresión lineal múltiple (**OLS**) con **stepwise**.
+Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Con el objetivo de comparar los resultados usamos regresión lineal múltiple (**OLS**) con **stepwise**.
 
 La comparación de resultados se muestra en la tabla siguiente:
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN   |
