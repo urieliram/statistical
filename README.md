@@ -2259,7 +2259,7 @@ Los datos de demanda están disponibles en [demanda.csv](https://drive.google.co
 
 ### Análisis de componentes principales aplicado a reducir dimensiones en pronóstico de demanda eléctrica.
 
-Análisis de componentes principales es un método de reducción de dimensiones que puede ser usado para representar con menos variables los datos originales. El método genera otras variables sintéticas llamadas **componentes** que pueden explicar partes importantes del fenómeno y demás ser ortogonales entre si, esto ayuda a prevenir [multicolinealidad](https://medium.com/@awabmohammedomer/principal-component-analysis-pca-in-python-6897664f97d6#:~:text=PCA%20aims%20to%20reduce%20dimensionality,original%20data%20with%20less%20noise.) en modelos de regresión. Estos **componentes** principales pueden utilizarse como regresores para ajustar un nuevo modelo.
+Análisis de componentes principales es un método de reducción de dimensiones que puede ser usado para representar con menos variables los datos originales. El método genera otras variables sintéticas llamadas **componentes** que pueden explicar partes importantes del fenómeno y demás ser ortogonales entre si, esto ayuda a prevenir [**multicolinealidad**](https://medium.com/@awabmohammedomer/principal-component-analysis-pca-in-python-6897664f97d6#:~:text=PCA%20aims%20to%20reduce%20dimensionality,original%20data%20with%20less%20noise.) en modelos de regresión. Estos **componentes** principales pueden utilizarse como regresores para ajustar un nuevo modelo.
 
 Por ejemplo, tenemos un conjunto de datos de demanda de 18 dias y queremos obtener un modelo de regresión que explique los datos de hoy con los días pasados. Sin embargo, al graficar los días observamos una alta correlación entre estos dias, por supuesto este es un comportamiento esperado debido a que estos dias fueron seleccionados por una similitud con el actual. Por lo que necesitamos un método que además de reducir las dimensiones también sea capaz de reducir el factor de inflación de la varianza (**VIF**).
 
@@ -2491,3 +2491,4 @@ Por otro lado, se agruparon parques eólicos usando la técnica de análisis fac
 
 Los datos de demanda están disponibles en [XXX.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [XX.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
+En esta tarea usaremos la técnica de 
