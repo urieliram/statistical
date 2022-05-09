@@ -2492,6 +2492,7 @@ Por otro lado, se agruparon parques eólicos usando la técnica de análisis fac
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea usaremos la técnica de **bosque aleatorio** (¨**RF**) en su versión de regresión para predecir la demanda eléctrica de los próximos siete dias, a partir de semanas pasadas con alta correlación con la semana actual, la selección de las semanas será utilizando vecinos más cercanos (**KNN**) y las medidas de correlación serán el coeficiente de pearson y la distancia euclidiana. Los resultados serán comparados con los obtenidos con la regresión lineal múltiple (**OLS**). 
+En esta tarea usaremos la técnica de **bosque aleatorio** (¨**RF**) en su versión de regresión para predecir la demanda eléctrica de los próximos siete dias, a partir de datos de semanas con alta correlación con la semana actual, la selección de las semanas correlacionadas será utilizando vecinos más cercanos (**KNN**) y las medidas de correlación serán el coeficiente de pearson y la distancia euclidiana. Los resultados serán comparados con los obtenidos con la regresión lineal múltiple (**OLS**).
+
 Esta combinación 
 
