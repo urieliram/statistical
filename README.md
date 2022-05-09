@@ -18,6 +18,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 12 Máquinas de Vectores de Soporte](#tarea-12-máquinas-de-vectores-de-soporte)
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
 + [Tarea 14 Aprendizaje no supervisado](#tarea-14-aprendizaje-no-supervisado)
++ [Tarea 15 Bosque aleatorio](#tarea-15-bosque-aleatorio)
 
 ---
 
@@ -2489,6 +2490,8 @@ Por otro lado, se agruparon parques eólicos usando la técnica de análisis fac
 ## **Tarea 15 Bosque aleatorio**
 >**Instrucciones:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest..
 
-Los datos de demanda están disponibles en [XXX.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). Los datos de generación eólica se encuentran disponibles en [XX.csv](https://drive.google.com/file/d/1FNMdGkhjypcGTAtPeOfw12EuAolUJ4Fh/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea usaremos la técnica de 
+En esta tarea usaremos la técnica de **bosque aleatorio** (¨**RF**) en su versión de regresión para predecir la demanda eléctrica de los próximos siete dias, a partir de semanas pasadas con alta correlación con la semana actual, la selección de las semanas será utilizando vecinos más cercanos (**KNN**) y las medidas de correlación serán el coeficiente de pearson y la distancia euclidiana. Los resultados serán comparados con los obtenidos con la regresión lineal múltiple (**OLS**). 
+Esta combinación 
+
