@@ -2248,7 +2248,7 @@ Test MAE OLS + stepwise=  149.97166666666666
 ```
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_aportaciones_prono3.png)
 
-### Conclusiones tarea 12
+### Conclusiones tarea 13
 En esta tarea se clasificaron diferentes dias de acuerdo a la radiación por hora. Diversas condiciones climáticas principalmente la nubosidad provocan que la producción de una planta fotovoltaica sea diferente a la de cielo despejado. Los métodos de agrupamiento utilizados fueron **k-means, LVQ, Gaussian mixtures** y **KNN** usando las librerias de **sklearn**. Además se implementó el **KNN** para encontrar los `k` dias mas parecidos a un día determinado. Este método se probó con los centroides previamente encontrados en el **k-means**. Adicionalmente, se implementó el método propuesto por [Grzegorz Dudek](https://doi.org/10.1016/j.epsr.2015.09.001) para extraer muestras de una serie de tiempo usando **KNN**  y haciendo una regresión con las muestras encontradas para obtener un pronóstico. Para probar el método se usaron datos de aportaciones hidrológicas de presa Peñitas en México.
 
 ---
@@ -2481,7 +2481,7 @@ El dendrograma presentado jerarquiza los parques por similitud, está dividido e
 
 Las agrupaciones encontradas por el **HC** corresponden en su mayoria con las propuestas por el método **AF**, sin embargo, a diferencia del **AF**, con el dendograma podemos hacer un análisis de similitud entre cada parque. Además, si cortamos el dendograma más abajo, podemos definir un mayor número de conglomerados de menor tamaño que hará que el nivel de similitud de los elementos sea mayor y crear nuevas agrupaciones.
 
-### Conclusiones tarea 12
+### Conclusiones tarea 14
 En esta tarea se demostró la utilidad del **PCA** como reductor de dimensiones y además como reductor del índice de inflación de la varianza **VIF**, se utilizaron los componentes principales para reducir el número de regresores en el pronóstico de demanda. Las pruebas demostraron la equivalencia en exactitud entre las variables originales y las variables calculadas por **PCA**. Muy importante que el método es eficaz para reducir la multicolinealidad.
 Por otro lado, se agruparon parques eólicos usando la técnica de análisis factorial **AF**y el de **conglomerados jerárquicos**. En el método de **AF** se obtuvieron los pesos de cada variable sobre cada factor y se agruparon las que tenian un peso mayor. Para el caso del método de conglomerados jerárquicos, se dibujó un dendograma, en el que facilmente puede visualizarse la cercania o similitud entre los elementos o variables. Los resultados entre ambas técnicas fueron en su mayoria semejentes. Sin embargo el dendograma permite visualizar la relación entre las variables, es decir es posible ver en las últimas hojas del dendograma aquellos parques  que tienen un comportamiento más parecido.
 
@@ -2497,8 +2497,27 @@ En esta tarea usaremos la técnica de bosque aleatorio (**RF**) en su versión d
 A continuación, presentamos las serie de tiempo de demanda eléctrica que se desea pronosticar, se muestran solo nueve semanas, la última semana en azul, será usada como prueba, mientras que la serie color café será de entrenamiento.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_demanda.png)
-Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** de la librería **sklearn**. Además, entrenaremos un grupo de **RF** utilizando los parámetros por defecto y otro grupo será entrenado usando la librería **GridSearchCV** para sintonizar los parámetros del modelo. La selección es automática combinando los siguientes parámetros:
+
+En la gráfica siguiente mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando el coeficiente de correlación de pearson como distancia. En color rojo se representan los datos de la semana actual.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_pearson_RF.png)
+
+Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** de la librería **sklearn**. Iniciaremos entrenando un **RF** utilizando los parámetros por defecto.
+```python
+    if typereg == 'RF':
+        model         = RandomForestRegressor(random_state=42) 
+        results       = model.fit(X, Y)
+        prediction_Y2 = results.predict(X_2)
+        print_importances(model_=model,labels_=positions,namefile_='fig_t15_importance_'+typedist+'_'+typereg)
 ```
+
+En la gráfica siguiente mostramos la importancia de las variables en el **RF**, las variables en el eje de las 'y' representan las posiciones de inicio en la serie de demanda que fueron elegidas como regresores y en el eje 'x' la importancia relativa de cada una.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importancia_pearson_RF.png)
+
+
+Otro modelo de **RT** es entrenado usando la librería **GridSearchCV** para sintonizar los parámetros del modelo. La selección es automática combinando los siguientes parámetros:
+
+```python
         param_grid = { 
         'bootstrap': [True, False],
         'n_estimators': [10,60,110,160,210,260,310],
@@ -2507,16 +2526,24 @@ Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** d
         'min_samples_leaf': [1, 2, 4],
         'min_samples_split': [2, 5, 10],}
 ```
-En la gráfica siguiente mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando el coeficiente de correlación de pearson como distancia. En color rojo se representan los datos de la semana actual.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_pearson_RF.png)
+Los parámetros que mejor ajustan a nuestros datos son: 
+```
 
-En la gráfica siguiente mostramos la importancia de las variables en el **RF**, las variables en el eje de las 'y' representan las posiciones de inicio en la serie de demanda que fueron elegidas como regresores y en el eje 'x' la importancia relativa de cada una.
+```
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importancia_pearson_RF.png)
+Ahora mostramos la importancia de las variables del **RF** entrenado con **GridSearchCV**:
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_importancia_pearson_AutoRF.png)
+
+Hemos repetido el ejercicio de seleccionar las semanas de mayor correlación usando **KNN** con la distancia euclidiana y aplicado la regresión con **RF** con y sin ajuste de parámetros por **GridSearchCV**. Adicionalemnte, usamos regresión lineal múltiple (**OLS**) con **stepwise**.
+
+La comparación de resultados se muestra en la tabla siguiente:
 
 
+Por último, se comparan los pronósticos obtenidos contra los datos reales. Los resultados son mucho mejor con la regresión con **RF** que con la regresión lineal.
 
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_ajuste_prono1.png)
 
-Esta combinación 
-
+### Conclusiones tarea 15
+En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Esta selección de parámetros hacen mucho más lento y costoso computacionalmente el entrenamiento de estos modelos.
