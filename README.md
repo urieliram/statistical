@@ -2499,9 +2499,11 @@ A continuación, presentamos las serie de tiempo de demanda eléctrica que se de
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_demanda.png)
 
 En la gráfica siguiente mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando el coeficiente de **correlación de pearson** como distancia. En color rojo se representan los datos de la semana actual.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_pearson_RF.png)
 
 Ahora mostramos las semanas seleccionadas con alta correlación usando el método de **KNN** usando la **distancia euclidiana***. Nuevamente, en color rojo se representan los datos de la semana actual.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_X_euclidian_RF.png)
 
 Para nuestras pruebas usaremos la implementación de **RandomForestRegressor** de la librería **sklearn**. Iniciaremos entrenando un **RF** utilizando los parámetros por defecto.
