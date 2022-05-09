@@ -2559,7 +2559,7 @@ La comparación de los erores en los pronósticos se muestran en la tabla siguie
 | PEARSON        | AutoRF            | 0.3434          | 2.8154           | 8.1127               |    398.406 |
 | EUCLIDIAN      | AutoRF            | 0.1982          | 1.2627           | 37.126               |    387.9376 |
 
-Por último, se comparan los pronósticos obtenidos contra los datos reales. Los resultados son mucho mejor con la regresión con **RF** que con la regresión lineal.
+Por último, se comparan los pronósticos obtenidos contra los datos reales. Los resultados son mucho mejor con la regresión con **RF** (series azul, naranja, gris) que con la regresión lineal (verde).
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_ajuste_prono1.png)
 
