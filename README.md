@@ -2563,5 +2563,35 @@ Por último, se comparan los pronósticos obtenidos contra los datos reales (en 
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_ajuste_prono1.png)
 
+
+### Dibujo de Bosque Aleatorio
+
+Una herramienta de análisis puede ser la visualización de los bosques aleatorios, en el siguiente cpodigo se muestra la manera en que estos se pueden representar, tanto un bosque como un árbol.
+
+```python
+        from sklearn.tree import export_graphviz
+        from subprocess import call
+        from IPython.display import Image ## Display in jupyter notebook
+      
+        model = RandomForestRegressor(n_estimators=2,max_features='sqrt',max_depth=10)
+        results = model.fit(X, Y)
+        prediction_Y2 = results.predict(X_2)
+
+        ## Extract a single tree
+        estimator = model.estimators_[1]
+
+        ## Export as dot file
+        export_graphviz(estimator, out_file='RFtree.dot', 
+                        rounded = True, proportion = False, 
+                        precision = 2, filled = True)
+
+        ## Convert to png using system command (requires Graphviz)
+        call(['dot', '-Tpng', 'RFtree.dot', '-o', 'RFtree.png', '-Gdpi=6000'])        
+        Image(filename = 'RFtree.png')
+```
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_RFtree.png)
+
+
 ### Conclusiones tarea 15
 En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Una desventaja de **RF** es que la selección de parámetros en estos modelos es mucho más lenta y costosa computacionalmente que los modelos lineales.
