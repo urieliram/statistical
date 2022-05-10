@@ -2590,7 +2590,7 @@ Una herramienta de análisis puede ser la visualización de los bosques aleatori
         Image(filename = 'RFtree.png')
 ```
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t15_RFtree.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/RFtree.png)
 
 
 ### Conclusiones tarea 15
