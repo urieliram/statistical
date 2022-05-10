@@ -19,6 +19,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 13 Prototipos y vecinos](#tarea-13-prototipos-y-vecinos)
 + [Tarea 14 Aprendizaje no supervisado](#tarea-14-aprendizaje-no-supervisado)
 + [Tarea 15 Bosque aleatorio](#tarea-15-bosque-aleatorio)
++ [Tarea 16 Aprendizaje por ensambles](#tarea-16-aprendizajes-por-ensambles)
 
 ---
 
@@ -2590,8 +2591,18 @@ Una herramienta de análisis puede ser la visualización de los bosques aleatori
         Image(filename = 'RFtree.png')
 ```
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/RFtree.png)
+En la siguiente figura se puede ver el bosque aleatorio completo (hacer clic en la figura para ver el detalle).
 
+![image](https://github.com/urieliram/statistical/blob/main/figures/RFtree.png)
 
 ### Conclusiones tarea 15
 En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Una desventaja de **RF** es que la selección de parámetros en estos modelos es mucho más lenta y costosa computacionalmente que los modelos lineales.
+
+---
+
+## **Tarea 16 Aprendizaje por ensambles**
+>**Instrucciones:**Two things: examine how increasing the length of the binary string to identify each class in a multi-class problem affects the performance and carry out some sort of pruning on an ensemble method of your choice, both with the project data.
+
+Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
+
+En esta tarea usaremos la técnica de **Ensambles** para ....
