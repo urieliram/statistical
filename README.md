@@ -2491,7 +2491,7 @@ Por otro lado, se agruparon parques eólicos usando la técnica de análisis fac
 ## **Tarea 15 Bosque aleatorio**
 >**Instrucciones:** After carefully reading all of Chapter 15 (regardless of how much of Section 15.4 results comprehensible), train (and evaluate) a random forest on your project data and compute also the variable importance and the proximity matrix corresponding to the forest.
 
-Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea15.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea15.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
 En esta tarea usaremos la técnica de bosque aleatorio (**RF**) en su versión de regresión para predecir la demanda eléctrica de los próximos siete dias, a partir de datos de semanas con alta correlación con la semana actual, la selección de las semanas correlacionadas será utilizando vecinos más cercanos (**KNN**) y las medidas de correlación serán el coeficiente de correlación de pearson y la distancia euclidiana. Los resultados serán comparados con los obtenidos por **RF** y la regresión lineal múltiple (**OLS**) con su versión de **stepwise** con una significancia de 0.001.
 
@@ -2603,6 +2603,6 @@ En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar
 ## **Tarea 16 Aprendizaje por ensambles**
 >**Instrucciones:**Two things: examine how increasing the length of the binary string to identify each class in a multi-class problem affects the performance and carry out some sort of pruning on an ensemble method of your choice, both with the project data.
 
-Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea14.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
+Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea16.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea usaremos la técnica de **Ensambles** para ....
+En esta tarea haremos una continuación de la predicción de demanda eléctrica de la tarea 15, pero usaremos diferentes métodos de **Ensambles** tales como **Boosting**, **Random forest** y **xxxxxxxxxxxx **. Además, usaremos el meta-estimador [voting regression](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la librería sklearn que promedia predicciones individuales de cada ensamble para formar una predicción final.
