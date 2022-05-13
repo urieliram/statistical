@@ -2605,8 +2605,16 @@ En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea16.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea haremos una continuación al ejercicio de predicción de demanda eléctrica de la tarea 15 usando diferentes métodos de regresión con **ensambles** como **Boosting**, **Random forest** y **Bagging** usando la libreria sklearn. Además, aplicaremos el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la misma librería que promedia predicciones individuales de cada ensamble para formar una predicción final.
+En esta tarea haremos una continuación al ejercicio de predicción de demanda eléctrica de la tarea 15 usando diferentes métodos de regresión con ensambles, comparando los resultados con los obtenidos por modelos lineales. Además udaremos el método  [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la librería sklearn para hacer uin promediado del resultado de diferentes modelos de regresión.
 
-Ap´licaremos tambien el[**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de modelos lineales PCR, PLS, Lasso, Ridge y OLS. 
+Iniciamos obteniendo los pronósticos de demanda con métodos de ensambles como **Boosting**, **Random forest** y **Bagging** usando la libreria sklearn. Los resultados se muestran a continuación:
 
-Al final compararemos los resultados tanto de los ensambles por método, como los obtenidos por el metaestimador voting para modelos de ensambles y modelos lineales.
+
+
+Ahora los métodos 
+
+
+Además, aplicaremos el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la misma librería que promedia predicciones individuales de cada ensamble para formar una predicción final.
+Aplicaremos tambien el[**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de modelos lineales PCR, PLS, Lasso, Ridge y OLS. 
+Al final compararemos los resultados tanto de los ensambles, como los obtenidos por el meta-estimador voting para modelos de ensambles y modelos lineales.
+
