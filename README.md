@@ -2605,7 +2605,7 @@ En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea16.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea haremos una continuación al ejercicio de predicción de demanda eléctrica de la tarea 15 usando diferentes métodos de **Ensambles** como **Boosting**, **Random forest** y **xxxxxxxxxxxx**. Además, usaremos el meta-estimador [voting regression](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la librería sklearn que promedia predicciones individuales de cada ensamble para formar una predicción final.
+En esta tarea haremos una continuación al ejercicio de predicción de demanda eléctrica de la tarea 15 usando diferentes métodos de **Ensambles** como **Boosting**, **Random forest** y **Bagging** usando las librerias de sklearn. Además, usaremos el meta-estimador [voting regression](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la misma librería que promedia predicciones individuales de cada ensamble para formar una predicción final.
 
 Además usaremos el meta-estimador para hacer un pronóstico combinando los resultados de modelos lineales PCR, PLS, Lasso, Ridge y OLS. 
 
