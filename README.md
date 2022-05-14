@@ -2651,11 +2651,11 @@ def VotingEnsemble(X, Y, X_2,verbose_=False):
     return prediction_Y2   
 ```
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(1).png)
 
 Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso y Ridge**. Aplicaremos tambien el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de los modelos lineales **PCR, PLS, Lasso, Ridge y OLS**. 
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(1).png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
 
 Al final compararemos todos los resultados individuales de los modelos lineales y de los ensambles, como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py)  para modelos de ensambles y modelos lineales.
 
