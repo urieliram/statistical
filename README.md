@@ -2600,8 +2600,8 @@ En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar
 
 ---
 
-## **Tarea 16 Aprendizaje por ensambles**
->**Instrucciones:**Two things: examine how increasing the length of the binary string to identify each class in a multi-class problem affects the performance and carry out some sort of pruning on an ensemble method of your choice, both with the project data.
+##**Tarea 16 Aprendizaje por ensambles**
+>**Instrucciones:** Two things: examine how increasing the length of the binary string to identify each class in a multi-class problem affects the performance and carry out some sort of pruning on an ensemble method of your choice, both with the project data.
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea16.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
@@ -2653,30 +2653,44 @@ def VotingEnsemble(X, Y, X_2,verbose_=False):
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(1).png)
 
-Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso y Ridge**. Aplicaremos tambien el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de los modelos lineales **PCR, PLS, Lasso, Ridge y OLS**. 
+
+Mostramos los resultados de los modelos de ensambles usando la distancia euclidianada en el método de vecinos más cercanos.
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(2).png)****
+
+Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso y Ridge**. Aplicaremos tambien el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinado.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
 
-Al final compararemos todos los resultados individuales de los modelos lineales y de los ensambles, como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py)  para modelos de ensambles y modelos lineales.
-
+Al final compararemos todos los resultados individuales de los modelos lineales y de los ensambles, así como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py)  para modelos de ensambles y modelos lineales. Para la selección de dias de mayor correlación (regresores) se usó el método de vecinos más cercanos usando como distancia la euclidiana y el coeficiente de correlación de pearson. 
 | SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |
 | :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:     |
-| PEARSON        | RF             | 0.6071          | 2.9952          | 2.2038               |    0.9208         |
-| PEARSON        | OLS + STEP     | 0.5665          | 4.6644          | 2.2038               |    0.0417         |
-| PEARSON        | Boosting       | 0.6506          | 4.5451          | 2.2038               |    0.751         |
-| PEARSON        | Bagging        | 0.6237          | 4.3245          | 2.2038               |    0.3403         |
-| PEARSON        | OLS            | 0.7099          | 5.086          | 2.2038               |    0.025         |
-| PEARSON        | AdaBoost       | 0.6341          | 7.0109          | 2.2038               |    0.4509         |
-| PEARSON        | Lasso          | 0.5827          | 3.6764          | 2.2038               |    0.0344         |
-| PEARSON        | Ridge          | 0.7099          | 5.088          | 2.2038               |    0.0094         |
-| PEARSON        | PLS            | 0.6074          | 6.054          | 2.2038               |    0.0286         |
-| PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.0136         |
-| PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    3.3413         |
-| PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    0.0748         |
-
+| PEARSON        | RF             | 0.6071          | 2.9952          | 2.2038               |    1.6157         |
+| PEARSON        | OLS + STEP     | 0.5665          | 4.6644          | 2.2038               |    0.033         |
+| PEARSON        | Boosting       | 0.6506          | 4.5451          | 2.2038               |    0.8738         |
+| PEARSON        | Bagging        | 0.6237          | 4.3245          | 2.2038               |    0.156         |
+| PEARSON        | OLS            | 0.7099          | 5.086          | 2.2038               |    0.0184         |
+| PEARSON        | AdaBoost       | 0.6341          | 7.0109          | 2.2038               |    0.3662         |
+| PEARSON        | Lasso          | 0.5827          | 3.6764          | 2.2038               |    0.0178         |
+| PEARSON        | Ridge          | 0.7099          | 5.088          | 2.2038               |    0.028         |
+| PEARSON        | PLS            | 0.6074          | 6.054          | 2.2038               |    0.0134         |
+| PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.0129         |
+| PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    3.3339         |
+| PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    0.0735         |
+| EUCLIDIAN      | RF             | 0.4278          | 2.5174          | 23.4583              |    0.9014         |
+| EUCLIDIAN      | OLS + STEP     | 0.4894          | 3.6113          | 23.4583              |    0.0098         |
+| EUCLIDIAN      | Boosting       | 0.4275          | 4.3086          | 23.4583               |    0.4005         |
+| EUCLIDIAN      | Bagging        | 0.4255          | 4.9835          | 23.4583               |    0.0965         |
+| EUCLIDIAN      | OLS            | 0.4316          | 2.4816          | 23.4583               |    0.0126         |
+| EUCLIDIAN      | AdaBoost       | 0.4151          | 5.7307          | 23.4583               |    0.2176         |
+| EUCLIDIAN      | Lasso          | 0.4672          | 4.5839          | 23.4583               |    0.0132         |
+| EUCLIDIAN      | Ridge          | 0.4316          | 2.4817          | 23.4583               |    0.0072         |
+| EUCLIDIAN      | PLS            | 0.4324          | 1.8292          | 23.4583               |    0.0125         |
+| EUCLIDIAN      | PCR            | 0.4441          | 2.9791          | 23.4583               |    0.0146         |
+| EUCLIDIAN      | Voting Ensemble| 0.4192          | 2.2354           | 23.4583              |    4.5739         |
+| EUCLIDIAN      | Voting Linear  | 0.4378          | 2.8625           | 23.4583              |    1.3782         |
 
 ### Conclusiones tarea 16
-En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Una desventaja de **RF** es que la selección de parámetros en estos modelos es mucho más lenta y costosa computacionalmente que los modelos lineales.
+En esta tarea se aplicaron diferentes métodos de aprendizaje por ensamble tales como **Boosting**, **Random forest** y **Bagging** implementados con la libreria sklearn. Estos Fueron usados para pronosticar demanda eléctrica de una día. Las pruebas demostraron un mejor desempeño de la combiación de modelos usando el método **voting** .............. 
 
 ---
 
