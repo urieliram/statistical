@@ -2698,7 +2698,7 @@ Al final compararemos todos los resultados individuales de los modelos de ensamb
 |pearson|AdaBoost|0.634108|7.010996|2.2038|0.366262|2.570062|
 
 ### Conclusiones tarea 16
-En esta tarea se aplicaron diferentes métodos de aprendizaje por ensamble tales como **Boosting**, **Random forest** y **Bagging** implementados con la libreria sklearn. Estos Fueron usados para pronosticar demanda eléctrica de una día. Las pruebas demostraron un mejor desempeño de la combiación de modelos usando el método **voting** .............. 
+En esta tarea se aplicaron diferentes métodos de aprendizaje por ensamble tales como **Boosting**, **Random forest** y **Bagging** implementados con la libreria sklearn. Estos fueron usados para pronosticar demanda eléctrica de un día. Las pruebas demostraron un buen desempeño de la combianación de modelos de ensambles usando el método **voting** y la distancia euclidiana en la selección de regresores. Sin embargo, podemos decir que los modelos lineales resultan muy competitivos para nuestro problema.
 
 ---
 
