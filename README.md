@@ -2651,43 +2651,46 @@ def VotingEnsemble(X, Y, X_2,verbose_=False):
     return prediction_Y2   
 ```
 
+Mostramos los resultados de pronóstico aplicando los modelos de ensambles usando el coeficiente de pearson en el método de vecinos más cercanos.
+
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(1).png)
 
 
-Mostramos los resultados de los modelos de ensambles usando la distancia euclidianada en el método de vecinos más cercanos.
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(2).png)****
+Mostramos los resultados de pronóstico aplicando los modelos de ensambles usando la distancia euclidiana en el método de vecinos más cercanos.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(2).png)
 
 Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso y Ridge**. Aplicaremos tambien el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinado.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
 
-Al final compararemos todos los resultados individuales de los modelos lineales y de los ensambles, así como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py)  para modelos de ensambles y modelos lineales. Para la selección de dias de mayor correlación (regresores) se usó el método de vecinos más cercanos usando como distancia la euclidiana y el coeficiente de correlación de pearson. 
-| SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |
-| :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:     |
-| PEARSON        | RF             | 0.6071          | 2.9952          | 2.2038               |    1.6157         |
-| PEARSON        | OLS + STEP     | 0.5665          | 4.6644          | 2.2038               |    0.033         |
-| PEARSON        | Boosting       | 0.6506          | 4.5451          | 2.2038               |    0.8738         |
-| PEARSON        | Bagging        | 0.6237          | 4.3245          | 2.2038               |    0.156         |
-| PEARSON        | OLS            | 0.7099          | 5.086          | 2.2038               |    0.0184         |
-| PEARSON        | AdaBoost       | 0.6341          | 7.0109          | 2.2038               |    0.3662         |
-| PEARSON        | Lasso          | 0.5827          | 3.6764          | 2.2038               |    0.0178         |
-| PEARSON        | Ridge          | 0.7099          | 5.088          | 2.2038               |    0.028         |
-| PEARSON        | PLS            | 0.6074          | 6.054          | 2.2038               |    0.0134         |
-| PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.0129         |
-| PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    3.3339         |
-| PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    0.0735         |
-| EUCLIDIAN      | RF             | 0.4278          | 2.5174          | 23.4583              |    0.9014         |
-| EUCLIDIAN      | OLS + STEP     | 0.4894          | 3.6113          | 23.4583              |    0.0098         |
-| EUCLIDIAN      | Boosting       | 0.4275          | 4.3086          | 23.4583               |    0.4005         |
-| EUCLIDIAN      | Bagging        | 0.4255          | 4.9835          | 23.4583               |    0.0965         |
-| EUCLIDIAN      | OLS            | 0.4316          | 2.4816          | 23.4583               |    0.0126         |
-| EUCLIDIAN      | AdaBoost       | 0.4151          | 5.7307          | 23.4583               |    0.2176         |
-| EUCLIDIAN      | Lasso          | 0.4672          | 4.5839          | 23.4583               |    0.0132         |
-| EUCLIDIAN      | Ridge          | 0.4316          | 2.4817          | 23.4583               |    0.0072         |
-| EUCLIDIAN      | PLS            | 0.4324          | 1.8292          | 23.4583               |    0.0125         |
-| EUCLIDIAN      | PCR            | 0.4441          | 2.9791          | 23.4583               |    0.0146         |
-| EUCLIDIAN      | Voting Ensemble| 0.4192          | 2.2354           | 23.4583              |    4.5739         |
-| EUCLIDIAN      | Voting Linear  | 0.4378          | 2.8625           | 23.4583              |    1.3782         |
+Al final compararemos todos los resultados individuales de los modelos de ensambles y lineales, así como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py). Para la selección de dias de mayor correlación (regresores) se usó el método de vecinos más cercanos usando como distancia la euclidiana y el coeficiente de correlación de pearson. 
+| DISTANCIA      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |TIEMPO |X|X|X|
+| :------------- | :------------- | -------------:| -------------:|-------------:|-------------:|-------------:|-------------:|-------------: |
+|21|euclidian|PLS|0.432474|1.829278|23.4583|0.012506|23.470806|0.042606|0.023291|0.098517|
+|23|euclidian|VotingEnsemble|0.419242|2.235444|23.4583|4.573918|28.032218|0.035673|0.015958|0.085090|
+|16|euclidian|LinearReg|0.431694|2.481661|23.4583|0.012675|23.470975|0.042606|0.017168|0.098694|
+|20|euclidian|RidgeReg|0.431678|2.481733|23.4583|0.007271|23.465571|0.042616|0.017172|0.098721|
+|18|euclidian|BayesRidge|0.431566|2.482159|23.4583|0.010954|23.469254|0.042609|0.017166|0.098731|
+|12|euclidian|RF|0.427850|2.517424|23.4583|0.901439|24.359739|0.041051|0.016307|0.095948|
+|24|euclidian|VotingLinear|0.437814|2.862516|23.4583|1.378206|24.836506|0.040263|0.014066|0.091965|
+|22|euclidian|PCR|0.444123|2.979113|23.4583|0.014618|23.472918|0.042602|0.014300|0.095925|
+|0|pearson|RF|0.607161|2.995270|2.2038|1.615726|3.819526|0.261813|0.087409|0.431208|
+|13|euclidian|OLSstep|0.489492|3.611317|23.4583|0.009812|23.468112|0.042611|0.011799|0.087052|
+|6|pearson|LassoReg|0.582797|3.676417|2.2038|0.017822|2.221622|0.450122|0.122435|0.772347|
+|10|pearson|VotingEnsemble|0.620427|3.758541|2.2038|3.333980|5.537780|0.180578|0.048045|0.291054|
+|14|euclidian|Boosting|0.427512|4.308652|23.4583|0.400538|23.858838|0.041913|0.009728|0.098040|
+|3|pearson|Bagging|0.623723|4.324531|2.2038|0.156088|2.359888|0.423749|0.097987|0.679386|
+|2|pearson|Boosting|0.650646|4.545101|2.2038|0.873808|3.077608|0.324928|0.071490|0.499392|
+|19|euclidian|LassoReg|0.467240|4.583963|23.4583|0.013289|23.471589|0.042605|0.009294|0.091184|
+|1|pearson|OLSstep|0.566529|4.664495|2.2038|0.033022|2.236822|0.447063|0.095844|0.789126|
+|15|euclidian|Bagging|0.425533|4.983530|23.4583|0.096533|23.554833|0.042454|0.008519|0.099767|
+|11|pearson|VotingLinear|0.643887|4.992442|2.2038|0.073536|2.277336|0.439110|0.087955|0.681967|
+|4|pearson|LinearReg|0.709961|5.086081|2.2038|0.018427|2.222227|0.449999|0.088477|0.633837|
+|7|pearson|RidgeReg|0.709985|5.088073|2.2038|0.028071|2.231871|0.448055|0.088060|0.631076|
+|17|euclidian|AdaBoost|0.415167|5.730770|23.4583|0.217685|23.675985|0.042237|0.007370|0.101735|
+|8|pearson|PLS|0.607450|6.054027|2.2038|0.013498|2.217298|0.450999|0.074496|0.742447|
+|5|pearson|AdaBoost|0.634108|7.010996|2.2038|0.366262|2.570062|0.389096|0.055498|0.613611|
 
 ### Conclusiones tarea 16
 En esta tarea se aplicaron diferentes métodos de aprendizaje por ensamble tales como **Boosting**, **Random forest** y **Bagging** implementados con la libreria sklearn. Estos Fueron usados para pronosticar demanda eléctrica de una día. Las pruebas demostraron un mejor desempeño de la combiación de modelos usando el método **voting** .............. 
