@@ -2653,21 +2653,21 @@ def VotingEnsemble(X, Y, X_2,verbose_=False):
 
 Mostramos los resultados de pronóstico aplicando los modelos de **ensambles** usando el **coeficiente de pearson** en el método de vecinos más cercanos.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(1).png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
 
 Mostramos los resultados de pronóstico aplicando los modelos de **ensambles** usando la **distancia euclidiana** en el método de vecinos más cercanos.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(2).png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(1).png)
 
 Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso y Ridge**. Aplicaremos tambien el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinado.
 
 Mostramos los resultados de pronóstico aplicando los modelos **lineales** usando el **coeficiente de pearson** en el método de vecinos más cercanos.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(2).png)
 
 Mostramos los resultados de pronóstico aplicando los modelos de **ensambles** usando la **distancia euclidiana** en el método de vecinos más cercanos.
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(4).png)
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono(3).png)
 
 Al final compararemos todos los resultados individuales de los modelos de ensambles y lineales, así como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py). Para la selección de dias de mayor correlación (regresores) se usó el método de vecinos más cercanos usando como distancia la euclidiana y el coeficiente de correlación de pearson. 
 | DISTANCIA      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |TIEMPO |
