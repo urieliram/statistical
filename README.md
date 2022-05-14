@@ -2673,3 +2673,12 @@ Al final compararemos todos los resultados individuales de los modelos lineales 
 | PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.0136         |
 | PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    3.3413         |
 | PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    0.0748         |
+
+
+### Conclusiones tarea 16
+En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar demanda eléctrica a siete dias. Las pruebas demostraron un menor error sobre regresión lineal incluso con la versión de **RF** con los parámetros por defecto. Sin embargo, un mejor desempeño del modelo se puede lograr ajustando los parámetros, para esto usamos la librería **GridSearchCV** que lo hace automáticamente. Una desventaja de **RF** es que la selección de parámetros en estos modelos es mucho más lenta y costosa computacionalmente que los modelos lineales.
+
+---
+
+## **Tarea 17 Gráficos**
+>**Instrucciones:** Using either an existing graph-based model or one of your own creation, build a graph of the features (possibly with transformations, kernels or the like to expand the vertex set) and the variables of interest for your project data. Draw this graph using color and size to emphasize the relative importance of the variables (vertices) and their dependencies (edges)
