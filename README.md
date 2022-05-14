@@ -2664,8 +2664,8 @@ Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t16_ajuste_prono.png)
 
 Al final compararemos todos los resultados individuales de los modelos de ensambles y lineales, así como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py). Para la selección de dias de mayor correlación (regresores) se usó el método de vecinos más cercanos usando como distancia la euclidiana y el coeficiente de correlación de pearson. 
-| DISTANCIA      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |TIEMPO |X|X|X|
-| :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:     |-------------:|-------------:|-------------: |
+| DISTANCIA      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |TIEMPO |
+| :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:     |-------------:|
 |euclidian|PLS                    |0.432474         |1.829278           |23.4583              |0.012506           |23.470806 |
 |euclidian|VotingEnsemble         |0.419242         |2.235444|23.4583|4.573918|28.032218|
 |euclidian|LinearReg              |0.431694         |2.481661|23.4583|0.012675|23.470975|
