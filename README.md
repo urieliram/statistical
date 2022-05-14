@@ -2698,7 +2698,10 @@ Al final compararemos todos los resultados individuales de los modelos de ensamb
 |pearson|AdaBoost|0.634108|7.010996|2.2038|0.366262|2.570062|
 
 ### Conclusiones tarea 16
-En esta tarea se aplicaron diferentes métodos de aprendizaje por ensamble tales como **Boosting**, **Random forest** y **Bagging** implementados con la libreria sklearn. Estos fueron usados para pronosticar demanda eléctrica de un día. Las pruebas demostraron un buen desempeño de la combianación de modelos de ensambles usando el método **voting** y la distancia euclidiana en la selección de regresores. Sin embargo, podemos decir que los modelos lineales resultan muy competitivos para nuestro problema.
+En esta tarea se aplicaron diferentes métodos de aprendizaje por ensamble tales como **Boosting**, **Random forest** y **Bagging** implementados con la libreria sklearn. Estos fueron usados para pronosticar demanda eléctrica de un día. Las pruebas demostraron un buen desempeño de la combinación de modelos de ensambles usando el método [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de sklearn y la distancia euclidiana en la selección de regresores. Sin embargo, podemos decir que los modelos lineales resultan muy competitivos para nuestro problema. 
+
+Con estos nuevos métodos de ensambles y los aprendidos durante el curso. Iniciaremos nuestro proyecto final de predicción de pronóstico de demanda eléctrica en tiempo real. En el que usaremos el método de vecinos más cercanos para seleccionar dias de mayor correlación y los usaremos como regresores. Posteriormente, usaremos  diferentes métodos de regresión para obtener un pronóstico. Finalmente un ajuste final del BIAS es aplicando un método autoregresivo a los errores.
+Para probar el método usaremos la técnica de validación cruzada. 
 
 ---
 
