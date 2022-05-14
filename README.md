@@ -2605,45 +2605,12 @@ En esta tarea se aplicó el **RF** en su versión de regresión para pronosticar
 
 Los datos de demanda están disponibles en [demanda.csv](https://drive.google.com/file/d/1KpY2p4bfVEwGRh5tJjMx9QpH6SEwrUwH/view?usp=sharing). El código completo de esta tarea se encuentra en [Tarea16.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea16.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
 
-En esta tarea haremos una continuación al ejercicio de predicción de demanda eléctrica de la tarea 15 usando diferentes métodos de regresión con ensambles, comparando los resultados con los obtenidos por modelos lineales. Además udaremos el método  [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la librería sklearn para hacer uin promediado del resultado de diferentes modelos de regresión.
+De acuerdo al [libro](https://link.springer.com/book/10.1007/978-0-387-84858-7), en el capítulo `16 Ensemble Learning` La idea del aprendizaje por ensables es la  construcción de un modelo de predicción combinando las fortalezas de una colección de modelos más simples. En esta tarea continuaremos el ejercicio de predicción de demanda eléctrica de la tarea 15 combinando diferentes métodos de regresión con ensambles, posteriormente compararemos los resultados con modelos más simples como los lineales. Además usaremos el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la librería sklearn que hace un promedio de las predicciones individuales de cada ensamble para formar una predicción final.
 
-Iniciamos obteniendo los pronósticos de demanda con métodos de ensambles como **Boosting**, **Random forest** y **Bagging** usando la libreria sklearn. Los resultados se muestran a continuación:
-
-
-
-Ahora los métodos 
+Iniciamos obteniendo los pronósticos de demanda con métodos de ensambles como **Boosting**, **Random forest** y **Bagging** usando la libreria sklearn. Los resultados se muestran en la gráfica siguiente, en la gráfica además de los tres modelos se muestra en color naranja el resultado del método [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) .
 
 
-Además, aplicaremos el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) de la misma librería que promedia predicciones individuales de cada ensamble para formar una predicción final.
-Aplicaremos tambien el[**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de modelos lineales PCR, PLS, Lasso, Ridge y OLS. 
-Al final compararemos los resultados tanto de los ensambles, como los obtenidos por el meta-estimador voting para modelos de ensambles y modelos lineales.
+Con fines de comparación usaremos los métodos lineales: **OLS, PCR, PLS, Lasso y Ridge**. Aplicaremos tambien el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de los modelos lineales **PCR, PLS, Lasso, Ridge y OLS**. 
 
-| SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |
-| :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:     |
-| PEARSON        | RF             | 0.6071          | 2.9952          | 2.2038               |    3.7705         |
-| PEARSON        | OLS + STEP     | 0.5665          | 4.6644          | 2.2038               |    0.226         |
-| PEARSON        | Boosting       | 0.6506          | 4.5451          | 2.2038               |    1.7612         |
-| PEARSON        | Bagging        | 0.6237          | 4.3245          | 2.2038               |    0.3969         |
-| PEARSON        | OLS            | 0.7099          | 5.086          | 2.2038               |    0.0295         |
-| PEARSON        | AdaBoost       | 0.6341          | 7.0109          | 2.2038               |    0.5203         |
-| PEARSON        | BayesRidge     | 0.7101          | 5.1042          | 2.2038               |    0.051         |
-| PEARSON        | Lasso          | 0.5827          | 3.6764          | 2.2038               |    0.0216         |
-| PEARSON        | Ridge          | 0.7099          | 5.088          | 2.2038               |    0.007         |
-| PEARSON        | PLS            | 0.6074          | 6.054          | 2.2038               |    0.0117         |
-| PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.012         |
-| PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    4.5221         |
-| PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    1.347         |
-| EUCLIDIAN      | RF             | 0.4278          | 2.5174          | 23.4583              |    0.885         |
-| EUCLIDIAN      | OLS + STEP     | 0.4894          | 3.6113          | 23.4583              |    0.0112         |
-| EUCLIDIAN      | Boosting       | 0.4275          | 4.3086          | 23.4583               |    0.404         |
-| EUCLIDIAN      | Bagging        | 0.4255          | 4.9835          | 23.4583               |    0.1564         |
-| EUCLIDIAN      | OLS            | 0.4316          | 2.4816          | 23.4583               |    0.0096         |
-| EUCLIDIAN      | AdaBoost       | 0.4151          | 5.7307          | 23.4583               |    0.2172         |
-| EUCLIDIAN      | BayesRidge     | 0.4315          | 2.4821          | 23.4583               |    0.0164         |
-| EUCLIDIAN      | Lasso          | 0.4672          | 4.5839          | 23.4583               |    0.0169         |
-| EUCLIDIAN      | Ridge          | 0.4316          | 2.4817          | 23.4583               |    0.0076         |
-| EUCLIDIAN      | PLS            | 0.4324          | 1.8292          | 23.4583               |    0.0118         |
-| EUCLIDIAN      | PCR            | 0.4441          | 2.9791          | 23.4583               |    0.0181         |
-| EUCLIDIAN      | Voting Ensemble| 0.4192          | 2.2354           | 23.4583              |    4.5448         |
-| EUCLIDIAN      | Voting Linear  | 0.4378          | 2.8625           | 23.4583              |    1.4207         |
+Al final compararemos todos los resultados individuales de los modelos lineales y de los ensambles, como los obtenidos por el meta-estimador [**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py)  para modelos de ensambles y modelos lineales.
 
