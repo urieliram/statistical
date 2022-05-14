@@ -2618,3 +2618,32 @@ Además, aplicaremos el meta-estimador [**voting regression**](https://scikit-le
 Aplicaremos tambien el[**voting regression**](https://scikit-learn.org/stable/auto_examples/ensemble/plot_voting_regressor.html#sphx-glr-auto-examples-ensemble-plot-voting-regressor-py) para hacer un pronóstico combinando los resultados de modelos lineales PCR, PLS, Lasso, Ridge y OLS. 
 Al final compararemos los resultados tanto de los ensambles, como los obtenidos por el meta-estimador voting para modelos de ensambles y modelos lineales.
 
+| SELECCIÓN      | REGRESIÓN      | MAE             | MAPE             | TIEMPO SELECCIÓN     | TIEMPO REGRESIÓN  |
+| :------------- | :------------- | -------------:  | -------------:   |-------------:        |-------------:     |
+| PEARSON        | RF             | 0.6071          | 2.9952          | 2.2038               |    3.7705         |
+| PEARSON        | OLS + STEP     | 0.5665          | 4.6644          | 2.2038               |    0.226         |
+| PEARSON        | Boosting       | 0.6506          | 4.5451          | 2.2038               |    1.7612         |
+| PEARSON        | Bagging        | 0.6237          | 4.3245          | 2.2038               |    0.3969         |
+| PEARSON        | OLS            | 0.7099          | 5.086          | 2.2038               |    0.0295         |
+| PEARSON        | AdaBoost       | 0.6341          | 7.0109          | 2.2038               |    0.5203         |
+| PEARSON        | BayesRidge     | 0.7101          | 5.1042          | 2.2038               |    0.051         |
+| PEARSON        | Lasso          | 0.5827          | 3.6764          | 2.2038               |    0.0216         |
+| PEARSON        | Ridge          | 0.7099          | 5.088          | 2.2038               |    0.007         |
+| PEARSON        | PLS            | 0.6074          | 6.054          | 2.2038               |    0.0117         |
+| PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.012         |
+| PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    4.5221         |
+| PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    1.347         |
+| EUCLIDIAN      | RF             | 0.4278          | 2.5174          | 23.4583              |    0.885         |
+| EUCLIDIAN      | OLS + STEP     | 0.4894          | 3.6113          | 23.4583              |    0.0112         |
+| EUCLIDIAN      | Boosting       | 0.4275          | 4.3086          | 23.4583               |    0.404         |
+| EUCLIDIAN      | Bagging        | 0.4255          | 4.9835          | 23.4583               |    0.1564         |
+| EUCLIDIAN      | OLS            | 0.4316          | 2.4816          | 23.4583               |    0.0096         |
+| EUCLIDIAN      | AdaBoost       | 0.4151          | 5.7307          | 23.4583               |    0.2172         |
+| EUCLIDIAN      | BayesRidge     | 0.4315          | 2.4821          | 23.4583               |    0.0164         |
+| EUCLIDIAN      | Lasso          | 0.4672          | 4.5839          | 23.4583               |    0.0169         |
+| EUCLIDIAN      | Ridge          | 0.4316          | 2.4817          | 23.4583               |    0.0076         |
+| EUCLIDIAN      | PLS            | 0.4324          | 1.8292          | 23.4583               |    0.0118         |
+| EUCLIDIAN      | PCR            | 0.4441          | 2.9791          | 23.4583               |    0.0181         |
+| EUCLIDIAN      | Voting Ensemble| 0.4192          | 2.2354           | 23.4583              |    4.5448         |
+| EUCLIDIAN      | Voting Linear  | 0.4378          | 2.8625           | 23.4583              |    1.4207         |
+
