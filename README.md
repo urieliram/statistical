@@ -2673,15 +2673,3 @@ Al final compararemos todos los resultados individuales de los modelos lineales 
 | PEARSON        | PCR            | 0.7823          | 5.0729          | 2.2038               |    0.0136         |
 | PEARSON        | Voting Ensemble| 0.6204         | 3.7585         | 2.2038              |    3.3413         |
 | PEARSON        | Voting Linear  | 0.6438         | 4.9924        | 2.2038            |    0.0748         |
-| EUCLIDIAN      | RF             | 0.4278          | 2.5174          | 23.4583              |    0.9107         |
-| EUCLIDIAN      | OLS + STEP     | 0.4894          | 3.6113          | 23.4583              |    0.0091         |
-| EUCLIDIAN      | Boosting       | 0.4275          | 4.3086          | 23.4583               |    0.402         |
-| EUCLIDIAN      | Bagging        | 0.4255          | 4.9835          | 23.4583               |    0.0974         |
-| EUCLIDIAN      | OLS            | 0.4316          | 2.4816          | 23.4583               |    0.0076         |
-| EUCLIDIAN      | AdaBoost       | 0.4151          | 5.7307          | 23.4583               |    0.3601         |
-| EUCLIDIAN      | Lasso          | 0.4672          | 4.5839          | 23.4583               |    0.0101         |
-| EUCLIDIAN      | Ridge          | 0.4316          | 2.4817          | 23.4583               |    0.0097         |
-| EUCLIDIAN      | PLS            | 0.4324          | 1.8292          | 23.4583               |    0.0147         |
-| EUCLIDIAN      | PCR            | 0.4441          | 2.9791          | 23.4583               |    0.0101         |
-| EUCLIDIAN      | Voting Ensemble| 0.4192          | 2.2354           | 23.4583              |    4.5285         |
-| EUCLIDIAN      | Voting Linear  | 0.4378          | 2.8625           | 23.4583              |    1.3315         |
