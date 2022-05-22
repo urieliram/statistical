@@ -20,6 +20,7 @@ Repositorio de actividades del curso de aprendizaje automático. La descripción
 + [Tarea 14 Aprendizaje no supervisado](#tarea-14-aprendizaje-no-supervisado)
 + [Tarea 15 Bosque aleatorio](#tarea-15-bosque-aleatorio)
 + [Tarea 16 Aprendizaje por ensambles](#tarea-16-aprendizaje-por-ensambles)
++ [Tarea 17 Gráficos](#tarea-17-gráficos)
 
 ---
 
