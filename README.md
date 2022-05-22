@@ -2773,5 +2773,57 @@ Con ayuda del grafo resultante, podemos ver que los arcos mas gruesos representa
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_grafo.png)
 
+### Representación de la red eléctrica nacional como un grafo
+Modelaremos los buses (nodos),  las líneas de transmisión (aristas), transformadores (aristas) y cargas de la República Mexicana. La idea es representar la red eléctrica como un grafo, para ello usaremos las coordenadas georeferenciales de las regiones léctricas, no contamos con las coordenadas de cada bus. 
+
+Iniciamos creando la red vacia y agregamos la información de los nodos desde un archivo. 
+```python
+net  = pp.create_empty_network(name='WEM', f_hz=60.0) ## Crea una red vacia
+node = []
+for i in nodos:                   
+    loc1 =(i[xgeo]+random.randint(-10000,10000)/100000,i[ygeo]+random.randint(-10000,10000)/100000)
+    node.append(pp.create_bus(net,vn_kv=i[6],name=i[1],geodata=loc1,zone=i[5],in_service=i[11])) ## https://pandapower.readthedocs.io/en/v2.9.0/elements/bus.html
+```
+
+Ahora agregamos las cargas que estan asociadas a los nodos.
+```python
+j=0
+for i in cargas:
+    pp.create_load(net, bus=node[cargas[j][3]], p_mw=carfijas[j][0], q_mvar=0, name=cargas[j][0])
+    j=j+1
+```
+
+Por último las líneas de tranmisión que unen los nodos, así como los tranformadores entre nodos. Conceptualmente tamto las líneas como los tranformadores son arcos en un grafo.
+```python
+import haversine as hs
+for r in ramas:
+    if r[8]==1: ## lineas
+        loc1 = (nodos[r[2]-1][xgeo]+random.randint(-10000,10000)/100000,nodos[r[2]-1][ygeo]+random.randint(-10000,10000)/100000)
+        loc2 = (nodos[r[4]-1][xgeo]+random.randint(-10000,10000)/100000,nodos[r[4]-1][ygeo]+random.randint(-10000,10000)/100000)
+        km   = hs.haversine(loc1,loc2)
+        pp.create_line(net,from_bus=node[r[2]],to_bus=node[r[4]],std_type="NAYY 4x50 SE",name=r[1],length_km=km,in_service=r[9]) ## 
+    if r[8]==2: ## transformadores
+        #print(r[0],node[r[2]-1],node[r[4]-1],r[1],r[9])
+        pp.create_transformer(net, hv_bus=node[r[2]-1],lv_bus=node[r[4]-1],std_type="160 MVA 380/110 kV",name=r[1],in_service=r[9])
+```
+
+Graficamos la red eléctrica.
+```python
+simple_plotly(net,on_map=False,projection='epsg:3857',figsize=1,bus_size=5 ,map_style='light')
+```
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_sin.png)
+
+Podemos usar las opciones de la librería [pandapower](http://www.pandapower.org/) para colorear las líneas de acuerdo a los diferentes niveles de tensión quedando como sigue:
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_sin2.png)
+
+Podemos hacer zoom y ver el detalle de los nodos y líneas de la red eléctrica, tal como se muestra en las gráficas.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen3.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen4.png)
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen5.png)
 
 
