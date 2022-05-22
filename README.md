@@ -47,7 +47,6 @@ En las salidas de cada instancia se tiene el resultado de:
 - Las pérdidas en el sistema (variable escalar).
 - Tiempos de ejecución de cada instancia (variable escalar).
 
-
 Preguntas de investigación:
 1. ¿Es posible determinar que conjunto de lineas de transmisión serán violadas conociendo los generadores que serán prendidos o la demanda por regiones?
 2. ¿Es posible predecir las pérdidas en el sistema conociendo la salida de potencia de cada generador?
@@ -2708,3 +2707,67 @@ Para probar el método usaremos la técnica de validación cruzada.
 
 ## **Tarea 17 Gráficos**
 >**Instrucciones:** Using either an existing graph-based model or one of your own creation, build a graph of the features (possibly with transformations, kernels or the like to expand the vertex set) and the variables of interest for your project data. Draw this graph using color and size to emphasize the relative importance of the variables (vertices) and their dependencies (edges)
+
+El código completo de esta tarea se encuentra en [Tarea17.ipynb](https://github.com/urieliram/statistical/blob/main/Tarea17.ipynb). Aquí solo se presentan los resultados y secciones relevantes del código.
+
+Esta tarea la hemos dividido en dos partes: la primera es la modelación cono grafo de los patrones de comportamiento de la producción eólica diarios identificados con k-means y estudiado en la tarea 13; la segunda parte consta de la modelación de la red eléctrica en México usando la libreria pandapower, que es una librería especializada para el análisis de redes eléctricas.
+
+### Modelación de perfiles solares diarios como un grafo.
+
+Como resultado del agrupamiento de perfiles de generación solar en una planta fotovoltaica aplicando el algoritmo de k-means se obtuvieron los perfiles con los dias que pertenecen a cada conglomerado. Cada subplot representa un conglomerado o cluster.
+
+![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t13_kmeans_train.png)
+
+Con estos perfiles se obtuvo una secuencia donde cada dato representa un número de pérfil en ese día:
+
+```
+serie = [1,1,7,7,9,8,1,8,7,0,2,7,6,1,1,6,6,5,9,2,7,9,0,1,2,9,7,9,2,0,7,5,5,5,5,7,
+         9,9,0,7,5,5,6,0,4,3,5,5,5,5,0,2,0,5,5,5,6,4,3,4,9,2,6,2,8,0,4,7,6,5,2,0,
+         3,2,0,0,6,2,6,6,4,5,0,6,1,4,9,6,0,3,6,9,5,0,2,4,3,5,0,5,6,4,5,5,0,3,2,0,
+         2,1,7,3,5,2,5,3,5,6,5,1,3,5,9,4,6,6,5,2,0,4,0,5,0,7,2,1,5,9,5,7,3,0,3,4,
+         5,3,0,5,2,2,5,4,9,7,6,0,5,5,5,5,0,0,3,5,2,5,3,9,5,7,5,3,5,9,5,4,0,2,4,4,
+         6,1,0,5,0,5,0,7,0,0,0,0,2,4,4,3,0,4,3,0,2,6,0,6,5,2,6,5,0,5,5,0,2,2,5,2,
+         4,9,0,2,5,6,1,0,0,0,5,8,0,5,3,0,0,3,5,0,0,5,5,5,7,2,5,0,4,5,6,0,0,5,4,0]
+```
+
+Ahora, SI contamos el numero de veces que cambia de perfil de un día para otro y lo guardamos en la matriz `A`.
+
+```python
+nodes = np.unique(serie)
+n = len(nodes)
+A = np.zeros(shape=(n,n))
+for i in range(len(serie)-1):
+    A[serie[i],serie[i+1]] = A[serie[i],serie[i+1]] + 1
+A
+```
+
+Hemos hecho una matriz de incidencia donde cada entrada respresenta el número de veces que ha cambiado el perfil de generación solar entre dos días consecutivos. 
+```
+array([[10.,  1.,  9.,  6.,  5., 12.,  3.,  4.,  0.,  0.],
+       [ 2.,  2.,  1.,  1.,  1.,  1.,  1.,  2.,  1.,  0.],
+       [ 6.,  2.,  2.,  0.,  4.,  6.,  4.,  2.,  1.,  1.],
+       [ 5.,  0.,  2.,  0.,  2.,  8.,  1.,  0.,  0.,  1.],
+       [ 3.,  0.,  0.,  5.,  2.,  4.,  2.,  1.,  0.,  4.],
+       [13.,  1.,  7.,  5.,  3., 16.,  6.,  4.,  1.,  4.],
+       [ 5.,  4.,  2.,  0.,  3.,  6.,  3.,  0.,  0.,  1.],
+       [ 2.,  0.,  2.,  2.,  0.,  3.,  3.,  1.,  0.,  4.],
+       [ 2.,  1.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.],
+       [ 3.,  0.,  3.,  0.,  1.,  4.,  1.,  2.,  1.,  1.]])    
+```
+
+Ahora usando la librería **Networkx** podemos graficar y analizar el comportamiento del sistema.
+El grafo que nos queda es una grafo dirigido donde además un perfil de comportamiento de una día puede repetirse varios días, Podemos ver esto en la diagonal de la matriz `A`.
+
+```python
+G = nx.DiGraph()
+G.add_nodes_from(nodes)
+rows = A.shape[0]
+cols = A.shape[1]
+for i in range(0, cols - 1):
+    for j in range(0, rows -1):
+        if A[i,j] != 0:
+            G.add_edge(i, j, weight=0 ,color='#FF0000')
+            #G.edges[i, j]['color'] = "red
+```
+
+
