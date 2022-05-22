@@ -2824,6 +2824,5 @@ Podemos hacer zoom y ver el detalle de los nodos y líneas de la red eléctrica,
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen4.png)
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen5.png)
 
 
