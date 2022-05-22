@@ -2818,7 +2818,7 @@ Podemos usar las opciones de la librería [pandapower](http://www.pandapower.org
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_sin2.png)
 
-Podemos hacer zoom y ver el detalle de los nodos y líneas de la red eléctrica, tal como se muestra en las gráficas.
+Algo interesante que hace el grafo mucho más útil es la posibilidad de hacer hacer acercamientos y ver el detalle de los nodos y líneas de la red eléctrica. En las gráficas siguientes se muestra un acercamiento a la zona de la península de Yucatán y Quintana Roo.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen3.png)
 
