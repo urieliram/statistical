@@ -2730,7 +2730,7 @@ serie = [1,1,7,7,9,8,1,8,7,0,2,7,6,1,1,6,6,5,9,2,7,9,0,1,2,9,7,9,2,0,7,5,5,5,5,7
          4,9,0,2,5,6,1,0,0,0,5,8,0,5,3,0,0,3,5,0,0,5,5,5,7,2,5,0,4,5,6,0,0,5,4,0]
 ```
 
-Ahora, contamos el numero de veces que cambia de perfil de un día para otro y lo guardamos en la matriz `A`.
+Ahora, contamos el número de veces que cambia de perfil de un día para otro y lo guardamos en la matriz `A`.
 
 ```python
 nodes = np.unique(serie)
@@ -2744,20 +2744,20 @@ A
 Hemos hecho una matriz de incidencia donde cada entrada respresenta el número de veces que ha cambiado el perfil de generación solar entre dos días consecutivos.
 
 ```
-array([[ 70.,   7.,  63.,  42.,  35.,  84.,  21.,  28.,   0.,   0.],
-       [ 14.,  14.,   7.,   7.,   7.,   7.,   7.,  14.,   7.,   0.],
-       [ 42.,  14.,  14.,   0.,  28.,  42.,  28.,  14.,   7.,   7.],
-       [ 35.,   0.,  14.,   0.,  14.,  56.,   7.,   0.,   0.,   7.],
-       [ 21.,   0.,   0.,  35.,  14.,  28.,  14.,   7.,   0.,  28.],
-       [ 91.,   7.,  49.,  35.,  21., 112.,  42.,  28.,   7.,  28.],
-       [ 35.,  28.,  14.,   0.,  21.,  42.,  21.,   0.,   0.,   7.],
-       [ 14.,   0.,  14.,  14.,   0.,  21.,  21.,   7.,   0.,  28.],
-       [ 14.,   7.,   0.,   0.,   0.,   0.,   0.,   7.,   0.,   0.],
-       [ 21.,   0.,  21.,   0.,   7.,  28.,   7.,  14.,   7.,   7.]])  
+array([[10.,  1.,  9.,  6.,  5., 12.,  3.,  4.,  0.,  0.],
+       [ 2.,  2.,  1.,  1.,  1.,  1.,  1.,  2.,  1.,  0.],
+       [ 6.,  2.,  2.,  0.,  4.,  6.,  4.,  2.,  1.,  1.],
+       [ 5.,  0.,  2.,  0.,  2.,  8.,  1.,  0.,  0.,  1.],
+       [ 3.,  0.,  0.,  5.,  2.,  4.,  2.,  1.,  0.,  4.],
+       [13.,  1.,  7.,  5.,  3., 16.,  6.,  4.,  1.,  4.],
+       [ 5.,  4.,  2.,  0.,  3.,  6.,  3.,  0.,  0.,  1.],
+       [ 2.,  0.,  2.,  2.,  0.,  3.,  3.,  1.,  0.,  4.],
+       [ 2.,  1.,  0.,  0.,  0.,  0.,  0.,  1.,  0.,  0.],
+       [ 3.,  0.,  3.,  0.,  1.,  4.,  1.,  2.,  1.,  1.]])
 ```
 
 Ahora usando la librería **Networkx** podemos graficar y analizar el comportamiento del sistema.
-El grafo que nos queda es una grafo dirigido, Observe que el perfil de generación solar puede repetirse varios días.
+El grafo que nos queda es una grafo dirigido. Observe que el perfil de generación solar puede repetirse varios días consecutivos y que se representa cono un arco que sale y regresa al misno nodo.
 
 ```python
 rows = A.shape[0]
@@ -2769,6 +2769,9 @@ for i in range(0, cols):
 colors  = nx.get_edge_attributes(G,'color').values()
 weights = nx.get_edge_attributes(G,'weight').values()
 ```
-Con ayuda del grafo resultante, podemos ver en las aristas mas gruesas una mayor frecuencia de transición entre estos perfiles. 
+Con ayuda del grafo resultante, podemos ver que los arcos mas gruesos representan una mayor frecuencia de transición entre estos perfiles, es el caso del nodo cinco y seis por ejemplo.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_grafo.png)
+
+
+
