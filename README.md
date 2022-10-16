@@ -2807,22 +2807,13 @@ for r in ramas:
         pp.create_transformer(net, hv_bus=node[r[2]-1],lv_bus=node[r[4]-1],std_type="160 MVA 380/110 kV",name=r[1],in_service=r[9])
 ```
 
-Graficamos la red eléctrica.
+Graficamos una red eléctrica hipotética de la red eléctrica.
 ```python
 simple_plotly(net,on_map=False,projection='epsg:3857',figsize=1,bus_size=5 ,map_style='light')
 ```
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_sin.png)
 
-Podemos usar las opciones de la librería [pandapower](http://www.pandapower.org/) para colorear las líneas de acuerdo a los diferentes niveles de tensión quedando como sigue:
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_sin2.png)
-
-Algo interesante que hace el grafo mucho más útil es la posibilidad de hacer hacer acercamientos y ver el detalle de los nodos y líneas de la red eléctrica. En las gráficas siguientes se muestra un acercamiento a la zona de la península de Yucatán y Quintana Roo.
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen3.png)
-
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen4.png)
 
 ### Conclusiones tarea 17
 En esta tarea se modelaron los problemas de secuencia de perfiles de generación solar diaria y de redes eléctricas como grafos. El primer problema de generación solar, fue transformada la información contruyendo una matriz de incidencia, para  dibujarla como un grafo. Con esta información puede analizarse, aquellos perfiles con mayor frecuencia y cuales podrían ser suprimidos. Por otro lado, modelamos la red eléctrica de México usando la librería especializada pandapower. Con su ayuda pudimos visualizar las líneas y nodos en un grafico, para ello fue necesario obtener las coordenada geodésicas de las principales regiones, para una mayor exactitud la información real de los nodos podría incluirse. Con esta herramienta podemos hacer estudios de flujos de potencia en las redes, y muchos otros. Además, cuenta con algunos algoritmos clásicos como el cálculo de el camino más corto, conjunto mínimo de corte, entre otros. 
