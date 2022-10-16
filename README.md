@@ -2818,12 +2818,22 @@ Podemos usar las opciones de la librería [pandapower](http://www.pandapower.org
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_sin2.png)
 
-Podemos hacer zoom y ver el detalle de los nodos y líneas de la red eléctrica, tal como se muestra en las gráficas.
+Algo interesante que hace el grafo mucho más útil es la posibilidad de hacer hacer acercamientos y ver el detalle de los nodos y líneas de la red eléctrica. En las gráficas siguientes se muestra un acercamiento a la zona de la península de Yucatán y Quintana Roo.
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen3.png)
 
 ![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen4.png)
 
-![image](https://github.com/urieliram/statistical/blob/main/figures/fig_t17_pen5.png)
+### Conclusiones tarea 17
+En esta tarea se modelaron los problemas de secuencia de perfiles de generación solar diaria y de redes eléctricas como grafos. El primer problema de generación solar, fue transformada la información contruyendo una matriz de incidencia, para  dibujarla como un grafo. Con esta información puede analizarse, aquellos perfiles con mayor frecuencia y cuales podrían ser suprimidos. Por otro lado, modelamos la red eléctrica de México usando la librería especializada pandapower. Con su ayuda pudimos visualizar las líneas y nodos en un grafico, para ello fue necesario obtener las coordenada geodésicas de las principales regiones, para una mayor exactitud la información real de los nodos podría incluirse. Con esta herramienta podemos hacer estudios de flujos de potencia en las redes, y muchos otros. Además, cuenta con algunos algoritmos clásicos como el cálculo de el camino más corto, conjunto mínimo de corte, entre otros. 
+Esta tarea fue de gran utilidad para el trabajo de tesis, ya que ahora consideraremos usar esta herramienta para resolver algunos de los subproblemas de la investigación.
 
+---
+
+## **Tarea 18 Proyecto integrador**
+
+>**Instrucciones:** Using everything you have learned about your project data during the 17 homework assignments, write an article (as you would for a scientific journal) of your absolute best effort of applying statistical learning to the project data. Respect the usual structure of an article and the style of scientific writing in computational sciences. Do not try to fit everything you did during the semester into the article. Be smart and use what you learned in later homeworks to improve upon the results you obtained in earlier ones instead of just copying and pasting homework fragments together. It is recommendable to include a comparison of techniques instead of just one technique, but try to not exaggerate on how many techniques to include. It is especially interesting if you manage to combine two or more techniques into a novel adaptation for your particular situation. Include pseudocodes (with an appropriate LaTeX package) or very clear and concise code fragments (using the listingspackage) of the applied methods, clear equations for anything that can be expressed mathematically, and pay extra attention to the quality of the scientific visualization of your results. Each figure or table should serve a clear purpose and needs to be discussed in the text; if there is nothing of interest to conclude about it, then it should not really be included. Remember to properly cite the state of the art and to provide the necessary concepts and notation in a background section. If the feedback on the homework was helpful, you can include me in the acknowledgments section along with people who provided data or had helpful discussions with you during the work; only people who actually write (either the manuscript or code) should be listed as authors, in all honesty (that's literally what being an author means).
+
+
+Usando métodos de ensambles , regresión y otra técnicas aprendidas durante el curso. Iniciaremos nuestro proyecto integrador de predicción de pronóstico de demanda eléctrica en tiempo real. En el que usaremos el método de vecinos más cercanos para seleccionar dias de mayor correlación y los usaremos como regresores. Posteriormente, usaremos  diferentes métodos de regresión para obtener un pronóstico. Finalmente un ajuste final del BIAS es aplicando un método autoregresivo a los errores. Para probar el método usaremos la técnica de validación cruzada. 
 
